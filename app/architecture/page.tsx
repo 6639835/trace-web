@@ -1,6 +1,7 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { Badge } from "@/components/ui/badge";
+import { Smartphone, Server, LayoutGrid, Network, Radio, MessageSquare, Activity } from "lucide-react";
 
 export default function ArchitecturePage() {
   return (
@@ -33,6 +34,7 @@ export default function ArchitecturePage() {
           <div className="grid gap-4 sm:gap-5 md:gap-6 sm:grid-cols-2 lg:grid-cols-3 mb-8 sm:mb-10 md:mb-12">
             <Card>
               <CardHeader>
+                <Smartphone className="h-8 w-8 mb-2 text-muted-foreground" />
                 <CardTitle className="text-lg">Main application</CardTitle>
               </CardHeader>
               <CardContent>
@@ -46,6 +48,7 @@ export default function ArchitecturePage() {
 
             <Card>
               <CardHeader>
+                <Server className="h-8 w-8 mb-2 text-muted-foreground" />
                 <CardTitle className="text-lg">Network extension (TraceVPN)</CardTitle>
               </CardHeader>
               <CardContent>
@@ -59,6 +62,7 @@ export default function ArchitecturePage() {
 
             <Card>
               <CardHeader>
+                <LayoutGrid className="h-8 w-8 mb-2 text-muted-foreground" />
                 <CardTitle className="text-lg">Widget extension</CardTitle>
               </CardHeader>
               <CardContent>
@@ -218,6 +222,7 @@ export default function ArchitecturePage() {
           <div className="grid gap-4 sm:gap-5 md:gap-6 sm:grid-cols-2">
             <Card>
               <CardHeader>
+                <Network className="h-8 w-8 mb-2 text-muted-foreground" />
                 <CardTitle className="text-lg">HTTP/HTTPS</CardTitle>
               </CardHeader>
               <CardContent>
@@ -231,6 +236,7 @@ export default function ArchitecturePage() {
 
             <Card>
               <CardHeader>
+                <Radio className="h-8 w-8 mb-2 text-muted-foreground" />
                 <CardTitle className="text-lg">WebSocket</CardTitle>
               </CardHeader>
               <CardContent>
@@ -245,6 +251,7 @@ export default function ArchitecturePage() {
 
             <Card>
               <CardHeader>
+                <MessageSquare className="h-8 w-8 mb-2 text-muted-foreground" />
                 <CardTitle className="text-lg">Server-Sent Events</CardTitle>
               </CardHeader>
               <CardContent>
@@ -259,6 +266,7 @@ export default function ArchitecturePage() {
 
             <Card>
               <CardHeader>
+                <Activity className="h-8 w-8 mb-2 text-muted-foreground" />
                 <CardTitle className="text-lg">TCP</CardTitle>
               </CardHeader>
               <CardContent>

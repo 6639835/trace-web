@@ -10,7 +10,6 @@ export default function OpenSourcePage() {
       {/* Header */}
       <section className="container py-section">
         <div className="mx-auto max-w-readable text-center">
-          <Github className="h-10 w-10 sm:h-12 sm:w-12 mx-auto mb-4 sm:mb-6 text-muted-foreground" />
           <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight mb-3 sm:mb-4">
             Open source
           </h1>
