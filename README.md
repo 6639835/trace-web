@@ -1,164 +1,104 @@
 # Trace Website
 
-Official website for Trace, a professional iOS network debugging tool.
+![Build](https://img.shields.io/github/actions/workflow/status/6639835/trace-web/ci.yml?label=build)
+![License](https://img.shields.io/github/license/6639835/trace-web)
+![Version](https://img.shields.io/github/package-json/v/6639835/trace-web)
+![Last Commit](https://img.shields.io/github/last-commit/6639835/trace-web)
+![Issues](https://img.shields.io/github/issues/6639835/trace-web)
 
-## Overview
+Professional docs and marketing site for Trace.
 
-This is the marketing and documentation website for Trace, an iOS network debugger that captures device-wide HTTP(S) traffic through a Network Extension (packet tunnel) with on-device TLS MITM. Built with Next.js, TypeScript, Tailwind CSS, and shadcn/ui.
+Marketing and documentation site for Trace, a professional iOS network debugging tool. It explains the product, showcases features, and hosts technical docs for engineers who need device-wide HTTP(S) inspection with on-device TLS MITM.
 
-## Design Philosophy
+![Trace Website Screenshot](https://placehold.co/1200x675/png?text=Trace+Website+Screenshot)
+![Trace Website GIF](https://placehold.co/1200x675/gif?text=Trace+Website+Demo)
 
-The website follows these core principles:
+## Table of Contents
 
-- **Minimalist and calm**: No visual noise, strong hierarchy, clean layouts
-- **Engineering-first**: Technical credibility without marketing hype
-- **Professional**: Reflects the quality and seriousness of the tool
-- **Accessible**: Clear information architecture and navigation
+- [Features](#features)
+- [Quick Start](#quick-start)
+- [Usage Examples](#usage-examples)
+- [Configuration](#configuration)
+- [Contributing](#contributing)
+- [Authors and Credits](#authors-and-credits)
+- [License](#license)
 
-Design references: Linear, Vercel, Raycast
+## Features
 
-## Tech Stack
+- Product marketing pages with a calm, engineering-focused visual system
+- Documentation sections for features, architecture, and open-source info
+- Next.js App Router with TypeScript and Tailwind CSS
+- Component library based on shadcn/ui for consistent UI building blocks
+- Static deployment ready for Vercel, Netlify, or any static host
 
-- **Framework**: Next.js 15 (App Router)
-- **Language**: TypeScript
-- **Styling**: Tailwind CSS v3
-- **UI Components**: shadcn/ui
-- **Icons**: Lucide React
-
-## Getting Started
+## Quick Start
 
 ### Prerequisites
 
-- Node.js 18+ 
+- Node.js 18+
 - npm, yarn, or pnpm
 
 ### Installation
 
 ```bash
-# Install dependencies
 npm install
+```
 
-# Run development server
+### Run the development server
+
+```bash
 npm run dev
+```
 
-# Build for production
+Open `http://localhost:3000` in your browser.
+
+### Build and run production
+
+```bash
 npm run build
-
-# Start production server
 npm start
 ```
 
-Open [http://localhost:3000](http://localhost:3000) to view the site.
+## Usage Examples
 
-## Project Structure
-
-```
-trace-web/
-├── app/                    # Next.js App Router pages
-│   ├── page.tsx           # Landing page
-│   ├── features/          # Features page
-│   ├── architecture/      # Architecture documentation
-│   ├── open-source/       # Open source information
-│   ├── docs/              # Documentation
-│   ├── layout.tsx         # Root layout with nav and footer
-│   └── globals.css        # Global styles and CSS variables
-├── components/            # React components
-│   ├── ui/               # shadcn/ui components
-│   ├── navigation.tsx    # Site navigation
-│   └── footer.tsx        # Site footer
-├── lib/                   # Utility functions
-│   └── utils.ts          # cn() helper for class names
-└── public/               # Static assets
-
-```
-
-## Pages
-
-- **Home** (`/`): Landing page with hero, product showcase, capabilities (device-wide capture, TLS inspection, WebSocket/SSE support, traffic modification, TCP flow tracking, deep inspection), technical details, and open source information
-- **Features** (`/features`): Comprehensive feature breakdown including core capabilities, advanced tools (request builder, filtering, search, import/export), traffic modification tools (rewrite rules, request maps, host overrides, breakpoints, JavaScript scripts, network throttling), and built-in utilities
-- **Architecture** (`/architecture`): Technical architecture covering system overview (main app, TraceVPN extension, widget extension), packet processing pipeline, data storage with App Groups, protocol support (HTTP/1.1/2/3, WebSocket, SSE, TCP), and performance considerations
-- **Open Source** (`/open-source`): MIT licensing, contribution guidelines, build instructions (Xcode 16+, iOS 18+, Swift 6.0), and community information
-- **Docs** (`/docs`): Documentation structure covering installation, configuration, user guide, and developer documentation
-
-## Styling
-
-The site uses a neutral, monochromatic color palette with subtle accents. Colors are defined as CSS variables in `app/globals.css` using HSL values for easy theming.
-
-### Design Tokens
-
-- Typography: Inter font family
-- Spacing: Consistent scale using Tailwind spacing
-- Border radius: Subtle rounding (0.5rem default)
-- Colors: Zinc-based neutral palette
-
-## Components
-
-All UI components are from shadcn/ui, copied directly into the project for full control:
-
-- Button
-- Card
-- Badge
-- Separator
-- Tabs
-
-Components are located in `components/ui/` and can be customized as needed.
-
-## Content Guidelines
-
-When adding or editing content, follow these rules:
-
-- **Tone**: Engineering-focused, confident, calm
-- **Length**: Short sentences, concise paragraphs
-- **Voice**: Third person, matter-of-fact
-- **Avoid**: Buzzwords, exclamation marks, hype, marketing language
-
-## Development
-
-### Adding a New Page
-
-1. Create a new directory in `app/`
-2. Add `page.tsx` in that directory
-3. Update navigation in `components/navigation.tsx`
-4. Update footer links if needed
-
-### Adding a Component
-
-Use shadcn/ui CLI to add components:
+### Add a new page
 
 ```bash
-npx shadcn@latest add [component-name]
+mkdir -p app/new-page
 ```
 
-Or manually create in `components/ui/`.
+```tsx
+// app/new-page/page.tsx
+export default function Page() {
+  return <main className="mx-auto max-w-3xl p-8">New page</main>;
+}
+```
 
-### Code Style
-
-- TypeScript strict mode enabled
-- Functional components with hooks
-- Tailwind for all styling (no CSS modules)
-- Use `cn()` utility for conditional classes
-
-## Building for Production
+### Add a UI component
 
 ```bash
-npm run build
+npx shadcn@latest add button
 ```
 
-Generates an optimized production build in `.next/`.
+## Configuration
 
-## Deployment
-
-The site is static and can be deployed to:
-
-- Vercel (recommended, zero-config)
-- Netlify
-- GitHub Pages
-- Any static hosting service
-
-## License
-
-MIT License - see LICENSE file for details.
+No runtime configuration is required for local development. If you add environment variables later, document them here and consider adding a `.env.example` file.
 
 ## Contributing
 
-Contributions are welcome. Please maintain the design philosophy and coding standards when submitting changes.
+Contributions are welcome. If you plan larger changes, please open an issue first.
+
+1. Fork the repo and create your branch.
+2. Keep code style consistent with the existing TypeScript and Tailwind patterns.
+3. Include clear descriptions and screenshots for UI changes.
+
+## Authors and Credits
+
+- Trace team and contributors
+- Built with Next.js, TypeScript, Tailwind CSS, and shadcn/ui
+
+## License
+
+![License](https://img.shields.io/github/license/6639835/trace-web)
+
+MIT License. See [LICENSE](LICENSE).
