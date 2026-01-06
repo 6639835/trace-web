@@ -10,8 +10,7 @@ Professional docs and marketing site for Trace.
 
 Marketing and documentation site for Trace, a professional iOS network debugging tool. It explains the product, showcases features, and hosts technical docs for engineers who need device-wide HTTP(S) inspection with on-device TLS MITM.
 
-![Trace Website Screenshot](https://placehold.co/1200x675/png?text=Trace+Website+Screenshot)
-![Trace Website GIF](https://placehold.co/1200x675/gif?text=Trace+Website+Demo)
+![Trace Website Screenshot](/public/trace-web.png)
 
 ## Table of Contents
 
