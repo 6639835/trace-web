@@ -8,8 +8,8 @@ export default function OpenSourcePage() {
   return (
     <div className="flex flex-col">
       {/* Header */}
-      <section className="container py-12 sm:py-16 md:py-24">
-        <div className="mx-auto max-w-3xl text-center">
+      <section className="container py-section">
+        <div className="mx-auto max-w-readable text-center">
           <Github className="h-10 w-10 sm:h-12 sm:w-12 mx-auto mb-4 sm:mb-6 text-muted-foreground" />
           <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight mb-3 sm:mb-4">
             Open source
@@ -24,10 +24,10 @@ export default function OpenSourcePage() {
       <Separator />
 
       {/* Why Open Source */}
-      <section className="container py-12 sm:py-16 md:py-24">
-        <div className="mx-auto max-w-4xl">
+      <section className="container py-section">
+        <div className="mx-auto max-w-content">
           <h2 className="text-xl sm:text-2xl font-bold tracking-tight mb-4 sm:mb-6 text-center">Why open source</h2>
-          <p className="text-sm sm:text-base text-muted-foreground leading-relaxed mb-8 sm:mb-10 md:mb-12 text-center max-w-2xl mx-auto">
+          <p className="text-sm sm:text-base text-muted-foreground leading-relaxed mb-8 sm:mb-10 md:mb-12 text-center max-w-readable mx-auto">
             Trace is open source by design. Network debugging tools require trust.
             Opening the codebase allows verification, contribution, and confidence in the tool.
           </p>
@@ -95,8 +95,8 @@ export default function OpenSourcePage() {
       <Separator />
 
       {/* License */}
-      <section className="container py-12 sm:py-16 md:py-24">
-        <div className="mx-auto max-w-4xl">
+      <section className="container py-section">
+        <div className="mx-auto max-w-content">
           <h2 className="text-xl sm:text-2xl font-bold tracking-tight mb-4 sm:mb-6">License</h2>
           
           <div className="rounded-lg border bg-muted/30 p-6 mb-6">
@@ -132,8 +132,8 @@ export default function OpenSourcePage() {
       <Separator />
 
       {/* Contributing */}
-      <section className="container py-12 sm:py-16 md:py-24">
-        <div className="mx-auto max-w-4xl">
+      <section className="container py-section">
+        <div className="mx-auto max-w-content">
           <h2 className="text-xl sm:text-2xl font-bold tracking-tight mb-4 sm:mb-6">Contributing</h2>
           
           <p className="text-sm sm:text-base text-muted-foreground leading-relaxed mb-6 sm:mb-8">
@@ -238,8 +238,8 @@ export default function OpenSourcePage() {
       <Separator />
 
       {/* Build from Source */}
-      <section className="container py-12 sm:py-16 md:py-24">
-        <div className="mx-auto max-w-4xl">
+      <section className="container py-section">
+        <div className="mx-auto max-w-content">
           <h2 className="text-xl sm:text-2xl font-bold tracking-tight mb-4 sm:mb-6">Build from source</h2>
           
           <p className="text-sm sm:text-base text-muted-foreground leading-relaxed mb-4 sm:mb-6">
@@ -314,8 +314,8 @@ export default function OpenSourcePage() {
       <Separator />
 
       {/* Support */}
-      <section className="container py-12 sm:py-16 md:py-24">
-        <div className="mx-auto max-w-3xl text-center">
+      <section className="container py-section">
+        <div className="mx-auto max-w-readable text-center">
           <h2 className="text-xl sm:text-2xl font-bold tracking-tight mb-3 sm:mb-4">
             Questions or feedback
           </h2>

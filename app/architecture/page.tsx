@@ -6,8 +6,8 @@ export default function ArchitecturePage() {
   return (
     <div className="flex flex-col">
       {/* Header */}
-      <section className="container py-12 sm:py-16 md:py-24">
-        <div className="mx-auto max-w-3xl text-center">
+      <section className="container py-section">
+        <div className="mx-auto max-w-readable text-center">
           <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight mb-3 sm:mb-4">
             Architecture
           </h1>
@@ -21,8 +21,8 @@ export default function ArchitecturePage() {
       <Separator />
 
       {/* System Overview */}
-      <section className="container py-12 sm:py-16 md:py-24">
-        <div className="mx-auto max-w-4xl">
+      <section className="container py-section">
+        <div className="mx-auto max-w-content">
           <h2 className="text-xl sm:text-2xl font-bold tracking-tight mb-4 sm:mb-6">System overview</h2>
           <p className="text-sm sm:text-base text-muted-foreground mb-6 sm:mb-8 leading-relaxed">
             Trace is built on iOS Network Extension framework, specifically implementing NEPacketTunnelProvider.
@@ -73,7 +73,7 @@ export default function ArchitecturePage() {
 
           <div className="rounded-lg border bg-muted/30 p-6">
             <h3 className="font-semibold mb-4">Data flow</h3>
-            <div className="space-y-3 text-sm text-muted-foreground font-mono">
+            <div className="space-y-3 text-sm text-muted-foreground font-mono break-words">
               <div>Device network → Network Extension (packet tunnel)</div>
               <div className="pl-4">↓ Packet capture at IP layer</div>
               <div className="pl-4">↓ TCP stream reconstruction</div>
@@ -91,8 +91,8 @@ export default function ArchitecturePage() {
       <Separator />
 
       {/* Network Extension */}
-      <section className="container py-12 sm:py-16 md:py-24">
-        <div className="mx-auto max-w-4xl">
+      <section className="container py-section">
+        <div className="mx-auto max-w-content">
           <h2 className="text-xl sm:text-2xl font-bold tracking-tight mb-4 sm:mb-6">Network extension implementation</h2>
           
           <div className="space-y-8">
@@ -103,7 +103,7 @@ export default function ArchitecturePage() {
                 Receives all IP packets destined for network, allowing inspection before forwarding.
                 Runs in separate process with elevated network privileges.
               </p>
-              <div className="rounded-lg border bg-muted/30 p-4 text-sm font-mono">
+              <div className="rounded-lg border bg-muted/30 p-4 text-sm font-mono break-words">
                 <div className="text-muted-foreground">class TracePacketTunnel: NEPacketTunnelProvider</div>
               </div>
             </div>
@@ -166,8 +166,8 @@ export default function ArchitecturePage() {
       <Separator />
 
       {/* Data Storage */}
-      <section className="container py-12 sm:py-16 md:py-24">
-        <div className="mx-auto max-w-4xl">
+      <section className="container py-section">
+        <div className="mx-auto max-w-content">
           <h2 className="text-xl sm:text-2xl font-bold tracking-tight mb-4 sm:mb-6">Data storage and IPC</h2>
           
           <div className="space-y-8">
@@ -179,7 +179,7 @@ export default function ArchitecturePage() {
                 Used for configuration, captured traffic data, and coordination.
               </p>
               <div className="rounded-lg border bg-muted/30 p-4">
-                <code className="text-sm font-mono text-muted-foreground">
+                <code className="text-sm font-mono text-muted-foreground break-words">
                   group.com.trace.network-debugger
                 </code>
               </div>
@@ -211,8 +211,8 @@ export default function ArchitecturePage() {
       <Separator />
 
       {/* Protocol Support */}
-      <section className="container py-12 sm:py-16 md:py-24">
-        <div className="mx-auto max-w-4xl">
+      <section className="container py-section">
+        <div className="mx-auto max-w-content">
           <h2 className="text-xl sm:text-2xl font-bold tracking-tight mb-4 sm:mb-6">Protocol support</h2>
           
           <div className="grid gap-4 sm:gap-5 md:gap-6 sm:grid-cols-2">
@@ -277,8 +277,8 @@ export default function ArchitecturePage() {
       <Separator />
 
       {/* Performance */}
-      <section className="container py-12 sm:py-16 md:py-24">
-        <div className="mx-auto max-w-4xl">
+      <section className="container py-section">
+        <div className="mx-auto max-w-content">
           <h2 className="text-xl sm:text-2xl font-bold tracking-tight mb-4 sm:mb-6">Performance considerations</h2>
           
           <div className="space-y-6">
@@ -317,8 +317,8 @@ export default function ArchitecturePage() {
       <Separator />
 
       {/* Security Model */}
-      <section className="container py-12 sm:py-16 md:py-24">
-        <div className="mx-auto max-w-4xl">
+      <section className="container py-section">
+        <div className="mx-auto max-w-content">
           <h2 className="text-xl sm:text-2xl font-bold tracking-tight mb-4 sm:mb-6">Security model</h2>
           
           <div className="space-y-6">
@@ -364,8 +364,8 @@ export default function ArchitecturePage() {
       <Separator />
 
       {/* Technical Stack */}
-      <section className="container py-12 sm:py-16 md:py-24">
-        <div className="mx-auto max-w-4xl text-center">
+      <section className="container py-section">
+        <div className="mx-auto max-w-readable text-center">
           <h2 className="text-xl sm:text-2xl font-bold tracking-tight mb-3 sm:mb-4">
             Built with
           </h2>

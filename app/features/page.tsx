@@ -20,8 +20,8 @@ export default function FeaturesPage() {
   return (
     <div className="flex flex-col">
       {/* Header */}
-      <section className="container py-12 sm:py-16 md:py-24">
-        <div className="mx-auto max-w-3xl text-center">
+      <section className="container py-section">
+        <div className="mx-auto max-w-readable text-center">
           <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight mb-3 sm:mb-4">
             Features
           </h1>
@@ -35,8 +35,8 @@ export default function FeaturesPage() {
       <Separator />
 
       {/* Core Features */}
-      <section className="container py-12 sm:py-16 md:py-24">
-        <div className="mx-auto max-w-5xl">
+      <section className="container py-section">
+        <div className="mx-auto max-w-content">
           <h2 className="text-xl sm:text-2xl font-bold tracking-tight mb-8 sm:mb-10 md:mb-12">Core capabilities</h2>
           
           <div className="space-y-10 sm:space-y-12 md:space-y-16">
@@ -174,8 +174,8 @@ export default function FeaturesPage() {
       <Separator />
 
       {/* Advanced Features */}
-      <section className="container py-12 sm:py-16 md:py-24">
-        <div className="mx-auto max-w-5xl">
+      <section className="container py-section">
+        <div className="mx-auto max-w-content">
           <h2 className="text-xl sm:text-2xl font-bold tracking-tight mb-8 sm:mb-10 md:mb-12">Advanced tools</h2>
           
           <div className="grid gap-4 sm:gap-5 md:gap-6 sm:grid-cols-2">
@@ -269,8 +269,8 @@ export default function FeaturesPage() {
       <Separator />
 
       {/* Traffic Modification Tools */}
-      <section className="container py-12 sm:py-16 md:py-24">
-        <div className="mx-auto max-w-5xl">
+      <section className="container py-section">
+        <div className="mx-auto max-w-content">
           <h2 className="text-xl sm:text-2xl font-bold tracking-tight mb-8 sm:mb-10 md:mb-12">Traffic modification and manipulation</h2>
           
           <div className="grid gap-4 sm:gap-5 md:gap-6 sm:grid-cols-2">
@@ -358,8 +358,8 @@ export default function FeaturesPage() {
       <Separator />
 
       {/* Built-in Utilities */}
-      <section className="container py-12 sm:py-16 md:py-24">
-        <div className="mx-auto max-w-5xl">
+      <section className="container py-section">
+        <div className="mx-auto max-w-content">
           <h2 className="text-xl sm:text-2xl font-bold tracking-tight mb-8 sm:mb-10 md:mb-12">Built-in utilities</h2>
           
           <div className="grid gap-4 sm:gap-5 md:gap-6 sm:grid-cols-2 lg:grid-cols-3">
@@ -435,8 +435,8 @@ export default function FeaturesPage() {
       <Separator />
 
       {/* Performance & Privacy */}
-      <section className="container py-12 sm:py-16 md:py-24">
-        <div className="mx-auto max-w-5xl">
+      <section className="container py-section">
+        <div className="mx-auto max-w-content">
           <h2 className="text-xl sm:text-2xl font-bold tracking-tight mb-8 sm:mb-10 md:mb-12">Performance and privacy</h2>
           
           <div className="grid gap-6 sm:gap-7 md:gap-8 sm:grid-cols-2">
@@ -501,8 +501,8 @@ export default function FeaturesPage() {
       <Separator />
 
       {/* Technical Stack */}
-      <section className="container py-12 sm:py-16 md:py-24">
-        <div className="mx-auto max-w-4xl text-center">
+      <section className="container py-section">
+        <div className="mx-auto max-w-readable text-center">
           <h2 className="text-xl sm:text-2xl font-bold tracking-tight mb-3 sm:mb-4">
             Built with modern iOS technologies
           </h2>

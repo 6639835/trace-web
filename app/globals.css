@@ -55,12 +55,8 @@
   }
   body {
     @apply bg-background text-foreground;
-    overflow-x: hidden;
     word-wrap: break-word;
     overflow-wrap: break-word;
-  }
-  html {
-    overflow-x: hidden;
   }
   
   /* Ensure all text elements wrap properly */
@@ -69,4 +65,3 @@
     overflow-wrap: break-word;
   }
 }
-

@@ -8,10 +8,10 @@ import { IPhoneMockup } from "@/components/marketing/iphone-mockup";
 
 export default function Home() {
   return (
-    <div className="flex flex-col overflow-x-hidden w-full">
+    <div className="flex flex-col w-full">
       {/* Hero Section with Phone Mockup */}
-      <section className="container min-h-[calc(100vh-4rem)] flex items-center py-8 sm:py-12 md:py-16 overflow-hidden">
-        <div className="grid lg:grid-cols-2 gap-8 sm:gap-10 lg:gap-12 items-center w-full max-w-7xl mx-auto overflow-hidden">
+      <section className="container min-h-[calc(100vh-4rem)] flex items-center py-section">
+        <div className="grid lg:grid-cols-2 gap-8 sm:gap-10 lg:gap-12 items-center w-full max-w-wide mx-auto">
           {/* Left Column - Hero Text */}
           <div className="flex flex-col justify-center space-y-4 sm:space-y-6 lg:space-y-8 max-w-full">
             <div className="max-w-full">
@@ -39,7 +39,7 @@ export default function Home() {
           </div>
 
           {/* Right Column - Phone Mockup */}
-          <div className="flex justify-center lg:justify-end items-center mt-4 lg:mt-0 overflow-hidden">
+          <div className="flex justify-center lg:justify-end items-center mt-4 lg:mt-0">
             <div className="max-w-full">
               <IPhoneMockup>
                 {/* App Screenshot Content */}
@@ -61,7 +61,7 @@ export default function Home() {
                         <div className="text-xs text-zinc-400">200</div>
                       </div>
                       <div className="text-xs font-mono text-zinc-900 truncate">api.example.com/users</div>
-                      <div className="text-[10px] text-zinc-400 mt-1">12.4 KB • 142ms</div>
+                      <div className="text-2xs text-zinc-400 mt-1">12.4 KB • 142ms</div>
                     </div>
                     
                     <div className="bg-white rounded-lg p-3 shadow-sm border border-zinc-200">
@@ -71,7 +71,7 @@ export default function Home() {
                         <div className="text-xs text-zinc-400">201</div>
                       </div>
                       <div className="text-xs font-mono text-zinc-900 truncate">api.example.com/events</div>
-                      <div className="text-[10px] text-zinc-400 mt-1">2.1 KB • 89ms</div>
+                      <div className="text-2xs text-zinc-400 mt-1">2.1 KB • 89ms</div>
                     </div>
                     
                     <div className="bg-white rounded-lg p-3 shadow-sm border border-zinc-200">
@@ -81,7 +81,7 @@ export default function Home() {
                         <div className="text-xs text-zinc-400">OPEN</div>
                       </div>
                       <div className="text-xs font-mono text-zinc-900 truncate">ws.example.com/live</div>
-                      <div className="text-[10px] text-zinc-400 mt-1">Real-time connection</div>
+                      <div className="text-2xs text-zinc-400 mt-1">Real-time connection</div>
                     </div>
                   </div>
                 </div>
@@ -94,13 +94,13 @@ export default function Home() {
       <Separator />
 
       {/* Core Capabilities Section */}
-      <section className="container py-12 sm:py-16 md:py-24 lg:py-32">
-        <div className="mx-auto max-w-5xl">
+      <section className="container py-section-lg">
+        <div className="mx-auto max-w-content">
           <div className="text-center mb-10 sm:mb-12 md:mb-16">
             <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight mb-3 sm:mb-4">
               Built for production debugging
             </h2>
-            <p className="text-sm sm:text-base text-muted-foreground max-w-2xl mx-auto">
+            <p className="text-sm sm:text-base text-muted-foreground max-w-readable mx-auto">
               Comprehensive network visibility with the tools you need to diagnose and resolve issues quickly.
             </p>
           </div>
@@ -184,13 +184,13 @@ export default function Home() {
       <Separator />
 
       {/* Technical Credibility Section */}
-      <section className="container py-12 sm:py-16 md:py-24 lg:py-32">
-        <div className="mx-auto max-w-4xl">
+      <section className="container py-section-lg">
+        <div className="mx-auto max-w-content">
           <div className="text-center mb-10 sm:mb-12 md:mb-16">
             <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight mb-3 sm:mb-4">
               Engineering depth
             </h2>
-            <p className="text-sm sm:text-base text-muted-foreground max-w-2xl mx-auto">
+            <p className="text-sm sm:text-base text-muted-foreground max-w-readable mx-auto">
               Built on iOS system frameworks for reliable, low-level network access.
             </p>
           </div>
@@ -246,14 +246,14 @@ export default function Home() {
           </div>
 
           <div className="mt-8 sm:mt-10 md:mt-12 flex flex-wrap gap-1.5 sm:gap-2 justify-center">
-            <Badge variant="secondary" className="text-[10px] sm:text-xs whitespace-nowrap">Swift 6.0</Badge>
-            <Badge variant="secondary" className="text-[10px] sm:text-xs whitespace-nowrap">SwiftUI</Badge>
-            <Badge variant="secondary" className="text-[10px] sm:text-xs whitespace-nowrap">Network Extension</Badge>
-            <Badge variant="secondary" className="text-[10px] sm:text-xs whitespace-nowrap">NEPacketTunnelProvider</Badge>
-            <Badge variant="secondary" className="text-[10px] sm:text-xs whitespace-nowrap">WidgetKit</Badge>
-            <Badge variant="secondary" className="text-[10px] sm:text-xs whitespace-nowrap">Live Activities</Badge>
-            <Badge variant="secondary" className="text-[10px] sm:text-xs whitespace-nowrap">App Groups</Badge>
-            <Badge variant="secondary" className="text-[10px] sm:text-xs whitespace-nowrap">Swift Package Manager</Badge>
+            <Badge variant="secondary" className="whitespace-nowrap">Swift 6.0</Badge>
+            <Badge variant="secondary" className="whitespace-nowrap">SwiftUI</Badge>
+            <Badge variant="secondary" className="whitespace-nowrap">Network Extension</Badge>
+            <Badge variant="secondary" className="whitespace-nowrap">NEPacketTunnelProvider</Badge>
+            <Badge variant="secondary" className="whitespace-nowrap">WidgetKit</Badge>
+            <Badge variant="secondary" className="whitespace-nowrap">Live Activities</Badge>
+            <Badge variant="secondary" className="whitespace-nowrap">App Groups</Badge>
+            <Badge variant="secondary" className="whitespace-nowrap">Swift Package Manager</Badge>
           </div>
         </div>
       </section>
@@ -261,8 +261,8 @@ export default function Home() {
       <Separator />
 
       {/* Open Source Section */}
-      <section className="container py-12 sm:py-16 md:py-24 lg:py-32">
-        <div className="mx-auto max-w-3xl text-center">
+      <section className="container py-section-lg">
+        <div className="mx-auto max-w-readable text-center">
           <Github className="h-10 w-10 sm:h-12 sm:w-12 mx-auto mb-4 sm:mb-6 text-muted-foreground" />
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight mb-3 sm:mb-4">
             Open source and transparent
