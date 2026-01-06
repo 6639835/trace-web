@@ -16,8 +16,8 @@ export default function Home() {
           </h1>
           <p className="text-lg text-muted-foreground mb-10 max-w-2xl mx-auto leading-relaxed">
             Professional network debugging tool for iOS developers. 
-            Captures device-wide HTTPS, TCP, WebSocket, and SSE traffic with on-device TLS MITM.
-            Built on Network Extension APIs for system-level visibility.
+            Captures device-wide HTTP(S), TCP, WebSocket, and SSE traffic through a packet tunnel with on-device TLS MITM.
+            Built on Network Extension APIs for complete system-level visibility and traffic modification.
           </p>
           <div className="flex justify-center">
             <Button size="lg" asChild>
@@ -157,11 +157,11 @@ export default function Home() {
             <Card>
               <CardHeader>
                 <Repeat className="h-8 w-8 mb-2 text-muted-foreground" />
-                <CardTitle className="text-lg">Traffic replay</CardTitle>
+                <CardTitle className="text-lg">Traffic modification</CardTitle>
               </CardHeader>
               <CardContent>
                 <CardDescription>
-                  Modify and replay captured requests. Test edge cases, reproduce issues, and validate API behavior without changing code.
+                  Comprehensive modification tools: rewrite rules, request maps, host overrides, breakpoints, JavaScript scripts, and network condition profiles. Replay requests with the built-in request builder or import cURL commands.
                 </CardDescription>
               </CardContent>
             </Card>
@@ -173,7 +173,7 @@ export default function Home() {
               </CardHeader>
               <CardContent>
                 <CardDescription>
-                  Low-level TCP connection monitoring. Track connection state, timing, and data flow for non-HTTP protocols.
+                  Low-level TCP connection monitoring with per-flow statistics, optional raw stream capture, and CSV/JSON export. Track connection state, timing, and data flow for non-HTTP protocols.
                 </CardDescription>
               </CardContent>
             </Card>
@@ -185,7 +185,7 @@ export default function Home() {
               </CardHeader>
               <CardContent>
                 <CardDescription>
-                  Complete request and response analysis. Headers, body, timing, size, and protocol-specific metadata all visible in detail.
+                  Comprehensive analysis with headers, body viewers (JSON, XML, images, SVG, multipart), timing breakdowns, TLS certificate chains, HTTP/2 stream info with HPACK table, HTTP/3 protocol markers, request comparison, and saved filter presets.
                 </CardDescription>
               </CardContent>
             </Card>
@@ -258,13 +258,14 @@ export default function Home() {
           </div>
 
           <div className="mt-12 flex flex-wrap gap-2 justify-center">
-            <Badge variant="secondary">Swift</Badge>
+            <Badge variant="secondary">Swift 6.0</Badge>
             <Badge variant="secondary">SwiftUI</Badge>
             <Badge variant="secondary">Network Extension</Badge>
             <Badge variant="secondary">NEPacketTunnelProvider</Badge>
             <Badge variant="secondary">WidgetKit</Badge>
+            <Badge variant="secondary">Live Activities</Badge>
             <Badge variant="secondary">App Groups</Badge>
-            <Badge variant="secondary">Core Data</Badge>
+            <Badge variant="secondary">Swift Package Manager</Badge>
           </div>
         </div>
       </section>

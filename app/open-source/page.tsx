@@ -201,11 +201,12 @@ export default function OpenSourcePage() {
               <h3 className="text-lg font-semibold mb-3">Development setup</h3>
               <div className="rounded-lg border bg-muted/30 p-4 text-sm font-mono space-y-2">
                 <div className="text-muted-foreground"># Clone the repository</div>
-                <div>git clone https://github.com/trace-network-debugger/trace.git</div>
-                <div className="text-muted-foreground mt-3"># Open in Xcode</div>
+                <div>git clone [repository-url]</div>
+                <div className="text-muted-foreground mt-3"># Option 1: Open in Xcode with project file</div>
                 <div>open Trace.xcodeproj</div>
-                <div className="text-muted-foreground mt-3"># Build and run</div>
-                <div>cmd + R</div>
+                <div className="text-muted-foreground mt-3"># Option 2: Open with Swift Package Manager</div>
+                <div>open Package.swift</div>
+                <div className="text-muted-foreground mt-3"># Build and run on device (cmd + R)</div>
               </div>
             </div>
 
@@ -252,19 +253,19 @@ export default function OpenSourcePage() {
               <div className="space-y-2 text-sm">
                 <div className="flex items-center gap-2">
                   <div className="w-1 h-1 rounded-full bg-foreground" />
-                  <p className="text-muted-foreground">Xcode 15.0 or later</p>
+                  <p className="text-muted-foreground">Xcode 16+ with Swift 6.0 support</p>
                 </div>
                 <div className="flex items-center gap-2">
                   <div className="w-1 h-1 rounded-full bg-foreground" />
-                  <p className="text-muted-foreground">iOS 17.0 deployment target</p>
+                  <p className="text-muted-foreground">iOS 18+ (Control widget requires iOS 18+)</p>
                 </div>
                 <div className="flex items-center gap-2">
                   <div className="w-1 h-1 rounded-full bg-foreground" />
-                  <p className="text-muted-foreground">Apple Developer account for code signing</p>
+                  <p className="text-muted-foreground">Apple Developer Team with Network Extension entitlements</p>
                 </div>
                 <div className="flex items-center gap-2">
                   <div className="w-1 h-1 rounded-full bg-foreground" />
-                  <p className="text-muted-foreground">Physical device (Network Extension unavailable in Simulator)</p>
+                  <p className="text-muted-foreground">Physical device (packet tunnel unavailable in Simulator)</p>
                 </div>
               </div>
             </div>
@@ -274,23 +275,27 @@ export default function OpenSourcePage() {
               <div className="space-y-2 text-sm">
                 <div className="flex items-start gap-2">
                   <div className="text-muted-foreground font-medium">1.</div>
-                  <p className="text-muted-foreground">Clone repository and open Trace.xcodeproj</p>
+                  <p className="text-muted-foreground">Clone repository and open Trace.xcodeproj (or Package.swift with SwiftPM)</p>
                 </div>
                 <div className="flex items-start gap-2">
                   <div className="text-muted-foreground font-medium">2.</div>
-                  <p className="text-muted-foreground">Update bundle identifiers and App Group ID in project settings</p>
+                  <p className="text-muted-foreground">Update signing for all targets (App, TraceVPN, TraceWidget) to your team</p>
                 </div>
                 <div className="flex items-start gap-2">
                   <div className="text-muted-foreground font-medium">3.</div>
-                  <p className="text-muted-foreground">Configure signing with your Apple Developer account</p>
+                  <p className="text-muted-foreground">Set APP_GROUP_IDENTIFIER build setting to your App Group ID</p>
                 </div>
                 <div className="flex items-start gap-2">
                   <div className="text-muted-foreground font-medium">4.</div>
-                  <p className="text-muted-foreground">Enable Network Extension capability</p>
+                  <p className="text-muted-foreground">Update bundle identifiers for App, TraceVPN, and TraceWidgetExtension</p>
                 </div>
                 <div className="flex items-start gap-2">
                   <div className="text-muted-foreground font-medium">5.</div>
-                  <p className="text-muted-foreground">Build and run on device</p>
+                  <p className="text-muted-foreground">Update providerBundleIdentifier in VPNManager.swift if extension bundle ID changed</p>
+                </div>
+                <div className="flex items-start gap-2">
+                  <div className="text-muted-foreground font-medium">6.</div>
+                  <p className="text-muted-foreground">Build and run on device (root CA generated automatically on first launch)</p>
                 </div>
               </div>
             </div>

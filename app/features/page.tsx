@@ -145,20 +145,24 @@ export default function FeaturesPage() {
                 <p className="text-muted-foreground mb-4 leading-relaxed">
                   Complete visibility into every aspect of HTTP transactions.
                   Headers, body, timing breakdown, size analysis, and protocol metadata all accessible in a structured format.
-                  Supports multiple body formats with syntax highlighting.
+                  Supports multiple body formats with syntax highlighting and advanced protocol features.
                 </p>
                 <div className="space-y-2 text-sm">
                   <div className="flex items-start gap-2">
                     <div className="w-1 h-1 rounded-full bg-foreground mt-2" />
-                    <p className="text-muted-foreground">JSON, XML, HTML, and binary body inspection</p>
+                    <p className="text-muted-foreground">JSON, XML, images, SVG, and multipart body inspection</p>
                   </div>
                   <div className="flex items-start gap-2">
                     <div className="w-1 h-1 rounded-full bg-foreground mt-2" />
-                    <p className="text-muted-foreground">Detailed timing breakdown from DNS to response completion</p>
+                    <p className="text-muted-foreground">HTTP/2 stream info with HPACK table viewer</p>
                   </div>
                   <div className="flex items-start gap-2">
                     <div className="w-1 h-1 rounded-full bg-foreground mt-2" />
-                    <p className="text-muted-foreground">Cookie inspection and Set-Cookie analysis</p>
+                    <p className="text-muted-foreground">HTTP/3 protocol markers and TLS certificate chain details</p>
+                  </div>
+                  <div className="flex items-start gap-2">
+                    <div className="w-1 h-1 rounded-full bg-foreground mt-2" />
+                    <p className="text-muted-foreground">Request comparison and timeline visualization</p>
                   </div>
                 </div>
               </div>
@@ -178,13 +182,13 @@ export default function FeaturesPage() {
             <Card>
               <CardHeader>
                 <Repeat className="h-8 w-8 mb-2 text-muted-foreground" />
-                <CardTitle>Request replay and modification</CardTitle>
+                <CardTitle>Request Builder and cURL</CardTitle>
               </CardHeader>
               <CardContent>
                 <CardDescription className="leading-relaxed">
-                  Replay any captured request with optional modifications.
-                  Edit headers, body, and method to test different scenarios.
-                  Useful for reproducing issues and testing edge cases.
+                  Built-in request builder to craft and send custom requests.
+                  Import cURL commands directly or export requests as cURL.
+                  Replay captured requests with full modification capabilities.
                 </CardDescription>
               </CardContent>
             </Card>
@@ -192,13 +196,13 @@ export default function FeaturesPage() {
             <Card>
               <CardHeader>
                 <Filter className="h-8 w-8 mb-2 text-muted-foreground" />
-                <CardTitle>Advanced filtering</CardTitle>
+                <CardTitle>Advanced filtering and grouping</CardTitle>
               </CardHeader>
               <CardContent>
                 <CardDescription className="leading-relaxed">
                   Filter traffic by domain, method, status code, content type, or custom patterns.
                   Save filter presets for common debugging scenarios.
-                  Focus on relevant requests during active development.
+                  Group requests by domain or session for better organization.
                 </CardDescription>
               </CardContent>
             </Card>
@@ -220,13 +224,13 @@ export default function FeaturesPage() {
             <Card>
               <CardHeader>
                 <Download className="h-8 w-8 mb-2 text-muted-foreground" />
-                <CardTitle>Export and sharing</CardTitle>
+                <CardTitle>Import and export</CardTitle>
               </CardHeader>
               <CardContent>
                 <CardDescription className="leading-relaxed">
-                  Export captured traffic in HAR format for analysis in other tools.
-                  Share specific requests with team members.
-                  Archive debugging sessions for later review.
+                  HAR import and export for comprehensive traffic analysis.
+                  Export TCP flows as CSV or JSON.
+                  Import/export configuration including rewrite rules, request maps, scripts, and hosts.
                 </CardDescription>
               </CardContent>
             </Card>
@@ -238,9 +242,9 @@ export default function FeaturesPage() {
               </CardHeader>
               <CardContent>
                 <CardDescription className="leading-relaxed">
-                  Track low-level TCP connections and data flow.
-                  Monitor connection state changes and timing.
-                  Debug non-HTTP protocols and connection issues.
+                  Track low-level TCP connections with per-flow statistics.
+                  Optional raw stream capture for deep packet analysis.
+                  Export flow data as CSV or JSON for external analysis.
                 </CardDescription>
               </CardContent>
             </Card>
@@ -255,6 +259,172 @@ export default function FeaturesPage() {
                   WidgetKit integration shows real-time network statistics.
                   Live Activities display active request counts and data transfer.
                   At-a-glance visibility without opening the app.
+                </CardDescription>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+      </section>
+
+      <Separator />
+
+      {/* Traffic Modification Tools */}
+      <section className="container py-16 md:py-24">
+        <div className="mx-auto max-w-5xl">
+          <h2 className="text-2xl font-bold tracking-tight mb-12">Traffic modification and manipulation</h2>
+          
+          <div className="grid gap-6 md:grid-cols-2">
+            <Card>
+              <CardHeader>
+                <CardTitle>Rewrite rules</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <CardDescription className="leading-relaxed">
+                  Create rules to automatically modify requests and responses.
+                  Change headers, URLs, or body content based on patterns.
+                  Test different scenarios without modifying application code.
+                </CardDescription>
+              </CardContent>
+            </Card>
+
+            <Card>
+              <CardHeader>
+                <CardTitle>Request maps</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <CardDescription className="leading-relaxed">
+                  Map requests to custom responses or redirect to different endpoints.
+                  Mock API responses for offline development.
+                  Test edge cases and error handling.
+                </CardDescription>
+              </CardContent>
+            </Card>
+
+            <Card>
+              <CardHeader>
+                <CardTitle>Host overrides</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <CardDescription className="leading-relaxed">
+                  Override DNS resolution to redirect traffic to different servers.
+                  Test against staging or development environments.
+                  Custom hosts file directly in the app.
+                </CardDescription>
+              </CardContent>
+            </Card>
+
+            <Card>
+              <CardHeader>
+                <CardTitle>Breakpoints</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <CardDescription className="leading-relaxed">
+                  Pause requests before they are sent or responses before they are delivered.
+                  Inspect and modify traffic in real-time.
+                  Interactive debugging for network issues.
+                </CardDescription>
+              </CardContent>
+            </Card>
+
+            <Card>
+              <CardHeader>
+                <CardTitle>JavaScript scripts</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <CardDescription className="leading-relaxed">
+                  Write custom JavaScript to programmatically modify traffic.
+                  Advanced automation for complex modification scenarios.
+                  Full access to request and response objects.
+                </CardDescription>
+              </CardContent>
+            </Card>
+
+            <Card>
+              <CardHeader>
+                <CardTitle>Network throttling</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <CardDescription className="leading-relaxed">
+                  Simulate different network conditions with custom profiles.
+                  Test application behavior under poor connectivity.
+                  Configure bandwidth limits, latency, and packet loss.
+                </CardDescription>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+      </section>
+
+      <Separator />
+
+      {/* Built-in Utilities */}
+      <section className="container py-16 md:py-24">
+        <div className="mx-auto max-w-5xl">
+          <h2 className="text-2xl font-bold tracking-tight mb-12">Built-in utilities</h2>
+          
+          <div className="grid gap-6 md:grid-cols-3">
+            <Card>
+              <CardHeader>
+                <CardTitle className="text-lg">Base64 encoder/decoder</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <CardDescription>
+                  Encode and decode Base64 strings directly in the app.
+                </CardDescription>
+              </CardContent>
+            </Card>
+
+            <Card>
+              <CardHeader>
+                <CardTitle className="text-lg">URL encoder/decoder</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <CardDescription>
+                  URL encode and decode for query parameters and paths.
+                </CardDescription>
+              </CardContent>
+            </Card>
+
+            <Card>
+              <CardHeader>
+                <CardTitle className="text-lg">JSON formatter</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <CardDescription>
+                  Format and validate JSON with syntax highlighting.
+                </CardDescription>
+              </CardContent>
+            </Card>
+
+            <Card>
+              <CardHeader>
+                <CardTitle className="text-lg">Hash generator</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <CardDescription>
+                  Generate MD5, SHA-1, SHA-256 hashes for strings.
+                </CardDescription>
+              </CardContent>
+            </Card>
+
+            <Card>
+              <CardHeader>
+                <CardTitle className="text-lg">Timestamp converter</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <CardDescription>
+                  Convert between Unix timestamps and human-readable dates.
+                </CardDescription>
+              </CardContent>
+            </Card>
+
+            <Card>
+              <CardHeader>
+                <CardTitle className="text-lg">Certificate guide</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <CardDescription>
+                  Step-by-step guide for CA installation and trust setup.
                 </CardDescription>
               </CardContent>
             </Card>
@@ -340,16 +510,14 @@ export default function FeaturesPage() {
             Leverages Apple's latest frameworks and APIs for reliability and performance.
           </p>
           <div className="flex flex-wrap gap-2 justify-center">
-            <Badge variant="secondary">Swift 5.9</Badge>
+            <Badge variant="secondary">Swift 6.0</Badge>
             <Badge variant="secondary">SwiftUI</Badge>
             <Badge variant="secondary">Network Extension</Badge>
             <Badge variant="secondary">NEPacketTunnelProvider</Badge>
             <Badge variant="secondary">WidgetKit</Badge>
             <Badge variant="secondary">Live Activities</Badge>
             <Badge variant="secondary">App Groups</Badge>
-            <Badge variant="secondary">Core Data</Badge>
-            <Badge variant="secondary">Combine</Badge>
-            <Badge variant="secondary">URLSession</Badge>
+            <Badge variant="secondary">Swift Package Manager</Badge>
           </div>
         </div>
       </section>

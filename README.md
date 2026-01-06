@@ -4,7 +4,7 @@ Official website for Trace, a professional iOS network debugging tool.
 
 ## Overview
 
-This is the marketing and documentation website for Trace, an open-source network debugger for iOS. Built with Next.js, TypeScript, Tailwind CSS, and shadcn/ui.
+This is the marketing and documentation website for Trace, an iOS network debugger that captures device-wide HTTP(S) traffic through a Network Extension (packet tunnel) with on-device TLS MITM. Built with Next.js, TypeScript, Tailwind CSS, and shadcn/ui.
 
 ## Design Philosophy
 
@@ -19,19 +19,18 @@ Design references: Linear, Vercel, Raycast
 
 ## Tech Stack
 
-- **Framework**: Next.js 16 (App Router)
+- **Framework**: Next.js 15 (App Router)
 - **Language**: TypeScript
 - **Styling**: Tailwind CSS v3
 - **UI Components**: shadcn/ui
 - **Icons**: Lucide React
-- **Animation**: Framer Motion (minimal usage)
 
 ## Getting Started
 
 ### Prerequisites
 
 - Node.js 18+ 
-- npm or yarn
+- npm, yarn, or pnpm
 
 ### Installation
 
@@ -75,11 +74,11 @@ trace-web/
 
 ## Pages
 
-- **Home** (`/`): Landing page with hero, product showcase, capabilities, technical details, and open source information
-- **Features** (`/features`): Detailed feature breakdown and capabilities
-- **Architecture** (`/architecture`): Technical architecture and implementation details
-- **Open Source** (`/open-source`): Licensing, contribution guidelines, and community information
-- **Docs** (`/docs`): Documentation structure (placeholder content)
+- **Home** (`/`): Landing page with hero, product showcase, capabilities (device-wide capture, TLS inspection, WebSocket/SSE support, traffic modification, TCP flow tracking, deep inspection), technical details, and open source information
+- **Features** (`/features`): Comprehensive feature breakdown including core capabilities, advanced tools (request builder, filtering, search, import/export), traffic modification tools (rewrite rules, request maps, host overrides, breakpoints, JavaScript scripts, network throttling), and built-in utilities
+- **Architecture** (`/architecture`): Technical architecture covering system overview (main app, TraceVPN extension, widget extension), packet processing pipeline, data storage with App Groups, protocol support (HTTP/1.1/2/3, WebSocket, SSE, TCP), and performance considerations
+- **Open Source** (`/open-source`): MIT licensing, contribution guidelines, build instructions (Xcode 16+, iOS 18+, Swift 6.0), and community information
+- **Docs** (`/docs`): Documentation structure covering installation, configuration, user guide, and developer documentation
 
 ## Styling
 
