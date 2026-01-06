@@ -9,7 +9,7 @@ export default function OpenSourcePage() {
     <div className="flex flex-col">
       {/* Header */}
       <section className="container py-12 sm:py-16 md:py-24">
-        <div className="mx-auto max-w-3xl text-center px-4 sm:px-6">
+        <div className="mx-auto max-w-3xl text-center">
           <Github className="h-10 w-10 sm:h-12 sm:w-12 mx-auto mb-4 sm:mb-6 text-muted-foreground" />
           <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight mb-3 sm:mb-4">
             Open source
@@ -25,7 +25,7 @@ export default function OpenSourcePage() {
 
       {/* Why Open Source */}
       <section className="container py-12 sm:py-16 md:py-24">
-        <div className="mx-auto max-w-4xl px-4 sm:px-6">
+        <div className="mx-auto max-w-4xl">
           <h2 className="text-xl sm:text-2xl font-bold tracking-tight mb-4 sm:mb-6 text-center">Why open source</h2>
           <p className="text-sm sm:text-base text-muted-foreground leading-relaxed mb-8 sm:mb-10 md:mb-12 text-center max-w-2xl mx-auto">
             Trace is open source by design. Network debugging tools require trust.
@@ -96,7 +96,7 @@ export default function OpenSourcePage() {
 
       {/* License */}
       <section className="container py-12 sm:py-16 md:py-24">
-        <div className="mx-auto max-w-4xl px-4 sm:px-6">
+        <div className="mx-auto max-w-4xl">
           <h2 className="text-xl sm:text-2xl font-bold tracking-tight mb-4 sm:mb-6">License</h2>
           
           <div className="rounded-lg border bg-muted/30 p-6 mb-6">
@@ -133,7 +133,7 @@ export default function OpenSourcePage() {
 
       {/* Contributing */}
       <section className="container py-12 sm:py-16 md:py-24">
-        <div className="mx-auto max-w-4xl px-4 sm:px-6">
+        <div className="mx-auto max-w-4xl">
           <h2 className="text-xl sm:text-2xl font-bold tracking-tight mb-4 sm:mb-6">Contributing</h2>
           
           <p className="text-sm sm:text-base text-muted-foreground leading-relaxed mb-6 sm:mb-8">
@@ -219,14 +219,14 @@ export default function OpenSourcePage() {
             </div>
           </div>
 
-          <div className="mt-8 flex gap-4">
-            <Button asChild>
+          <div className="mt-8 flex flex-col sm:flex-row gap-4">
+            <Button asChild className="w-full sm:w-auto">
               <Link href="https://github.com/trace-network-debugger/trace" target="_blank" rel="noopener noreferrer">
                 <Github className="mr-2 h-5 w-5" />
                 View repository
               </Link>
             </Button>
-            <Button variant="outline" asChild>
+            <Button variant="outline" asChild className="w-full sm:w-auto">
               <Link href="https://github.com/trace-network-debugger/trace/issues" target="_blank" rel="noopener noreferrer">
                 View issues
               </Link>
@@ -239,7 +239,7 @@ export default function OpenSourcePage() {
 
       {/* Build from Source */}
       <section className="container py-12 sm:py-16 md:py-24">
-        <div className="mx-auto max-w-4xl px-4 sm:px-6">
+        <div className="mx-auto max-w-4xl">
           <h2 className="text-xl sm:text-2xl font-bold tracking-tight mb-4 sm:mb-6">Build from source</h2>
           
           <p className="text-sm sm:text-base text-muted-foreground leading-relaxed mb-4 sm:mb-6">
@@ -315,7 +315,7 @@ export default function OpenSourcePage() {
 
       {/* Support */}
       <section className="container py-12 sm:py-16 md:py-24">
-        <div className="mx-auto max-w-3xl text-center px-4 sm:px-6">
+        <div className="mx-auto max-w-3xl text-center">
           <h2 className="text-xl sm:text-2xl font-bold tracking-tight mb-3 sm:mb-4">
             Questions or feedback
           </h2>
@@ -333,4 +333,3 @@ export default function OpenSourcePage() {
     </div>
   );
 }
-

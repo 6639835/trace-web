@@ -67,7 +67,7 @@ export function Footer() {
           <p className="text-xs sm:text-sm text-muted-foreground">
             Built for iOS developers who value precision and transparency.
           </p>
-          <p className="text-xs sm:text-sm text-muted-foreground whitespace-nowrap">
+          <p className="text-xs sm:text-sm text-muted-foreground sm:whitespace-nowrap">
             Open source under MIT License.
           </p>
         </div>
@@ -75,4 +75,3 @@ export function Footer() {
     </footer>
   );
 }
-
