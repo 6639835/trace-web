@@ -27,10 +27,10 @@ export default function ArchitecturePage() {
           <p className="text-muted-foreground mb-8 leading-relaxed">
             Trace is built on iOS Network Extension framework, specifically implementing NEPacketTunnelProvider.
             This architecture enables system-level network visibility without requiring apps to route traffic through a local proxy.
-            The system consists of two primary components that communicate via shared container.
+            The system consists of three primary components that communicate via shared App Group container.
           </p>
 
-          <div className="grid gap-6 md:grid-cols-2 mb-12">
+          <div className="grid gap-6 md:grid-cols-3 mb-12">
             <Card>
               <CardHeader>
                 <CardTitle className="text-lg">Main application</CardTitle>
@@ -38,21 +38,34 @@ export default function ArchitecturePage() {
               <CardContent>
                 <CardDescription className="leading-relaxed">
                   SwiftUI-based interface for viewing captured traffic, managing filters, and configuring settings.
-                  Reads data from shared container and provides real-time updates via Combine publishers.
-                  Handles export, search, and replay functionality.
+                  Reads data from shared App Group container and provides real-time updates.
+                  Handles export, search, replay, modification tools, and built-in utilities.
                 </CardDescription>
               </CardContent>
             </Card>
 
             <Card>
               <CardHeader>
-                <CardTitle className="text-lg">Network extension</CardTitle>
+                <CardTitle className="text-lg">Network extension (TraceVPN)</CardTitle>
               </CardHeader>
               <CardContent>
                 <CardDescription className="leading-relaxed">
                   Separate process running NEPacketTunnelProvider that captures IP packets.
-                  Reconstructs TCP streams and HTTP transactions.
-                  Writes captured data to shared container for app consumption.
+                  Implements MITM proxy with TLS handling and HTTP/2/WebSocket parsing.
+                  Writes captured data to shared App Group container.
+                </CardDescription>
+              </CardContent>
+            </Card>
+
+            <Card>
+              <CardHeader>
+                <CardTitle className="text-lg">Widget extension</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <CardDescription className="leading-relaxed">
+                  WidgetKit bundle with standard widget, control widget, and Live Activity.
+                  Real-time network statistics and quick actions.
+                  Shares data through App Group container.
                 </CardDescription>
               </CardContent>
             </Card>
@@ -64,10 +77,12 @@ export default function ArchitecturePage() {
               <div>Device network → Network Extension (packet tunnel)</div>
               <div className="pl-4">↓ Packet capture at IP layer</div>
               <div className="pl-4">↓ TCP stream reconstruction</div>
-              <div className="pl-4">↓ HTTP transaction parsing</div>
+              <div className="pl-4">↓ HTTP/HTTP2/HTTP3/WebSocket parsing</div>
               <div className="pl-4">↓ TLS interception (if enabled)</div>
+              <div className="pl-4">↓ Apply rewrite rules, request maps, breakpoints</div>
               <div className="pl-4">↓ Write to shared container (App Group)</div>
               <div>Main app reads and displays</div>
+              <div>Widget extension shows real-time stats</div>
             </div>
           </div>
         </div>
@@ -117,9 +132,9 @@ export default function ArchitecturePage() {
                 <div className="rounded-lg border p-4">
                   <h4 className="font-semibold text-sm mb-2">3. HTTP parsing</h4>
                   <p className="text-sm text-muted-foreground leading-relaxed">
-                    Parse HTTP/1.1 request and response from TCP stream.
-                    Extract method, path, headers, and body.
-                    Track request-response pairs for complete transaction view.
+                    Parse HTTP/1.1, HTTP/2, and HTTP/3 transactions from TCP stream.
+                    Extract method, path, headers, and body with protocol-specific features.
+                    Track WebSocket upgrades, SSE connections, and request-response pairs.
                   </p>
                 </div>
 
@@ -171,22 +186,22 @@ export default function ArchitecturePage() {
             </div>
 
             <div>
-              <h3 className="text-lg font-semibold mb-3">Core Data</h3>
+              <h3 className="text-lg font-semibold mb-3">Persistent storage</h3>
               <p className="text-muted-foreground leading-relaxed mb-4">
-                Persistent storage for captured requests and responses.
-                Shared Core Data store accessible from both app and extension.
-                Efficient querying and filtering with NSFetchRequest.
-                Automatic cleanup of old data based on retention policy.
+                Structured storage for captured requests, responses, and configuration.
+                Shared data accessible from app, extension, and widgets through App Group.
+                Efficient querying and filtering with support for search and presets.
+                Automatic cleanup with configurable retention policy.
               </p>
             </div>
 
             <div>
               <h3 className="text-lg font-semibold mb-3">Real-time updates</h3>
               <p className="text-muted-foreground leading-relaxed">
-                Extension writes new captures to Core Data.
-                Main app observes NSManagedObjectContext changes.
-                UI updates automatically via Combine publishers.
-                Minimal latency between capture and display.
+                Extension writes new captures to shared storage.
+                Main app observes data changes for UI updates.
+                Widgets receive notifications for Live Activity updates.
+                Minimal latency between capture and display across all components.
               </p>
             </div>
           </div>
@@ -207,9 +222,9 @@ export default function ArchitecturePage() {
               </CardHeader>
               <CardContent>
                 <CardDescription className="leading-relaxed">
-                  Full HTTP/1.1 support with request and response parsing.
+                  Full HTTP/1.1, HTTP/2, and HTTP/3 support with complete parsing.
                   HTTPS via TLS MITM with dynamic certificate generation.
-                  HTTP/2 support planned for future releases.
+                  HTTP/2 stream info with HPACK table viewer and HTTP/3 protocol markers.
                 </CardDescription>
               </CardContent>
             </Card>
@@ -358,16 +373,16 @@ export default function ArchitecturePage() {
             Modern iOS frameworks and APIs.
           </p>
           <div className="flex flex-wrap gap-2 justify-center">
-            <Badge variant="secondary">Swift</Badge>
+            <Badge variant="secondary">Swift 6.0</Badge>
             <Badge variant="secondary">SwiftUI</Badge>
             <Badge variant="secondary">Network Extension</Badge>
             <Badge variant="secondary">NEPacketTunnelProvider</Badge>
             <Badge variant="secondary">Network.framework</Badge>
-            <Badge variant="secondary">Core Data</Badge>
-            <Badge variant="secondary">Combine</Badge>
             <Badge variant="secondary">WidgetKit</Badge>
+            <Badge variant="secondary">Live Activities</Badge>
             <Badge variant="secondary">App Groups</Badge>
             <Badge variant="secondary">Keychain Services</Badge>
+            <Badge variant="secondary">Swift Package Manager</Badge>
           </div>
         </div>
       </section>

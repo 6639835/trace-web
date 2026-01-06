@@ -78,35 +78,35 @@ export default function DocsPage() {
             <div className="rounded-lg border p-6">
               <h3 className="text-lg font-semibold mb-3">Capturing traffic</h3>
               <p className="text-muted-foreground leading-relaxed">
-                Start and stop capture sessions. Filter by app, domain, or protocol.
-                View real-time traffic as it flows through your device.
+                Start capture from Settings tab and view traffic in the Network tab.
+                Filter by HTTP, WebSocket, SSE, or TCP flows with saved presets.
+                Group by domain or session for better organization.
               </p>
             </div>
 
             <div className="rounded-lg border p-6">
               <h3 className="text-lg font-semibold mb-3">Inspecting requests</h3>
               <p className="text-muted-foreground leading-relaxed">
-                Navigate captured requests and view detailed information.
-                Headers, body, timing, and protocol metadata.
-                Search and filter captured data.
+                Tap any request to view complete details: headers, body (JSON, XML, images, SVG, multipart), timing breakdowns, TLS certificate chains, and HTTP/2 HPACK tables.
+                Compare requests side-by-side and search across all content.
               </p>
             </div>
 
             <div className="rounded-lg border p-6">
               <h3 className="text-lg font-semibold mb-3">Modifying and replaying</h3>
               <p className="text-muted-foreground leading-relaxed">
-                Edit request headers, body, and parameters.
-                Replay modified requests to test different scenarios.
-                Validate API behavior without changing code.
+                Use Request Builder to craft custom requests or import cURL commands.
+                Configure rewrite rules, request maps, host overrides, breakpoints, and JavaScript scripts in the Tools tab.
+                Apply network condition profiles to simulate different connectivity scenarios.
               </p>
             </div>
 
             <div className="rounded-lg border p-6">
               <h3 className="text-lg font-semibold mb-3">Exporting data</h3>
               <p className="text-muted-foreground leading-relaxed">
-                Export captured traffic in HAR format.
-                Share specific requests with team members.
-                Archive debugging sessions for later analysis.
+                Export/import HAR files from Settings → Data.
+                Export TCP flows as CSV or JSON.
+                Export and import configuration including rewrite rules, request maps, scripts, and hosts.
               </p>
             </div>
           </div>
