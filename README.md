@@ -10,7 +10,7 @@ Professional docs and marketing site for Trace.
 
 Marketing and documentation site for Trace, a professional iOS network debugging tool. It explains the product, showcases features, and hosts technical docs for engineers who need device-wide HTTP(S) inspection with on-device TLS MITM.
 
-![Trace Website Screenshot](/public/trace-web.png)
+[![Trace Website Screenshot](/public/trace-web.png)](https://trace-web-ruby.vercel.app/)
 
 ## Table of Contents
 
