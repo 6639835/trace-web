@@ -4,6 +4,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 import { Github, Network, Fingerprint, Radio, Repeat, Activity, Layers } from "lucide-react";
+import { IPhoneMockup } from "@/components/marketing/iphone-mockup";
 
 export default function Home() {
   return (
@@ -36,63 +37,51 @@ export default function Home() {
       <section className="container py-24 md:py-32">
         <div className="mx-auto max-w-5xl">
           <div className="flex flex-col items-center">
-            <div className="relative w-full max-w-sm">
-              {/* iPhone Mockup Container */}
-              <div className="relative mx-auto" style={{ aspectRatio: "390/844" }}>
-                {/* Device Frame */}
-                <div className="absolute inset-0 rounded-[3rem] border-8 border-zinc-900 bg-zinc-900 shadow-2xl">
-                  {/* Notch */}
-                  <div className="absolute top-0 left-1/2 -translate-x-1/2 w-36 h-6 bg-zinc-900 rounded-b-3xl z-10"></div>
-                  
-                  {/* Screen Content */}
-                  <div className="absolute inset-2 rounded-[2.5rem] bg-white overflow-hidden">
-                    {/* App Screenshot Placeholder */}
-                    <div className="w-full h-full bg-gradient-to-b from-zinc-50 to-zinc-100 p-4">
-                      {/* Status Bar */}
-                      <div className="flex justify-between items-center mb-4 text-xs text-zinc-900">
-                        <span className="font-semibold">9:41</span>
-                        <div className="flex gap-1">
-                          <div className="w-4 h-3 border border-zinc-900 rounded-sm"></div>
-                        </div>
-                      </div>
-                      
-                      {/* App Content */}
-                      <div className="space-y-3">
-                        <div className="bg-white rounded-lg p-3 shadow-sm border border-zinc-200">
-                          <div className="flex items-center gap-2 mb-2">
-                            <div className="w-2 h-2 rounded-full bg-green-500"></div>
-                            <div className="text-xs font-mono text-zinc-600">GET</div>
-                            <div className="text-xs text-zinc-400">200</div>
-                          </div>
-                          <div className="text-xs font-mono text-zinc-900 truncate">api.example.com/users</div>
-                          <div className="text-[10px] text-zinc-400 mt-1">12.4 KB • 142ms</div>
-                        </div>
-                        
-                        <div className="bg-white rounded-lg p-3 shadow-sm border border-zinc-200">
-                          <div className="flex items-center gap-2 mb-2">
-                            <div className="w-2 h-2 rounded-full bg-blue-500"></div>
-                            <div className="text-xs font-mono text-zinc-600">POST</div>
-                            <div className="text-xs text-zinc-400">201</div>
-                          </div>
-                          <div className="text-xs font-mono text-zinc-900 truncate">api.example.com/events</div>
-                          <div className="text-[10px] text-zinc-400 mt-1">2.1 KB • 89ms</div>
-                        </div>
-                        
-                        <div className="bg-white rounded-lg p-3 shadow-sm border border-zinc-200">
-                          <div className="flex items-center gap-2 mb-2">
-                            <div className="w-2 h-2 rounded-full bg-purple-500"></div>
-                            <div className="text-xs font-mono text-zinc-600">WS</div>
-                            <div className="text-xs text-zinc-400">OPEN</div>
-                          </div>
-                          <div className="text-xs font-mono text-zinc-900 truncate">ws.example.com/live</div>
-                          <div className="text-[10px] text-zinc-400 mt-1">Real-time connection</div>
-                        </div>
-                      </div>
+            <IPhoneMockup className="mx-auto">
+              {/* App Screenshot Content */}
+              <div className="w-full h-full bg-gradient-to-b from-zinc-50 to-zinc-100 p-4">
+                {/* Status Bar */}
+                <div className="flex justify-between items-center mb-4 text-xs text-zinc-900">
+                  <span className="font-semibold">9:41</span>
+                  <div className="flex gap-1">
+                    <div className="w-4 h-3 border border-zinc-900 rounded-sm"></div>
+                  </div>
+                </div>
+                
+                {/* App Content */}
+                <div className="space-y-3">
+                  <div className="bg-white rounded-lg p-3 shadow-sm border border-zinc-200">
+                    <div className="flex items-center gap-2 mb-2">
+                      <div className="w-2 h-2 rounded-full bg-green-500"></div>
+                      <div className="text-xs font-mono text-zinc-600">GET</div>
+                      <div className="text-xs text-zinc-400">200</div>
                     </div>
+                    <div className="text-xs font-mono text-zinc-900 truncate">api.example.com/users</div>
+                    <div className="text-[10px] text-zinc-400 mt-1">12.4 KB • 142ms</div>
+                  </div>
+                  
+                  <div className="bg-white rounded-lg p-3 shadow-sm border border-zinc-200">
+                    <div className="flex items-center gap-2 mb-2">
+                      <div className="w-2 h-2 rounded-full bg-blue-500"></div>
+                      <div className="text-xs font-mono text-zinc-600">POST</div>
+                      <div className="text-xs text-zinc-400">201</div>
+                    </div>
+                    <div className="text-xs font-mono text-zinc-900 truncate">api.example.com/events</div>
+                    <div className="text-[10px] text-zinc-400 mt-1">2.1 KB • 89ms</div>
+                  </div>
+                  
+                  <div className="bg-white rounded-lg p-3 shadow-sm border border-zinc-200">
+                    <div className="flex items-center gap-2 mb-2">
+                      <div className="w-2 h-2 rounded-full bg-purple-500"></div>
+                      <div className="text-xs font-mono text-zinc-600">WS</div>
+                      <div className="text-xs text-zinc-400">OPEN</div>
+                    </div>
+                    <div className="text-xs font-mono text-zinc-900 truncate">ws.example.com/live</div>
+                    <div className="text-[10px] text-zinc-400 mt-1">Real-time connection</div>
                   </div>
                 </div>
               </div>
-            </div>
+            </IPhoneMockup>
             <div className="mt-16 text-center max-w-2xl">
               <p className="text-sm text-muted-foreground">
                 Real-time network inspection at the system level.
