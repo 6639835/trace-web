@@ -8,23 +8,23 @@ import { IPhoneMockup } from "@/components/marketing/iphone-mockup";
 
 export default function Home() {
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col overflow-x-hidden w-full">
       {/* Hero Section with Phone Mockup */}
-      <section className="container min-h-[calc(100vh-4rem)] flex items-center py-8 sm:py-12 md:py-16">
-        <div className="grid lg:grid-cols-2 gap-8 sm:gap-10 lg:gap-12 items-center w-full max-w-7xl mx-auto">
+      <section className="container min-h-[calc(100vh-4rem)] flex items-center py-8 sm:py-12 md:py-16 overflow-hidden">
+        <div className="grid lg:grid-cols-2 gap-8 sm:gap-10 lg:gap-12 items-center w-full max-w-7xl mx-auto overflow-hidden">
           {/* Left Column - Hero Text */}
-          <div className="flex flex-col justify-center space-y-4 sm:space-y-6 lg:space-y-8">
-            <div>
-              <h1 className="text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl lg:text-6xl mb-3 sm:mb-4 lg:mb-6 leading-tight">
+          <div className="flex flex-col justify-center space-y-4 sm:space-y-6 lg:space-y-8 max-w-full">
+            <div className="max-w-full">
+              <h1 className="text-2xl xs:text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl lg:text-6xl mb-3 sm:mb-4 lg:mb-6 leading-tight break-words hyphens-auto">
                 Redefining iOS network debugging.
               </h1>
-              <p className="text-sm sm:text-base lg:text-lg text-muted-foreground leading-relaxed">
+              <p className="text-sm sm:text-base lg:text-lg text-muted-foreground leading-relaxed break-words">
                 Professional network debugging tool for iOS developers. 
                 Captures device-wide HTTP(S), TCP, WebSocket, and SSE traffic through a packet tunnel with on-device TLS MITM.
                 Built on Network Extension APIs for complete system-level visibility and traffic modification.
               </p>
             </div>
-            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
+            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 max-w-full">
               <Button size="lg" asChild className="w-full sm:w-auto">
                 <Link href="https://github.com/trace-network-debugger" target="_blank" rel="noopener noreferrer">
                   <Github className="mr-2 h-5 w-5" />
@@ -32,15 +32,15 @@ export default function Home() {
                 </Link>
               </Button>
             </div>
-            <p className="text-xs sm:text-sm text-muted-foreground">
+            <p className="text-xs sm:text-sm text-muted-foreground break-words max-w-full">
               Real-time network inspection at the system level.
               See every request from every app on your device.
             </p>
           </div>
 
           {/* Right Column - Phone Mockup */}
-          <div className="flex justify-center lg:justify-end items-center mt-4 lg:mt-0">
-            <div className="scale-[0.6] sm:scale-[0.7] md:scale-75 lg:scale-[0.85] xl:scale-95 origin-center lg:origin-right">
+          <div className="flex justify-center lg:justify-end items-center mt-4 lg:mt-0 overflow-hidden">
+            <div className="max-w-full">
               <IPhoneMockup>
                 {/* App Screenshot Content */}
                 <div className="w-full h-full bg-gradient-to-b from-zinc-50 to-zinc-100 p-4">
@@ -95,7 +95,7 @@ export default function Home() {
 
       {/* Core Capabilities Section */}
       <section className="container py-12 sm:py-16 md:py-24 lg:py-32">
-        <div className="mx-auto max-w-5xl px-4 sm:px-6">
+        <div className="mx-auto max-w-5xl">
           <div className="text-center mb-10 sm:mb-12 md:mb-16">
             <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight mb-3 sm:mb-4">
               Built for production debugging
@@ -185,7 +185,7 @@ export default function Home() {
 
       {/* Technical Credibility Section */}
       <section className="container py-12 sm:py-16 md:py-24 lg:py-32">
-        <div className="mx-auto max-w-4xl px-4 sm:px-6">
+        <div className="mx-auto max-w-4xl">
           <div className="text-center mb-10 sm:mb-12 md:mb-16">
             <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight mb-3 sm:mb-4">
               Engineering depth
@@ -246,14 +246,14 @@ export default function Home() {
           </div>
 
           <div className="mt-8 sm:mt-10 md:mt-12 flex flex-wrap gap-1.5 sm:gap-2 justify-center">
-            <Badge variant="secondary" className="text-xs">Swift 6.0</Badge>
-            <Badge variant="secondary" className="text-xs">SwiftUI</Badge>
-            <Badge variant="secondary" className="text-xs">Network Extension</Badge>
-            <Badge variant="secondary" className="text-xs">NEPacketTunnelProvider</Badge>
-            <Badge variant="secondary" className="text-xs">WidgetKit</Badge>
-            <Badge variant="secondary" className="text-xs">Live Activities</Badge>
-            <Badge variant="secondary" className="text-xs">App Groups</Badge>
-            <Badge variant="secondary" className="text-xs">Swift Package Manager</Badge>
+            <Badge variant="secondary" className="text-[10px] sm:text-xs whitespace-nowrap">Swift 6.0</Badge>
+            <Badge variant="secondary" className="text-[10px] sm:text-xs whitespace-nowrap">SwiftUI</Badge>
+            <Badge variant="secondary" className="text-[10px] sm:text-xs whitespace-nowrap">Network Extension</Badge>
+            <Badge variant="secondary" className="text-[10px] sm:text-xs whitespace-nowrap">NEPacketTunnelProvider</Badge>
+            <Badge variant="secondary" className="text-[10px] sm:text-xs whitespace-nowrap">WidgetKit</Badge>
+            <Badge variant="secondary" className="text-[10px] sm:text-xs whitespace-nowrap">Live Activities</Badge>
+            <Badge variant="secondary" className="text-[10px] sm:text-xs whitespace-nowrap">App Groups</Badge>
+            <Badge variant="secondary" className="text-[10px] sm:text-xs whitespace-nowrap">Swift Package Manager</Badge>
           </div>
         </div>
       </section>
@@ -262,7 +262,7 @@ export default function Home() {
 
       {/* Open Source Section */}
       <section className="container py-12 sm:py-16 md:py-24 lg:py-32">
-        <div className="mx-auto max-w-3xl text-center px-4 sm:px-6">
+        <div className="mx-auto max-w-3xl text-center">
           <Github className="h-10 w-10 sm:h-12 sm:w-12 mx-auto mb-4 sm:mb-6 text-muted-foreground" />
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight mb-3 sm:mb-4">
             Open source and transparent
@@ -290,4 +290,3 @@ export default function Home() {
     </div>
   );
 }
-

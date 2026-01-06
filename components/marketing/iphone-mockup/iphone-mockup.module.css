@@ -9,9 +9,11 @@
 }
 
 .deviceIphone14Pro {
-  height: 868px;
-  width: 428px;
+  --device-scale: 1;
+  height: calc(868px * var(--device-scale));
+  width: calc(428px * var(--device-scale));
   position: relative;
+  flex-shrink: 0;
 }
 
 .deviceFrame {
@@ -25,6 +27,8 @@
   padding: 19px;
   width: 428px;
   position: relative;
+  transform: scale(var(--device-scale));
+  transform-origin: top left;
 }
 
 /* 2556‑by‑1179-pixel resolution */
@@ -160,5 +164,21 @@
   left: 86px;
 }
 
-/* Responsive Scaling - Now handled at layout level */
+/* Responsive Scaling */
 
+/* Ensure mockup doesn't cause overflow */
+.deviceIphone14Pro {
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+.deviceFrame {
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+@media (max-width: 520px) {
+  .deviceIphone14Pro {
+    display: none;
+  }
+}
