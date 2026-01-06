@@ -4,8 +4,8 @@ import { Separator } from "@/components/ui/separator";
 export function Footer() {
   return (
     <footer className="border-t">
-      <div className="container py-12">
-        <div className="grid grid-cols-2 gap-8 md:grid-cols-4">
+      <div className="container py-8 sm:py-12">
+        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4 sm:gap-8">
           <div>
             <h3 className="text-sm font-semibold mb-3">Product</h3>
             <ul className="space-y-2 text-sm text-muted-foreground">
@@ -62,12 +62,12 @@ export function Footer() {
             </ul>
           </div>
         </div>
-        <Separator className="my-8" />
-        <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-          <p className="text-sm text-muted-foreground">
+        <Separator className="my-6 sm:my-8" />
+        <div className="flex flex-col sm:flex-row justify-between items-center gap-3 sm:gap-4 text-center sm:text-left">
+          <p className="text-xs sm:text-sm text-muted-foreground">
             Built for iOS developers who value precision and transparency.
           </p>
-          <p className="text-sm text-muted-foreground">
+          <p className="text-xs sm:text-sm text-muted-foreground whitespace-nowrap">
             Open source under MIT License.
           </p>
         </div>

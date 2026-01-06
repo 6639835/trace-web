@@ -6,12 +6,12 @@ export default function ArchitecturePage() {
   return (
     <div className="flex flex-col">
       {/* Header */}
-      <section className="container py-16 md:py-24">
-        <div className="mx-auto max-w-3xl text-center">
-          <h1 className="text-4xl font-bold tracking-tight sm:text-5xl mb-4">
+      <section className="container py-12 sm:py-16 md:py-24">
+        <div className="mx-auto max-w-3xl text-center px-4 sm:px-6">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight mb-3 sm:mb-4">
             Architecture
           </h1>
-          <p className="text-lg text-muted-foreground leading-relaxed">
+          <p className="text-sm sm:text-base lg:text-lg text-muted-foreground leading-relaxed">
             A deep look at how Trace works under the hood.
             Understanding the technical foundation and design decisions.
           </p>
@@ -21,16 +21,16 @@ export default function ArchitecturePage() {
       <Separator />
 
       {/* System Overview */}
-      <section className="container py-16 md:py-24">
-        <div className="mx-auto max-w-4xl">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">System overview</h2>
-          <p className="text-muted-foreground mb-8 leading-relaxed">
+      <section className="container py-12 sm:py-16 md:py-24">
+        <div className="mx-auto max-w-4xl px-4 sm:px-6">
+          <h2 className="text-xl sm:text-2xl font-bold tracking-tight mb-4 sm:mb-6">System overview</h2>
+          <p className="text-sm sm:text-base text-muted-foreground mb-6 sm:mb-8 leading-relaxed">
             Trace is built on iOS Network Extension framework, specifically implementing NEPacketTunnelProvider.
             This architecture enables system-level network visibility without requiring apps to route traffic through a local proxy.
             The system consists of three primary components that communicate via shared App Group container.
           </p>
 
-          <div className="grid gap-6 md:grid-cols-3 mb-12">
+          <div className="grid gap-4 sm:gap-5 md:gap-6 sm:grid-cols-2 lg:grid-cols-3 mb-8 sm:mb-10 md:mb-12">
             <Card>
               <CardHeader>
                 <CardTitle className="text-lg">Main application</CardTitle>
@@ -91,9 +91,9 @@ export default function ArchitecturePage() {
       <Separator />
 
       {/* Network Extension */}
-      <section className="container py-16 md:py-24">
-        <div className="mx-auto max-w-4xl">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Network extension implementation</h2>
+      <section className="container py-12 sm:py-16 md:py-24">
+        <div className="mx-auto max-w-4xl px-4 sm:px-6">
+          <h2 className="text-xl sm:text-2xl font-bold tracking-tight mb-4 sm:mb-6">Network extension implementation</h2>
           
           <div className="space-y-8">
             <div>
@@ -166,9 +166,9 @@ export default function ArchitecturePage() {
       <Separator />
 
       {/* Data Storage */}
-      <section className="container py-16 md:py-24">
-        <div className="mx-auto max-w-4xl">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Data storage and IPC</h2>
+      <section className="container py-12 sm:py-16 md:py-24">
+        <div className="mx-auto max-w-4xl px-4 sm:px-6">
+          <h2 className="text-xl sm:text-2xl font-bold tracking-tight mb-4 sm:mb-6">Data storage and IPC</h2>
           
           <div className="space-y-8">
             <div>
@@ -211,11 +211,11 @@ export default function ArchitecturePage() {
       <Separator />
 
       {/* Protocol Support */}
-      <section className="container py-16 md:py-24">
-        <div className="mx-auto max-w-4xl">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Protocol support</h2>
+      <section className="container py-12 sm:py-16 md:py-24">
+        <div className="mx-auto max-w-4xl px-4 sm:px-6">
+          <h2 className="text-xl sm:text-2xl font-bold tracking-tight mb-4 sm:mb-6">Protocol support</h2>
           
-          <div className="grid gap-6 md:grid-cols-2">
+          <div className="grid gap-4 sm:gap-5 md:gap-6 sm:grid-cols-2">
             <Card>
               <CardHeader>
                 <CardTitle className="text-lg">HTTP/HTTPS</CardTitle>
@@ -277,9 +277,9 @@ export default function ArchitecturePage() {
       <Separator />
 
       {/* Performance */}
-      <section className="container py-16 md:py-24">
-        <div className="mx-auto max-w-4xl">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Performance considerations</h2>
+      <section className="container py-12 sm:py-16 md:py-24">
+        <div className="mx-auto max-w-4xl px-4 sm:px-6">
+          <h2 className="text-xl sm:text-2xl font-bold tracking-tight mb-4 sm:mb-6">Performance considerations</h2>
           
           <div className="space-y-6">
             <div>
@@ -317,9 +317,9 @@ export default function ArchitecturePage() {
       <Separator />
 
       {/* Security Model */}
-      <section className="container py-16 md:py-24">
-        <div className="mx-auto max-w-4xl">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Security model</h2>
+      <section className="container py-12 sm:py-16 md:py-24">
+        <div className="mx-auto max-w-4xl px-4 sm:px-6">
+          <h2 className="text-xl sm:text-2xl font-bold tracking-tight mb-4 sm:mb-6">Security model</h2>
           
           <div className="space-y-6">
             <div>
@@ -364,25 +364,25 @@ export default function ArchitecturePage() {
       <Separator />
 
       {/* Technical Stack */}
-      <section className="container py-16 md:py-24">
-        <div className="mx-auto max-w-4xl text-center">
-          <h2 className="text-2xl font-bold tracking-tight mb-4">
+      <section className="container py-12 sm:py-16 md:py-24">
+        <div className="mx-auto max-w-4xl text-center px-4 sm:px-6">
+          <h2 className="text-xl sm:text-2xl font-bold tracking-tight mb-3 sm:mb-4">
             Built with
           </h2>
-          <p className="text-muted-foreground mb-8">
+          <p className="text-sm sm:text-base text-muted-foreground mb-6 sm:mb-8">
             Modern iOS frameworks and APIs.
           </p>
-          <div className="flex flex-wrap gap-2 justify-center">
-            <Badge variant="secondary">Swift 6.0</Badge>
-            <Badge variant="secondary">SwiftUI</Badge>
-            <Badge variant="secondary">Network Extension</Badge>
-            <Badge variant="secondary">NEPacketTunnelProvider</Badge>
-            <Badge variant="secondary">Network.framework</Badge>
-            <Badge variant="secondary">WidgetKit</Badge>
-            <Badge variant="secondary">Live Activities</Badge>
-            <Badge variant="secondary">App Groups</Badge>
-            <Badge variant="secondary">Keychain Services</Badge>
-            <Badge variant="secondary">Swift Package Manager</Badge>
+          <div className="flex flex-wrap gap-1.5 sm:gap-2 justify-center">
+            <Badge variant="secondary" className="text-xs">Swift 6.0</Badge>
+            <Badge variant="secondary" className="text-xs">SwiftUI</Badge>
+            <Badge variant="secondary" className="text-xs">Network Extension</Badge>
+            <Badge variant="secondary" className="text-xs">NEPacketTunnelProvider</Badge>
+            <Badge variant="secondary" className="text-xs">Network.framework</Badge>
+            <Badge variant="secondary" className="text-xs">WidgetKit</Badge>
+            <Badge variant="secondary" className="text-xs">Live Activities</Badge>
+            <Badge variant="secondary" className="text-xs">App Groups</Badge>
+            <Badge variant="secondary" className="text-xs">Keychain Services</Badge>
+            <Badge variant="secondary" className="text-xs">Swift Package Manager</Badge>
           </div>
         </div>
       </section>
