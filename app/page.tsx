@@ -9,84 +9,83 @@ import { IPhoneMockup } from "@/components/marketing/iphone-mockup";
 export default function Home() {
   return (
     <div className="flex flex-col">
-      {/* Hero Section */}
-      <section className="container py-24 md:py-32 lg:py-40">
-        <div className="mx-auto max-w-3xl text-center">
-          <h1 className="text-4xl font-bold tracking-tight sm:text-6xl lg:text-7xl mb-6">
-            Redefining iOS network debugging.
-          </h1>
-          <p className="text-lg text-muted-foreground mb-10 max-w-2xl mx-auto leading-relaxed">
-            Professional network debugging tool for iOS developers. 
-            Captures device-wide HTTP(S), TCP, WebSocket, and SSE traffic through a packet tunnel with on-device TLS MITM.
-            Built on Network Extension APIs for complete system-level visibility and traffic modification.
-          </p>
-          <div className="flex justify-center">
-            <Button size="lg" asChild>
-              <Link href="https://github.com/trace-network-debugger" target="_blank" rel="noopener noreferrer">
-                <Github className="mr-2 h-5 w-5" />
-                View on GitHub
-              </Link>
-            </Button>
-          </div>
-        </div>
-      </section>
-
-      <Separator />
-
-      {/* Product Showcase Section */}
-      <section className="container py-24 md:py-32">
-        <div className="mx-auto max-w-5xl">
-          <div className="flex flex-col items-center">
-            <IPhoneMockup className="mx-auto">
-              {/* App Screenshot Content */}
-              <div className="w-full h-full bg-gradient-to-b from-zinc-50 to-zinc-100 p-4">
-                {/* Status Bar */}
-                <div className="flex justify-between items-center mb-4 text-xs text-zinc-900">
-                  <span className="font-semibold">9:41</span>
-                  <div className="flex gap-1">
-                    <div className="w-4 h-3 border border-zinc-900 rounded-sm"></div>
-                  </div>
-                </div>
-                
-                {/* App Content */}
-                <div className="space-y-3">
-                  <div className="bg-white rounded-lg p-3 shadow-sm border border-zinc-200">
-                    <div className="flex items-center gap-2 mb-2">
-                      <div className="w-2 h-2 rounded-full bg-green-500"></div>
-                      <div className="text-xs font-mono text-zinc-600">GET</div>
-                      <div className="text-xs text-zinc-400">200</div>
-                    </div>
-                    <div className="text-xs font-mono text-zinc-900 truncate">api.example.com/users</div>
-                    <div className="text-[10px] text-zinc-400 mt-1">12.4 KB • 142ms</div>
-                  </div>
-                  
-                  <div className="bg-white rounded-lg p-3 shadow-sm border border-zinc-200">
-                    <div className="flex items-center gap-2 mb-2">
-                      <div className="w-2 h-2 rounded-full bg-blue-500"></div>
-                      <div className="text-xs font-mono text-zinc-600">POST</div>
-                      <div className="text-xs text-zinc-400">201</div>
-                    </div>
-                    <div className="text-xs font-mono text-zinc-900 truncate">api.example.com/events</div>
-                    <div className="text-[10px] text-zinc-400 mt-1">2.1 KB • 89ms</div>
-                  </div>
-                  
-                  <div className="bg-white rounded-lg p-3 shadow-sm border border-zinc-200">
-                    <div className="flex items-center gap-2 mb-2">
-                      <div className="w-2 h-2 rounded-full bg-purple-500"></div>
-                      <div className="text-xs font-mono text-zinc-600">WS</div>
-                      <div className="text-xs text-zinc-400">OPEN</div>
-                    </div>
-                    <div className="text-xs font-mono text-zinc-900 truncate">ws.example.com/live</div>
-                    <div className="text-[10px] text-zinc-400 mt-1">Real-time connection</div>
-                  </div>
-                </div>
-              </div>
-            </IPhoneMockup>
-            <div className="mt-16 text-center max-w-2xl">
-              <p className="text-sm text-muted-foreground">
-                Real-time network inspection at the system level.
-                See every request from every app on your device.
+      {/* Hero Section with Phone Mockup */}
+      <section className="container min-h-[calc(100vh-4rem)] flex items-center py-12 md:py-16">
+        <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center w-full max-w-7xl mx-auto">
+          {/* Left Column - Hero Text */}
+          <div className="flex flex-col justify-center space-y-6 lg:space-y-8">
+            <div>
+              <h1 className="text-4xl font-bold tracking-tight sm:text-5xl lg:text-6xl mb-4 lg:mb-6">
+                Redefining iOS network debugging.
+              </h1>
+              <p className="text-base sm:text-lg text-muted-foreground leading-relaxed">
+                Professional network debugging tool for iOS developers. 
+                Captures device-wide HTTP(S), TCP, WebSocket, and SSE traffic through a packet tunnel with on-device TLS MITM.
+                Built on Network Extension APIs for complete system-level visibility and traffic modification.
               </p>
+            </div>
+            <div className="flex flex-col sm:flex-row gap-4">
+              <Button size="lg" asChild>
+                <Link href="https://github.com/trace-network-debugger" target="_blank" rel="noopener noreferrer">
+                  <Github className="mr-2 h-5 w-5" />
+                  View on GitHub
+                </Link>
+              </Button>
+            </div>
+            <p className="text-sm text-muted-foreground">
+              Real-time network inspection at the system level.
+              See every request from every app on your device.
+            </p>
+          </div>
+
+          {/* Right Column - Phone Mockup */}
+          <div className="flex justify-center lg:justify-end items-center">
+            <div className="scale-[0.65] sm:scale-75 lg:scale-[0.85] xl:scale-95 origin-center lg:origin-right">
+              <IPhoneMockup>
+                {/* App Screenshot Content */}
+                <div className="w-full h-full bg-gradient-to-b from-zinc-50 to-zinc-100 p-4">
+                  {/* Status Bar */}
+                  <div className="flex justify-between items-center mb-4 text-xs text-zinc-900">
+                    <span className="font-semibold">9:41</span>
+                    <div className="flex gap-1">
+                      <div className="w-4 h-3 border border-zinc-900 rounded-sm"></div>
+                    </div>
+                  </div>
+                  
+                  {/* App Content */}
+                  <div className="space-y-3">
+                    <div className="bg-white rounded-lg p-3 shadow-sm border border-zinc-200">
+                      <div className="flex items-center gap-2 mb-2">
+                        <div className="w-2 h-2 rounded-full bg-green-500"></div>
+                        <div className="text-xs font-mono text-zinc-600">GET</div>
+                        <div className="text-xs text-zinc-400">200</div>
+                      </div>
+                      <div className="text-xs font-mono text-zinc-900 truncate">api.example.com/users</div>
+                      <div className="text-[10px] text-zinc-400 mt-1">12.4 KB • 142ms</div>
+                    </div>
+                    
+                    <div className="bg-white rounded-lg p-3 shadow-sm border border-zinc-200">
+                      <div className="flex items-center gap-2 mb-2">
+                        <div className="w-2 h-2 rounded-full bg-blue-500"></div>
+                        <div className="text-xs font-mono text-zinc-600">POST</div>
+                        <div className="text-xs text-zinc-400">201</div>
+                      </div>
+                      <div className="text-xs font-mono text-zinc-900 truncate">api.example.com/events</div>
+                      <div className="text-[10px] text-zinc-400 mt-1">2.1 KB • 89ms</div>
+                    </div>
+                    
+                    <div className="bg-white rounded-lg p-3 shadow-sm border border-zinc-200">
+                      <div className="flex items-center gap-2 mb-2">
+                        <div className="w-2 h-2 rounded-full bg-purple-500"></div>
+                        <div className="text-xs font-mono text-zinc-600">WS</div>
+                        <div className="text-xs text-zinc-400">OPEN</div>
+                      </div>
+                      <div className="text-xs font-mono text-zinc-900 truncate">ws.example.com/live</div>
+                      <div className="text-[10px] text-zinc-400 mt-1">Real-time connection</div>
+                    </div>
+                  </div>
+                </div>
+              </IPhoneMockup>
             </div>
           </div>
         </div>

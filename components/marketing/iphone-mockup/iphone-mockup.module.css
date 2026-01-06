@@ -160,18 +160,5 @@
   left: 86px;
 }
 
-/* Responsive Scaling */
-@media (max-width: 768px) {
-  .deviceIphone14Pro {
-    transform: scale(0.7);
-    transform-origin: top center;
-  }
-}
-
-@media (max-width: 480px) {
-  .deviceIphone14Pro {
-    transform: scale(0.5);
-    transform-origin: top center;
-  }
-}
+/* Responsive Scaling - Now handled at layout level */
 
