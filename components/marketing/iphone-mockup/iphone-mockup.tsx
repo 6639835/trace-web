@@ -17,8 +17,6 @@ export const IPhoneMockup: React.FC<IPhoneMockupProps> = ({
           {children}
         </div>
         <div className={styles.deviceStripe}></div>
-        <div className={styles.deviceHeader}></div>
-        <div className={styles.deviceSensors}></div>
         <div className={styles.deviceBtns}></div>
         <div className={styles.devicePower}></div>
         <div className={styles.deviceHome}></div>
@@ -26,4 +24,3 @@ export const IPhoneMockup: React.FC<IPhoneMockupProps> = ({
     </div>
   );
 };
-

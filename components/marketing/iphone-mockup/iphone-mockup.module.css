@@ -10,15 +10,22 @@
 
 .deviceIphone14Pro {
   --device-width: clamp(240px, 32vw, 380px);
+  /* Match the actual screenshot aspect ratio so the screen fits edge-to-edge. */
+  --screen-aspect: calc(2622 / 1206);
+  --screen-bg: #f2f2f7;
+  --unit-w: calc(var(--device-width) / 428);
+  --bezel-x: calc(var(--unit-w) * 18);
+  --bezel-y: calc(var(--unit-w) * 18);
+  --device-height: calc((var(--device-width) - (2 * var(--bezel-x))) * var(--screen-aspect) + (2 * var(--bezel-y)));
   width: var(--device-width);
-  aspect-ratio: 428 / 868;
+  height: var(--device-height);
   position: relative;
   flex-shrink: 0;
+  box-sizing: border-box;
 }
 
 .deviceFrame {
-  --unit-w: calc(100% / 428);
-  --unit-h: calc(100% / 868);
+  --unit-h: calc(var(--device-height) / 868);
   background: var(--device-panel);
   border: 1px solid var(--device-black-dark);
   border-radius: calc(var(--unit-w) * 68);
@@ -26,18 +33,19 @@
     inset 0 0 4px 2px var(--device-black-light),
     inset 0 0 0 6px var(--device-black);
   height: 100%;
-  padding: calc(var(--unit-w) * 19);
+  padding: var(--bezel-y) var(--bezel-x);
   width: 100%;
   position: relative;
+  box-sizing: border-box;
 }
 
 /* 2556‑by‑1179-pixel resolution */
 .deviceScreen {
   border-radius: calc(var(--unit-w) * 49);
-  height: calc(100% - (var(--unit-h) * 38));
-  width: calc(100% - (var(--unit-w) * 38));
+  height: 100%;
+  width: 100%;
   overflow: hidden;
-  background: #000;
+  background: var(--screen-bg);
   position: relative;
   z-index: 1;
 }
@@ -169,12 +177,10 @@
 /* Ensure mockup doesn't cause overflow */
 .deviceIphone14Pro {
   max-width: 100%;
-  box-sizing: border-box;
 }
 
 .deviceFrame {
   max-width: 100%;
-  box-sizing: border-box;
 }
 
 @media (max-width: 640px) {
