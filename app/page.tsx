@@ -10,18 +10,22 @@ export default function Home() {
   return (
     <div className="flex flex-col w-full">
       {/* Hero Section with Phone Mockup */}
-      <section className="container min-h-[calc(100vh-4rem)] flex items-center py-section">
-        <div className="grid lg:grid-cols-2 gap-8 sm:gap-10 lg:gap-12 items-center w-full max-w-wide mx-auto">
+      <section className="container min-h-[calc(100vh-4rem)] flex items-start py-section">
+        <div className="grid lg:grid-cols-2 gap-8 sm:gap-10 lg:gap-12 items-start w-full max-w-wide mx-auto pt-8 sm:pt-12 lg:pt-16">
           {/* Left Column - Hero Text */}
-          <div className="flex flex-col justify-center space-y-4 sm:space-y-6 lg:space-y-8 max-w-full">
+          <div className="flex flex-col space-y-4 sm:space-y-6 lg:space-y-8 max-w-full">
             <div className="max-w-full">
               <h1 className="text-2xl xs:text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl lg:text-6xl mb-3 sm:mb-4 lg:mb-6 leading-tight break-words hyphens-auto">
                 Redefining iOS network debugging.
               </h1>
-              <p className="text-sm sm:text-base lg:text-lg text-muted-foreground leading-relaxed break-words">
+              <p className="text-sm sm:text-base lg:text-lg text-muted-foreground leading-relaxed break-words mb-3 sm:mb-4">
                 Professional network debugging tool for iOS developers. 
                 Captures device-wide HTTP(S), TCP, WebSocket, and SSE traffic through a packet tunnel with on-device TLS MITM.
                 Built on Network Extension APIs for complete system-level visibility and traffic modification.
+              </p>
+              <p className="text-xs sm:text-sm text-muted-foreground break-words max-w-full">
+                Real-time network inspection at the system level.
+                See every request from every app on your device.
               </p>
             </div>
             <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 max-w-full">
@@ -32,10 +36,6 @@ export default function Home() {
                 </Link>
               </Button>
             </div>
-            <p className="text-xs sm:text-sm text-muted-foreground break-words max-w-full">
-              Real-time network inspection at the system level.
-              See every request from every app on your device.
-            </p>
           </div>
 
           {/* Right Column - Phone Mockup with Screenshot */}

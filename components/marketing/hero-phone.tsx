@@ -17,7 +17,7 @@ export function HeroPhone() {
   // Show placeholder during SSR and initial mount
   if (!mounted) {
     return (
-      <div className="flex justify-center lg:justify-end items-center mt-4 lg:mt-0">
+      <div className="flex justify-center lg:justify-end items-start">
         <div className="max-w-full">
           <IPhoneMockup>
             <Image
@@ -37,7 +37,7 @@ export function HeroPhone() {
   const isDark = resolvedTheme === "dark";
 
   return (
-    <div className="flex justify-center lg:justify-end items-center mt-4 lg:mt-0">
+    <div className="flex justify-center lg:justify-end items-start">
       <div className="max-w-full">
         <IPhoneMockup>
           <Image
