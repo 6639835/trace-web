@@ -10,37 +10,37 @@ export default function Home() {
   return (
     <div className="flex flex-col">
       {/* Hero Section with Phone Mockup */}
-      <section className="container min-h-[calc(100vh-4rem)] flex items-center py-12 md:py-16">
-        <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center w-full max-w-7xl mx-auto">
+      <section className="container min-h-[calc(100vh-4rem)] flex items-center py-8 sm:py-12 md:py-16">
+        <div className="grid lg:grid-cols-2 gap-8 sm:gap-10 lg:gap-12 items-center w-full max-w-7xl mx-auto">
           {/* Left Column - Hero Text */}
-          <div className="flex flex-col justify-center space-y-6 lg:space-y-8">
+          <div className="flex flex-col justify-center space-y-4 sm:space-y-6 lg:space-y-8">
             <div>
-              <h1 className="text-4xl font-bold tracking-tight sm:text-5xl lg:text-6xl mb-4 lg:mb-6">
+              <h1 className="text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl lg:text-6xl mb-3 sm:mb-4 lg:mb-6 leading-tight">
                 Redefining iOS network debugging.
               </h1>
-              <p className="text-base sm:text-lg text-muted-foreground leading-relaxed">
+              <p className="text-sm sm:text-base lg:text-lg text-muted-foreground leading-relaxed">
                 Professional network debugging tool for iOS developers. 
                 Captures device-wide HTTP(S), TCP, WebSocket, and SSE traffic through a packet tunnel with on-device TLS MITM.
                 Built on Network Extension APIs for complete system-level visibility and traffic modification.
               </p>
             </div>
-            <div className="flex flex-col sm:flex-row gap-4">
-              <Button size="lg" asChild>
+            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
+              <Button size="lg" asChild className="w-full sm:w-auto">
                 <Link href="https://github.com/trace-network-debugger" target="_blank" rel="noopener noreferrer">
                   <Github className="mr-2 h-5 w-5" />
                   View on GitHub
                 </Link>
               </Button>
             </div>
-            <p className="text-sm text-muted-foreground">
+            <p className="text-xs sm:text-sm text-muted-foreground">
               Real-time network inspection at the system level.
               See every request from every app on your device.
             </p>
           </div>
 
           {/* Right Column - Phone Mockup */}
-          <div className="flex justify-center lg:justify-end items-center">
-            <div className="scale-[0.65] sm:scale-75 lg:scale-[0.85] xl:scale-95 origin-center lg:origin-right">
+          <div className="flex justify-center lg:justify-end items-center mt-4 lg:mt-0">
+            <div className="scale-[0.6] sm:scale-[0.7] md:scale-75 lg:scale-[0.85] xl:scale-95 origin-center lg:origin-right">
               <IPhoneMockup>
                 {/* App Screenshot Content */}
                 <div className="w-full h-full bg-gradient-to-b from-zinc-50 to-zinc-100 p-4">
@@ -94,18 +94,18 @@ export default function Home() {
       <Separator />
 
       {/* Core Capabilities Section */}
-      <section className="container py-24 md:py-32">
-        <div className="mx-auto max-w-5xl">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl font-bold tracking-tight sm:text-4xl mb-4">
+      <section className="container py-12 sm:py-16 md:py-24 lg:py-32">
+        <div className="mx-auto max-w-5xl px-4 sm:px-6">
+          <div className="text-center mb-10 sm:mb-12 md:mb-16">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight mb-3 sm:mb-4">
               Built for production debugging
             </h2>
-            <p className="text-muted-foreground max-w-2xl mx-auto">
+            <p className="text-sm sm:text-base text-muted-foreground max-w-2xl mx-auto">
               Comprehensive network visibility with the tools you need to diagnose and resolve issues quickly.
             </p>
           </div>
           
-          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          <div className="grid gap-4 sm:gap-5 md:gap-6 sm:grid-cols-2 lg:grid-cols-3">
             <Card>
               <CardHeader>
                 <Network className="h-8 w-8 mb-2 text-muted-foreground" />
@@ -184,60 +184,60 @@ export default function Home() {
       <Separator />
 
       {/* Technical Credibility Section */}
-      <section className="container py-24 md:py-32">
-        <div className="mx-auto max-w-4xl">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl font-bold tracking-tight sm:text-4xl mb-4">
+      <section className="container py-12 sm:py-16 md:py-24 lg:py-32">
+        <div className="mx-auto max-w-4xl px-4 sm:px-6">
+          <div className="text-center mb-10 sm:mb-12 md:mb-16">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight mb-3 sm:mb-4">
               Engineering depth
             </h2>
-            <p className="text-muted-foreground max-w-2xl mx-auto">
+            <p className="text-sm sm:text-base text-muted-foreground max-w-2xl mx-auto">
               Built on iOS system frameworks for reliable, low-level network access.
             </p>
           </div>
 
-          <div className="grid gap-8 md:grid-cols-2">
-            <div className="space-y-4">
+          <div className="grid gap-6 sm:gap-7 md:gap-8 sm:grid-cols-2">
+            <div className="space-y-4 sm:space-y-5">
               <div>
-                <h3 className="font-semibold mb-2">Network Extension</h3>
-                <p className="text-sm text-muted-foreground leading-relaxed">
+                <h3 className="font-semibold mb-2 text-sm sm:text-base">Network Extension</h3>
+                <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">
                   Implements NEPacketTunnelProvider for system-wide network capture. 
                   Runs in a separate process with elevated privileges for complete traffic visibility.
                 </p>
               </div>
               <div>
-                <h3 className="font-semibold mb-2">TLS MITM</h3>
-                <p className="text-sm text-muted-foreground leading-relaxed">
+                <h3 className="font-semibold mb-2 text-sm sm:text-base">TLS MITM</h3>
+                <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">
                   On-device certificate authority and dynamic certificate generation.
                   Intercepts TLS handshakes to enable encrypted traffic inspection.
                 </p>
               </div>
               <div>
-                <h3 className="font-semibold mb-2">App Groups</h3>
-                <p className="text-sm text-muted-foreground leading-relaxed">
+                <h3 className="font-semibold mb-2 text-sm sm:text-base">App Groups</h3>
+                <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">
                   Shared container for IPC between main app and extension.
                   Enables real-time traffic streaming and coordinated state management.
                 </p>
               </div>
             </div>
 
-            <div className="space-y-4">
+            <div className="space-y-4 sm:space-y-5">
               <div>
-                <h3 className="font-semibold mb-2">Packet Tunnel</h3>
-                <p className="text-sm text-muted-foreground leading-relaxed">
+                <h3 className="font-semibold mb-2 text-sm sm:text-base">Packet Tunnel</h3>
+                <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">
                   Virtual network interface captures IP packets before encryption.
                   Processes TCP streams and reconstructs HTTP transactions from raw packets.
                 </p>
               </div>
               <div>
-                <h3 className="font-semibold mb-2">Widgets & Live Activities</h3>
-                <p className="text-sm text-muted-foreground leading-relaxed">
+                <h3 className="font-semibold mb-2 text-sm sm:text-base">Widgets & Live Activities</h3>
+                <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">
                   WidgetKit integration for at-a-glance network statistics.
                   Live Activities show real-time request counts and data transfer rates.
                 </p>
               </div>
               <div>
-                <h3 className="font-semibold mb-2">Background Processing</h3>
-                <p className="text-sm text-muted-foreground leading-relaxed">
+                <h3 className="font-semibold mb-2 text-sm sm:text-base">Background Processing</h3>
+                <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">
                   Efficient packet processing with minimal battery impact.
                   Optimized memory usage for long-running capture sessions.
                 </p>
@@ -245,15 +245,15 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="mt-12 flex flex-wrap gap-2 justify-center">
-            <Badge variant="secondary">Swift 6.0</Badge>
-            <Badge variant="secondary">SwiftUI</Badge>
-            <Badge variant="secondary">Network Extension</Badge>
-            <Badge variant="secondary">NEPacketTunnelProvider</Badge>
-            <Badge variant="secondary">WidgetKit</Badge>
-            <Badge variant="secondary">Live Activities</Badge>
-            <Badge variant="secondary">App Groups</Badge>
-            <Badge variant="secondary">Swift Package Manager</Badge>
+          <div className="mt-8 sm:mt-10 md:mt-12 flex flex-wrap gap-1.5 sm:gap-2 justify-center">
+            <Badge variant="secondary" className="text-xs">Swift 6.0</Badge>
+            <Badge variant="secondary" className="text-xs">SwiftUI</Badge>
+            <Badge variant="secondary" className="text-xs">Network Extension</Badge>
+            <Badge variant="secondary" className="text-xs">NEPacketTunnelProvider</Badge>
+            <Badge variant="secondary" className="text-xs">WidgetKit</Badge>
+            <Badge variant="secondary" className="text-xs">Live Activities</Badge>
+            <Badge variant="secondary" className="text-xs">App Groups</Badge>
+            <Badge variant="secondary" className="text-xs">Swift Package Manager</Badge>
           </div>
         </div>
       </section>
@@ -261,25 +261,25 @@ export default function Home() {
       <Separator />
 
       {/* Open Source Section */}
-      <section className="container py-24 md:py-32">
-        <div className="mx-auto max-w-3xl text-center">
-          <Github className="h-12 w-12 mx-auto mb-6 text-muted-foreground" />
-          <h2 className="text-3xl font-bold tracking-tight sm:text-4xl mb-4">
+      <section className="container py-12 sm:py-16 md:py-24 lg:py-32">
+        <div className="mx-auto max-w-3xl text-center px-4 sm:px-6">
+          <Github className="h-10 w-10 sm:h-12 sm:w-12 mx-auto mb-4 sm:mb-6 text-muted-foreground" />
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight mb-3 sm:mb-4">
             Open source and transparent
           </h2>
-          <p className="text-muted-foreground mb-8 leading-relaxed">
+          <p className="text-sm sm:text-base text-muted-foreground mb-6 sm:mb-8 leading-relaxed">
             Trace is free and open source under the MIT license.
             No pricing tiers, no feature gates, no telemetry.
             The entire codebase is available for inspection, modification, and contribution.
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button size="lg" asChild>
+          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center">
+            <Button size="lg" asChild className="w-full sm:w-auto">
               <Link href="https://github.com/trace-network-debugger" target="_blank" rel="noopener noreferrer">
                 <Github className="mr-2 h-5 w-5" />
                 View repository
               </Link>
             </Button>
-            <Button size="lg" variant="outline" asChild>
+            <Button size="lg" variant="outline" asChild className="w-full sm:w-auto">
               <Link href="/open-source">
                 Read more about the project
               </Link>

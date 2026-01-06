@@ -6,12 +6,12 @@ export default function DocsPage() {
   return (
     <div className="flex flex-col">
       {/* Header */}
-      <section className="container py-16 md:py-24">
-        <div className="mx-auto max-w-3xl text-center">
-          <h1 className="text-4xl font-bold tracking-tight sm:text-5xl mb-4">
+      <section className="container py-12 sm:py-16 md:py-24">
+        <div className="mx-auto max-w-3xl text-center px-4 sm:px-6">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight mb-3 sm:mb-4">
             Documentation
           </h1>
-          <p className="text-lg text-muted-foreground leading-relaxed">
+          <p className="text-sm sm:text-base lg:text-lg text-muted-foreground leading-relaxed">
             Guides and reference documentation for Trace.
           </p>
         </div>
@@ -20,11 +20,11 @@ export default function DocsPage() {
       <Separator />
 
       {/* Getting Started */}
-      <section className="container py-16 md:py-24">
-        <div className="mx-auto max-w-5xl">
-          <h2 className="text-2xl font-bold tracking-tight mb-12">Getting started</h2>
+      <section className="container py-12 sm:py-16 md:py-24">
+        <div className="mx-auto max-w-5xl px-4 sm:px-6">
+          <h2 className="text-xl sm:text-2xl font-bold tracking-tight mb-8 sm:mb-10 md:mb-12">Getting started</h2>
           
-          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          <div className="grid gap-4 sm:gap-5 md:gap-6 sm:grid-cols-2 lg:grid-cols-3">
             <Card>
               <CardHeader>
                 <Download className="h-8 w-8 mb-2 text-muted-foreground" />
@@ -70,9 +70,9 @@ export default function DocsPage() {
       <Separator />
 
       {/* User Guide */}
-      <section className="container py-16 md:py-24">
-        <div className="mx-auto max-w-5xl">
-          <h2 className="text-2xl font-bold tracking-tight mb-12">User guide</h2>
+      <section className="container py-12 sm:py-16 md:py-24">
+        <div className="mx-auto max-w-5xl px-4 sm:px-6">
+          <h2 className="text-xl sm:text-2xl font-bold tracking-tight mb-8 sm:mb-10 md:mb-12">User guide</h2>
           
           <div className="space-y-8">
             <div className="rounded-lg border p-6">
@@ -116,11 +116,11 @@ export default function DocsPage() {
       <Separator />
 
       {/* Developer Documentation */}
-      <section className="container py-16 md:py-24">
-        <div className="mx-auto max-w-5xl">
-          <h2 className="text-2xl font-bold tracking-tight mb-12">Developer documentation</h2>
+      <section className="container py-12 sm:py-16 md:py-24">
+        <div className="mx-auto max-w-5xl px-4 sm:px-6">
+          <h2 className="text-xl sm:text-2xl font-bold tracking-tight mb-8 sm:mb-10 md:mb-12">Developer documentation</h2>
           
-          <div className="grid gap-6 md:grid-cols-2">
+          <div className="grid gap-4 sm:gap-5 md:gap-6 sm:grid-cols-2">
             <Card>
               <CardHeader>
                 <Code className="h-8 w-8 mb-2 text-muted-foreground" />
@@ -183,9 +183,9 @@ export default function DocsPage() {
       <Separator />
 
       {/* Advanced Topics */}
-      <section className="container py-16 md:py-24">
-        <div className="mx-auto max-w-5xl">
-          <h2 className="text-2xl font-bold tracking-tight mb-12">Advanced topics</h2>
+      <section className="container py-12 sm:py-16 md:py-24">
+        <div className="mx-auto max-w-5xl px-4 sm:px-6">
+          <h2 className="text-xl sm:text-2xl font-bold tracking-tight mb-8 sm:mb-10 md:mb-12">Advanced topics</h2>
           
           <div className="space-y-4">
             <div className="rounded-lg border p-6">
@@ -222,16 +222,16 @@ export default function DocsPage() {
       <Separator />
 
       {/* Resources */}
-      <section className="container py-16 md:py-24">
-        <div className="mx-auto max-w-3xl text-center">
-          <h2 className="text-2xl font-bold tracking-tight mb-4">
+      <section className="container py-12 sm:py-16 md:py-24">
+        <div className="mx-auto max-w-3xl text-center px-4 sm:px-6">
+          <h2 className="text-xl sm:text-2xl font-bold tracking-tight mb-3 sm:mb-4">
             Additional resources
           </h2>
-          <p className="text-muted-foreground mb-8 leading-relaxed">
+          <p className="text-sm sm:text-base text-muted-foreground mb-6 sm:mb-8 leading-relaxed">
             Detailed documentation is maintained in the GitHub repository.
             README, wiki, and inline code documentation provide comprehensive coverage.
           </p>
-          <div className="text-sm text-muted-foreground">
+          <div className="text-xs sm:text-sm text-muted-foreground space-y-2">
             <p>This documentation page provides an overview of available topics.</p>
             <p>Complete documentation content will be added as the project matures.</p>
           </div>

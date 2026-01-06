@@ -8,13 +8,13 @@ export default function OpenSourcePage() {
   return (
     <div className="flex flex-col">
       {/* Header */}
-      <section className="container py-16 md:py-24">
-        <div className="mx-auto max-w-3xl text-center">
-          <Github className="h-12 w-12 mx-auto mb-6 text-muted-foreground" />
-          <h1 className="text-4xl font-bold tracking-tight sm:text-5xl mb-4">
+      <section className="container py-12 sm:py-16 md:py-24">
+        <div className="mx-auto max-w-3xl text-center px-4 sm:px-6">
+          <Github className="h-10 w-10 sm:h-12 sm:w-12 mx-auto mb-4 sm:mb-6 text-muted-foreground" />
+          <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight mb-3 sm:mb-4">
             Open source
           </h1>
-          <p className="text-lg text-muted-foreground leading-relaxed">
+          <p className="text-sm sm:text-base lg:text-lg text-muted-foreground leading-relaxed">
             Free to use, free to modify, free to distribute.
             Built transparently for the iOS developer community.
           </p>
@@ -24,15 +24,15 @@ export default function OpenSourcePage() {
       <Separator />
 
       {/* Why Open Source */}
-      <section className="container py-16 md:py-24">
-        <div className="mx-auto max-w-4xl">
-          <h2 className="text-2xl font-bold tracking-tight mb-6 text-center">Why open source</h2>
-          <p className="text-muted-foreground leading-relaxed mb-12 text-center max-w-2xl mx-auto">
+      <section className="container py-12 sm:py-16 md:py-24">
+        <div className="mx-auto max-w-4xl px-4 sm:px-6">
+          <h2 className="text-xl sm:text-2xl font-bold tracking-tight mb-4 sm:mb-6 text-center">Why open source</h2>
+          <p className="text-sm sm:text-base text-muted-foreground leading-relaxed mb-8 sm:mb-10 md:mb-12 text-center max-w-2xl mx-auto">
             Trace is open source by design. Network debugging tools require trust.
             Opening the codebase allows verification, contribution, and confidence in the tool.
           </p>
 
-          <div className="grid gap-6 md:grid-cols-2">
+          <div className="grid gap-4 sm:gap-5 md:gap-6 sm:grid-cols-2">
             <Card>
               <CardHeader>
                 <Shield className="h-8 w-8 mb-2 text-muted-foreground" />
@@ -95,9 +95,9 @@ export default function OpenSourcePage() {
       <Separator />
 
       {/* License */}
-      <section className="container py-16 md:py-24">
-        <div className="mx-auto max-w-4xl">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">License</h2>
+      <section className="container py-12 sm:py-16 md:py-24">
+        <div className="mx-auto max-w-4xl px-4 sm:px-6">
+          <h2 className="text-xl sm:text-2xl font-bold tracking-tight mb-4 sm:mb-6">License</h2>
           
           <div className="rounded-lg border bg-muted/30 p-6 mb-6">
             <p className="text-lg font-semibold mb-2">MIT License</p>
@@ -132,11 +132,11 @@ export default function OpenSourcePage() {
       <Separator />
 
       {/* Contributing */}
-      <section className="container py-16 md:py-24">
-        <div className="mx-auto max-w-4xl">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Contributing</h2>
+      <section className="container py-12 sm:py-16 md:py-24">
+        <div className="mx-auto max-w-4xl px-4 sm:px-6">
+          <h2 className="text-xl sm:text-2xl font-bold tracking-tight mb-4 sm:mb-6">Contributing</h2>
           
-          <p className="text-muted-foreground leading-relaxed mb-8">
+          <p className="text-sm sm:text-base text-muted-foreground leading-relaxed mb-6 sm:mb-8">
             Contributions are welcome from iOS developers of all experience levels.
             Whether you are fixing a bug, adding a feature, or improving documentation, your help makes Trace better.
           </p>
@@ -238,11 +238,11 @@ export default function OpenSourcePage() {
       <Separator />
 
       {/* Build from Source */}
-      <section className="container py-16 md:py-24">
-        <div className="mx-auto max-w-4xl">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Build from source</h2>
+      <section className="container py-12 sm:py-16 md:py-24">
+        <div className="mx-auto max-w-4xl px-4 sm:px-6">
+          <h2 className="text-xl sm:text-2xl font-bold tracking-tight mb-4 sm:mb-6">Build from source</h2>
           
-          <p className="text-muted-foreground leading-relaxed mb-6">
+          <p className="text-sm sm:text-base text-muted-foreground leading-relaxed mb-4 sm:mb-6">
             Building from source ensures you know exactly what code is running on your device.
             No pre-built binaries required.
           </p>
@@ -314,16 +314,16 @@ export default function OpenSourcePage() {
       <Separator />
 
       {/* Support */}
-      <section className="container py-16 md:py-24">
-        <div className="mx-auto max-w-3xl text-center">
-          <h2 className="text-2xl font-bold tracking-tight mb-4">
+      <section className="container py-12 sm:py-16 md:py-24">
+        <div className="mx-auto max-w-3xl text-center px-4 sm:px-6">
+          <h2 className="text-xl sm:text-2xl font-bold tracking-tight mb-3 sm:mb-4">
             Questions or feedback
           </h2>
-          <p className="text-muted-foreground mb-8 leading-relaxed">
+          <p className="text-sm sm:text-base text-muted-foreground mb-6 sm:mb-8 leading-relaxed">
             Open an issue on GitHub for bug reports, feature requests, or general questions.
             The community and maintainers monitor issues and discussions.
           </p>
-          <Button asChild>
+          <Button asChild className="w-full sm:w-auto">
             <Link href="https://github.com/trace-network-debugger/trace/issues/new" target="_blank" rel="noopener noreferrer">
               Open an issue
             </Link>

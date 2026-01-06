@@ -20,12 +20,12 @@ export default function FeaturesPage() {
   return (
     <div className="flex flex-col">
       {/* Header */}
-      <section className="container py-16 md:py-24">
-        <div className="mx-auto max-w-3xl text-center">
-          <h1 className="text-4xl font-bold tracking-tight sm:text-5xl mb-4">
+      <section className="container py-12 sm:py-16 md:py-24">
+        <div className="mx-auto max-w-3xl text-center px-4 sm:px-6">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight mb-3 sm:mb-4">
             Features
           </h1>
-          <p className="text-lg text-muted-foreground leading-relaxed">
+          <p className="text-sm sm:text-base lg:text-lg text-muted-foreground leading-relaxed">
             A complete toolkit for network debugging and analysis.
             Built for iOS developers who need precise, low-level visibility.
           </p>
@@ -35,21 +35,21 @@ export default function FeaturesPage() {
       <Separator />
 
       {/* Core Features */}
-      <section className="container py-16 md:py-24">
-        <div className="mx-auto max-w-5xl">
-          <h2 className="text-2xl font-bold tracking-tight mb-12">Core capabilities</h2>
+      <section className="container py-12 sm:py-16 md:py-24">
+        <div className="mx-auto max-w-5xl px-4 sm:px-6">
+          <h2 className="text-xl sm:text-2xl font-bold tracking-tight mb-8 sm:mb-10 md:mb-12">Core capabilities</h2>
           
-          <div className="space-y-16">
+          <div className="space-y-10 sm:space-y-12 md:space-y-16">
             {/* Device-wide Capture */}
-            <div className="grid gap-8 md:grid-cols-[auto,1fr]">
+            <div className="grid gap-4 sm:gap-6 md:gap-8 md:grid-cols-[auto,1fr]">
               <div className="flex items-start">
-                <div className="rounded-lg border p-3 bg-muted/50">
-                  <Network className="h-6 w-6" />
+                <div className="rounded-lg border p-2.5 sm:p-3 bg-muted/50">
+                  <Network className="h-5 w-5 sm:h-6 sm:w-6" />
                 </div>
               </div>
               <div>
-                <h3 className="text-xl font-semibold mb-3">Device-wide traffic capture</h3>
-                <p className="text-muted-foreground mb-4 leading-relaxed">
+                <h3 className="text-lg sm:text-xl font-semibold mb-2 sm:mb-3">Device-wide traffic capture</h3>
+                <p className="text-sm sm:text-base text-muted-foreground mb-3 sm:mb-4 leading-relaxed">
                   Network Extension-based implementation provides system-level network access.
                   Captures all HTTP and HTTPS traffic from every app on the device without requiring proxy configuration.
                   The packet tunnel interface operates at the IP layer for complete visibility.
@@ -72,15 +72,15 @@ export default function FeaturesPage() {
             </div>
 
             {/* TLS Inspection */}
-            <div className="grid gap-8 md:grid-cols-[auto,1fr]">
+            <div className="grid gap-4 sm:gap-6 md:gap-8 md:grid-cols-[auto,1fr]">
               <div className="flex items-start">
-                <div className="rounded-lg border p-3 bg-muted/50">
-                  <Fingerprint className="h-6 w-6" />
+                <div className="rounded-lg border p-2.5 sm:p-3 bg-muted/50">
+                  <Fingerprint className="h-5 w-5 sm:h-6 sm:w-6" />
                 </div>
               </div>
               <div>
-                <h3 className="text-xl font-semibold mb-3">TLS inspection and MITM</h3>
-                <p className="text-muted-foreground mb-4 leading-relaxed">
+                <h3 className="text-lg sm:text-xl font-semibold mb-2 sm:mb-3">TLS inspection and MITM</h3>
+                <p className="text-sm sm:text-base text-muted-foreground mb-3 sm:mb-4 leading-relaxed">
                   On-device certificate authority enables transparent TLS interception.
                   Dynamically generates certificates for intercepted domains to decrypt and inspect HTTPS traffic.
                   All cryptographic operations happen locally with no external dependencies.
@@ -103,15 +103,15 @@ export default function FeaturesPage() {
             </div>
 
             {/* Real-time Protocols */}
-            <div className="grid gap-8 md:grid-cols-[auto,1fr]">
+            <div className="grid gap-4 sm:gap-6 md:gap-8 md:grid-cols-[auto,1fr]">
               <div className="flex items-start">
-                <div className="rounded-lg border p-3 bg-muted/50">
-                  <Radio className="h-6 w-6" />
+                <div className="rounded-lg border p-2.5 sm:p-3 bg-muted/50">
+                  <Radio className="h-5 w-5 sm:h-6 sm:w-6" />
                 </div>
               </div>
               <div>
-                <h3 className="text-xl font-semibold mb-3">WebSocket and SSE support</h3>
-                <p className="text-muted-foreground mb-4 leading-relaxed">
+                <h3 className="text-lg sm:text-xl font-semibold mb-2 sm:mb-3">WebSocket and SSE support</h3>
+                <p className="text-sm sm:text-base text-muted-foreground mb-3 sm:mb-4 leading-relaxed">
                   First-class support for real-time protocols.
                   WebSocket frames and Server-Sent Events are captured, parsed, and displayed with full context.
                   Frame-level inspection shows exact timing and content of bidirectional communication.
@@ -134,15 +134,15 @@ export default function FeaturesPage() {
             </div>
 
             {/* Deep Inspection */}
-            <div className="grid gap-8 md:grid-cols-[auto,1fr]">
+            <div className="grid gap-4 sm:gap-6 md:gap-8 md:grid-cols-[auto,1fr]">
               <div className="flex items-start">
-                <div className="rounded-lg border p-3 bg-muted/50">
-                  <Layers className="h-6 w-6" />
+                <div className="rounded-lg border p-2.5 sm:p-3 bg-muted/50">
+                  <Layers className="h-5 w-5 sm:h-6 sm:w-6" />
                 </div>
               </div>
               <div>
-                <h3 className="text-xl font-semibold mb-3">Comprehensive request analysis</h3>
-                <p className="text-muted-foreground mb-4 leading-relaxed">
+                <h3 className="text-lg sm:text-xl font-semibold mb-2 sm:mb-3">Comprehensive request analysis</h3>
+                <p className="text-sm sm:text-base text-muted-foreground mb-3 sm:mb-4 leading-relaxed">
                   Complete visibility into every aspect of HTTP transactions.
                   Headers, body, timing breakdown, size analysis, and protocol metadata all accessible in a structured format.
                   Supports multiple body formats with syntax highlighting and advanced protocol features.
@@ -174,11 +174,11 @@ export default function FeaturesPage() {
       <Separator />
 
       {/* Advanced Features */}
-      <section className="container py-16 md:py-24">
-        <div className="mx-auto max-w-5xl">
-          <h2 className="text-2xl font-bold tracking-tight mb-12">Advanced tools</h2>
+      <section className="container py-12 sm:py-16 md:py-24">
+        <div className="mx-auto max-w-5xl px-4 sm:px-6">
+          <h2 className="text-xl sm:text-2xl font-bold tracking-tight mb-8 sm:mb-10 md:mb-12">Advanced tools</h2>
           
-          <div className="grid gap-6 md:grid-cols-2">
+          <div className="grid gap-4 sm:gap-5 md:gap-6 sm:grid-cols-2">
             <Card>
               <CardHeader>
                 <Repeat className="h-8 w-8 mb-2 text-muted-foreground" />
@@ -269,11 +269,11 @@ export default function FeaturesPage() {
       <Separator />
 
       {/* Traffic Modification Tools */}
-      <section className="container py-16 md:py-24">
-        <div className="mx-auto max-w-5xl">
-          <h2 className="text-2xl font-bold tracking-tight mb-12">Traffic modification and manipulation</h2>
+      <section className="container py-12 sm:py-16 md:py-24">
+        <div className="mx-auto max-w-5xl px-4 sm:px-6">
+          <h2 className="text-xl sm:text-2xl font-bold tracking-tight mb-8 sm:mb-10 md:mb-12">Traffic modification and manipulation</h2>
           
-          <div className="grid gap-6 md:grid-cols-2">
+          <div className="grid gap-4 sm:gap-5 md:gap-6 sm:grid-cols-2">
             <Card>
               <CardHeader>
                 <CardTitle>Rewrite rules</CardTitle>
@@ -358,11 +358,11 @@ export default function FeaturesPage() {
       <Separator />
 
       {/* Built-in Utilities */}
-      <section className="container py-16 md:py-24">
-        <div className="mx-auto max-w-5xl">
-          <h2 className="text-2xl font-bold tracking-tight mb-12">Built-in utilities</h2>
+      <section className="container py-12 sm:py-16 md:py-24">
+        <div className="mx-auto max-w-5xl px-4 sm:px-6">
+          <h2 className="text-xl sm:text-2xl font-bold tracking-tight mb-8 sm:mb-10 md:mb-12">Built-in utilities</h2>
           
-          <div className="grid gap-6 md:grid-cols-3">
+          <div className="grid gap-4 sm:gap-5 md:gap-6 sm:grid-cols-2 lg:grid-cols-3">
             <Card>
               <CardHeader>
                 <CardTitle className="text-lg">Base64 encoder/decoder</CardTitle>
@@ -435,11 +435,11 @@ export default function FeaturesPage() {
       <Separator />
 
       {/* Performance & Privacy */}
-      <section className="container py-16 md:py-24">
-        <div className="mx-auto max-w-5xl">
-          <h2 className="text-2xl font-bold tracking-tight mb-12">Performance and privacy</h2>
+      <section className="container py-12 sm:py-16 md:py-24">
+        <div className="mx-auto max-w-5xl px-4 sm:px-6">
+          <h2 className="text-xl sm:text-2xl font-bold tracking-tight mb-8 sm:mb-10 md:mb-12">Performance and privacy</h2>
           
-          <div className="grid gap-8 md:grid-cols-2">
+          <div className="grid gap-6 sm:gap-7 md:gap-8 sm:grid-cols-2">
             <div>
               <div className="flex items-center gap-3 mb-4">
                 <div className="rounded-lg border p-2 bg-muted/50">
@@ -501,23 +501,23 @@ export default function FeaturesPage() {
       <Separator />
 
       {/* Technical Stack */}
-      <section className="container py-16 md:py-24">
-        <div className="mx-auto max-w-4xl text-center">
-          <h2 className="text-2xl font-bold tracking-tight mb-4">
+      <section className="container py-12 sm:py-16 md:py-24">
+        <div className="mx-auto max-w-4xl text-center px-4 sm:px-6">
+          <h2 className="text-xl sm:text-2xl font-bold tracking-tight mb-3 sm:mb-4">
             Built with modern iOS technologies
           </h2>
-          <p className="text-muted-foreground mb-8">
+          <p className="text-sm sm:text-base text-muted-foreground mb-6 sm:mb-8">
             Leverages Apple's latest frameworks and APIs for reliability and performance.
           </p>
-          <div className="flex flex-wrap gap-2 justify-center">
-            <Badge variant="secondary">Swift 6.0</Badge>
-            <Badge variant="secondary">SwiftUI</Badge>
-            <Badge variant="secondary">Network Extension</Badge>
-            <Badge variant="secondary">NEPacketTunnelProvider</Badge>
-            <Badge variant="secondary">WidgetKit</Badge>
-            <Badge variant="secondary">Live Activities</Badge>
-            <Badge variant="secondary">App Groups</Badge>
-            <Badge variant="secondary">Swift Package Manager</Badge>
+          <div className="flex flex-wrap gap-1.5 sm:gap-2 justify-center">
+            <Badge variant="secondary" className="text-xs">Swift 6.0</Badge>
+            <Badge variant="secondary" className="text-xs">SwiftUI</Badge>
+            <Badge variant="secondary" className="text-xs">Network Extension</Badge>
+            <Badge variant="secondary" className="text-xs">NEPacketTunnelProvider</Badge>
+            <Badge variant="secondary" className="text-xs">WidgetKit</Badge>
+            <Badge variant="secondary" className="text-xs">Live Activities</Badge>
+            <Badge variant="secondary" className="text-xs">App Groups</Badge>
+            <Badge variant="secondary" className="text-xs">Swift Package Manager</Badge>
           </div>
         </div>
       </section>
