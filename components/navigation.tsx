@@ -3,8 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
-import { Github } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { ThemeSwitcher } from "@/components/theme-switcher";
 
 const navItems = [
   { name: "Features", href: "/features" },
@@ -41,16 +40,7 @@ export function Navigation() {
           </div>
         </div>
         <div className="flex items-center gap-2">
-          <Button variant="ghost" size="icon" asChild>
-            <Link
-              href="https://github.com/trace-network-debugger"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <Github className="h-5 w-5" />
-              <span className="sr-only">GitHub</span>
-            </Link>
-          </Button>
+          <ThemeSwitcher />
         </div>
       </div>
     </nav>
