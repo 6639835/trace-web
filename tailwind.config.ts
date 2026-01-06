@@ -23,6 +23,19 @@ const config: Config = {
       screens: {
         'xs': '475px',
       },
+      fontSize: {
+        "2xs": ["0.625rem", { lineHeight: "0.85rem" }],
+      },
+      spacing: {
+        section: "clamp(3rem, 6vw, 7rem)",
+        "section-lg": "clamp(3.5rem, 7vw, 9rem)",
+      },
+      maxWidth: {
+        content: "72rem",
+        readable: "48rem",
+        narrow: "36rem",
+        wide: "80rem",
+      },
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
@@ -69,4 +82,3 @@ const config: Config = {
 };
 
 export default config;
-

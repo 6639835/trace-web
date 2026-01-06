@@ -9,33 +9,33 @@
 }
 
 .deviceIphone14Pro {
-  --device-scale: 1;
-  height: calc(868px * var(--device-scale));
-  width: calc(428px * var(--device-scale));
+  --device-width: clamp(240px, 32vw, 380px);
+  width: var(--device-width);
+  aspect-ratio: 428 / 868;
   position: relative;
   flex-shrink: 0;
 }
 
 .deviceFrame {
+  --unit-w: calc(100% / 428);
+  --unit-h: calc(100% / 868);
   background: var(--device-panel);
   border: 1px solid var(--device-black-dark);
-  border-radius: 68px;
+  border-radius: calc(var(--unit-w) * 68);
   box-shadow: 
     inset 0 0 4px 2px var(--device-black-light),
     inset 0 0 0 6px var(--device-black);
-  height: 868px;
-  padding: 19px;
-  width: 428px;
+  height: 100%;
+  padding: calc(var(--unit-w) * 19);
+  width: 100%;
   position: relative;
-  transform: scale(var(--device-scale));
-  transform-origin: top left;
 }
 
 /* 2556‑by‑1179-pixel resolution */
 .deviceScreen {
-  border-radius: 49px;
-  height: 830px;
-  width: 390px;
+  border-radius: calc(var(--unit-w) * 49);
+  height: calc(100% - (var(--unit-h) * 38));
+  width: calc(100% - (var(--unit-w) * 38));
   overflow: hidden;
   background: #000;
   position: relative;
@@ -45,9 +45,9 @@
 .deviceStripe::after,
 .deviceStripe::before {
   border: solid rgba(1, 1, 1, 0.25);
-  border-width: 0 7px;
+  border-width: 0 calc(var(--unit-w) * 7);
   content: "";
-  height: 7px;
+  height: calc(var(--unit-h) * 7);
   left: 0;
   position: absolute;
   width: 100%;
@@ -55,22 +55,22 @@
 }
 
 .deviceStripe::after {
-  top: 85px;
+  top: calc(var(--unit-h) * 85);
 }
 
 .deviceStripe::before {
-  bottom: 85px;
+  bottom: calc(var(--unit-h) * 85);
 }
 
 .deviceHeader {
   background: var(--device-panel);
-  border-radius: 20px;
-  height: 35px;
+  border-radius: calc(var(--unit-w) * 20);
+  height: calc(var(--unit-h) * 35);
   left: 50%;
-  margin-left: -60px;
+  margin-left: calc(var(--unit-w) * -60);
   position: absolute;
-  top: 29px;
-  width: 120px;
+  top: calc(var(--unit-h) * 29);
+  width: calc(var(--unit-w) * 120);
   z-index: 10;
 }
 
@@ -83,12 +83,12 @@
 
 .deviceSensors::after {
   background: var(--device-panel);
-  border-radius: 17px;
-  height: 33px;
+  border-radius: calc(var(--unit-w) * 17);
+  height: calc(var(--unit-h) * 33);
   left: 50%;
-  margin-left: -60px;
-  top: 30px;
-  width: 74px;
+  margin-left: calc(var(--unit-w) * -60);
+  top: calc(var(--unit-h) * 30);
+  width: calc(var(--unit-w) * 74);
 }
 
 .deviceSensors::before {
@@ -97,71 +97,71 @@
     radial-gradient(farthest-corner at 80% 80%, #513785 0%, #24555E 20%, transparent 50%);
   box-shadow: 0 0 1px 1px rgba(255, 255, 255, 0.05);
   border-radius: 50%;
-  height: 9px;
+  height: calc(var(--unit-w) * 9);
   left: 50%;
-  margin-left: 36px;
-  top: 42px;
-  width: 9px;
+  margin-left: calc(var(--unit-w) * 36);
+  top: calc(var(--unit-h) * 42);
+  width: calc(var(--unit-w) * 9);
 }
 
 .deviceBtns {
   background: var(--device-black-dark);
-  border-radius: 2px;
-  height: 32px;
-  left: -2px;
+  border-radius: calc(var(--unit-w) * 2);
+  height: calc(var(--unit-h) * 32);
+  left: calc(var(--unit-w) * -2);
   position: absolute;
-  top: 115px;
-  width: 3px;
+  top: calc(var(--unit-h) * 115);
+  width: calc(var(--unit-w) * 3);
 }
 
 .deviceBtns::after,
 .deviceBtns::before {
   background: var(--device-black-dark);
-  border-radius: 2px;
+  border-radius: calc(var(--unit-w) * 2);
   content: "";
-  height: 62px;
+  height: calc(var(--unit-h) * 62);
   left: 0;
   position: absolute;
-  width: 3px;
+  width: calc(var(--unit-w) * 3);
 }
 
 .deviceBtns::after {
-  top: 60px;
+  top: calc(var(--unit-h) * 60);
 }
 
 .deviceBtns::before {
-  top: 140px;
+  top: calc(var(--unit-h) * 140);
 }
 
 .devicePower {
   background: var(--device-black-dark);
-  border-radius: 2px;
-  height: 100px;
-  right: -2px;
+  border-radius: calc(var(--unit-w) * 2);
+  height: calc(var(--unit-h) * 100);
+  right: calc(var(--unit-w) * -2);
   position: absolute;
-  top: 200px;
-  width: 3px;
+  top: calc(var(--unit-h) * 200);
+  width: calc(var(--unit-w) * 3);
 }
 
 .deviceHome::after,
 .deviceHome::before {
   border: solid rgba(1, 1, 1, 0.25);
-  border-width: 6px 0;
+  border-width: calc(var(--unit-w) * 6) 0;
   content: "";
-  height: 6px;
+  height: calc(var(--unit-h) * 6);
   position: absolute;
-  width: 6px;
+  width: calc(var(--unit-w) * 6);
   z-index: 9;
 }
 
 .deviceHome::after {
-  right: 86px;
+  right: calc(var(--unit-w) * 86);
   top: 0;
 }
 
 .deviceHome::before {
   bottom: 0;
-  left: 86px;
+  left: calc(var(--unit-w) * 86);
 }
 
 /* Responsive Scaling */
@@ -177,8 +177,8 @@
   box-sizing: border-box;
 }
 
-@media (max-width: 520px) {
+@media (max-width: 640px) {
   .deviceIphone14Pro {
-    display: none;
+    --device-width: clamp(200px, 70vw, 300px);
   }
 }

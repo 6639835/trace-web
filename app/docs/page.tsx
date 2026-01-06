@@ -6,8 +6,8 @@ export default function DocsPage() {
   return (
     <div className="flex flex-col">
       {/* Header */}
-      <section className="container py-12 sm:py-16 md:py-24">
-        <div className="mx-auto max-w-3xl text-center">
+      <section className="container py-section">
+        <div className="mx-auto max-w-readable text-center">
           <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight mb-3 sm:mb-4">
             Documentation
           </h1>
@@ -20,8 +20,8 @@ export default function DocsPage() {
       <Separator />
 
       {/* Getting Started */}
-      <section className="container py-12 sm:py-16 md:py-24">
-        <div className="mx-auto max-w-5xl">
+      <section className="container py-section">
+        <div className="mx-auto max-w-content">
           <h2 className="text-xl sm:text-2xl font-bold tracking-tight mb-8 sm:mb-10 md:mb-12">Getting started</h2>
           
           <div className="grid gap-4 sm:gap-5 md:gap-6 sm:grid-cols-2 lg:grid-cols-3">
@@ -70,8 +70,8 @@ export default function DocsPage() {
       <Separator />
 
       {/* User Guide */}
-      <section className="container py-12 sm:py-16 md:py-24">
-        <div className="mx-auto max-w-5xl">
+      <section className="container py-section">
+        <div className="mx-auto max-w-content">
           <h2 className="text-xl sm:text-2xl font-bold tracking-tight mb-8 sm:mb-10 md:mb-12">User guide</h2>
           
           <div className="space-y-8">
@@ -116,8 +116,8 @@ export default function DocsPage() {
       <Separator />
 
       {/* Developer Documentation */}
-      <section className="container py-12 sm:py-16 md:py-24">
-        <div className="mx-auto max-w-5xl">
+      <section className="container py-section">
+        <div className="mx-auto max-w-content">
           <h2 className="text-xl sm:text-2xl font-bold tracking-tight mb-8 sm:mb-10 md:mb-12">Developer documentation</h2>
           
           <div className="grid gap-4 sm:gap-5 md:gap-6 sm:grid-cols-2">
@@ -183,8 +183,8 @@ export default function DocsPage() {
       <Separator />
 
       {/* Advanced Topics */}
-      <section className="container py-12 sm:py-16 md:py-24">
-        <div className="mx-auto max-w-5xl">
+      <section className="container py-section">
+        <div className="mx-auto max-w-content">
           <h2 className="text-xl sm:text-2xl font-bold tracking-tight mb-8 sm:mb-10 md:mb-12">Advanced topics</h2>
           
           <div className="space-y-4">
@@ -222,8 +222,8 @@ export default function DocsPage() {
       <Separator />
 
       {/* Resources */}
-      <section className="container py-12 sm:py-16 md:py-24">
-        <div className="mx-auto max-w-3xl text-center">
+      <section className="container py-section">
+        <div className="mx-auto max-w-readable text-center">
           <h2 className="text-xl sm:text-2xl font-bold tracking-tight mb-3 sm:mb-4">
             Additional resources
           </h2>
