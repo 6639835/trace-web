@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { ThemeSwitcher } from "@/components/theme-switcher";
@@ -23,7 +24,14 @@ export function Navigation() {
       <div className="container flex h-16 items-center justify-between">
         <div className="flex items-center gap-6 lg:gap-10">
           <Link href="/" className="flex items-center space-x-2">
-            <span className="text-xl font-semibold tracking-tight">Trace</span>
+            <Image 
+              src="/logos/trace-logomark.svg" 
+              alt="Trace" 
+              width={32} 
+              height={32}
+              className="h-8 w-8"
+              priority
+            />
           </Link>
           <div className="hidden md:flex items-center gap-4 lg:gap-6">
             {navItems.map((item) => (

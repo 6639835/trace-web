@@ -10,6 +10,14 @@ const inter = Inter({ subsets: ["latin"] });
 export const metadata: Metadata = {
   title: "Trace - iOS Network Debugger",
   description: "Professional network debugging tool for iOS. Device-wide traffic capture, deep inspection, and real-time analysis.",
+  icons: {
+    icon: [
+      { url: '/logos/trace-logomark.svg', type: 'image/svg+xml' },
+    ],
+    apple: [
+      { url: '/logos/trace-logomark.svg', type: 'image/svg+xml' },
+    ],
+  },
 };
 
 export default function RootLayout({
