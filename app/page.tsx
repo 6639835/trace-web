@@ -30,7 +30,7 @@ export default function Home() {
             </div>
             <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 max-w-full">
               <Button size="lg" asChild className="w-full sm:w-auto">
-                <Link href="https://github.com/trace-network-debugger" target="_blank" rel="noopener noreferrer">
+                <Link href="https://github.com/6639835/Trace" target="_blank" rel="noopener noreferrer">
                   <Github className="mr-2 h-5 w-5" />
                   View on GitHub
                 </Link>
@@ -226,7 +226,7 @@ export default function Home() {
           </p>
           <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center">
             <Button size="lg" asChild className="w-full sm:w-auto">
-              <Link href="https://github.com/trace-network-debugger" target="_blank" rel="noopener noreferrer">
+              <Link href="https://github.com/6639835/Trace" target="_blank" rel="noopener noreferrer">
                 <Github className="mr-2 h-5 w-5" />
                 View repository
               </Link>

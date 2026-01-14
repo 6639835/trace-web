@@ -1,7 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
 import { Separator } from "@/components/ui/separator";
-import { Github } from "lucide-react";
 
 export function Footer() {
   return (
@@ -62,12 +61,11 @@ export function Footer() {
             <ul className="space-y-2 text-sm text-muted-foreground text-center md:text-left">
               <li>
                 <Link
-                  href="https://github.com/trace-network-debugger"
+                  href="https://github.com/6639835/Trace"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="hover:text-foreground transition-colors flex items-center gap-2"
+                  className="hover:text-foreground transition-colors"
                 >
-                  <Github className="h-4 w-4" />
                   GitHub
                 </Link>
               </li>
@@ -77,6 +75,11 @@ export function Footer() {
           <div className="flex flex-col items-center md:items-start space-y-3">
             <h3 className="font-semibold text-sm">Legal</h3>
             <ul className="space-y-2 text-sm text-muted-foreground text-center md:text-left">
+              <li>
+                <Link href="/privacy" className="hover:text-foreground transition-colors">
+                  Privacy Policy
+                </Link>
+              </li>
               <li>
                 <Link href="/open-source" className="hover:text-foreground transition-colors">
                   License

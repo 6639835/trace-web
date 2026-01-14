@@ -98,14 +98,7 @@ export default function OpenSourcePage() {
         <div className="mx-auto max-w-content">
           <h2 className="text-xl sm:text-2xl font-bold tracking-tight mb-4 sm:mb-6">License</h2>
           
-          <div className="rounded-lg border bg-muted/30 p-6 mb-6">
-            <p className="text-lg font-semibold mb-2">MIT License</p>
-            <p className="text-sm text-muted-foreground">
-              Copyright (c) 2026 Justin
-            </p>
-          </div>
-
-          <div className="space-y-4 text-muted-foreground leading-relaxed">
+          <div className="space-y-4 text-muted-foreground leading-relaxed mb-6">
             <p>
               Trace is licensed under the MIT License, one of the most permissive open source licenses.
               This means you can use, copy, modify, merge, publish, distribute, sublicense, and sell copies of the software.
@@ -113,15 +106,38 @@ export default function OpenSourcePage() {
             <p>
               The only requirement is that the license and copyright notice must be included in all copies or substantial portions of the software.
             </p>
-            <p>
-              No warranty is provided. The software is provided as is.
-            </p>
+          </div>
+
+          <div className="rounded-lg border bg-muted/30 p-6 mb-6">
+            <pre className="text-xs sm:text-sm text-muted-foreground font-mono whitespace-pre-wrap leading-relaxed">
+MIT License
+
+Copyright (c) 2026 Justin
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the &quot;Software&quot;), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+            </pre>
           </div>
 
           <div className="mt-8">
             <Button variant="outline" asChild>
-              <Link href="https://github.com/trace-network-debugger/trace/blob/main/LICENSE" target="_blank" rel="noopener noreferrer">
-                Read full license
+              <Link href="https://github.com/6639835/Trace/blob/main/LICENSE" target="_blank" rel="noopener noreferrer">
+                View on GitHub
               </Link>
             </Button>
           </div>
@@ -220,13 +236,13 @@ export default function OpenSourcePage() {
 
           <div className="mt-8 flex flex-col sm:flex-row gap-4">
             <Button asChild className="w-full sm:w-auto">
-              <Link href="https://github.com/trace-network-debugger/trace" target="_blank" rel="noopener noreferrer">
+              <Link href="https://github.com/6639835/Trace" target="_blank" rel="noopener noreferrer">
                 <Github className="mr-2 h-5 w-5" />
                 View repository
               </Link>
             </Button>
             <Button variant="outline" asChild className="w-full sm:w-auto">
-              <Link href="https://github.com/trace-network-debugger/trace/issues" target="_blank" rel="noopener noreferrer">
+              <Link href="https://github.com/6639835/Trace/issues" target="_blank" rel="noopener noreferrer">
                 View issues
               </Link>
             </Button>
@@ -323,7 +339,7 @@ export default function OpenSourcePage() {
             The community and maintainers monitor issues and discussions.
           </p>
           <Button asChild className="w-full sm:w-auto">
-            <Link href="https://github.com/trace-network-debugger/trace/issues/new" target="_blank" rel="noopener noreferrer">
+            <Link href="https://github.com/6639835/Trace/issues/new" target="_blank" rel="noopener noreferrer">
               Open an issue
             </Link>
           </Button>
