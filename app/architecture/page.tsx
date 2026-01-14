@@ -2,6 +2,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Separator } from "@/components/ui/separator";
 import { Badge } from "@/components/ui/badge";
 import { Smartphone, Server, LayoutGrid, Network, Radio, MessageSquare, Activity } from "lucide-react";
+import { NetworkFlowDiagram } from "@/components/network-flow-diagram";
 
 export default function ArchitecturePage() {
   return (
@@ -75,19 +76,13 @@ export default function ArchitecturePage() {
             </Card>
           </div>
 
-          <div className="rounded-lg border bg-muted/30 p-6">
-            <h3 className="font-semibold mb-4">Data flow</h3>
-            <div className="space-y-3 text-sm text-muted-foreground font-mono break-words">
-              <div>Device network → Network Extension (packet tunnel)</div>
-              <div className="pl-4">↓ Packet capture at IP layer</div>
-              <div className="pl-4">↓ TCP stream reconstruction</div>
-              <div className="pl-4">↓ HTTP/HTTP2/HTTP3/WebSocket parsing</div>
-              <div className="pl-4">↓ TLS interception (if enabled)</div>
-              <div className="pl-4">↓ Apply rewrite rules, request maps, breakpoints</div>
-              <div className="pl-4">↓ Write to shared container (App Group)</div>
-              <div>Main app reads and displays</div>
-              <div>Widget extension shows real-time stats</div>
-            </div>
+          <div>
+            <h3 className="font-semibold mb-4">Network flow</h3>
+            <p className="text-sm text-muted-foreground mb-6 leading-relaxed">
+              Trace uses a VPN-based proxy mode to capture HTTP/HTTPS traffic. 
+              All captured traffic stays on-device and flows through a local MITM proxy server.
+            </p>
+            <NetworkFlowDiagram />
           </div>
         </div>
       </section>

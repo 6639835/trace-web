@@ -101,7 +101,7 @@ export default function OpenSourcePage() {
           <div className="rounded-lg border bg-muted/30 p-6 mb-6">
             <p className="text-lg font-semibold mb-2">MIT License</p>
             <p className="text-sm text-muted-foreground">
-              Copyright (c) 2024 Trace Contributors
+              Copyright (c) 2026 Justin
             </p>
           </div>
 
