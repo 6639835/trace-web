@@ -3,7 +3,6 @@
 import Image from "next/image";
 import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
-import { IPhoneMockup } from "@/components/marketing/iphone-mockup";
 
 export function HeroPhone() {
   const { resolvedTheme } = useTheme();
@@ -14,43 +13,33 @@ export function HeroPhone() {
     setMounted(true);
   }, []);
 
-  // Show placeholder during SSR and initial mount
-  if (!mounted) {
-    return (
-      <div className="flex justify-center lg:justify-end items-start">
-        <div className="max-w-full">
-          <IPhoneMockup>
-            <Image
-              src="/iphone-screenshot-light.png"
-              alt="Trace iOS App Screenshot"
-              width={1206}
-              height={2622}
-              className="w-full h-full object-cover"
-              priority
-            />
-          </IPhoneMockup>
-        </div>
-      </div>
-    );
-  }
-
-  const isDark = resolvedTheme === "dark";
+  const isDark = mounted && resolvedTheme === "dark";
 
   return (
     <div className="flex justify-center lg:justify-end items-start">
-      <div className="max-w-full">
-        <IPhoneMockup>
+      <div className="relative w-[280px] md:w-[320px] lg:w-[360px]">
+        {/* Screenshot layer - positioned behind the frame */}
+        <div className="absolute inset-[5%] top-[1.5%] bottom-[1.5%] rounded-[12%] overflow-hidden">
           <Image
             src={isDark ? "/iphone-screenshot-dark.png" : "/iphone-screenshot-light.png"}
             alt="Trace iOS App Screenshot"
-            width={1206}
-            height={2622}
-            className="w-full h-full object-cover"
+            fill
+            className="object-cover"
             priority
           />
-        </IPhoneMockup>
+        </div>
+        
+        {/* iPhone frame overlay */}
+        <Image
+          src="/iphone-16-pro-frame.png"
+          alt=""
+          width={874}
+          height={1778}
+          className="relative w-full h-auto pointer-events-none select-none"
+          priority
+          aria-hidden="true"
+        />
       </div>
     </div>
   );
 }
-
