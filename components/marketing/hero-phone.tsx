@@ -51,6 +51,7 @@ export function HeroPhone() {
             sizes="(min-width: 1024px) 360px, (min-width: 768px) 320px, 280px"
             priority
             quality={100}
+            unoptimized
             onLoadingComplete={handleLoaded}
           />
           <Image
@@ -61,6 +62,7 @@ export function HeroPhone() {
             sizes="(min-width: 1024px) 360px, (min-width: 768px) 320px, 280px"
             priority
             quality={100}
+            unoptimized
             onLoadingComplete={handleLoaded}
           />
         </div>
@@ -74,6 +76,7 @@ export function HeroPhone() {
           className="relative w-full h-auto pointer-events-none select-none"
           priority
           quality={100}
+          unoptimized
           aria-hidden="true"
         />
       </div>
