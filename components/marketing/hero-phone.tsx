@@ -13,6 +13,16 @@ export function HeroPhone() {
     setMounted(true);
   }, []);
 
+  // Preload both theme screenshots to avoid swap delay on theme change.
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const sources = ["/iphone-screenshot-dark.png", "/iphone-screenshot-light.png"];
+    sources.forEach((src) => {
+      const img = new window.Image();
+      img.src = src;
+    });
+  }, []);
+
   const isDark = mounted && resolvedTheme === "dark";
 
   return (
@@ -21,10 +31,19 @@ export function HeroPhone() {
         {/* Screenshot layer - positioned behind the frame */}
         <div className="absolute inset-[5%] top-[1.5%] bottom-[1.5%] rounded-[12%] overflow-hidden">
           <Image
-            src={isDark ? "/iphone-screenshot-dark.png" : "/iphone-screenshot-light.png"}
-            alt="Trace iOS App Screenshot"
+            src="/iphone-screenshot-dark.png"
+            alt={isDark ? "Trace iOS App Screenshot" : ""}
             fill
-            className="object-cover"
+            className={`object-cover transition-opacity duration-200 ${isDark ? "opacity-100" : "opacity-0"}`}
+            sizes="(min-width: 1024px) 360px, (min-width: 768px) 320px, 280px"
+            priority
+          />
+          <Image
+            src="/iphone-screenshot-light.png"
+            alt={!isDark ? "Trace iOS App Screenshot" : ""}
+            fill
+            className={`object-cover transition-opacity duration-200 ${isDark ? "opacity-0" : "opacity-100"}`}
+            sizes="(min-width: 1024px) 360px, (min-width: 768px) 320px, 280px"
             priority
           />
         </div>
