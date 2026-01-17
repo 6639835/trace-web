@@ -20,12 +20,12 @@ export default function Home() {
               </h1>
               <p className="text-sm sm:text-base lg:text-lg text-muted-foreground leading-relaxed break-words mb-3 sm:mb-4">
                 Professional network debugging tool for iOS developers. 
-                Captures device-wide HTTP(S), TCP, WebSocket, and SSE traffic through a packet tunnel with on-device TLS MITM.
-                Built on Network Extension APIs for complete system-level visibility and traffic modification.
+                Captures HTTP(S), WebSocket, and SSE traffic through a proxy-only packet tunnel with on-device TLS MITM.
+                Built on Network Extension APIs for system-level visibility when apps honor the system proxy.
               </p>
               <p className="text-xs sm:text-sm text-muted-foreground break-words max-w-full">
                 Real-time network inspection at the system level.
-                See every request from every app on your device.
+                See requests from apps that honor the system proxy settings.
               </p>
             </div>
             <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 max-w-full">
@@ -65,7 +65,7 @@ export default function Home() {
               </CardHeader>
               <CardContent>
                 <CardDescription>
-                  Network Extension-based packet tunnel captures all HTTP(S) traffic across every app on the device. No proxy configuration required.
+                  Network Extension-based packet tunnel configures a system proxy to capture HTTP(S) for apps that honor it. No per-app setup required.
                 </CardDescription>
               </CardContent>
             </Card>
@@ -109,11 +109,11 @@ export default function Home() {
             <Card>
               <CardHeader>
                 <Activity className="h-8 w-8 mb-2 text-muted-foreground" />
-                <CardTitle className="text-lg">TCP flow tracking</CardTitle>
+                <CardTitle className="text-lg">PCAP export</CardTitle>
               </CardHeader>
               <CardContent>
                 <CardDescription>
-                  Low-level TCP connection monitoring with per-flow statistics, optional raw stream capture, and CSV/JSON export. Track connection state, timing, and data flow for non-HTTP protocols.
+                  Optional PCAP export of captured HTTP frames for offline analysis, plus event logging for diagnostics and troubleshooting.
                 </CardDescription>
               </CardContent>
             </Card>
@@ -125,7 +125,7 @@ export default function Home() {
               </CardHeader>
               <CardContent>
                 <CardDescription>
-                  Comprehensive analysis with headers, body viewers (JSON, XML, images, SVG, multipart), timing breakdowns, TLS certificate chains, HTTP/2 stream info with HPACK table, HTTP/3 protocol markers, request comparison, and saved filter presets.
+                  Comprehensive analysis with headers, body viewers (JSON, XML, images, SVG, multipart), timing breakdowns, TLS certificate chains, HTTP/2 stream info with HPACK table, request comparison, and saved filter presets.
                 </CardDescription>
               </CardContent>
             </Card>
@@ -152,8 +152,8 @@ export default function Home() {
               <div>
                 <h3 className="font-semibold mb-2 text-sm sm:text-base">Network Extension</h3>
                 <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">
-                  Implements NEPacketTunnelProvider for system-wide network capture. 
-                  Runs in a separate process with elevated privileges for complete traffic visibility.
+                  Implements NEPacketTunnelProvider to configure system proxy settings for capture.
+                  Runs in a separate process with elevated privileges to manage the local MITM proxy.
                 </p>
               </div>
               <div>
@@ -176,8 +176,8 @@ export default function Home() {
               <div>
                 <h3 className="font-semibold mb-2 text-sm sm:text-base">Packet Tunnel</h3>
                 <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">
-                  Virtual network interface captures IP packets before encryption.
-                  Processes TCP streams and reconstructs HTTP transactions from raw packets.
+                  Proxy-only tunnel injects NEProxySettings without routing packets.
+                  HTTP/HTTPS traffic flows through the local proxy for inspection and tooling.
                 </p>
               </div>
               <div>
@@ -190,7 +190,7 @@ export default function Home() {
               <div>
                 <h3 className="font-semibold mb-2 text-sm sm:text-base">Background Processing</h3>
                 <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">
-                  Efficient packet processing with minimal battery impact.
+                  Efficient proxy processing with minimal battery impact.
                   Optimized memory usage for long-running capture sessions.
                 </p>
               </div>

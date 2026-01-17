@@ -79,7 +79,7 @@ export default function DocsPage() {
               <h3 className="text-lg font-semibold mb-3">Capturing traffic</h3>
               <p className="text-muted-foreground leading-relaxed">
                 Start capture from Settings tab and view traffic in the Network tab.
-                Filter by HTTP, WebSocket, SSE, or TCP flows with saved presets.
+                Filter by HTTP, WebSocket, or SSE flows with saved presets.
                 Group by domain or session for better organization.
               </p>
             </div>
@@ -105,7 +105,6 @@ export default function DocsPage() {
               <h3 className="text-lg font-semibold mb-3">Exporting data</h3>
               <p className="text-muted-foreground leading-relaxed">
                 Export/import HAR files from Settings → Data.
-                Export TCP flows as CSV or JSON.
                 Export and import configuration including rewrite rules, request maps, scripts, and hosts.
               </p>
             </div>
@@ -189,16 +188,16 @@ export default function DocsPage() {
           
           <div className="space-y-4">
             <div className="rounded-lg border p-6">
-              <h3 className="text-lg font-semibold mb-2">Certificate pinning bypass</h3>
+              <h3 className="text-lg font-semibold mb-2">Certificate pinning detection</h3>
               <p className="text-sm text-muted-foreground">
-                Techniques for debugging apps with certificate pinning.
+                How Trace flags likely pinning failures and what to expect.
               </p>
             </div>
 
             <div className="rounded-lg border p-6">
-              <h3 className="text-lg font-semibold mb-2">Custom protocol handlers</h3>
+              <h3 className="text-lg font-semibold mb-2">Protocol coverage</h3>
               <p className="text-sm text-muted-foreground">
-                Extending Trace to support custom or proprietary protocols.
+                HTTP/1.1, HTTP/2, WebSocket, and SSE coverage and limitations.
               </p>
             </div>
 

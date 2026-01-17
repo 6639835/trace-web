@@ -62,7 +62,7 @@ export function NetworkFlowDiagram() {
         {/* Device Header */}
         <div className="flex items-center gap-2 mb-6 pb-4 border-b border-border">
           <Smartphone className="h-5 w-5 text-muted-foreground" />
-          <span className="font-semibold text-sm sm:text-base">iOS / macOS Device</span>
+          <span className="font-semibold text-sm sm:text-base">iOS / iPadOS Device</span>
         </div>
 
         {/* Main Flow */}

@@ -51,21 +51,21 @@ export default function FeaturesPage() {
                 <h3 className="text-lg sm:text-xl font-semibold mb-2 sm:mb-3">Device-wide traffic capture</h3>
                 <p className="text-sm sm:text-base text-muted-foreground mb-3 sm:mb-4 leading-relaxed">
                   Network Extension-based implementation provides system-level network access.
-                  Captures all HTTP and HTTPS traffic from every app on the device without requiring proxy configuration.
-                  The packet tunnel interface operates at the IP layer for complete visibility.
+                  Uses a proxy-only packet tunnel to configure system proxy settings and capture HTTP/HTTPS traffic.
+                  Apps must honor the system proxy for their traffic to be captured.
                 </p>
                 <div className="space-y-2 text-sm">
                   <div className="flex items-start gap-2">
                     <div className="w-1 h-1 rounded-full bg-foreground mt-2" />
-                    <p className="text-muted-foreground">Automatic capture of system and third-party app traffic</p>
+                    <p className="text-muted-foreground">Automatic capture for apps that respect the system proxy</p>
                   </div>
                   <div className="flex items-start gap-2">
                     <div className="w-1 h-1 rounded-full bg-foreground mt-2" />
-                    <p className="text-muted-foreground">No VPN or proxy configuration required by apps</p>
+                    <p className="text-muted-foreground">No per-app proxy configuration required</p>
                   </div>
                   <div className="flex items-start gap-2">
                     <div className="w-1 h-1 rounded-full bg-foreground mt-2" />
-                    <p className="text-muted-foreground">Works with apps that have strict network requirements</p>
+                    <p className="text-muted-foreground">Apps that ignore proxy settings will not be captured</p>
                   </div>
                 </div>
               </div>
@@ -92,7 +92,7 @@ export default function FeaturesPage() {
                   </div>
                   <div className="flex items-start gap-2">
                     <div className="w-1 h-1 rounded-full bg-foreground mt-2" />
-                    <p className="text-muted-foreground">Certificate pinning detection and bypass options</p>
+                    <p className="text-muted-foreground">Certificate pinning detection indicators</p>
                   </div>
                   <div className="flex items-start gap-2">
                     <div className="w-1 h-1 rounded-full bg-foreground mt-2" />
@@ -158,7 +158,7 @@ export default function FeaturesPage() {
                   </div>
                   <div className="flex items-start gap-2">
                     <div className="w-1 h-1 rounded-full bg-foreground mt-2" />
-                    <p className="text-muted-foreground">HTTP/3 protocol markers and TLS certificate chain details</p>
+                    <p className="text-muted-foreground">TLS certificate chain details and MITM status</p>
                   </div>
                   <div className="flex items-start gap-2">
                     <div className="w-1 h-1 rounded-full bg-foreground mt-2" />
@@ -229,7 +229,7 @@ export default function FeaturesPage() {
               <CardContent>
                 <CardDescription className="leading-relaxed">
                   HAR import and export for comprehensive traffic analysis.
-                  Export TCP flows as CSV or JSON.
+                  Optional PCAP export of captured HTTP frames for offline analysis.
                   Import/export configuration including rewrite rules, request maps, scripts, and hosts.
                 </CardDescription>
               </CardContent>
@@ -238,13 +238,13 @@ export default function FeaturesPage() {
             <Card>
               <CardHeader>
                 <Activity className="h-8 w-8 mb-2 text-muted-foreground" />
-                <CardTitle>TCP flow monitoring</CardTitle>
+                <CardTitle>PCAP capture</CardTitle>
               </CardHeader>
               <CardContent>
                 <CardDescription className="leading-relaxed">
-                  Track low-level TCP connections with per-flow statistics.
-                  Optional raw stream capture for deep packet analysis.
-                  Export flow data as CSV or JSON for external analysis.
+                  Capture HTTP request/response frames in PCAP format.
+                  Useful for offline protocol inspection and debugging.
+                  Configurable capture limits to keep files manageable.
                 </CardDescription>
               </CardContent>
             </Card>

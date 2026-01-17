@@ -268,7 +268,7 @@ SOFTWARE.
               <div className="space-y-2 text-sm">
                 <div className="flex items-center gap-2">
                   <div className="w-1 h-1 rounded-full bg-foreground" />
-                  <p className="text-muted-foreground">Xcode 16+ with Swift 6.0 support</p>
+                  <p className="text-muted-foreground">Xcode 26.2 with Swift 6.0 support</p>
                 </div>
                 <div className="flex items-center gap-2">
                   <div className="w-1 h-1 rounded-full bg-foreground" />
@@ -294,7 +294,7 @@ SOFTWARE.
                 </div>
                 <div className="flex items-start gap-2">
                   <div className="text-muted-foreground font-medium">2.</div>
-                  <p className="text-muted-foreground">Update signing for all targets (App, TraceVPN, TraceWidget) to your team</p>
+                  <p className="text-muted-foreground">Update signing for all targets (App, TraceVPN, TraceWidgetExtension) to your team</p>
                 </div>
                 <div className="flex items-start gap-2">
                   <div className="text-muted-foreground font-medium">3.</div>

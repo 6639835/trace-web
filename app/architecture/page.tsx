@@ -28,7 +28,8 @@ export default function ArchitecturePage() {
           <h2 className="text-xl sm:text-2xl font-bold tracking-tight mb-4 sm:mb-6">System overview</h2>
           <p className="text-sm sm:text-base text-muted-foreground mb-6 sm:mb-8 leading-relaxed">
             Trace is built on iOS Network Extension framework, specifically implementing NEPacketTunnelProvider.
-            This architecture enables system-level network visibility without requiring apps to route traffic through a local proxy.
+            The tunnel runs in proxy-only mode and configures system proxy settings to route HTTP/HTTPS through a local MITM proxy.
+            Apps must honor the system proxy for their traffic to be captured.
             The system consists of three primary components that communicate via shared App Group container.
           </p>
 
@@ -50,16 +51,16 @@ export default function ArchitecturePage() {
             <Card>
               <CardHeader>
                 <Server className="h-8 w-8 mb-2 text-muted-foreground" />
-                <CardTitle className="text-lg">Network extension (TraceVPN)</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <CardDescription className="leading-relaxed">
-                  Separate process running NEPacketTunnelProvider that captures IP packets.
-                  Implements MITM proxy with TLS handling and HTTP/2/WebSocket parsing.
-                  Writes captured data to shared App Group container.
-                </CardDescription>
-              </CardContent>
-            </Card>
+              <CardTitle className="text-lg">Network extension (TraceVPN)</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <CardDescription className="leading-relaxed">
+                  Separate process running NEPacketTunnelProvider in proxy-only mode.
+                  Configures system proxy settings and runs the local MITM proxy for HTTP/HTTPS.
+                  Handles TLS, HTTP/2, WebSocket, and SSE before writing captures to the App Group.
+              </CardDescription>
+            </CardContent>
+          </Card>
 
             <Card>
               <CardHeader>
@@ -98,52 +99,47 @@ export default function ArchitecturePage() {
             <div>
               <h3 className="text-lg font-semibold mb-3">NEPacketTunnelProvider</h3>
               <p className="text-muted-foreground leading-relaxed mb-4">
-                Core component that implements virtual network interface.
-                Receives all IP packets destined for network, allowing inspection before forwarding.
-                Runs in separate process with elevated network privileges.
+                Core component that configures proxy-only VPN network settings via NEProxySettings.
+                Starts the local MITM proxy and applies system proxy rules without routing packets.
+                Runs in a separate process with elevated network privileges.
               </p>
               <div className="rounded-lg border bg-muted/30 p-4 text-sm font-mono break-words">
-                <div className="text-muted-foreground">class TracePacketTunnel: NEPacketTunnelProvider</div>
+                <div className="text-muted-foreground">final class PacketTunnelProvider: NEPacketTunnelProvider</div>
               </div>
             </div>
 
             <div>
-              <h3 className="text-lg font-semibold mb-3">Packet processing pipeline</h3>
+              <h3 className="text-lg font-semibold mb-3">Proxy processing pipeline</h3>
               <div className="space-y-3">
                 <div className="rounded-lg border p-4">
-                  <h4 className="font-semibold text-sm mb-2">1. Packet capture</h4>
+                  <h4 className="font-semibold text-sm mb-2">1. Proxy configuration</h4>
                   <p className="text-sm text-muted-foreground leading-relaxed">
-                    Intercept IP packets via packetFlow.readPackets().
-                    Parse IP headers to identify protocol and endpoints.
-                    Forward packets to maintain connectivity while copying for analysis.
+                    Apply system proxy settings to route HTTP/HTTPS to the local MITM proxy.
+                    Start the proxy server and expose it on 127.0.0.1:8888.
                   </p>
                 </div>
 
                 <div className="rounded-lg border p-4">
-                  <h4 className="font-semibold text-sm mb-2">2. TCP reconstruction</h4>
+                  <h4 className="font-semibold text-sm mb-2">2. HTTP parsing</h4>
                   <p className="text-sm text-muted-foreground leading-relaxed">
-                    Track TCP connections by five-tuple (src IP, src port, dst IP, dst port, protocol).
-                    Reassemble TCP segments in correct sequence order.
-                    Handle retransmissions, out-of-order delivery, and connection state.
-                  </p>
-                </div>
-
-                <div className="rounded-lg border p-4">
-                  <h4 className="font-semibold text-sm mb-2">3. HTTP parsing</h4>
-                  <p className="text-sm text-muted-foreground leading-relaxed">
-                    Parse HTTP/1.1, HTTP/2, and HTTP/3 transactions from TCP stream.
-                    Extract method, path, headers, and body with protocol-specific features.
+                    Handle HTTP/1.1 and HTTP/2 requests and CONNECT tunnels in the proxy.
                     Track WebSocket upgrades, SSE connections, and request-response pairs.
                   </p>
                 </div>
 
                 <div className="rounded-lg border p-4">
-                  <h4 className="font-semibold text-sm mb-2">4. TLS interception</h4>
+                  <h4 className="font-semibold text-sm mb-2">3. TLS interception</h4>
                   <p className="text-sm text-muted-foreground leading-relaxed">
-                    Intercept TLS handshakes on port 443.
-                    Present dynamically generated certificate to client.
-                    Establish separate TLS connection to actual server.
-                    Decrypt, inspect, and re-encrypt traffic transparently.
+                    When the local CA is trusted and MITM is enabled, dynamically generate leaf certificates.
+                    Decrypt and re-encrypt HTTPS traffic in the proxy for inspection.
+                  </p>
+                </div>
+
+                <div className="rounded-lg border p-4">
+                  <h4 className="font-semibold text-sm mb-2">4. Storage and notifications</h4>
+                  <p className="text-sm text-muted-foreground leading-relaxed">
+                    Persist captures to the App Group container and notify the main app.
+                    Widgets and Live Activities update from the shared storage.
                   </p>
                 </div>
               </div>
@@ -222,9 +218,9 @@ export default function ArchitecturePage() {
               </CardHeader>
               <CardContent>
                 <CardDescription className="leading-relaxed">
-                  Full HTTP/1.1, HTTP/2, and HTTP/3 support with complete parsing.
+                  Full HTTP/1.1 and HTTP/2 support with complete parsing.
                   HTTPS via TLS MITM with dynamic certificate generation.
-                  HTTP/2 stream info with HPACK table viewer and HTTP/3 protocol markers.
+                  HTTP/2 stream info with HPACK table viewer.
                 </CardDescription>
               </CardContent>
             </Card>
@@ -262,14 +258,13 @@ export default function ArchitecturePage() {
             <Card>
               <CardHeader>
                 <Activity className="h-8 w-8 mb-2 text-muted-foreground" />
-                <CardTitle className="text-lg">TCP</CardTitle>
+                <CardTitle className="text-lg">Limitations</CardTitle>
               </CardHeader>
               <CardContent>
                 <CardDescription className="leading-relaxed">
-                  Low-level TCP flow monitoring.
-                  Connection state tracking.
-                  Raw data inspection for non-HTTP protocols.
-                  Useful for debugging custom protocols.
+                  Proxy-only mode captures HTTP/HTTPS for apps that honor system proxy settings.
+                  QUIC/HTTP/3 traffic is not captured in this mode.
+                  Apps that bypass proxy settings will not appear in captures.
                 </CardDescription>
               </CardContent>
             </Card>
@@ -286,11 +281,11 @@ export default function ArchitecturePage() {
           
           <div className="space-y-6">
             <div>
-              <h3 className="text-lg font-semibold mb-3">Packet processing efficiency</h3>
+              <h3 className="text-lg font-semibold mb-3">Proxy processing efficiency</h3>
               <p className="text-muted-foreground leading-relaxed">
-                Minimal per-packet overhead to maintain network performance.
-                Efficient buffer management reduces memory allocations.
-                Parallel processing where possible without compromising order.
+                Minimal per-connection overhead to maintain network performance.
+                Efficient buffering reduces memory allocations under load.
+                Parsing work is scheduled off the critical path where possible.
               </p>
             </div>
 
@@ -298,8 +293,8 @@ export default function ArchitecturePage() {
               <h3 className="text-lg font-semibold mb-3">Memory management</h3>
               <p className="text-muted-foreground leading-relaxed">
                 Extension memory budget is limited by iOS.
-                Aggressive cleanup of processed packets.
-                Streaming write to Core Data instead of buffering in memory.
+                Aggressive cleanup of processed proxy data.
+                Writes captures to App Group storage as JSON files.
                 Configurable retention policy prevents unbounded growth.
               </p>
             </div>
@@ -308,8 +303,8 @@ export default function ArchitecturePage() {
               <h3 className="text-lg font-semibold mb-3">Battery impact</h3>
               <p className="text-muted-foreground leading-relaxed">
                 Background processing optimized for power efficiency.
-                Packet forwarding path is lightweight.
-                Heavy parsing done asynchronously off critical path.
+                Proxy handling path is lightweight.
+                Heavy parsing done asynchronously off the critical path.
                 Extension can be disabled when not actively debugging.
               </p>
             </div>
