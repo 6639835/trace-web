@@ -38,8 +38,8 @@ export default function PrivacyPage() {
       <section className="container py-section">
         <div className="mx-auto max-w-readable">
           <p className="text-sm leading-relaxed text-muted-foreground sm:text-base">
-            This Privacy Policy explains how Trace ("the App") handles information when you use the
-            App on iOS.
+            This Privacy Policy explains how Trace (&quot;the App&quot;) handles information when
+            you use the App on iOS.
           </p>
         </div>
       </section>
@@ -77,7 +77,7 @@ export default function PrivacyPage() {
           </h2>
           <div className="space-y-4 sm:space-y-5">
             <div>
-              <p className="mb-2 text-sm font-semibold sm:text-base">"Capture Data"</p>
+              <p className="mb-2 text-sm font-semibold sm:text-base">&quot;Capture Data&quot;</p>
               <p className="text-sm leading-relaxed text-muted-foreground sm:text-base">
                 Means any network traffic content and metadata the App displays or stores, including
                 HTTP(S) requests and responses, WebSocket frames, Server-Sent Events (SSE) messages,
@@ -85,10 +85,10 @@ export default function PrivacyPage() {
               </p>
             </div>
             <div>
-              <p className="mb-2 text-sm font-semibold sm:text-base">"On-Device"</p>
+              <p className="mb-2 text-sm font-semibold sm:text-base">&quot;On-Device&quot;</p>
               <p className="text-sm leading-relaxed text-muted-foreground sm:text-base">
-                Means stored locally on your iPhone/iPad in the App's sandbox and/or App Group
-                container shared with the App's extensions.
+                Means stored locally on your iPhone/iPad in the App&apos;s sandbox and/or App Group
+                container shared with the App&apos;s extensions.
               </p>
             </div>
           </div>
@@ -111,7 +111,7 @@ export default function PrivacyPage() {
               </h3>
               <p className="mb-3 text-sm leading-relaxed text-muted-foreground sm:text-base">
                 The App can capture and store network traffic that passes through a system proxy
-                configured by the App's Network Extension (proxy-only mode). Depending on your
+                configured by the App&apos;s Network Extension (proxy-only mode). Depending on your
                 device and usage, Capture Data may include highly sensitive information, such as:
               </p>
               <ul className="ml-4 list-inside list-disc space-y-2 text-sm leading-relaxed text-muted-foreground sm:text-base">
@@ -134,9 +134,9 @@ export default function PrivacyPage() {
                 3.2 TLS Decryption and Certificates (On-Device)
               </h3>
               <p className="mb-3 text-sm leading-relaxed text-muted-foreground sm:text-base">
-                The App supports on-device TLS interception ("TLS MITM") for debugging. To do this,
-                the App may generate a local root Certificate Authority (CA) and require you to
-                install and trust it.
+                The App supports on-device TLS interception (&quot;TLS MITM&quot;) for debugging. To
+                do this, the App may generate a local root Certificate Authority (CA) and require
+                you to install and trust it.
               </p>
               <p className="mb-3 text-sm leading-relaxed text-muted-foreground sm:text-base">
                 If you enable TLS interception:
@@ -149,8 +149,8 @@ export default function PrivacyPage() {
                 </li>
               </ul>
               <p className="mt-3 text-sm leading-relaxed text-muted-foreground sm:text-base">
-                You can disable TLS interception and remove the certificate by following the App's
-                instructions and/or removing the certificate from iOS settings.
+                You can disable TLS interception and remove the certificate by following the
+                App&apos;s instructions and/or removing the certificate from iOS settings.
               </p>
             </div>
 
@@ -239,7 +239,7 @@ export default function PrivacyPage() {
                 If you use export or sharing features (e.g., exporting HAR, copying cURL, saving
                 files, sharing via iOS Share Sheet), you are directing data to a destination you
                 choose (e.g., Files, AirDrop, email, messaging apps, third-party storage). That
-                destination's privacy practices apply.
+                destination&apos;s privacy practices apply.
               </p>
             </div>
           </div>
@@ -312,7 +312,7 @@ export default function PrivacyPage() {
             9. Your Choices and Controls
           </h2>
           <p className="mb-3 text-sm leading-relaxed text-muted-foreground sm:text-base">
-            You can control the App's handling of information by:
+            You can control the App&apos;s handling of information by:
           </p>
           <ul className="ml-4 list-inside list-disc space-y-2 text-sm leading-relaxed text-muted-foreground sm:text-base">
             <li>starting/stopping capture at any time</li>
@@ -342,16 +342,16 @@ export default function PrivacyPage() {
 
       <Separator />
 
-      {/* Children's Privacy */}
+      {/* Children&apos;s Privacy */}
       <section className="container py-section">
         <div className="mx-auto max-w-readable">
           <h2 className="mb-6 text-xl font-bold tracking-tight sm:mb-8 sm:text-2xl">
-            11. Children's Privacy
+            11. Children&apos;s Privacy
           </h2>
           <p className="text-sm leading-relaxed text-muted-foreground sm:text-base">
             The App is not directed to children. We do not knowingly collect personal information
             from children. Because the App does not transmit data to us, we have no practical means
-            to identify users' ages.
+            to identify users&apos; ages.
           </p>
         </div>
       </section>

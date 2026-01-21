@@ -62,6 +62,6 @@ export function Tabs({ children, defaultValue }: TabsProps) {
   );
 }
 
-export function Tab(_props: TabProps) {
+export function Tab() {
   return null;
 }

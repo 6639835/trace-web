@@ -553,7 +553,7 @@ export default function FeaturesPage() {
             Built with modern iOS technologies
           </h2>
           <p className="mb-6 text-sm text-muted-foreground sm:mb-8 sm:text-base">
-            Leverages Apple's latest frameworks and APIs for reliability and performance.
+            Leverages Apple&apos;s latest frameworks and APIs for reliability and performance.
           </p>
           <div className="flex flex-wrap justify-center gap-1.5 sm:gap-2">
             <Badge variant="secondary" className="text-xs">

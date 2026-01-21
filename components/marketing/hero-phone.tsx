@@ -2,17 +2,18 @@
 
 import Image from 'next/image';
 import { useTheme } from 'next-themes';
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 
 export function HeroPhone() {
   const { resolvedTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
   const [assetsReady, setAssetsReady] = useState(false);
-  const [loadedCount, setLoadedCount] = useState(0);
+  const loadedCountRef = useRef(0);
 
   // Avoid hydration mismatch
   useEffect(() => {
-    setMounted(true);
+    const frame = requestAnimationFrame(() => setMounted(true));
+    return () => cancelAnimationFrame(frame);
   }, []);
 
   // Preload both theme screenshots to avoid swap delay on theme change.
@@ -27,11 +28,10 @@ export function HeroPhone() {
 
   const isDark = mounted && resolvedTheme === 'dark';
   const handleLoaded = useCallback(() => {
-    setLoadedCount((count) => {
-      const next = count + 1;
-      if (next >= 2) setAssetsReady(true);
-      return next;
-    });
+    loadedCountRef.current += 1;
+    if (loadedCountRef.current >= 2) {
+      setAssetsReady(true);
+    }
   }, []);
 
   return (

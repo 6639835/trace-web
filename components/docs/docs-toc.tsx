@@ -23,39 +23,60 @@ export function DocsTableOfContents() {
   const [activeId, setActiveId] = useState<string>('');
 
   useEffect(() => {
+    const updateItems = () => {
+      const article = document.querySelector('article');
+      if (!article) {
+        setItems([]);
+        setActiveId('');
+        return;
+      }
+
+      const headingElements = Array.from(article.querySelectorAll<HTMLHeadingElement>('h2, h3'));
+
+      const seen = new Map<string, number>();
+      const nextItems = headingElements
+        .map((heading) => {
+          const text = heading.textContent?.trim() ?? '';
+          if (!text) {
+            return null;
+          }
+
+          let id = heading.id;
+          if (!id) {
+            const base = slugify(text);
+            const count = seen.get(base) ?? 0;
+            const unique = count === 0 ? base : `${base}-${count}`;
+            seen.set(base, count + 1);
+            id = unique;
+            heading.id = unique;
+          }
+
+          const level = heading.tagName === 'H2' ? 2 : 3;
+          return { id, text, level };
+        })
+        .filter((item): item is TocItem => Boolean(item));
+
+      setItems(nextItems);
+      setActiveId(nextItems[0]?.id ?? '');
+    };
+
+    let frame = requestAnimationFrame(updateItems);
     const article = document.querySelector('article');
     if (!article) {
-      setItems([]);
-      return;
+      return () => cancelAnimationFrame(frame);
     }
 
-    const headingElements = Array.from(article.querySelectorAll<HTMLHeadingElement>('h2, h3'));
+    const observer = new MutationObserver(() => {
+      cancelAnimationFrame(frame);
+      frame = requestAnimationFrame(updateItems);
+    });
 
-    const seen = new Map<string, number>();
-    const nextItems = headingElements
-      .map((heading) => {
-        const text = heading.textContent?.trim() ?? '';
-        if (!text) {
-          return null;
-        }
+    observer.observe(article, { childList: true, subtree: true });
 
-        let id = heading.id;
-        if (!id) {
-          const base = slugify(text);
-          const count = seen.get(base) ?? 0;
-          const unique = count === 0 ? base : `${base}-${count}`;
-          seen.set(base, count + 1);
-          id = unique;
-          heading.id = unique;
-        }
-
-        const level = heading.tagName === 'H2' ? 2 : 3;
-        return { id, text, level };
-      })
-      .filter((item): item is TocItem => Boolean(item));
-
-    setItems(nextItems);
-    setActiveId(nextItems[0]?.id ?? '');
+    return () => {
+      cancelAnimationFrame(frame);
+      observer.disconnect();
+    };
   }, [pathname]);
 
   useEffect(() => {
