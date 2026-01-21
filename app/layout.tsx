@@ -1,30 +1,23 @@
-import type { Metadata } from "next";
-import { Inter } from "next/font/google";
-import "./globals.css";
-import { Navigation } from "@/components/navigation";
-import { Footer } from "@/components/footer";
-import { ThemeProvider } from "@/components/theme-provider";
+import type { Metadata } from 'next';
+import { Inter } from 'next/font/google';
+import './globals.css';
+import { Navigation } from '@/components/navigation';
+import { Footer } from '@/components/footer';
+import { ThemeProvider } from '@/components/theme-provider';
 
-const inter = Inter({ subsets: ["latin"] });
+const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: "Trace - iOS Network Debugger",
-  description: "Professional network debugging tool for iOS. Device-wide traffic capture, deep inspection, and real-time analysis.",
+  title: 'Trace - iOS Network Debugger',
+  description:
+    'Professional network debugging tool for iOS. Device-wide traffic capture, deep inspection, and real-time analysis.',
   icons: {
-    icon: [
-      { url: '/logos/trace-logomark.svg', type: 'image/svg+xml' },
-    ],
-    apple: [
-      { url: '/logos/trace-logomark.svg', type: 'image/svg+xml' },
-    ],
+    icon: [{ url: '/logos/trace-logomark.svg', type: 'image/svg+xml' }],
+    apple: [{ url: '/logos/trace-logomark.svg', type: 'image/svg+xml' }],
   },
 };
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={inter.className}>
@@ -36,7 +29,7 @@ export default function RootLayout({
         >
           <div className="flex min-h-screen flex-col">
             <Navigation />
-            <main className="flex-1 w-full">{children}</main>
+            <main className="w-full flex-1">{children}</main>
             <Footer />
           </div>
         </ThemeProvider>

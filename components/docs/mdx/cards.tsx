@@ -1,4 +1,4 @@
-import Link from "next/link";
+import Link from 'next/link';
 import {
   BookOpen,
   Rocket,
@@ -13,23 +13,23 @@ import {
   Lock,
   GraduationCap,
   FileText,
-} from "lucide-react";
-import { cn } from "@/lib/utils";
+} from 'lucide-react';
+import { cn } from '@/lib/utils';
 
 const iconMap = {
-  "book-open": BookOpen,
+  'book-open': BookOpen,
   rocket: Rocket,
   wrench: Wrench,
   laptop: Laptop,
   shield: Shield,
   settings: Settings,
   sparkles: Sparkles,
-  "code-branch": CodeXml,
+  'code-branch': CodeXml,
   cloud: Cloud,
   terminal: Terminal,
   lock: Lock,
-  "graduation-cap": GraduationCap,
-  "file-text": FileText,
+  'graduation-cap': GraduationCap,
+  'file-text': FileText,
   gear: Settings,
   code: Terminal,
 };
@@ -41,26 +41,28 @@ type CardProps = {
   children: React.ReactNode;
 };
 
-export function CardGroup({ children, className }: { children: React.ReactNode; className?: string }) {
+export function CardGroup({
+  children,
+  className,
+}: {
+  children: React.ReactNode;
+  className?: string;
+}) {
   return (
-    <div className={cn("not-prose my-6 grid gap-4 sm:grid-cols-2", className)}>
-      {children}
-    </div>
+    <div className={cn('not-prose my-6 grid gap-4 sm:grid-cols-2', className)}>{children}</div>
   );
 }
 
 export function Card({ title, href, icon, children }: CardProps) {
   const Icon = icon ? iconMap[icon] : null;
-  const isExternal = href?.startsWith("http");
+  const isExternal = href?.startsWith('http');
 
   const content = (
     <>
       <div className="flex items-start justify-between gap-3">
         <div className="space-y-1">
           <h3 className="text-base font-semibold text-foreground">{title}</h3>
-          <div className="text-sm text-muted-foreground [&_p]:m-0 [&_p]:text-sm">
-            {children}
-          </div>
+          <div className="text-sm text-muted-foreground [&_p]:m-0 [&_p]:text-sm">{children}</div>
         </div>
         {Icon ? <Icon className="h-4 w-4 text-muted-foreground" /> : null}
       </div>
@@ -80,8 +82,8 @@ export function Card({ title, href, icon, children }: CardProps) {
     <Link
       href={href}
       className="flex flex-col justify-between gap-4 rounded-lg border bg-card/70 p-4 transition-colors hover:border-primary/50 hover:bg-card"
-      target={isExternal ? "_blank" : undefined}
-      rel={isExternal ? "noreferrer" : undefined}
+      target={isExternal ? '_blank' : undefined}
+      rel={isExternal ? 'noreferrer' : undefined}
     >
       {content}
     </Link>

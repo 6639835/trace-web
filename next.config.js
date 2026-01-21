@@ -1,4 +1,4 @@
-const withMDX = require("@next/mdx")({
+const withMDX = require('@next/mdx')({
   extension: /\.mdx?$/,
 });
 
@@ -8,7 +8,7 @@ const nextConfig = {
   images: {
     qualities: [100, 75],
   },
-  pageExtensions: ["js", "jsx", "ts", "tsx", "md", "mdx"],
+  pageExtensions: ['js', 'jsx', 'ts', 'tsx', 'md', 'mdx'],
 };
 
 module.exports = withMDX(nextConfig);

@@ -1,8 +1,8 @@
-"use client";
+'use client';
 
-import * as React from "react";
-import * as TabsPrimitive from "@radix-ui/react-tabs";
-import { cn } from "@/lib/utils";
+import * as React from 'react';
+import * as TabsPrimitive from '@radix-ui/react-tabs';
+import { cn } from '@/lib/utils';
 
 type TabProps = {
   title: string;
@@ -16,14 +16,18 @@ type TabsProps = {
 };
 
 function toSlug(input: string, index: number) {
-  return input
-    .toLowerCase()
-    .replace(/[^a-z0-9]+/g, "-")
-    .replace(/^-+|-+$/g, "") || `tab-${index + 1}`;
+  return (
+    input
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, '-')
+      .replace(/^-+|-+$/g, '') || `tab-${index + 1}`
+  );
 }
 
 export function Tabs({ children, defaultValue }: TabsProps) {
-  const tabs = React.Children.toArray(children).filter(React.isValidElement) as React.ReactElement<TabProps>[];
+  const tabs = React.Children.toArray(children).filter(
+    React.isValidElement,
+  ) as React.ReactElement<TabProps>[];
   const values = tabs.map((child, index) => child.props.value ?? toSlug(child.props.title, index));
   const activeValue = defaultValue ?? values[0];
 
@@ -38,9 +42,9 @@ export function Tabs({ children, defaultValue }: TabsProps) {
             key={values[index]}
             value={values[index]}
             className={cn(
-              "rounded-full px-3 py-1 text-xs font-medium transition-colors",
-              "data-[state=active]:bg-primary data-[state=active]:text-primary-foreground",
-              "text-muted-foreground hover:text-foreground"
+              'rounded-full px-3 py-1 text-xs font-medium transition-colors',
+              'data-[state=active]:bg-primary data-[state=active]:text-primary-foreground',
+              'text-muted-foreground hover:text-foreground',
             )}
           >
             {child.props.title}
@@ -50,9 +54,7 @@ export function Tabs({ children, defaultValue }: TabsProps) {
       <div className="pt-4">
         {tabs.map((child, index) => (
           <TabsPrimitive.Content key={values[index]} value={values[index]}>
-            <div className="space-y-3 text-sm text-muted-foreground">
-              {child.props.children}
-            </div>
+            <div className="space-y-3 text-sm text-muted-foreground">{child.props.children}</div>
           </TabsPrimitive.Content>
         ))}
       </div>

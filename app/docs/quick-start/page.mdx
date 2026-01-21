@@ -7,9 +7,7 @@ Get capturing in a few minutes. This guide follows the actual Trace flow: VPN pe
 - iOS 16.0 or later
 - Trace installed on a physical iPhone or iPad
 
-<Info>
-  Network Extension packet tunnels do not run in the iOS simulator.
-</Info>
+<Info>Network Extension packet tunnels do not run in the iOS simulator.</Info>
 
 ## Step 1: Grant VPN permission
 
@@ -20,7 +18,8 @@ When Trace first launches, iOS prompts to add a VPN configuration. This is requi
 3. When capture is active, you will see the VPN indicator in the status bar.
 
 <Info>
-  The VPN is local-only and routes traffic to the on-device proxy. Your traffic never leaves the device.
+  The VPN is local-only and routes traffic to the on-device proxy. Your traffic never leaves the
+  device.
 </Info>
 
 ## Step 2: Install and trust the root CA (optional)
@@ -64,7 +63,8 @@ To decrypt HTTPS bodies, install and trust the Trace root certificate.
 2. Review **Overview**, **Headers**, **Body**, **Timing**, and **Certificate** (HTTPS).
 
 <Tip>
-  Large bodies are stored on disk and may be truncated in the UI. Use export if you need the full payload.
+  Large bodies are stored on disk and may be truncated in the UI. Use export if you need the full
+  payload.
 </Tip>
 
 ## Step 5: Filter traffic
@@ -94,9 +94,9 @@ Open **Filters** to narrow results. You can:
     Full setup, certificate trust, and troubleshooting
   </Card>
 
-  <Card title="Request inspection" icon="file-text" href="/docs/request-inspection">
-    Deep dive into headers, bodies, and timing
-  </Card>
+<Card title="Request inspection" icon="file-text" href="/docs/request-inspection">
+  Deep dive into headers, bodies, and timing
+</Card>
 
   <Card title="Proxy modes" icon="shuffle" href="/docs/proxy-modes">
     Learn when to use proxy-only or full-tunnel

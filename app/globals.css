@@ -58,9 +58,17 @@
     word-wrap: break-word;
     overflow-wrap: break-word;
   }
-  
+
   /* Ensure all text elements wrap properly */
-  h1, h2, h3, h4, h5, h6, p, span, div {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  p,
+  span,
+  div {
     word-wrap: break-word;
     overflow-wrap: break-word;
   }
@@ -77,27 +85,27 @@
   }
 
   .prose h2 {
-    @apply scroll-mt-20 border-b pb-2 mt-10 mb-4;
+    @apply mb-4 mt-10 scroll-mt-20 border-b pb-2;
   }
 
   .prose h3 {
-    @apply scroll-mt-20 mt-8 mb-3;
+    @apply mb-3 mt-8 scroll-mt-20;
   }
 
   .prose h4 {
-    @apply scroll-mt-20 mt-6 mb-2;
+    @apply mb-2 mt-6 scroll-mt-20;
   }
 
   .prose a {
-    @apply text-primary hover:underline font-medium;
+    @apply font-medium text-primary hover:underline;
   }
 
   .prose code {
-    @apply bg-muted px-1.5 py-0.5 rounded text-sm font-mono;
+    @apply rounded bg-muted px-1.5 py-0.5 font-mono text-sm;
   }
 
   .prose pre {
-    @apply bg-slate-900 dark:bg-slate-950 text-slate-100 rounded-lg;
+    @apply rounded-lg bg-slate-900 text-slate-100 dark:bg-slate-950;
   }
 
   .prose pre code {
@@ -113,7 +121,7 @@
   }
 
   .prose th {
-    @apply bg-muted font-semibold text-left p-3;
+    @apply bg-muted p-3 text-left font-semibold;
   }
 
   .prose td {

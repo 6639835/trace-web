@@ -1,9 +1,9 @@
-"use client";
+'use client';
 
-import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { cn } from "@/lib/utils";
-import { BookOpen, Code, Wrench, Plug, Users, Compass } from "lucide-react";
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
+import { cn } from '@/lib/utils';
+import { BookOpen, Code, Wrench, Plug, Users, Compass } from 'lucide-react';
 
 interface NavItem {
   title: string;
@@ -18,56 +18,56 @@ interface NavSection {
 
 const navigation: NavSection[] = [
   {
-    title: "Start Here",
+    title: 'Start Here',
     icon: Compass,
     items: [
-      { title: "Overview", href: "/docs" },
-      { title: "Installation", href: "/docs/installation" },
-      { title: "Quick Start", href: "/docs/quick-start" },
+      { title: 'Overview', href: '/docs' },
+      { title: 'Installation', href: '/docs/installation' },
+      { title: 'Quick Start', href: '/docs/quick-start' },
     ],
   },
   {
-    title: "Use Trace",
+    title: 'Use Trace',
     icon: BookOpen,
     items: [
-      { title: "Capture Modes", href: "/docs/proxy-modes" },
-      { title: "Certificates", href: "/docs/certificates" },
-      { title: "Inspect Requests", href: "/docs/request-inspection" },
-      { title: "Filter Traffic", href: "/docs/filtering" },
-      { title: "Export Sessions", href: "/docs/exporting" },
+      { title: 'Capture Modes', href: '/docs/proxy-modes' },
+      { title: 'Certificates', href: '/docs/certificates' },
+      { title: 'Inspect Requests', href: '/docs/request-inspection' },
+      { title: 'Filter Traffic', href: '/docs/filtering' },
+      { title: 'Export Sessions', href: '/docs/exporting' },
     ],
   },
   {
-    title: "Advanced Usage",
+    title: 'Advanced Usage',
     icon: Code,
     items: [
-      { title: "Performance Tuning", href: "/docs/performance" },
-      { title: "Certificate Pinning", href: "/docs/cert-pinning" },
-      { title: "Custom Scripts", href: "/docs/scripts" },
+      { title: 'Performance Tuning', href: '/docs/performance' },
+      { title: 'Certificate Pinning', href: '/docs/cert-pinning' },
+      { title: 'Custom Scripts', href: '/docs/scripts' },
     ],
   },
   {
-    title: "Integrations",
+    title: 'Integrations',
     icon: Plug,
     items: [
-      { title: "Charles Import", href: "/docs/charles-import" },
-      { title: "Postman Export", href: "/docs/postman-export" },
-      { title: "CI/CD Integration", href: "/docs/cicd" },
+      { title: 'Charles Import', href: '/docs/charles-import' },
+      { title: 'Postman Export', href: '/docs/postman-export' },
+      { title: 'CI/CD Integration', href: '/docs/cicd' },
     ],
   },
   {
-    title: "Developers",
+    title: 'Developers',
     icon: Users,
     items: [
-      { title: "Architecture", href: "/docs/architecture" },
-      { title: "API Reference", href: "/docs/api" },
-      { title: "Development Guide", href: "/docs/development" },
+      { title: 'Architecture', href: '/docs/architecture' },
+      { title: 'API Reference', href: '/docs/api' },
+      { title: 'Development Guide', href: '/docs/development' },
     ],
   },
   {
-    title: "Contributing",
+    title: 'Contributing',
     icon: Wrench,
-    items: [{ title: "Building from Source", href: "/docs/building" }],
+    items: [{ title: 'Building from Source', href: '/docs/building' }],
   },
 ];
 
@@ -77,9 +77,7 @@ export function DocsSidebar() {
   return (
     <nav className="space-y-6">
       <div>
-        <h2 className="mb-2 px-3 text-lg font-semibold tracking-tight">
-          Documentation
-        </h2>
+        <h2 className="mb-2 px-3 text-lg font-semibold tracking-tight">Documentation</h2>
       </div>
 
       {navigation.map((section) => (
@@ -97,10 +95,10 @@ export function DocsSidebar() {
                   key={item.href}
                   href={item.href}
                   className={cn(
-                    "flex items-center gap-3 rounded-md px-3 py-2 text-sm transition-colors",
+                    'flex items-center gap-3 rounded-md px-3 py-2 text-sm transition-colors',
                     isActive
-                      ? "bg-accent text-accent-foreground font-medium"
-                      : "text-muted-foreground hover:bg-accent/50 hover:text-foreground"
+                      ? 'bg-accent font-medium text-accent-foreground'
+                      : 'text-muted-foreground hover:bg-accent/50 hover:text-foreground',
                   )}
                 >
                   <span>{item.title}</span>

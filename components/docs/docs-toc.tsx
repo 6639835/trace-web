@@ -1,7 +1,7 @@
-"use client";
+'use client';
 
-import { useEffect, useMemo, useState } from "react";
-import { usePathname } from "next/navigation";
+import { useEffect, useMemo, useState } from 'react';
+import { usePathname } from 'next/navigation';
 
 type TocItem = {
   id: string;
@@ -13,30 +13,28 @@ const slugify = (value: string) =>
   value
     .toLowerCase()
     .trim()
-    .replace(/[^a-z0-9\s-]/g, "")
-    .replace(/\s+/g, "-")
-    .replace(/-+/g, "-");
+    .replace(/[^a-z0-9\s-]/g, '')
+    .replace(/\s+/g, '-')
+    .replace(/-+/g, '-');
 
 export function DocsTableOfContents() {
   const pathname = usePathname();
   const [items, setItems] = useState<TocItem[]>([]);
-  const [activeId, setActiveId] = useState<string>("");
+  const [activeId, setActiveId] = useState<string>('');
 
   useEffect(() => {
-    const article = document.querySelector("article");
+    const article = document.querySelector('article');
     if (!article) {
       setItems([]);
       return;
     }
 
-    const headingElements = Array.from(
-      article.querySelectorAll<HTMLHeadingElement>("h2, h3"),
-    );
+    const headingElements = Array.from(article.querySelectorAll<HTMLHeadingElement>('h2, h3'));
 
     const seen = new Map<string, number>();
     const nextItems = headingElements
       .map((heading) => {
-        const text = heading.textContent?.trim() ?? "";
+        const text = heading.textContent?.trim() ?? '';
         if (!text) {
           return null;
         }
@@ -51,13 +49,13 @@ export function DocsTableOfContents() {
           heading.id = unique;
         }
 
-        const level = heading.tagName === "H2" ? 2 : 3;
+        const level = heading.tagName === 'H2' ? 2 : 3;
         return { id, text, level };
       })
       .filter((item): item is TocItem => Boolean(item));
 
     setItems(nextItems);
-    setActiveId(nextItems[0]?.id ?? "");
+    setActiveId(nextItems[0]?.id ?? '');
   }, [pathname]);
 
   useEffect(() => {
@@ -84,7 +82,7 @@ export function DocsTableOfContents() {
         }
       },
       {
-        rootMargin: "0px 0px -70% 0px",
+        rootMargin: '0px 0px -70% 0px',
         threshold: [0.1, 0.5, 1],
       },
     );
@@ -102,12 +100,10 @@ export function DocsTableOfContents() {
           key={item.id}
           href={`#${item.id}`}
           className={[
-            "block rounded px-2 py-1 text-sm transition",
-            item.level === 3 ? "ml-3 text-xs" : "font-medium",
-            isActive
-              ? "bg-muted text-foreground"
-              : "text-muted-foreground hover:text-foreground",
-          ].join(" ")}
+            'block rounded px-2 py-1 text-sm transition',
+            item.level === 3 ? 'ml-3 text-xs' : 'font-medium',
+            isActive ? 'bg-muted text-foreground' : 'text-muted-foreground hover:text-foreground',
+          ].join(' ')}
         >
           {item.text}
         </a>
@@ -117,11 +113,9 @@ export function DocsTableOfContents() {
 
   return (
     <div className="space-y-2">
-      <p className="font-medium text-sm mb-4">On This Page</p>
+      <p className="mb-4 text-sm font-medium">On This Page</p>
       {items.length === 0 ? (
-        <p className="text-xs text-muted-foreground">
-          No headings found for this page.
-        </p>
+        <p className="text-xs text-muted-foreground">No headings found for this page.</p>
       ) : (
         <nav className="space-y-1">{renderedItems}</nav>
       )}
