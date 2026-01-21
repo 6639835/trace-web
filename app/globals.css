@@ -113,11 +113,11 @@
   }
 
   .prose pre {
-    @apply rounded-lg bg-slate-900 text-slate-100 dark:bg-slate-950;
+    @apply rounded-lg bg-slate-900 text-slate-50 dark:bg-slate-950 dark:text-slate-100;
   }
 
   .prose pre code {
-    @apply bg-transparent p-0 text-slate-100;
+    @apply bg-transparent p-0 text-slate-50 dark:text-slate-100;
   }
 
   .prose blockquote {
