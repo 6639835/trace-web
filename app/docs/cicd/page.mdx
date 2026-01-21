@@ -8,6 +8,12 @@ Trace is an on-device tool, so it does not run in headless CI. Instead, use Trac
 2. Export the session as HAR or copy cURL requests.
 3. Attach exports to CI artifacts, bug reports, or QA checklists.
 
+## Common integration patterns
+
+- **Regression triage**: attach HAR to failed test runs.
+- **API checks**: replay cURL commands in a pipeline step.
+- **Bug reports**: include a short session plus screenshots.
+
 ## Useful artifacts
 
 - **HAR**: full session context for debugging regressions

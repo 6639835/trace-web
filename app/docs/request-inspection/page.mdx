@@ -42,6 +42,15 @@ Browse request and response headers in a searchable table.
   Use copy/share actions to export the header set for debugging.
 </Tip>
 
+## Body tab details
+
+Trace chooses a viewer based on the content type and payload:
+
+- **Pretty-print** JSON and XML
+- **Syntax highlight** common text formats
+- **Inline preview** for images and SVG
+- **Raw view** when the body is binary or unknown
+
 ## Body tab
 
 Trace renders bodies with format-aware viewers:
@@ -77,6 +86,13 @@ Use the **Filters** panel to narrow results:
 - Status code
 - Content type
 - Quick filters (errors, favorites, duplicates)
+
+## Debugging workflow example
+
+1. Filter by domain and status.
+2. Open a request and confirm headers.
+3. Inspect the response body for errors or schema changes.
+4. Export as cURL or HAR if you need to share.
 
 <CardGroup>
   <Card title="Exporting sessions" icon="download" href="/docs/exporting">

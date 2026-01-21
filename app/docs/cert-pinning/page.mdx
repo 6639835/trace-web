@@ -8,6 +8,12 @@ Some apps use certificate pinning or custom trust logic. In these cases, HTTPS M
 - The Certificate tab shows the original server certificate.
 - The connection may fail if the app rejects the MITM certificate.
 
+## How to recognize pinning
+
+- HTTPS bodies stay encrypted even after installing the root CA.
+- Requests fail with TLS errors or retries.
+- The app works without Trace but fails when capture is active.
+
 ## What you can do
 
 - **Disable HTTPS inspection** for that app or host if you only need metadata.

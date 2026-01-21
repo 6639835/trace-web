@@ -19,6 +19,11 @@ Proxy-only mode configures iOS system proxy settings and routes HTTP/HTTPS to th
 - Low battery impact
 - Quick setup
 
+**Limitations**
+
+- Apps that ignore proxy settings will not be captured
+- UDP/QUIC traffic is not visible
+
 ## Full-tunnel (advanced)
 
 Full-tunnel mode routes traffic through the tunnel and forwards it to a SOCKS5 server.
@@ -39,6 +44,11 @@ Full-tunnel mode routes traffic through the tunnel and forwards it to a SOCKS5 s
 - Apps that bypass proxy settings
 - Low-level packet analysis and debugging
 
+**Limitations**
+
+- Requires a reachable SOCKS5 server
+- Higher CPU/battery usage
+
 ## Switching modes
 
 1. Open **Settings → Capture Mode**.
@@ -53,6 +63,12 @@ Full-tunnel mode routes traffic through the tunnel and forwards it to a SOCKS5 s
 ## HTTPS inspection
 
 Both modes can perform HTTPS MITM, but only after you install and trust the Trace root CA.
+
+## Which mode should I use?
+
+- **Start with proxy-only** for most debugging tasks.
+- **Switch to full-tunnel** when traffic is missing or bypasses proxy settings.
+- **Avoid full-tunnel** for long capture sessions unless you need it.
 
 <CardGroup>
   <Card title="Certificates" icon="shield" href="/docs/certificates">

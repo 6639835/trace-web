@@ -36,6 +36,17 @@ Save a filter configuration and reuse it later from the **Saved Presets** list.
   Combine domain + method + status filters to find a single endpoint quickly.
 </Tip>
 
+## Example filters
+
+- **Only API errors**: domain `api.example.com` + status `>= 400`
+- **Images only**: content type `image/*`
+- **Checkout flow**: domain `checkout.example.com` + method `POST`
+
+## Performance tips
+
+- Apply filters early to reduce list size.
+- Save presets for repeated investigations.
+
 <CardGroup>
   <Card title="Request inspection" icon="file-text" href="/docs/request-inspection">
     Inspect headers, bodies, and timing

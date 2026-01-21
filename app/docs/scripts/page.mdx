@@ -15,6 +15,12 @@ Trace includes a JavaScript-based scripting engine to modify requests and respon
 - **Response scripts**: run after the response is received
 - **Both**: run on both phases
 
+## Execution model
+
+- Scripts run inside Trace on-device.
+- A script can inspect or modify headers, bodies, and metadata.
+- If a script fails, Trace logs the error and continues with the original request.
+
 ## When to use scripts
 
 - You need conditional logic (if/else) instead of static rules
@@ -26,6 +32,12 @@ Trace includes a JavaScript-based scripting engine to modify requests and respon
 - Keep scripts small and focused for easier debugging.
 - Prefer rewrite rules for simple header or URL changes.
 - Export scripts to share them with teammates.
+
+## Debugging scripts
+
+- Start with a narrow filter so you see only the requests your script touches.
+- Add temporary logging in the script to validate inputs and outputs.
+- Disable scripts one by one if you see unexpected behavior.
 
 <CardGroup>
   <Card title="Exporting sessions" icon="download" href="/docs/exporting">

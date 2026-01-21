@@ -20,6 +20,12 @@ Trace does not expose a public SDK, but contributors can use this map of core mo
 - `MITMProxyServer`: local proxy for HTTP/HTTPS
 - `CertificateManager`: root CA generation and validation
 
+## Configuration surfaces
+
+- **Capture settings**: mode, body size limits, and filters
+- **Rules and scripts**: rewrite rules, request maps, and scripting config
+- **Export**: session and request exporters
+
 ## Working with requests
 
 Requests are captured in the extension, stored in the App Group container, and surfaced in the app through the `TraceCore` models. Use the storage layer rather than direct file access.
@@ -27,6 +33,12 @@ Requests are captured in the extension, stored in the App Group container, and s
 ## Extension boundary
 
 Anything in `TraceVPN` runs in a separate process. Use NEAppMessages and App Group storage for communication and state.
+
+## Adding a new feature
+
+1. Define models in `TraceCore` if you need shared storage.
+2. Add capture-time behavior in `TraceVPN` or `TraceProxy` as needed.
+3. Expose UI in `TraceUI` and wire feature toggles in `TraceFeatures`.
 
 <CardGroup>
   <Card title="Development guide" icon="users" href="/docs/development">

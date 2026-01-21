@@ -27,9 +27,21 @@ This page helps contributors understand the Trace codebase and workflow.
 
 The app and extensions share data via the App Group container. If unavailable (e.g., simulator), Trace falls back to local storage and logs a warning.
 
+## Local development workflow
+
+- Run the app target and the VPN extension on a physical device.
+- Use a clean session when testing new capture changes.
+- Clear App Group data if you need a fresh start.
+
 ## Logging
 
 Trace uses structured logging categories for storage, VPN, export, and networking events. Check the console during development for diagnostic events.
+
+## Where to start contributing
+
+- **UI work**: `TraceUI` components and Network inspector screens.
+- **Capture pipeline**: `TraceVPN` and `TraceProxy`.
+- **Storage and models**: `TraceCore` data structures and persistence.
 
 ## Testing notes
 

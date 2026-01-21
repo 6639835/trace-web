@@ -3,42 +3,44 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
-import { BookOpen, Rocket, Code, Wrench, Plug, Users } from "lucide-react";
+import { BookOpen, Code, Wrench, Plug, Users, Compass } from "lucide-react";
 
 interface NavItem {
   title: string;
   href: string;
-  icon?: React.ComponentType<{ className?: string }>;
 }
 
 interface NavSection {
   title: string;
+  icon?: React.ComponentType<{ className?: string }>;
   items: NavItem[];
 }
 
 const navigation: NavSection[] = [
   {
-    title: "Getting Started",
+    title: "Start Here",
+    icon: Compass,
     items: [
-      { title: "Introduction", href: "/docs", icon: BookOpen },
-      { title: "Installation", href: "/docs/installation", icon: Rocket },
+      { title: "Overview", href: "/docs" },
+      { title: "Installation", href: "/docs/installation" },
       { title: "Quick Start", href: "/docs/quick-start" },
     ],
   },
   {
-    title: "Guides",
+    title: "Use Trace",
+    icon: BookOpen,
     items: [
-      { title: "Request Inspection", href: "/docs/request-inspection" },
-      { title: "Proxy Modes", href: "/docs/proxy-modes" },
-      { title: "Certificate Management", href: "/docs/certificates" },
-      { title: "Filtering Traffic", href: "/docs/filtering" },
-      { title: "Exporting Sessions", href: "/docs/exporting" },
+      { title: "Capture Modes", href: "/docs/proxy-modes" },
+      { title: "Certificates", href: "/docs/certificates" },
+      { title: "Inspect Requests", href: "/docs/request-inspection" },
+      { title: "Filter Traffic", href: "/docs/filtering" },
+      { title: "Export Sessions", href: "/docs/exporting" },
     ],
   },
   {
-    title: "Advanced",
+    title: "Advanced Usage",
+    icon: Code,
     items: [
-      { title: "Architecture Overview", href: "/docs/architecture", icon: Code },
       { title: "Performance Tuning", href: "/docs/performance" },
       { title: "Certificate Pinning", href: "/docs/cert-pinning" },
       { title: "Custom Scripts", href: "/docs/scripts" },
@@ -46,19 +48,26 @@ const navigation: NavSection[] = [
   },
   {
     title: "Integrations",
+    icon: Plug,
     items: [
-      { title: "Charles Proxy Import", href: "/docs/charles-import", icon: Plug },
+      { title: "Charles Import", href: "/docs/charles-import" },
       { title: "Postman Export", href: "/docs/postman-export" },
       { title: "CI/CD Integration", href: "/docs/cicd" },
     ],
   },
   {
-    title: "Contributing",
+    title: "Developers",
+    icon: Users,
     items: [
-      { title: "Building from Source", href: "/docs/building", icon: Users },
-      { title: "Development Guide", href: "/docs/development" },
+      { title: "Architecture", href: "/docs/architecture" },
       { title: "API Reference", href: "/docs/api" },
+      { title: "Development Guide", href: "/docs/development" },
     ],
+  },
+  {
+    title: "Contributing",
+    icon: Wrench,
+    items: [{ title: "Building from Source", href: "/docs/building" }],
   },
 ];
 
@@ -75,12 +84,12 @@ export function DocsSidebar() {
 
       {navigation.map((section) => (
         <div key={section.title}>
-          <h3 className="mb-2 px-3 text-sm font-medium text-muted-foreground">
+          <h3 className="mb-2 flex items-center gap-2 px-3 text-sm font-medium text-muted-foreground">
+            {section.icon ? <section.icon className="h-4 w-4" /> : null}
             {section.title}
           </h3>
           <div className="space-y-1">
             {section.items.map((item) => {
-              const Icon = item.icon;
               const isActive = pathname === item.href;
 
               return (
@@ -94,7 +103,6 @@ export function DocsSidebar() {
                       : "text-muted-foreground hover:bg-accent/50 hover:text-foreground"
                   )}
                 >
-                  {Icon && <Icon className="h-4 w-4 shrink-0" />}
                   <span>{item.title}</span>
                 </Link>
               );

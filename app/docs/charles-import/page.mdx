@@ -14,6 +14,11 @@ Trace exports standard HAR files that can be opened in Charles Proxy.
 2. Choose **File → Import Session**.
 3. Select the HAR file exported from Trace.
 
+## Notes and limitations
+
+- HAR import is a one-time snapshot, not a live proxy bridge.
+- Some binary bodies may be truncated if you exported with size limits.
+
 <Tip>
   HAR captures requests, responses, headers, and timing, making it the most compatible format for desktop tooling.
 </Tip>

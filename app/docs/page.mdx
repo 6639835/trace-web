@@ -1,11 +1,24 @@
-# Trace documentation overview
+# Trace documentation
 
-Trace is an on-device iOS network debugger that captures HTTP(S), WebSocket, and SSE traffic using a Network Extension packet tunnel. It runs a local MITM proxy, stores captures in an App Group container, and ships tools for inspection, modification, replay, and export.
+Trace is an on-device iOS network debugger that captures HTTP(S), WebSocket, and SSE traffic using a Network Extension packet tunnel. It runs a local MITM proxy, stores captures in an App Group container, and ships tools for inspection, modification, replay, and export. These docs cover how to use Trace and how to work on the codebase.
+
+## Who this is for
+
+- **Developers** debugging network behavior on iOS
+- **QA and release engineers** validating regressions or backend changes
+- **Contributors** working on the Trace app or extension
+
+## How the docs are organized
+
+- **Start Here**: install Trace and capture your first requests
+- **Use Trace**: inspect, filter, and export sessions
+- **Advanced Usage**: deeper capture modes and customization
+- **Developers & Contributing**: architecture, building, and APIs
 
 ## What you will learn
 
 - How to install and trust the Trace root CA for HTTPS inspection
-- How proxy-only and full-tunnel capture modes differ
+- How capture modes differ and what they include
 - How to inspect, filter, and export traffic
 - How the system is built (app, extension, SwiftPM modules)
 
@@ -33,7 +46,7 @@ Prerequisites:
 - **On-device MITM**: A local root CA enables HTTPS inspection when trusted.
 - **Shared storage**: Captures, sessions, and config are stored in an App Group container.
 
-## Next steps
+## Start here
 
 <CardGroup>
   <Card title="Quick start" icon="rocket" href="/docs/quick-start">
@@ -44,27 +57,47 @@ Prerequisites:
     VPN permission, certificate trust, and setup tips
   </Card>
 
-  <Card title="Proxy modes" icon="shuffle" href="/docs/proxy-modes">
+  <Card title="Capture modes" icon="shuffle" href="/docs/proxy-modes">
     Understand proxy-only vs full-tunnel behavior
   </Card>
 
-  <Card title="Architecture" icon="book-open" href="/docs/architecture">
-    Explore the app, extension, and data flow
+  <Card title="Certificates" icon="shield" href="/docs/certificates">
+    Set up the root CA and HTTPS inspection
   </Card>
 </CardGroup>
 
-## More guides
+## Core workflows
 
 <CardGroup>
-  <Card title="Request inspection" icon="file-text" href="/docs/request-inspection">
+  <Card title="Inspect requests" icon="file-text" href="/docs/request-inspection">
     Inspect headers, bodies, timing, and TLS
   </Card>
 
-  <Card title="Filtering traffic" icon="filter" href="/docs/filtering">
+  <Card title="Filter traffic" icon="filter" href="/docs/filtering">
     Use query filters and presets to find issues fast
   </Card>
 
-  <Card title="Exporting sessions" icon="download" href="/docs/exporting">
+  <Card title="Export sessions" icon="download" href="/docs/exporting">
     Share HAR, cURL, and diagnostic exports
+  </Card>
+</CardGroup>
+
+## Developers and contributors
+
+<CardGroup>
+  <Card title="Architecture" icon="book-open" href="/docs/architecture">
+    Understand the app, extension, and data flow
+  </Card>
+
+  <Card title="API reference" icon="code" href="/docs/api">
+    Endpoints, schemas, and internal interfaces
+  </Card>
+
+  <Card title="Development guide" icon="graduation-cap" href="/docs/development">
+    Local setup, workflows, and conventions
+  </Card>
+
+  <Card title="Build from source" icon="wrench" href="/docs/building">
+    Signing, provisioning, and Xcode build steps
   </Card>
 </CardGroup>

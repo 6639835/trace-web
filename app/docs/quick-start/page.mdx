@@ -52,6 +52,12 @@ To decrypt HTTPS bodies, install and trust the Trace root certificate.
 2. Tap **Start Capture**.
 3. Use any app and return to Trace to see live requests.
 
+## Step 4: Verify HTTPS inspection (optional)
+
+1. Open any HTTPS page in Safari.
+2. Inspect a request body.
+3. If the body is empty, confirm the root CA is trusted in Settings.
+
 ## Step 4: Inspect a request
 
 1. Tap a request in the list.
@@ -70,6 +76,16 @@ Open **Filters** to narrow results. You can:
 - Filter by content type
 - Toggle quick filters (errors, favorites, duplicates)
 - Save filter presets for reuse
+
+## Step 6: Save and share a session
+
+1. Open the session menu in **Network**.
+2. Export as **HAR** or copy a request as **cURL**.
+3. Share using the iOS Share Sheet.
+
+<Info>
+  Use HAR for full-session context. Use cURL when you need a single request you can replay quickly.
+</Info>
 
 ## Next steps
 

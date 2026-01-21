@@ -24,6 +24,16 @@ Trace performs HTTPS inspection using a local root certificate authority (CA) ge
 - **Export**: Use the certificate screen in Trace to export the root CA for testing or device management.
 - **Remove**: Delete the profile from Settings and disable trust in Certificate Trust Settings.
 
+## Verify HTTPS inspection
+
+1. Capture a request to any HTTPS domain.
+2. Open the **Body** tab in the inspector.
+3. If the body is empty, re-check trust settings or reinstall the profile.
+
+## Multiple devices
+
+Each device generates its own root CA. If you debug on multiple devices, repeat installation and trust on each one.
+
 ## Security guidance
 
 - Only trust the Trace CA on devices you control.

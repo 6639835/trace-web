@@ -8,6 +8,11 @@ Trace is built to run on-device, but large captures can still consume CPU, memor
 - **Lower max body size** to avoid large payloads filling storage.
 - **Clear sessions** regularly if you are running long tests.
 
+## Session management
+
+- Capture only the flows you need, then stop capture.
+- Use a new session per test run to keep data grouped.
+
 ## Use filters early
 
 Apply domain, method, and status filters to reduce UI load and indexing overhead.
@@ -25,6 +30,10 @@ Proxy-only mode has less overhead than full-tunnel routing. Use full-tunnel only
 
 - Keep the device plugged in for long capture sessions.
 - Close other apps to reduce background contention.
+
+## When to restart
+
+If the capture list becomes sluggish, stop capture, export what you need, then clear the session and restart.
 
 <CardGroup>
   <Card title="Proxy modes" icon="shuffle" href="/docs/proxy-modes">

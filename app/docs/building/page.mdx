@@ -37,6 +37,12 @@ open Trace.xcodeproj
 
 6. Build and run on device.
 
+## First run checklist
+
+- Accept the VPN configuration prompt.
+- Confirm the VPN status indicator appears when capture is active.
+- Verify App Group access by starting a capture session.
+
 ## SwiftPM-only workflow (optional)
 
 You can open `Package.swift` in Xcode 26.2 to work without the `.xcodeproj`, but note:
@@ -49,6 +55,11 @@ You can open `Package.swift` in Xcode 26.2 to work without the `.xcodeproj`, but
 - **VPN permission prompt never appears**: delete the existing VPN configuration in Settings and run again.
 - **App Group container unavailable**: verify entitlements and `APP_GROUP_IDENTIFIER` values.
 - **No traffic on simulator**: packet tunnels do not run in the simulator.
+
+## Signing tips
+
+- All targets must use the same Team and App Group.
+- The Network Extension entitlement must be enabled for `TraceVPN`.
 
 <CardGroup>
   <Card title="Development guide" icon="users" href="/docs/development">

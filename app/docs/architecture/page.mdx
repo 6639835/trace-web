@@ -19,6 +19,12 @@ Communication happens through **App Group storage**, **Darwin notifications**, a
 4. Captured requests are persisted to the App Group container.
 5. The app receives notifications and updates the UI.
 
+## Data model
+
+- **Sessions** group captured requests and metadata.
+- **Requests** store headers, bodies, timing, and TLS details.
+- **Artifacts** include exports, scripts, rules, and settings snapshots.
+
 ## Core components
 
 ### Main app
@@ -53,6 +59,10 @@ Communication happens through **App Group storage**, **Darwin notifications**, a
 - **App Group container**: shared storage for requests, bodies, sessions, scripts, rules, and logs.
 - **Darwin notifications**: notify the app when new data arrives.
 - **Fallback storage**: used when App Group is unavailable (e.g., simulator).
+
+## Extension boundary
+
+The network extension runs in a separate process with its own memory limits and lifecycle. Keep heavy work (parsing, persistence) efficient to avoid termination.
 
 ## Security and privacy
 
