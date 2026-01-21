@@ -1,0 +1,37 @@
+# Custom scripts
+
+Trace includes a JavaScript-based scripting engine to modify requests and responses on the fly.
+
+## What scripts can do
+
+- Rewrite URLs or headers
+- Transform request or response bodies
+- Mock dynamic responses
+- Apply logic that is hard to express with simple rules
+
+## Script types
+
+- **Request scripts**: run before the request is sent
+- **Response scripts**: run after the response is received
+- **Both**: run on both phases
+
+## When to use scripts
+
+- You need conditional logic (if/else) instead of static rules
+- You need to compute a response body dynamically
+- You want to prototype backend changes without deploying
+
+## Tips
+
+- Keep scripts small and focused for easier debugging.
+- Prefer rewrite rules for simple header or URL changes.
+- Export scripts to share them with teammates.
+
+<CardGroup>
+  <Card title="Exporting sessions" icon="download" href="/docs/exporting">
+    Export scripts and rule sets
+  </Card>
+  <Card title="Proxy modes" icon="shuffle" href="/docs/proxy-modes">
+    Understand where scripts run in the pipeline
+  </Card>
+</CardGroup>

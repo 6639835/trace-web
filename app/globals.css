@@ -65,3 +65,62 @@
     overflow-wrap: break-word;
   }
 }
+
+/* Documentation-specific styles */
+@layer components {
+  .prose {
+    @apply text-foreground;
+  }
+
+  .prose h1 {
+    @apply scroll-mt-20;
+  }
+
+  .prose h2 {
+    @apply scroll-mt-20 border-b pb-2 mt-10 mb-4;
+  }
+
+  .prose h3 {
+    @apply scroll-mt-20 mt-8 mb-3;
+  }
+
+  .prose h4 {
+    @apply scroll-mt-20 mt-6 mb-2;
+  }
+
+  .prose a {
+    @apply text-primary hover:underline font-medium;
+  }
+
+  .prose code {
+    @apply bg-muted px-1.5 py-0.5 rounded text-sm font-mono;
+  }
+
+  .prose pre {
+    @apply bg-slate-900 dark:bg-slate-950 text-slate-100 rounded-lg;
+  }
+
+  .prose pre code {
+    @apply bg-transparent p-0 text-slate-100;
+  }
+
+  .prose blockquote {
+    @apply border-l-4 border-primary pl-4 italic;
+  }
+
+  .prose table {
+    @apply w-full border-collapse;
+  }
+
+  .prose th {
+    @apply bg-muted font-semibold text-left p-3;
+  }
+
+  .prose td {
+    @apply border-t p-3;
+  }
+
+  .prose img {
+    @apply rounded-lg;
+  }
+}

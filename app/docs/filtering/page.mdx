@@ -1,0 +1,46 @@
+# Filtering traffic
+
+Trace includes a dedicated Filters panel to reduce noise and focus on the requests you care about.
+
+## Open the Filters panel
+
+From the Network screen, open **Filters** to configure capture and view filters.
+
+## Quick filters
+
+- **Favorites only**: show only starred requests
+- **Errors only**: show HTTP 4xx/5xx responses
+- **Duplicates only**: highlight repeated requests and refresh detection
+
+## Domain filters
+
+Add domains to include or exclude traffic.
+
+- Supports wildcards like `*.example.com`
+- Useful for focusing on a single backend
+
+## Method and status filters
+
+- Filter by HTTP method (GET, POST, etc.)
+- Filter by a specific status code
+
+## Content type filters
+
+Filter by response content type (JSON, HTML, images, and more) to focus on a specific payload type.
+
+## Saved presets
+
+Save a filter configuration and reuse it later from the **Saved Presets** list.
+
+<Tip>
+  Combine domain + method + status filters to find a single endpoint quickly.
+</Tip>
+
+<CardGroup>
+  <Card title="Request inspection" icon="file-text" href="/docs/request-inspection">
+    Inspect headers, bodies, and timing
+  </Card>
+  <Card title="Exporting sessions" icon="download" href="/docs/exporting">
+    Share filtered data for analysis
+  </Card>
+</CardGroup>

@@ -1,0 +1,29 @@
+# CI/CD integration
+
+Trace is an on-device tool, so it does not run in headless CI. Instead, use Trace exports to connect device testing with your CI/CD workflows.
+
+## Recommended workflow
+
+1. Reproduce the issue on device with Trace running.
+2. Export the session as HAR or copy cURL requests.
+3. Attach exports to CI artifacts, bug reports, or QA checklists.
+
+## Useful artifacts
+
+- **HAR**: full session context for debugging regressions
+- **cURL**: replay a single request in automation or load testing
+- **Screenshots**: capture UI context alongside network evidence
+
+## Tips
+
+- Use consistent session names for easier lookup.
+- Export only the relevant session to keep artifacts small.
+
+<CardGroup>
+  <Card title="Exporting sessions" icon="download" href="/docs/exporting">
+    Get HAR and cURL from Trace
+  </Card>
+  <Card title="Quick start" icon="rocket" href="/docs/quick-start">
+    Capture your first session
+  </Card>
+</CardGroup>

@@ -1,0 +1,53 @@
+# Exporting sessions
+
+Trace provides multiple ways to export traffic and configuration artifacts.
+
+## HAR export and import
+
+From the Network screen menu, you can:
+
+- **Export HAR**: save the current session as a HAR file
+- **Import HAR**: load a HAR file and view it inside Trace
+
+HAR is the best format for sharing complete sessions with teammates or desktop tools.
+
+## cURL import and copy
+
+- **Copy as cURL** from a request detail or list action
+- **Import cURL** from the Network toolbar to replay a request
+
+## Share request and body data
+
+Each request supports sharing:
+
+- Full request summary
+- Request body
+- Response body
+
+Trace chooses a suitable file type for the body based on content type.
+
+## Export configuration
+
+From the relevant settings screens, you can export and share:
+
+- Rewrite rules
+- Request maps
+- Scripts
+- Hosts entries
+
+## DNS and UDP exports
+
+If you capture DNS or UDP flows, Trace can export them as CSV, JSON, or text from their respective screens.
+
+<Info>
+  Exports use the iOS Share Sheet, so you control where the data goes.
+</Info>
+
+<CardGroup>
+  <Card title="Request inspection" icon="file-text" href="/docs/request-inspection">
+    Inspect and export specific requests
+  </Card>
+  <Card title="Integrations" icon="plug" href="/docs/charles-import">
+    Use HAR files with desktop tooling
+  </Card>
+</CardGroup>

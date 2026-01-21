@@ -1,0 +1,46 @@
+# Development guide
+
+This page helps contributors understand the Trace codebase and workflow.
+
+## Repository layout
+
+- `Trace`: iOS app target (UI + capture management)
+- `TraceVPN`: Network Extension packet tunnel
+- `TraceWidget` / `TraceWidgetExtension`: WidgetKit and Live Activity
+- SwiftPM modules:
+  - `TraceCore`
+  - `TraceNetworking`
+  - `TraceSecurity`
+  - `TraceProxy`
+  - `TraceCompression`
+  - `TracePacket`
+  - `TraceFeatures`
+  - `TraceUI`
+
+## Core flows
+
+- **Capture lifecycle**: `TraceFeatures/VPN/VPNManager` controls the tunnel.
+- **Proxy server**: `TraceProxy` hosts the MITM proxy at `127.0.0.1:8888`.
+- **Storage**: `TraceCore/Storage/AppGroupStorage` owns shared data and config.
+
+## App Group storage
+
+The app and extensions share data via the App Group container. If unavailable (e.g., simulator), Trace falls back to local storage and logs a warning.
+
+## Logging
+
+Trace uses structured logging categories for storage, VPN, export, and networking events. Check the console during development for diagnostic events.
+
+## Testing notes
+
+- Packet tunnel features require a physical device.
+- Widget and Live Activity builds require entitlements and valid signing.
+
+<CardGroup>
+  <Card title="Architecture" icon="book-open" href="/docs/architecture">
+    Full system overview
+  </Card>
+  <Card title="Building from source" icon="wrench" href="/docs/building">
+    Setup and signing instructions
+  </Card>
+</CardGroup>

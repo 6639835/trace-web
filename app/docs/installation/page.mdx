@@ -1,0 +1,76 @@
+# Installation
+
+Install Trace and complete the initial setup for capture.
+
+## System requirements
+
+- **iOS version**: iOS 16.0 or later
+- **Device**: physical iPhone or iPad
+- **Storage**: enough free space for capture data (requests, bodies, exports)
+
+<Info>
+  Network Extension packet tunnels do not work in the iOS simulator.
+</Info>
+
+## Installation options
+
+How you install Trace depends on how your team distributes builds.
+
+<Tabs>
+  <Tab title="App Store">
+    If your team ships an App Store build, install from the App Store as usual.
+  </Tab>
+
+  <Tab title="TestFlight">
+    If you are on a TestFlight beta, accept the invite and install from TestFlight.
+  </Tab>
+
+  <Tab title="Build from Source">
+    Build from source using Xcode. See the [building guide](/docs/building) for the exact steps and signing requirements.
+  </Tab>
+</Tabs>
+
+## Initial setup
+
+### 1. Grant VPN permission
+
+1. Launch Trace.
+2. Approve the system prompt to add a VPN configuration.
+3. Authenticate with Face ID/Touch ID or passcode.
+
+<Info>
+  This VPN configuration is local-only and routes traffic to the on-device proxy.
+</Info>
+
+### 2. Install and trust the root CA (optional)
+
+To decrypt HTTPS traffic, install and trust the Trace root certificate.
+
+1. In Trace, go to **Settings → Certificate** and tap **Install Certificate**.
+2. In iOS Settings, install the profile.
+3. Enable trust under **Settings → General → About → Certificate Trust Settings**.
+
+<Tip>
+  You can remove the profile and trust at any time. Without it, HTTPS bodies remain encrypted.
+</Tip>
+
+### 3. Verify capture
+
+- Start capture from **Network**.
+- Confirm the VPN indicator appears.
+- Load a page in Safari and verify requests appear.
+
+## Troubleshooting
+
+- **No requests appear**: Ensure capture is started and the VPN indicator is visible.
+- **HTTPS bodies are empty**: Confirm the root CA is installed and trusted.
+- **Simulator**: Capture does not work in the simulator.
+
+<CardGroup>
+  <Card title="Quick start" icon="rocket" href="/docs/quick-start">
+    Capture your first request
+  </Card>
+  <Card title="Certificates" icon="shield" href="/docs/certificates">
+    Manage the root CA and trust
+  </Card>
+</CardGroup>

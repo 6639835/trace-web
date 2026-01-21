@@ -1,0 +1,28 @@
+# Charles Proxy import
+
+Trace exports standard HAR files that can be opened in Charles Proxy.
+
+## Export from Trace
+
+1. In Trace, open **Network**.
+2. Use the menu to **Export HAR**.
+3. Save the file using the iOS Share Sheet.
+
+## Import into Charles
+
+1. Open Charles on your desktop.
+2. Choose **File → Import Session**.
+3. Select the HAR file exported from Trace.
+
+<Tip>
+  HAR captures requests, responses, headers, and timing, making it the most compatible format for desktop tooling.
+</Tip>
+
+<CardGroup>
+  <Card title="Exporting sessions" icon="download" href="/docs/exporting">
+    HAR and cURL exports from Trace
+  </Card>
+  <Card title="Postman export" icon="send" href="/docs/postman-export">
+    Use cURL for API tooling
+  </Card>
+</CardGroup>

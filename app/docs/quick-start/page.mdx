@@ -1,0 +1,88 @@
+# Quick start guide
+
+Get capturing in a few minutes. This guide follows the actual Trace flow: VPN permission, optional CA trust, and your first request.
+
+## Prerequisites
+
+- iOS 16.0 or later
+- Trace installed on a physical iPhone or iPad
+
+<Info>
+  Network Extension packet tunnels do not run in the iOS simulator.
+</Info>
+
+## Step 1: Grant VPN permission
+
+When Trace first launches, iOS prompts to add a VPN configuration. This is required for capture.
+
+1. Tap **Allow** on the system dialog.
+2. Authenticate with Face ID/Touch ID or passcode.
+3. When capture is active, you will see the VPN indicator in the status bar.
+
+<Info>
+  The VPN is local-only and routes traffic to the on-device proxy. Your traffic never leaves the device.
+</Info>
+
+## Step 2: Install and trust the root CA (optional)
+
+To decrypt HTTPS bodies, install and trust the Trace root certificate.
+
+<Tabs>
+  <Tab title="Install Profile">
+    1. Open Trace and go to **Settings → Certificate**.
+    2. Tap **Install Certificate**.
+    3. iOS Settings opens a profile install screen.
+    4. Tap **Install** and confirm.
+  </Tab>
+
+  <Tab title="Enable Trust">
+    1. Go to **Settings → General → About**.
+    2. Tap **Certificate Trust Settings**.
+    3. Enable **Trace Root CA** and confirm.
+  </Tab>
+</Tabs>
+
+<Tip>
+  If you skip this step, Trace still captures request metadata but cannot decrypt HTTPS bodies.
+</Tip>
+
+## Step 3: Start capture
+
+1. Open Trace and go to **Network**.
+2. Tap **Start Capture**.
+3. Use any app and return to Trace to see live requests.
+
+## Step 4: Inspect a request
+
+1. Tap a request in the list.
+2. Review **Overview**, **Headers**, **Body**, **Timing**, and **Certificate** (HTTPS).
+
+<Tip>
+  Large bodies are stored on disk and may be truncated in the UI. Use export if you need the full payload.
+</Tip>
+
+## Step 5: Filter traffic
+
+Open **Filters** to narrow results. You can:
+
+- Filter by domains (supports wildcards)
+- Filter by method or status code
+- Filter by content type
+- Toggle quick filters (errors, favorites, duplicates)
+- Save filter presets for reuse
+
+## Next steps
+
+<CardGroup>
+  <Card title="Installation" icon="wrench" href="/docs/installation">
+    Full setup, certificate trust, and troubleshooting
+  </Card>
+
+  <Card title="Request inspection" icon="file-text" href="/docs/request-inspection">
+    Deep dive into headers, bodies, and timing
+  </Card>
+
+  <Card title="Proxy modes" icon="shuffle" href="/docs/proxy-modes">
+    Learn when to use proxy-only or full-tunnel
+  </Card>
+</CardGroup>

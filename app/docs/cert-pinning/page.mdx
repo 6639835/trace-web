@@ -1,0 +1,28 @@
+# Certificate pinning
+
+Some apps use certificate pinning or custom trust logic. In these cases, HTTPS MITM will fail and Trace will fall back to passthrough.
+
+## What you will see
+
+- The request appears, but the body may be empty or encrypted.
+- The Certificate tab shows the original server certificate.
+- The connection may fail if the app rejects the MITM certificate.
+
+## What you can do
+
+- **Disable HTTPS inspection** for that app or host if you only need metadata.
+- **Use full-tunnel mode** to capture more context, then analyze with exports.
+- **Use a debug build** of the app with pinning disabled (recommended for internal apps).
+
+<Tip>
+  Pinning is a security feature. Only bypass it when you have explicit permission to do so.
+</Tip>
+
+<CardGroup>
+  <Card title="Certificates" icon="shield" href="/docs/certificates">
+    Root CA setup and trust
+  </Card>
+  <Card title="Exporting sessions" icon="download" href="/docs/exporting">
+    Share encrypted traffic for offline analysis
+  </Card>
+</CardGroup>

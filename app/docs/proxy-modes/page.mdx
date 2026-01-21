@@ -1,0 +1,64 @@
+# Proxy modes
+
+Trace supports two capture modes. Choose the right one for your workflow.
+
+## Proxy-only (default)
+
+Proxy-only mode configures iOS system proxy settings and routes HTTP/HTTPS to the local MITM proxy.
+
+**Behavior**
+
+- Captures apps that honor system proxy settings.
+- Does not route packets through the tunnel.
+- DNS is not intercepted; system DNS is used.
+- QUIC/HTTP3 over UDP is not captured in this mode.
+
+**Best for**
+
+- Most HTTP(S) debugging
+- Low battery impact
+- Quick setup
+
+## Full-tunnel (advanced)
+
+Full-tunnel mode routes traffic through the tunnel and forwards it to a SOCKS5 server.
+
+**Requirements**
+
+- A reachable SOCKS5 host and port
+- Optional custom DNS servers and search domains
+
+**Behavior**
+
+- Includes packet routing and optional raw packet capture
+- Can capture traffic from apps that ignore system proxies
+- Higher overhead than proxy-only mode
+
+**Best for**
+
+- Apps that bypass proxy settings
+- Low-level packet analysis and debugging
+
+## Switching modes
+
+1. Open **Settings → Capture Mode**.
+2. Select **Proxy Only** or **Full Tunnel**.
+3. If using full-tunnel, enter the SOCKS5 host and port.
+4. Tap **Apply Capture Mode**.
+
+<Tip>
+  If capture is active, Trace will refresh settings automatically. If you do not see traffic after switching, stop and start capture once.
+</Tip>
+
+## HTTPS inspection
+
+Both modes can perform HTTPS MITM, but only after you install and trust the Trace root CA.
+
+<CardGroup>
+  <Card title="Certificates" icon="shield" href="/docs/certificates">
+    Install, trust, and remove the root CA
+  </Card>
+  <Card title="Architecture" icon="book-open" href="/docs/architecture">
+    How the proxy and tunnel are wired together
+  </Card>
+</CardGroup>

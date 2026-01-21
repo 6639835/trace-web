@@ -52,7 +52,7 @@ export function HeroPhone() {
             priority
             quality={100}
             unoptimized
-            onLoadingComplete={handleLoaded}
+            onLoad={handleLoaded}
           />
           <Image
             src="/iphone-screenshot-light.png"
@@ -63,7 +63,7 @@ export function HeroPhone() {
             priority
             quality={100}
             unoptimized
-            onLoadingComplete={handleLoaded}
+            onLoad={handleLoaded}
           />
         </div>
         

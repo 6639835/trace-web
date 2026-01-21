@@ -1,0 +1,36 @@
+# Performance tuning
+
+Trace is built to run on-device, but large captures can still consume CPU, memory, and storage. Use these settings to keep captures efficient.
+
+## Reduce capture size
+
+- **Disable body capture** when you only need headers and timing.
+- **Lower max body size** to avoid large payloads filling storage.
+- **Clear sessions** regularly if you are running long tests.
+
+## Use filters early
+
+Apply domain, method, and status filters to reduce UI load and indexing overhead.
+
+## Prefer proxy-only mode
+
+Proxy-only mode has less overhead than full-tunnel routing. Use full-tunnel only when needed.
+
+## Throttling and diagnostics
+
+- Use throttling profiles only when you need network simulation.
+- Disable raw packet capture when not actively debugging low-level issues.
+
+## Device considerations
+
+- Keep the device plugged in for long capture sessions.
+- Close other apps to reduce background contention.
+
+<CardGroup>
+  <Card title="Proxy modes" icon="shuffle" href="/docs/proxy-modes">
+    Choose the most efficient capture mode
+  </Card>
+  <Card title="Exporting sessions" icon="download" href="/docs/exporting">
+    Export and clear large sessions
+  </Card>
+</CardGroup>

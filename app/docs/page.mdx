@@ -1,0 +1,70 @@
+# Trace documentation overview
+
+Trace is an on-device iOS network debugger that captures HTTP(S), WebSocket, and SSE traffic using a Network Extension packet tunnel. It runs a local MITM proxy, stores captures in an App Group container, and ships tools for inspection, modification, replay, and export.
+
+## What you will learn
+
+- How to install and trust the Trace root CA for HTTPS inspection
+- How proxy-only and full-tunnel capture modes differ
+- How to inspect, filter, and export traffic
+- How the system is built (app, extension, SwiftPM modules)
+
+## Get started in 2 minutes
+
+Prerequisites:
+
+- iOS 16.0 or later
+- A physical iPhone or iPad (Network Extension packet tunnels do not run in the simulator)
+
+**Start capturing:**
+
+1. Open Trace and complete onboarding (VPN permission, optional certificate trust).
+2. Go to Network and tap **Start Capture**.
+3. Use any app and watch requests appear.
+
+<Tip>
+  New here? Follow the [Quick Start](/docs/quick-start) for a guided walkthrough.
+</Tip>
+
+## Key concepts
+
+- **Proxy-only capture**: Uses system proxy settings and captures apps that honor proxy settings.
+- **Full-tunnel capture**: Routes all traffic through the tunnel and forwards via a SOCKS5 server (advanced).
+- **On-device MITM**: A local root CA enables HTTPS inspection when trusted.
+- **Shared storage**: Captures, sessions, and config are stored in an App Group container.
+
+## Next steps
+
+<CardGroup>
+  <Card title="Quick start" icon="rocket" href="/docs/quick-start">
+    Capture your first request and learn the UI
+  </Card>
+
+  <Card title="Installation" icon="wrench" href="/docs/installation">
+    VPN permission, certificate trust, and setup tips
+  </Card>
+
+  <Card title="Proxy modes" icon="shuffle" href="/docs/proxy-modes">
+    Understand proxy-only vs full-tunnel behavior
+  </Card>
+
+  <Card title="Architecture" icon="book-open" href="/docs/architecture">
+    Explore the app, extension, and data flow
+  </Card>
+</CardGroup>
+
+## More guides
+
+<CardGroup>
+  <Card title="Request inspection" icon="file-text" href="/docs/request-inspection">
+    Inspect headers, bodies, timing, and TLS
+  </Card>
+
+  <Card title="Filtering traffic" icon="filter" href="/docs/filtering">
+    Use query filters and presets to find issues fast
+  </Card>
+
+  <Card title="Exporting sessions" icon="download" href="/docs/exporting">
+    Share HAR, cURL, and diagnostic exports
+  </Card>
+</CardGroup>

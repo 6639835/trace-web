@@ -1,0 +1,40 @@
+# Certificate management
+
+Trace performs HTTPS inspection using a local root certificate authority (CA) generated on your device. You control whether that CA is trusted.
+
+## Install the root CA
+
+1. In Trace, go to **Settings → Certificate**.
+2. Tap **Install Certificate**.
+3. iOS Settings opens a profile installation screen.
+4. Tap **Install** and confirm.
+
+## Enable full trust
+
+1. Open **Settings → General → About**.
+2. Tap **Certificate Trust Settings**.
+3. Enable **Trace Root CA** and confirm.
+
+<Info>
+  Without trust enabled, Trace can still capture HTTPS metadata but cannot decrypt bodies.
+</Info>
+
+## Export or remove the certificate
+
+- **Export**: Use the certificate screen in Trace to export the root CA for testing or device management.
+- **Remove**: Delete the profile from Settings and disable trust in Certificate Trust Settings.
+
+## Security guidance
+
+- Only trust the Trace CA on devices you control.
+- Remove the CA when you are done debugging.
+- Apps that use certificate pinning may bypass MITM and show passthrough traffic.
+
+<CardGroup>
+  <Card title="Certificate pinning" icon="shield" href="/docs/cert-pinning">
+    Learn how pinning affects HTTPS inspection
+  </Card>
+  <Card title="Proxy modes" icon="shuffle" href="/docs/proxy-modes">
+    Capture mode choices and limitations
+  </Card>
+</CardGroup>

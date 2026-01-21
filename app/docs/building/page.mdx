@@ -1,0 +1,60 @@
+# Building from source
+
+This guide is for developers building Trace locally from the `Trace` repository.
+
+## Requirements
+
+- macOS with **Xcode 26.2**
+- **Swift 6** (via Xcode 26.2)
+- **iOS 16.0** deployment target
+- An Apple Developer account with **Network Extension** entitlements
+- A physical iPhone or iPad for testing
+
+## Build with Xcode
+
+1. Open the project:
+
+```
+open Trace.xcodeproj
+```
+
+2. Update signing for all targets:
+
+- `Trace` (app)
+- `TraceVPN` (packet tunnel extension)
+- `TraceWidgetExtension`
+
+3. Set the App Group identifier:
+
+- Set `APP_GROUP_IDENTIFIER` in Build Settings
+- Ensure entitlements for app + extensions use the same App Group
+
+4. Update bundle identifiers if needed.
+
+5. If you change the VPN extension bundle ID, update:
+
+- `protocolConfiguration.providerBundleIdentifier` in `TraceFeatures/VPN/VPNManager.swift`
+
+6. Build and run on device.
+
+## SwiftPM-only workflow (optional)
+
+You can open `Package.swift` in Xcode 26.2 to work without the `.xcodeproj`, but note:
+
+- VPN and widget extension bundles still need Xcode for signing and entitlements.
+- Set `bundleIdentifier` and optional `teamIdentifier` in the `.iOSApplication` declaration.
+
+## Common issues
+
+- **VPN permission prompt never appears**: delete the existing VPN configuration in Settings and run again.
+- **App Group container unavailable**: verify entitlements and `APP_GROUP_IDENTIFIER` values.
+- **No traffic on simulator**: packet tunnels do not run in the simulator.
+
+<CardGroup>
+  <Card title="Development guide" icon="users" href="/docs/development">
+    Architecture, modules, and workflows
+  </Card>
+  <Card title="Architecture" icon="book-open" href="/docs/architecture">
+    System design and data flow
+  </Card>
+</CardGroup>

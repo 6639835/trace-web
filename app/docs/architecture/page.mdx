@@ -1,0 +1,70 @@
+# Architecture overview
+
+This page summarizes how Trace captures, processes, and stores traffic on-device.
+
+## System design
+
+Trace is split into two processes:
+
+- **Main app**: UI, configuration, and storage access
+- **Network extension (TraceVPN)**: Packet tunnel + local MITM proxy
+
+Communication happens through **App Group storage**, **Darwin notifications**, and **NEAppMessages**.
+
+## High-level flow
+
+1. The app enables capture and updates configuration.
+2. The VPN extension configures the system to use a local HTTP/HTTPS proxy.
+3. The proxy intercepts HTTP(S), WebSocket, and SSE traffic.
+4. Captured requests are persisted to the App Group container.
+5. The app receives notifications and updates the UI.
+
+## Core components
+
+### Main app
+
+- **TraceFeatures** managers: rewrite rules, request maps, scripts, breakpoints, hosts, and favorites.
+- **TraceUI** views: Network list, request inspector, tools, and settings.
+- **TraceCore** storage: App Group container, sessions, and configuration.
+
+### Network extension (TraceVPN)
+
+- **PacketTunnelProvider**: configures `NEPacketTunnelNetworkSettings` and proxy settings.
+- **MITMProxyServer (TraceProxy)**: HTTP/HTTPS proxy that performs TLS MITM when allowed.
+- **TraceSecurity**: certificate generation and TLS handling.
+- **TraceNetworking**: HTTP, HTTP/2, WebSocket, and SSE parsing.
+
+## Capture modes
+
+### Proxy-only (default)
+
+- Uses `NEProxySettings` to route HTTP/HTTPS to `127.0.0.1:8888`.
+- No packet routing; apps must honor system proxy settings.
+- QUIC/HTTP3 over UDP is not captured in this mode.
+
+### Full-tunnel (advanced)
+
+- Includes packet routing and optional DNS configuration.
+- Requires a SOCKS5 forwarder host and port.
+- Uses a packet forwarding engine and optional raw PCAP capture.
+
+## Storage and IPC
+
+- **App Group container**: shared storage for requests, bodies, sessions, scripts, rules, and logs.
+- **Darwin notifications**: notify the app when new data arrives.
+- **Fallback storage**: used when App Group is unavailable (e.g., simulator).
+
+## Security and privacy
+
+- **On-device only**: traffic stays on the device.
+- **Explicit trust**: HTTPS decryption only works after trusting the Trace root CA.
+- **Bypass handling**: certificate pinning or trust failures fall back to passthrough.
+
+<CardGroup>
+  <Card title="Proxy modes" icon="shuffle" href="/docs/proxy-modes">
+    Understand how capture modes differ
+  </Card>
+  <Card title="Certificates" icon="shield" href="/docs/certificates">
+    Root CA and trust flow
+  </Card>
+</CardGroup>

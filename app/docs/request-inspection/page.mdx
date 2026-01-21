@@ -1,0 +1,88 @@
+# Request inspection
+
+Inspect any captured request in Trace with headers, bodies, timing, and TLS details.
+
+## Overview
+
+Tap a request in the Network list to open the inspector.
+
+<Info>
+  **Inspector tabs:**
+  - **Overview**: summary, status, size, and timing
+  - **Headers**: request and response headers
+  - **Body**: request/response bodies with format-aware viewers
+  - **Timing**: DNS, connect, TLS, and transfer breakdown
+  - **Certificate**: TLS chain details (HTTPS only)
+</Info>
+
+## Overview tab
+
+The Overview tab shows core metadata:
+
+```
+GET /api/items
+Host: api.example.com
+Status: 200 OK
+Size: 12.4 KB
+Duration: 184 ms
+```
+
+Common fields include:
+
+- **Protocol**: HTTP/1.1 or HTTP/2
+- **Remote address**: server IP and port
+- **Connection**: keep-alive, close, or upgrade
+- **Timestamp**: when the request started
+
+## Headers tab
+
+Browse request and response headers in a searchable table.
+
+<Tip>
+  Use copy/share actions to export the header set for debugging.
+</Tip>
+
+## Body tab
+
+Trace renders bodies with format-aware viewers:
+
+- JSON, XML, and HTML
+- Images and SVG
+- Form and multipart data
+- Plain text and binary detection
+
+Large bodies may be truncated in the UI; export for full payloads.
+
+## Timing tab
+
+The timing breakdown helps identify slow steps:
+
+- **DNS**
+- **Connect**
+- **TLS**
+- **Request**
+- **Wait (TTFB)**
+- **Response**
+
+## Certificate tab (HTTPS only)
+
+Inspect the TLS chain and certificate fingerprint. This is useful for debugging trust issues and pinning.
+
+## Filtering requests
+
+Use the **Filters** panel to narrow results:
+
+- Domains (wildcards supported)
+- HTTP method
+- Status code
+- Content type
+- Quick filters (errors, favorites, duplicates)
+
+<CardGroup>
+  <Card title="Exporting sessions" icon="download" href="/docs/exporting">
+    Share HAR and cURL for deeper analysis
+  </Card>
+  <Card title="Certificates" icon="shield" href="/docs/certificates">
+    HTTPS inspection and trust settings
+  </Card>
+</CardGroup>
