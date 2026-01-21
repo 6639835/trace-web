@@ -49,7 +49,9 @@ export function CardGroup({
   className?: string;
 }) {
   return (
-    <div className={cn('not-prose my-6 grid gap-4 sm:grid-cols-2', className)}>{children}</div>
+    <div data-toc="ignore" className={cn('not-prose my-6 grid gap-4 sm:grid-cols-2', className)}>
+      {children}
+    </div>
   );
 }
 
@@ -72,7 +74,10 @@ export function Card({ title, href, icon, children }: CardProps) {
 
   if (!href) {
     return (
-      <div className="flex flex-col justify-between gap-4 rounded-lg border bg-card/70 p-4">
+      <div
+        data-toc="ignore"
+        className="flex flex-col justify-between gap-4 rounded-lg border bg-card/70 p-4"
+      >
         {content}
       </div>
     );
@@ -81,7 +86,8 @@ export function Card({ title, href, icon, children }: CardProps) {
   return (
     <Link
       href={href}
-      className="flex flex-col justify-between gap-4 rounded-lg border bg-card/70 p-4 transition-colors hover:border-primary/50 hover:bg-card"
+      data-toc="ignore"
+      className="docs-card flex flex-col justify-between gap-4 rounded-lg border bg-card/70 p-4 no-underline transition-colors hover:border-foreground hover:bg-card hover:no-underline"
       target={isExternal ? '_blank' : undefined}
       rel={isExternal ? 'noreferrer' : undefined}
     >

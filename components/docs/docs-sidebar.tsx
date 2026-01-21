@@ -3,7 +3,6 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { cn } from '@/lib/utils';
-import { BookOpen, Code, Wrench, Plug, Users, Compass } from 'lucide-react';
 
 interface NavItem {
   title: string;
@@ -12,14 +11,12 @@ interface NavItem {
 
 interface NavSection {
   title: string;
-  icon?: React.ComponentType<{ className?: string }>;
   items: NavItem[];
 }
 
 const navigation: NavSection[] = [
   {
     title: 'Start Here',
-    icon: Compass,
     items: [
       { title: 'Overview', href: '/docs' },
       { title: 'Installation', href: '/docs/installation' },
@@ -28,7 +25,6 @@ const navigation: NavSection[] = [
   },
   {
     title: 'Use Trace',
-    icon: BookOpen,
     items: [
       { title: 'Capture Modes', href: '/docs/proxy-modes' },
       { title: 'Certificates', href: '/docs/certificates' },
@@ -39,7 +35,6 @@ const navigation: NavSection[] = [
   },
   {
     title: 'Advanced Usage',
-    icon: Code,
     items: [
       { title: 'Performance Tuning', href: '/docs/performance' },
       { title: 'Certificate Pinning', href: '/docs/cert-pinning' },
@@ -48,7 +43,6 @@ const navigation: NavSection[] = [
   },
   {
     title: 'Integrations',
-    icon: Plug,
     items: [
       { title: 'Charles Import', href: '/docs/charles-import' },
       { title: 'Postman Export', href: '/docs/postman-export' },
@@ -57,7 +51,6 @@ const navigation: NavSection[] = [
   },
   {
     title: 'Developers',
-    icon: Users,
     items: [
       { title: 'Architecture', href: '/docs/architecture' },
       { title: 'API Reference', href: '/docs/api' },
@@ -66,7 +59,6 @@ const navigation: NavSection[] = [
   },
   {
     title: 'Contributing',
-    icon: Wrench,
     items: [{ title: 'Building from Source', href: '/docs/building' }],
   },
 ];
@@ -75,18 +67,13 @@ export function DocsSidebar() {
   const pathname = usePathname();
 
   return (
-    <nav className="space-y-6">
-      <div>
-        <h2 className="mb-2 px-3 text-lg font-semibold tracking-tight">Documentation</h2>
-      </div>
-
-      {navigation.map((section) => (
-        <div key={section.title}>
-          <h3 className="mb-2 flex items-center gap-2 px-3 text-sm font-medium text-muted-foreground">
-            {section.icon ? <section.icon className="h-4 w-4" /> : null}
+    <nav className="w-full">
+      {navigation.map((section, index) => (
+        <div key={section.title} className={cn('pb-4', index > 0 && 'pt-4')}>
+          <h4 className="mb-1 rounded-md px-2 py-1 text-sm font-semibold text-foreground">
             {section.title}
-          </h3>
-          <div className="space-y-1">
+          </h4>
+          <div className="grid grid-flow-row auto-rows-max text-sm">
             {section.items.map((item) => {
               const isActive = pathname === item.href;
 
@@ -95,13 +82,13 @@ export function DocsSidebar() {
                   key={item.href}
                   href={item.href}
                   className={cn(
-                    'flex items-center gap-3 rounded-md px-3 py-2 text-sm transition-colors',
+                    'group flex w-full items-center rounded-md border border-transparent px-2 py-1.5',
                     isActive
-                      ? 'bg-accent font-medium text-accent-foreground'
-                      : 'text-muted-foreground hover:bg-accent/50 hover:text-foreground',
+                      ? 'font-medium text-foreground'
+                      : 'text-muted-foreground hover:text-foreground',
                   )}
                 >
-                  <span>{item.title}</span>
+                  {item.title}
                 </Link>
               );
             })}

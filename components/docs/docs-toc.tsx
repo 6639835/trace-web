@@ -35,6 +35,7 @@ export function DocsTableOfContents() {
 
       const seen = new Map<string, number>();
       const nextItems = headingElements
+        .filter((heading) => !heading.closest('[data-toc="ignore"]'))
         .map((heading) => {
           const text = heading.textContent?.trim() ?? '';
           if (!text) {

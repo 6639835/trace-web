@@ -100,6 +100,14 @@
     @apply font-medium text-primary hover:underline;
   }
 
+  .prose a.docs-card {
+    text-decoration: none;
+  }
+
+  .prose a.docs-card:hover {
+    text-decoration: none;
+  }
+
   .prose code {
     @apply rounded bg-muted px-1.5 py-0.5 font-mono text-sm;
   }
