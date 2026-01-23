@@ -1,0 +1,39 @@
+# Request maps
+
+Request maps return a mocked response for a matching request, without calling the server.
+
+## When to use request maps
+
+- Build offline demos or reproduce bugs reliably.
+- Replace unstable endpoints with known data.
+- Test edge cases by returning custom responses.
+
+## Create a request map
+
+1. Open **Settings → Request Maps**.
+2. Tap **Add Map**.
+3. Choose a **Match** pattern (exact, contains, wildcard, or regex).
+4. Configure the **Mock Response** (status, headers, body).
+5. Save and enable the map.
+
+## Mock response options
+
+- **Inline body**: paste JSON, text, or binary data.
+- **File body**: load from a file in Trace storage.
+- **Template body**: render with request context.
+- **Scripted body**: generate dynamically when scripting is enabled.
+
+## Tips
+
+- Use exact match for narrow targeting.
+- Start with a real request and build a map from it to preserve headers.
+- Keep mock files small for faster iteration.
+
+<CardGroup>
+  <Card title="Rewrite rules" icon="sparkles" href="/docs/rewrite-rules">
+    Modify live traffic instead of mocking it
+  </Card>
+  <Card title="Custom scripts" icon="code" href="/docs/scripts">
+    Use JavaScript to power templates and maps
+  </Card>
+</CardGroup>

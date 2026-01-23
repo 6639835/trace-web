@@ -30,7 +30,29 @@ const navigation: NavSection[] = [
       { title: 'Certificates', href: '/docs/certificates' },
       { title: 'Inspect Requests', href: '/docs/request-inspection' },
       { title: 'Filter Traffic', href: '/docs/filtering' },
+      { title: 'Sessions', href: '/docs/sessions' },
+      { title: 'Favorites', href: '/docs/favorites' },
+      { title: 'Request Builder', href: '/docs/request-builder' },
       { title: 'Export Sessions', href: '/docs/exporting' },
+    ],
+  },
+  {
+    title: 'Traffic Control',
+    items: [
+      { title: 'Rewrite Rules', href: '/docs/rewrite-rules' },
+      { title: 'Request Maps', href: '/docs/request-maps' },
+      { title: 'Host Overrides', href: '/docs/hosts' },
+      { title: 'Breakpoints', href: '/docs/breakpoints' },
+      { title: 'Custom Scripts', href: '/docs/scripts' },
+    ],
+  },
+  {
+    title: 'Protocols',
+    items: [
+      { title: 'WebSocket Inspector', href: '/docs/websockets' },
+      { title: 'SSE Inspector', href: '/docs/sse' },
+      { title: 'DNS Inspector', href: '/docs/dns' },
+      { title: 'UDP Flows', href: '/docs/udp' },
     ],
   },
   {
@@ -38,7 +60,10 @@ const navigation: NavSection[] = [
     items: [
       { title: 'Performance Tuning', href: '/docs/performance' },
       { title: 'Certificate Pinning', href: '/docs/cert-pinning' },
-      { title: 'Custom Scripts', href: '/docs/scripts' },
+      { title: 'Network Throttling', href: '/docs/throttling' },
+      { title: 'Diagnostics and Logs', href: '/docs/diagnostics' },
+      { title: 'Utilities', href: '/docs/utilities' },
+      { title: 'Widgets and Live Activity', href: '/docs/widgets' },
     ],
   },
   {

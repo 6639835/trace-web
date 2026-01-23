@@ -1,0 +1,34 @@
+# Breakpoints
+
+Breakpoints pause live requests or responses so you can inspect and edit them before continuing.
+
+## What breakpoints can do
+
+- Pause a request before it is sent.
+- Pause a response before it is displayed.
+- Edit URL, method, headers, body, and status code.
+- Resume or drop the request.
+
+## Enable breakpoints
+
+1. Open **Settings → Breakpoints**.
+2. Tap **Add Breakpoint**.
+3. Choose **Request** or **Response**.
+4. Set a match pattern and enable the breakpoint.
+
+## When a breakpoint triggers
+
+- Trace presents a breakpoint editor.
+- Make edits in **Overview**, **Headers**, or **Body** tabs.
+- Tap **Send** to continue or **Drop** to cancel.
+
+<Tip>Use narrow match patterns to avoid pausing too many requests at once.</Tip>
+
+<CardGroup>
+  <Card title="Rewrite rules" icon="sparkles" href="/docs/rewrite-rules">
+    Automatic changes without pausing
+  </Card>
+  <Card title="Request builder" icon="terminal" href="/docs/request-builder">
+    Manually craft and send requests
+  </Card>
+</CardGroup>

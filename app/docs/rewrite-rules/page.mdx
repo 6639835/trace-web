@@ -1,0 +1,51 @@
+# Rewrite rules
+
+Rewrite rules let you change requests and responses on the fly before they reach the server or the UI.
+
+## What rewrite rules can do
+
+Use rewrite rules to:
+
+- Redirect requests to a different URL.
+- Modify request headers, query params, cookies, or body.
+- Modify response headers, body, or status code.
+- Block requests entirely.
+- Map requests to local responses (mocking).
+
+## Create a rule
+
+1. Open **Settings → Rewrite Rules**.
+2. Tap **Add Rule**.
+3. Choose a **Rule Type** (redirect, modify, block, map).
+4. Configure the **Match** criteria (exact, contains, wildcard, or regex).
+5. Add one or more **Actions**.
+6. Save and enable the rule.
+
+## Matching and priority
+
+- Rules match on the request URL.
+- Use **priority** to control evaluation order.
+- Enable **Stop processing** to prevent later rules from running after a match.
+- Use **tags** to group and filter rules.
+
+## Common actions
+
+- Set or remove headers.
+- Replace or set the body.
+- Redirect to a new URL.
+- Add delays or throttling.
+- Encode/decode body content.
+- Adjust status codes and connection behavior.
+
+<Tip>
+  Start with a single rule and verify it applies to one request before broadening the match pattern.
+</Tip>
+
+<CardGroup>
+  <Card title="Request maps" icon="sparkles" href="/docs/request-maps">
+    Mock responses without touching the server
+  </Card>
+  <Card title="Breakpoints" icon="file-text" href="/docs/breakpoints">
+    Pause and edit live requests
+  </Card>
+</CardGroup>

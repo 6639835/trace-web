@@ -1,0 +1,28 @@
+# DNS inspector
+
+Trace can capture and inspect DNS queries and responses when DNS traffic passes through the tunnel.
+
+## View DNS traffic
+
+- DNS messages appear in the DNS list when capture is active.
+- Use search and filters to isolate domains or record types.
+
+## Export DNS data
+
+1. Open the DNS list.
+2. Tap **Export**.
+3. Choose CSV or JSON.
+
+## Notes
+
+- DNS is usually UDP-based. In proxy-only mode, DNS traffic is not captured.
+- Use full-tunnel mode when you need DNS visibility.
+
+<CardGroup>
+  <Card title="UDP flows" icon="cloud" href="/docs/udp">
+    Inspect raw UDP activity
+  </Card>
+  <Card title="Proxy modes" icon="settings" href="/docs/proxy-modes">
+    Understand capture limitations
+  </Card>
+</CardGroup>

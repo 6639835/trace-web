@@ -1,0 +1,32 @@
+# Host overrides
+
+Host overrides let you map a hostname to a custom IP address (and optional port), similar to an on-device hosts file.
+
+## Common use cases
+
+- Point production domains to a staging server.
+- Test a new backend without changing client code.
+- Override DNS resolution for debugging.
+
+## Create a host entry
+
+1. Open **Settings → Hosts**.
+2. Tap **Add Host**.
+3. Enter the **Hostname** (wildcards supported).
+4. Enter the **Target IP** and optional **Port**.
+5. Save and enable the entry.
+
+## Notes
+
+- Host overrides apply only while capture is active.
+- Use distinct names to keep entries organized.
+- Disable or delete overrides when you are done to avoid confusion.
+
+<CardGroup>
+  <Card title="Rewrite rules" icon="sparkles" href="/docs/rewrite-rules">
+    Modify traffic instead of routing it
+  </Card>
+  <Card title="Request maps" icon="book-open" href="/docs/request-maps">
+    Return mock responses locally
+  </Card>
+</CardGroup>
