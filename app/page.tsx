@@ -3,7 +3,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Separator } from '@/components/ui/separator';
-import { Github, Network, Fingerprint, Radio, Repeat, Activity, Layers } from 'lucide-react';
+import { Github, Network, Fingerprint, Radio, Repeat, Activity, Layers, Smartphone } from 'lucide-react';
 import { HeroPhone } from '@/components/marketing/hero-phone';
 
 export default function Home() {
@@ -30,6 +30,16 @@ export default function Home() {
             </div>
             <div className="flex max-w-full flex-col gap-3 sm:flex-row sm:gap-4">
               <Button size="lg" asChild className="w-full sm:w-auto">
+                <Link
+                  href="https://testflight.apple.com/join/fmYFd8ud"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <Smartphone className="mr-2 h-5 w-5" />
+                  Get on TestFlight
+                </Link>
+              </Button>
+              <Button size="lg" variant="outline" asChild className="w-full sm:w-auto">
                 <Link
                   href="https://github.com/6639835/Trace"
                   target="_blank"
