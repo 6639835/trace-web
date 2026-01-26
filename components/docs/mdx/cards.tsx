@@ -49,7 +49,10 @@ export function CardGroup({
   className?: string;
 }) {
   return (
-    <div data-toc="ignore" className={cn('not-prose my-6 grid gap-4 sm:grid-cols-2', className)}>
+    <div
+      data-toc="ignore"
+      className={cn('not-prose my-6 grid gap-3 sm:grid-cols-2 sm:gap-4', className)}
+    >
       {children}
     </div>
   );
@@ -62,11 +65,13 @@ export function Card({ title, href, icon, children }: CardProps) {
   const content = (
     <>
       <div className="flex items-start justify-between gap-3">
-        <div className="space-y-1">
-          <h3 className="text-base font-semibold text-foreground">{title}</h3>
-          <div className="text-sm text-muted-foreground [&_p]:m-0 [&_p]:text-sm">{children}</div>
+        <div className="min-w-0 flex-1 space-y-1">
+          <h3 className="break-words text-base font-semibold text-foreground">{title}</h3>
+          <div className="break-words text-sm text-muted-foreground [&_p]:m-0 [&_p]:text-sm">
+            {children}
+          </div>
         </div>
-        {Icon ? <Icon className="h-4 w-4 text-muted-foreground" /> : null}
+        {Icon ? <Icon className="h-4 w-4 shrink-0 text-muted-foreground" /> : null}
       </div>
       <span className="text-xs font-medium text-primary">Learn more →</span>
     </>

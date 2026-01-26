@@ -77,23 +77,24 @@
 /* Documentation-specific styles */
 @layer components {
   .prose {
-    @apply text-foreground;
+    @apply text-[15px] text-foreground sm:text-base;
   }
 
+  /* Better heading sizes for mobile */
   .prose h1 {
-    @apply scroll-mt-20;
+    @apply scroll-mt-20 text-2xl sm:text-3xl;
   }
 
   .prose h2 {
-    @apply mb-4 mt-10 scroll-mt-20 border-b pb-2;
+    @apply mb-4 mt-10 scroll-mt-20 border-b pb-2 text-xl sm:text-2xl;
   }
 
   .prose h3 {
-    @apply mb-3 mt-8 scroll-mt-20;
+    @apply mb-3 mt-8 scroll-mt-20 text-lg sm:text-xl;
   }
 
   .prose h4 {
-    @apply mb-2 mt-6 scroll-mt-20;
+    @apply mb-2 mt-6 scroll-mt-20 text-base sm:text-lg;
   }
 
   .prose a {
@@ -124,12 +125,19 @@
     @apply border-l-4 border-primary pl-4 italic;
   }
 
+  /* Table wrapper for horizontal scrolling on mobile */
   .prose table {
     @apply w-full border-collapse;
   }
 
+  /* Ensure tables are scrollable on small screens */
+  .prose > table {
+    @apply block overflow-x-auto;
+  }
+
   .prose th {
     @apply bg-muted p-3 text-left font-semibold;
+    white-space: nowrap;
   }
 
   .prose td {
@@ -137,6 +145,22 @@
   }
 
   .prose img {
-    @apply rounded-lg;
+    @apply max-w-full rounded-lg;
+  }
+
+  /* Better code block handling on mobile */
+  .prose pre {
+    @apply overflow-x-auto;
+  }
+
+  /* Ensure long URLs and code don't break layout on mobile */
+  .prose code {
+    @apply break-words;
+    word-wrap: break-word;
+  }
+
+  .prose pre code {
+    @apply break-normal;
+    word-wrap: normal;
   }
 }

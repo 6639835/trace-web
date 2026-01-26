@@ -25,12 +25,16 @@ export function Tip({ title = 'Tip', children, variant = 'tip' }: CalloutProps) 
   const Icon = variant === 'tip' ? Lightbulb : InfoIcon;
 
   return (
-    <div className={cn('not-prose my-6 rounded-lg border px-5 py-4', styles.wrapper)}>
+    <div
+      className={cn('not-prose my-6 rounded-lg border px-4 py-3 sm:px-5 sm:py-4', styles.wrapper)}
+    >
       <div className="flex items-start gap-3">
-        <Icon className="mt-0.5 h-4 w-4" />
-        <div className="space-y-1">
-          <p className={cn('text-sm font-semibold', styles.title)}>{title}</p>
-          <div className="text-sm leading-relaxed text-muted-foreground">{children}</div>
+        <Icon className="mt-0.5 h-4 w-4 shrink-0" />
+        <div className="min-w-0 flex-1 space-y-1">
+          <p className={cn('break-words text-sm font-semibold', styles.title)}>{title}</p>
+          <div className="break-words text-sm leading-relaxed text-muted-foreground">
+            {children}
+          </div>
         </div>
       </div>
     </div>
