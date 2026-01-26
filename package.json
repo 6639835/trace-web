@@ -12,15 +12,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/6639835/trace-web.git"
+    "url": "git+https://github.com/Trace-iOS/trace-web.git"
   },
   "keywords": [],
   "author": "",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/6639835/trace-web/issues"
+    "url": "https://github.com/Trace-iOS/trace-web/issues"
   },
-  "homepage": "https://github.com/6639835/trace-web#readme",
+  "homepage": "https://github.com/Trace-iOS/trace-web#readme",
   "dependencies": {
     "@radix-ui/react-separator": "^1.1.8",
     "@radix-ui/react-slot": "^1.2.4",

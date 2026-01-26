@@ -41,7 +41,7 @@ export default function Home() {
               </Button>
               <Button size="lg" variant="outline" asChild className="w-full sm:w-auto">
                 <Link
-                  href="https://github.com/6639835/Trace"
+                  href="https://github.com/Trace-iOS/Trace"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
@@ -269,7 +269,7 @@ export default function Home() {
           <div className="flex flex-col justify-center gap-3 sm:flex-row sm:gap-4">
             <Button size="lg" asChild className="w-full sm:w-auto">
               <Link
-                href="https://github.com/6639835/Trace"
+                href="https://github.com/Trace-iOS/Trace"
                 target="_blank"
                 rel="noopener noreferrer"
               >

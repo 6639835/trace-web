@@ -61,7 +61,7 @@ export function Footer() {
             <ul className="space-y-2 text-center text-sm text-muted-foreground md:text-left">
               <li>
                 <Link
-                  href="https://github.com/6639835/Trace"
+                  href="https://github.com/Trace-iOS/Trace"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="transition-colors hover:text-foreground"

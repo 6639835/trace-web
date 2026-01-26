@@ -112,26 +112,34 @@ export default function OpenSourcePage() {
 
           <div className="mb-6 rounded-lg border bg-muted/30 p-6">
             <pre className="whitespace-pre-wrap font-mono text-xs leading-relaxed text-muted-foreground sm:text-sm">
-              MIT License Copyright (c) 2026 Justin Permission is hereby granted, free of charge, to
-              any person obtaining a copy of this software and associated documentation files (the
-              &quot;Software&quot;), to deal in the Software without restriction, including without
-              limitation the rights to use, copy, modify, merge, publish, distribute, sublicense,
-              and/or sell copies of the Software, and to permit persons to whom the Software is
-              furnished to do so, subject to the following conditions: The above copyright notice
-              and this permission notice shall be included in all copies or substantial portions of
-              the Software. THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY
-              KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
-              MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT
-              SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-              LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF
-              OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+              {`MIT License
+
+Copyright (c) 2026 Justin
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.`}
             </pre>
           </div>
 
           <div className="mt-8">
             <Button variant="outline" asChild>
               <Link
-                href="https://github.com/6639835/Trace/blob/main/LICENSE"
+                href="https://github.com/Trace-iOS/Trace/blob/main/LICENSE"
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -248,7 +256,7 @@ export default function OpenSourcePage() {
           <div className="mt-8 flex flex-col gap-4 sm:flex-row">
             <Button asChild className="w-full sm:w-auto">
               <Link
-                href="https://github.com/6639835/Trace"
+                href="https://github.com/Trace-iOS/Trace"
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -258,7 +266,7 @@ export default function OpenSourcePage() {
             </Button>
             <Button variant="outline" asChild className="w-full sm:w-auto">
               <Link
-                href="https://github.com/6639835/Trace/issues"
+                href="https://github.com/Trace-iOS/Trace/issues"
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -379,7 +387,7 @@ export default function OpenSourcePage() {
           </p>
           <Button asChild className="w-full sm:w-auto">
             <Link
-              href="https://github.com/6639835/Trace/issues/new"
+              href="https://github.com/Trace-iOS/Trace/issues/new"
               target="_blank"
               rel="noopener noreferrer"
             >
