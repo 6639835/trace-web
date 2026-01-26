@@ -53,6 +53,16 @@ export function Footer() {
                   Open Source
                 </Link>
               </li>
+              <li>
+                <Link
+                  href="https://stats.uptimerobot.com/37hByzDJwT"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="transition-colors hover:text-foreground"
+                >
+                  Status Page
+                </Link>
+              </li>
             </ul>
           </div>
 
