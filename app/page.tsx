@@ -3,7 +3,16 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Separator } from '@/components/ui/separator';
-import { Github, Network, Fingerprint, Radio, Repeat, Activity, Layers, Smartphone } from 'lucide-react';
+import {
+  Github,
+  Network,
+  Fingerprint,
+  Radio,
+  Repeat,
+  Activity,
+  Layers,
+  Smartphone,
+} from 'lucide-react';
 import { HeroPhone } from '@/components/marketing/hero-phone';
 
 export default function Home() {
