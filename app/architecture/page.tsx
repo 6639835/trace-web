@@ -117,7 +117,7 @@ export default function ArchitecturePage() {
                 Starts the local MITM proxy and applies system proxy rules without routing packets.
                 Runs in a separate process with elevated network privileges.
               </p>
-              <div className="break-words rounded-lg border bg-muted/30 p-4 font-mono text-sm">
+              <div className="rounded-lg border bg-muted/30 p-4 font-mono text-sm break-words">
                 <div className="text-muted-foreground">
                   final class PacketTunnelProvider: NEPacketTunnelProvider
                 </div>
@@ -192,7 +192,7 @@ export default function ArchitecturePage() {
                 traffic data, and coordination.
               </p>
               <div className="rounded-lg border bg-muted/30 p-4">
-                <code className="break-words font-mono text-sm text-muted-foreground">
+                <code className="font-mono text-sm break-words text-muted-foreground">
                   group.com.trace.network-debugger
                 </code>
               </div>

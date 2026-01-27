@@ -42,7 +42,7 @@ export function HeroPhone() {
         }`}
       >
         {/* Screenshot layer - positioned behind the frame */}
-        <div className="absolute inset-[5%] bottom-[1.5%] top-[1.5%] overflow-hidden rounded-[12%]">
+        <div className="absolute inset-[5%] top-[1.5%] bottom-[1.5%] overflow-hidden rounded-[12%]">
           <Image
             src="/iphone-screenshot-dark.png"
             alt={isDark ? 'Trace iOS App Screenshot' : ''}

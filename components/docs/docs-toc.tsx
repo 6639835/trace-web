@@ -122,7 +122,7 @@ export function DocsTableOfContents() {
           key={item.id}
           href={`#${item.id}`}
           className={[
-            'block rounded px-2 py-1 text-sm transition',
+            'block rounded-sm px-2 py-1 text-sm transition',
             item.level === 3 ? 'ml-3 text-xs' : 'font-medium',
             isActive ? 'bg-muted text-foreground' : 'text-muted-foreground hover:text-foreground',
           ].join(' ')}

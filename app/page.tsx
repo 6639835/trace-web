@@ -24,15 +24,15 @@ export default function Home() {
           {/* Left Column - Hero Text */}
           <div className="flex max-w-full flex-col space-y-4 sm:space-y-6 lg:space-y-8">
             <div className="max-w-full">
-              <h1 className="mb-3 hyphens-auto break-words text-2xl font-bold leading-tight tracking-tight xs:text-3xl sm:mb-4 sm:text-4xl md:text-5xl lg:mb-6 lg:text-6xl">
+              <h1 className="mb-3 text-2xl leading-tight font-bold tracking-tight break-words hyphens-auto xs:text-3xl sm:mb-4 sm:text-4xl md:text-5xl lg:mb-6 lg:text-6xl">
                 Redefining iOS network debugging.
               </h1>
-              <p className="mb-3 break-words text-sm leading-relaxed text-muted-foreground sm:mb-4 sm:text-base lg:text-lg">
+              <p className="mb-3 text-sm leading-relaxed break-words text-muted-foreground sm:mb-4 sm:text-base lg:text-lg">
                 Professional network debugging tool for iOS developers. Captures HTTP(S), WebSocket,
                 and SSE traffic through a proxy-only packet tunnel with on-device TLS MITM. Built on
                 Network Extension APIs for system-level visibility when apps honor the system proxy.
               </p>
-              <p className="max-w-full break-words text-xs text-muted-foreground sm:text-sm">
+              <p className="max-w-full text-xs break-words text-muted-foreground sm:text-sm">
                 Real-time network inspection at the system level. See requests from apps that honor
                 the system proxy settings.
               </p>

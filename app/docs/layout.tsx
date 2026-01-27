@@ -20,7 +20,7 @@ export default function DocsLayout({ children }: { children: React.ReactNode }) 
 
         {/* Main Content */}
         <main className="min-w-0 flex-1">
-          <article className="prose prose-slate max-w-none dark:prose-invert prose-headings:break-words prose-p:break-words">
+          <article className="prose max-w-none prose-slate dark:prose-invert prose-headings:break-words prose-p:break-words">
             {children}
           </article>
         </main>

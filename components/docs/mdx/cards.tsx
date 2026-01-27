@@ -66,8 +66,8 @@ export function Card({ title, href, icon, children }: CardProps) {
     <>
       <div className="flex items-start justify-between gap-3">
         <div className="min-w-0 flex-1 space-y-1">
-          <h3 className="break-words text-base font-semibold text-foreground">{title}</h3>
-          <div className="break-words text-sm text-muted-foreground [&_p]:m-0 [&_p]:text-sm">
+          <h3 className="text-base font-semibold break-words text-foreground">{title}</h3>
+          <div className="text-sm break-words text-muted-foreground [&_p]:m-0 [&_p]:text-sm">
             {children}
           </div>
         </div>

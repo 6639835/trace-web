@@ -1,6 +1,5 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@config '../tailwind.config.ts';
+@import 'tailwindcss';
 
 @layer base {
   :root {
@@ -86,15 +85,15 @@
   }
 
   .prose h2 {
-    @apply mb-4 mt-10 scroll-mt-20 border-b pb-2 text-xl sm:text-2xl;
+    @apply mt-10 mb-4 scroll-mt-20 border-b pb-2 text-xl sm:text-2xl;
   }
 
   .prose h3 {
-    @apply mb-3 mt-8 scroll-mt-20 text-lg sm:text-xl;
+    @apply mt-8 mb-3 scroll-mt-20 text-lg sm:text-xl;
   }
 
   .prose h4 {
-    @apply mb-2 mt-6 scroll-mt-20 text-base sm:text-lg;
+    @apply mt-6 mb-2 scroll-mt-20 text-base sm:text-lg;
   }
 
   .prose a {
@@ -110,7 +109,7 @@
   }
 
   .prose code {
-    @apply rounded bg-muted px-1.5 py-0.5 font-mono text-sm;
+    @apply rounded-sm bg-muted px-1.5 py-0.5 font-mono text-sm;
   }
 
   .prose pre {

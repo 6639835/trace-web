@@ -111,7 +111,7 @@ export default function OpenSourcePage() {
           </div>
 
           <div className="mb-6 rounded-lg border bg-muted/30 p-6">
-            <pre className="whitespace-pre-wrap font-mono text-xs leading-relaxed text-muted-foreground sm:text-sm">
+            <pre className="font-mono text-xs leading-relaxed whitespace-pre-wrap text-muted-foreground sm:text-sm">
               {`MIT License
 
 Copyright (c) 2026 Justin
@@ -170,7 +170,7 @@ SOFTWARE.`}
               <h3 className="mb-3 text-lg font-semibold">Ways to contribute</h3>
               <div className="space-y-3">
                 <div className="flex items-start gap-3">
-                  <div className="mt-2 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-foreground" />
+                  <div className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-foreground" />
                   <div>
                     <p className="mb-1 font-medium">Report bugs</p>
                     <p className="text-sm text-muted-foreground">
@@ -181,7 +181,7 @@ SOFTWARE.`}
                 </div>
 
                 <div className="flex items-start gap-3">
-                  <div className="mt-2 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-foreground" />
+                  <div className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-foreground" />
                   <div>
                     <p className="mb-1 font-medium">Request features</p>
                     <p className="text-sm text-muted-foreground">
@@ -192,7 +192,7 @@ SOFTWARE.`}
                 </div>
 
                 <div className="flex items-start gap-3">
-                  <div className="mt-2 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-foreground" />
+                  <div className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-foreground" />
                   <div>
                     <p className="mb-1 font-medium">Submit pull requests</p>
                     <p className="text-sm text-muted-foreground">
@@ -203,7 +203,7 @@ SOFTWARE.`}
                 </div>
 
                 <div className="flex items-start gap-3">
-                  <div className="mt-2 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-foreground" />
+                  <div className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-foreground" />
                   <div>
                     <p className="mb-1 font-medium">Improve documentation</p>
                     <p className="text-sm text-muted-foreground">
@@ -214,7 +214,7 @@ SOFTWARE.`}
                 </div>
 
                 <div className="flex items-start gap-3">
-                  <div className="mt-2 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-foreground" />
+                  <div className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-foreground" />
                   <div>
                     <p className="mb-1 font-medium">Share knowledge</p>
                     <p className="text-sm text-muted-foreground">

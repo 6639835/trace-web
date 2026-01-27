@@ -31,8 +31,8 @@ export function Tip({ title = 'Tip', children, variant = 'tip' }: CalloutProps) 
       <div className="flex items-start gap-3">
         <Icon className="mt-0.5 h-4 w-4 shrink-0" />
         <div className="min-w-0 flex-1 space-y-1">
-          <p className={cn('break-words text-sm font-semibold', styles.title)}>{title}</p>
-          <div className="break-words text-sm leading-relaxed text-muted-foreground">
+          <p className={cn('text-sm font-semibold break-words', styles.title)}>{title}</p>
+          <div className="text-sm leading-relaxed break-words text-muted-foreground">
             {children}
           </div>
         </div>
