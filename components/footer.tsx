@@ -37,6 +37,11 @@ export function Footer() {
                   Architecture
                 </Link>
               </li>
+              <li>
+                <Link href="/roadmap" className="transition-colors hover:text-foreground">
+                  Roadmap
+                </Link>
+              </li>
             </ul>
           </div>
 

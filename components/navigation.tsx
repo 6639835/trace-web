@@ -11,6 +11,7 @@ import { useState } from 'react';
 const navItems = [
   { name: 'Features', href: '/features' },
   { name: 'Architecture', href: '/architecture' },
+  { name: 'Roadmap', href: '/roadmap' },
   { name: 'Docs', href: '/docs' },
   { name: 'Open Source', href: '/open-source' },
 ];
