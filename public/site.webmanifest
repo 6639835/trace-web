@@ -1,0 +1,28 @@
+{
+  "name": "Trace - iOS Network Debugger",
+  "short_name": "Trace",
+  "description": "Professional network debugging tool for iOS. Device-wide traffic capture, TLS inspection, and real-time analysis.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#000000",
+  "icons": [
+    {
+      "src": "/icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    },
+    {
+      "src": "/logos/trace-logomark.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ],
+  "categories": ["developer tools", "productivity", "utilities"],
+  "orientation": "portrait-primary"
+}

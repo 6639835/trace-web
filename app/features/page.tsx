@@ -1,3 +1,4 @@
+import type { Metadata } from 'next';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Separator } from '@/components/ui/separator';
 import { Badge } from '@/components/ui/badge';
@@ -15,6 +16,27 @@ import {
   Zap,
   Lock,
 } from 'lucide-react';
+
+export const metadata: Metadata = {
+  title: 'Features - Complete iOS Network Debugging Toolkit',
+  description:
+    'Explore Trace features: device-wide traffic capture, TLS MITM inspection, WebSocket & SSE support, traffic modification, PCAP export, request builder, and advanced filtering. Built for iOS developers.',
+  keywords: [
+    'iOS network debugger features',
+    'TLS MITM iOS',
+    'WebSocket debugging',
+    'HTTP traffic modification',
+    'PCAP export iOS',
+    'request builder iOS',
+    'network filtering iOS',
+  ],
+  openGraph: {
+    title: 'Trace Features - Complete iOS Network Debugging Toolkit',
+    description:
+      'Device-wide traffic capture, TLS inspection, WebSocket support, and advanced debugging tools for iOS developers.',
+    url: 'https://trace.justinl.site/features',
+  },
+};
 
 export default function FeaturesPage() {
   return (

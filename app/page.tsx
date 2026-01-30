@@ -16,8 +16,52 @@ import {
 import { HeroPhone } from '@/components/marketing/hero-phone';
 
 export default function Home() {
+  const structuredData = {
+    '@context': 'https://schema.org',
+    '@type': 'SoftwareApplication',
+    name: 'Trace',
+    applicationCategory: 'DeveloperApplication',
+    operatingSystem: 'iOS',
+    offers: {
+      '@type': 'Offer',
+      price: '0',
+      priceCurrency: 'USD',
+    },
+    description:
+      'Professional network debugging tool for iOS developers. Device-wide HTTP(S), WebSocket, and SSE traffic capture with TLS MITM inspection.',
+    softwareVersion: '1.0',
+    applicationSubCategory: 'Network Debugging Tool',
+    featureList: [
+      'Device-wide traffic capture',
+      'TLS MITM inspection',
+      'WebSocket & SSE support',
+      'Traffic modification',
+      'PCAP export',
+      'Deep packet inspection',
+    ],
+    downloadUrl: 'https://testflight.apple.com/join/fmYFd8ud',
+    screenshot: 'https://trace.justinl.site/images/screenshot.png',
+    author: {
+      '@type': 'Person',
+      name: 'Justin',
+    },
+    aggregateRating: {
+      '@type': 'AggregateRating',
+      ratingValue: '5',
+      ratingCount: '1',
+    },
+    codeRepository: 'https://github.com/Trace-iOS/Trace',
+    license: 'https://github.com/Trace-iOS/Trace/blob/main/LICENSE',
+    keywords:
+      'iOS, network debugger, traffic inspector, HTTPS proxy, packet capture, TLS MITM, WebSocket, developer tools',
+  };
+
   return (
     <div className="flex w-full flex-col">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+      />
       {/* Hero Section with Phone Mockup */}
       <section className="container flex min-h-[calc(100vh-4rem)] items-start py-section">
         <div className="mx-auto grid w-full max-w-wide items-start gap-8 pt-8 sm:gap-10 sm:pt-12 lg:grid-cols-2 lg:gap-12 lg:pt-16">

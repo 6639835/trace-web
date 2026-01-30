@@ -1,8 +1,29 @@
+import type { Metadata } from 'next';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Separator } from '@/components/ui/separator';
 import { Github, Code, Users, Shield, BookOpen } from 'lucide-react';
+
+export const metadata: Metadata = {
+  title: 'Open Source - Free MIT Licensed iOS Network Debugger',
+  description:
+    'Trace is free and open source under MIT license. No subscriptions, no feature gates, no telemetry. Build from source, contribute, and verify binary integrity. Transparent iOS network debugging.',
+  keywords: [
+    'open source iOS debugger',
+    'MIT license iOS',
+    'free network debugger',
+    'iOS open source tools',
+    'build from source iOS',
+    'transparent network debugging',
+  ],
+  openGraph: {
+    title: 'Trace - Open Source iOS Network Debugger',
+    description:
+      'Free and open source under MIT license. Build from source, contribute, and verify what runs on your device.',
+    url: 'https://trace.justinl.site/open-source',
+  },
+};
 
 export default function OpenSourcePage() {
   return (

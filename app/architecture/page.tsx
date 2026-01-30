@@ -1,3 +1,4 @@
+import type { Metadata } from 'next';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Separator } from '@/components/ui/separator';
 import { Badge } from '@/components/ui/badge';
@@ -11,6 +12,27 @@ import {
   Activity,
 } from 'lucide-react';
 import { NetworkFlowDiagram } from '@/components/network-flow-diagram';
+
+export const metadata: Metadata = {
+  title: 'Architecture - How Trace Works Under the Hood',
+  description:
+    'Deep dive into Trace architecture: NEPacketTunnelProvider implementation, proxy-only VPN mode, TLS MITM, App Groups IPC, and protocol support. Learn how the iOS network debugger works.',
+  keywords: [
+    'NEPacketTunnelProvider',
+    'iOS Network Extension',
+    'TLS MITM architecture',
+    'iOS VPN architecture',
+    'App Groups iOS',
+    'network debugging architecture',
+    'iOS proxy implementation',
+  ],
+  openGraph: {
+    title: 'Trace Architecture - Technical Deep Dive',
+    description:
+      'Learn how Trace uses NEPacketTunnelProvider, proxy-only VPN mode, and TLS MITM for iOS network debugging.',
+    url: 'https://trace.justinl.site/architecture',
+  },
+};
 
 export default function ArchitecturePage() {
   return (
