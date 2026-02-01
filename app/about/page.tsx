@@ -1,0 +1,384 @@
+import type { Metadata } from 'next';
+import Link from 'next/link';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Separator } from '@/components/ui/separator';
+import { Timeline, TimelineItem } from '@/components/ui/timeline';
+import {
+  Target,
+  Code,
+  Shield,
+  Users,
+  Zap,
+  Heart,
+  CheckCircle2,
+  Rocket,
+  GitBranch,
+  Package,
+} from 'lucide-react';
+
+export const metadata: Metadata = {
+  title: 'About',
+  description:
+    'Learn about Trace: our mission to build the best iOS network debugger, the principles that guide development, and the story behind the project. Built by developers, for developers.',
+  keywords: [
+    'about Trace',
+    'Trace story',
+    'iOS network debugger',
+    'Trace mission',
+    'developer tools',
+  ],
+  openGraph: {
+    title: 'About - Trace iOS Network Debugger',
+    description:
+      'Learn about Trace: our mission, principles, and the story behind the best iOS network debugger.',
+    url: 'https://trace.justinl.site/about',
+  },
+};
+
+export default function AboutPage() {
+  return (
+    <div className="flex flex-col">
+      {/* Header */}
+      <section className="container py-section">
+        <div className="mx-auto max-w-readable text-center">
+          <Target className="mx-auto mb-4 h-10 w-10 text-muted-foreground sm:mb-6 sm:h-12 sm:w-12" />
+          <h1 className="mb-3 text-3xl font-bold tracking-tight sm:mb-4 sm:text-4xl md:text-5xl">
+            About Trace
+          </h1>
+          <p className="text-sm leading-relaxed text-muted-foreground sm:text-base lg:text-lg">
+            Building the best iOS network debugger. On-device, privacy-first, and designed for
+            developers who need precise visibility into their apps&apos; network behavior.
+          </p>
+        </div>
+      </section>
+
+      <Separator />
+
+      {/* Mission */}
+      <section className="container py-section">
+        <div className="mx-auto max-w-readable">
+          <h2 className="mb-6 text-2xl font-bold tracking-tight sm:mb-8 sm:text-3xl">
+            Our mission
+          </h2>
+          <p className="mb-4 text-base leading-relaxed text-muted-foreground sm:text-lg">
+            iOS network debugging shouldn&apos;t require desktop tools, manual configuration, or
+            compromising on privacy. Trace brings professional-grade network inspection directly to
+            your iPhone or iPad.
+          </p>
+          <p className="mb-4 text-base leading-relaxed text-muted-foreground sm:text-lg">
+            We believe debugging tools should be transparent, privacy-respecting, and powerful
+            enough for professional use while remaining accessible to developers at all levels.
+          </p>
+          <p className="text-base leading-relaxed text-muted-foreground sm:text-lg">
+            Every architectural decision, every feature, and every line of code reflects these
+            principles. Trace is open source because transparency builds trust, and trust is
+            essential for a tool that handles sensitive network data.
+          </p>
+        </div>
+      </section>
+
+      <Separator />
+
+      {/* Story */}
+      <section className="container py-section">
+        <div className="mx-auto max-w-readable">
+          <h2 className="mb-6 text-2xl font-bold tracking-tight sm:mb-8 sm:text-3xl">
+            The story behind Trace
+          </h2>
+          <div className="space-y-4 text-base leading-relaxed text-muted-foreground sm:text-lg">
+            <p>
+              Trace started as a personal project to solve a specific problem: debugging network
+              issues on iOS without reaching for a desktop tool or configuring proxy settings across
+              multiple apps.
+            </p>
+            <p>
+              Existing solutions worked but felt cumbersome—switching between devices, trusting
+              certificates from third-party tools, or accepting that some traffic just wouldn&apos;t
+              be captured. The more I debugged iOS apps, the more I wanted something different.
+            </p>
+            <p>
+              What if network debugging happened entirely on-device? What if it integrated
+              seamlessly with iOS instead of fighting against sandbox restrictions? What if privacy
+              wasn&apos;t an afterthought but a core design principle?
+            </p>
+            <p>
+              After months of experimentation with Network Extension APIs, TLS certificate
+              generation, and storage architecture, Trace emerged. It&apos;s not just another
+              network proxy—it&apos;s a rethinking of what iOS network debugging can be.
+            </p>
+            <p>
+              Trace became open source from day one because tools that handle sensitive data deserve
+              scrutiny. The community has shaped its development through bug reports, feature
+              requests, and contributions. This is a tool built by developers, for developers.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <Separator />
+
+      {/* Principles */}
+      <section className="container py-section">
+        <div className="mx-auto max-w-content">
+          <h2 className="mb-8 text-2xl font-bold tracking-tight sm:mb-10 sm:text-3xl md:mb-12">
+            Our principles
+          </h2>
+          <div className="grid gap-4 sm:grid-cols-2 sm:gap-5 md:gap-6">
+            <Card>
+              <CardHeader>
+                <Shield className="mb-2 h-8 w-8 text-primary" />
+                <CardTitle>Privacy first</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <CardDescription className="leading-relaxed">
+                  All traffic capture and analysis happens on-device. No telemetry, no analytics, no
+                  external servers. Your data never leaves your device. The architecture is designed
+                  to make privacy violations impossible, not just unlikely.
+                </CardDescription>
+              </CardContent>
+            </Card>
+
+            <Card>
+              <CardHeader>
+                <Code className="mb-2 h-8 w-8 text-primary" />
+                <CardTitle>Open source</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <CardDescription className="leading-relaxed">
+                  Complete source code is available under the MIT license. Audit the implementation,
+                  verify security claims, or fork it for your needs. Transparency builds trust, and
+                  trust is essential for debugging tools.
+                </CardDescription>
+              </CardContent>
+            </Card>
+
+            <Card>
+              <CardHeader>
+                <Zap className="mb-2 h-8 w-8 text-primary" />
+                <CardTitle>Performance matters</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <CardDescription className="leading-relaxed">
+                  Network debugging is time-sensitive work. Trace is optimized for minimal latency,
+                  efficient memory usage, and fast UI responsiveness. Even a debugging tool needs to
+                  be fast enough that it doesn&apos;t slow down your workflow.
+                </CardDescription>
+              </CardContent>
+            </Card>
+
+            <Card>
+              <CardHeader>
+                <Users className="mb-2 h-8 w-8 text-primary" />
+                <CardTitle>Community driven</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <CardDescription className="leading-relaxed">
+                  Feature priorities and roadmap decisions are shaped by user feedback.
+                  Contributions are welcome—code, documentation, bug reports, and feature requests
+                  all move the project forward. This is built with the community, not just for it.
+                </CardDescription>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+      </section>
+
+      <Separator />
+
+      {/* Milestones */}
+      <section className="container py-section">
+        <div className="mx-auto max-w-readable">
+          <h2 className="mb-8 text-2xl font-bold tracking-tight sm:mb-10 sm:text-3xl md:mb-12">
+            Milestones
+          </h2>
+          <Timeline>
+            <TimelineItem icon={<CheckCircle2 className="h-5 w-5 text-primary sm:h-6 sm:w-6" />}>
+              <Card>
+                <CardHeader>
+                  <div className="mb-2 text-xs font-medium text-muted-foreground sm:text-sm">
+                    September 2024
+                  </div>
+                  <CardTitle>Project started</CardTitle>
+                  <CardDescription>
+                    Initial exploration of Network Extension APIs and feasibility research. Proof of
+                    concept for on-device TLS MITM.
+                  </CardDescription>
+                </CardHeader>
+              </Card>
+            </TimelineItem>
+
+            <TimelineItem icon={<CheckCircle2 className="h-5 w-5 text-primary sm:h-6 sm:w-6" />}>
+              <Card>
+                <CardHeader>
+                  <div className="mb-2 text-xs font-medium text-muted-foreground sm:text-sm">
+                    October 2024
+                  </div>
+                  <CardTitle>Alpha builds</CardTitle>
+                  <CardDescription>
+                    First functional builds with basic HTTP capture and inspection. Early testing
+                    with a small group of developers to validate the approach.
+                  </CardDescription>
+                </CardHeader>
+              </Card>
+            </TimelineItem>
+
+            <TimelineItem icon={<CheckCircle2 className="h-5 w-5 text-primary sm:h-6 sm:w-6" />}>
+              <Card>
+                <CardHeader>
+                  <div className="mb-2 text-xs font-medium text-muted-foreground sm:text-sm">
+                    November 2024
+                  </div>
+                  <CardTitle>Open source release</CardTitle>
+                  <CardDescription>
+                    Published source code on GitHub under MIT license. Established contribution
+                    guidelines and project structure for community involvement.
+                  </CardDescription>
+                </CardHeader>
+              </Card>
+            </TimelineItem>
+
+            <TimelineItem icon={<CheckCircle2 className="h-5 w-5 text-primary sm:h-6 sm:w-6" />}>
+              <Card>
+                <CardHeader>
+                  <div className="mb-2 text-xs font-medium text-muted-foreground sm:text-sm">
+                    December 2024
+                  </div>
+                  <CardTitle>TestFlight launch</CardTitle>
+                  <CardDescription>
+                    Trace 1.0 released on TestFlight with core features: device-wide capture, TLS
+                    inspection, WebSocket support, and traffic modification tools.
+                  </CardDescription>
+                </CardHeader>
+              </Card>
+            </TimelineItem>
+
+            <TimelineItem
+              icon={<GitBranch className="h-5 w-5 text-muted-foreground sm:h-6 sm:w-6" />}
+            >
+              <Card>
+                <CardHeader>
+                  <div className="mb-2 text-xs font-medium text-muted-foreground sm:text-sm">
+                    Q1 2026
+                  </div>
+                  <CardTitle>Advanced features</CardTitle>
+                  <CardDescription>
+                    Planned: Advanced filtering, request comparison tool, saved filter presets, and
+                    performance optimizations for large sessions.
+                  </CardDescription>
+                </CardHeader>
+              </Card>
+            </TimelineItem>
+
+            <TimelineItem
+              icon={<Package className="h-5 w-5 text-muted-foreground sm:h-6 sm:w-6" />}
+            >
+              <Card>
+                <CardHeader>
+                  <div className="mb-2 text-xs font-medium text-muted-foreground sm:text-sm">
+                    Q3 2026
+                  </div>
+                  <CardTitle>App Store release</CardTitle>
+                  <CardDescription>
+                    Target: Submit to the App Store after gathering feedback from TestFlight users
+                    and implementing major features.
+                  </CardDescription>
+                </CardHeader>
+              </Card>
+            </TimelineItem>
+          </Timeline>
+        </div>
+      </section>
+
+      <Separator />
+
+      {/* Team */}
+      <section className="container py-section">
+        <div className="mx-auto max-w-readable">
+          <h2 className="mb-6 text-2xl font-bold tracking-tight sm:mb-8 sm:text-3xl">Team</h2>
+          <Card>
+            <CardHeader>
+              <CardTitle>Justin Lu</CardTitle>
+              <CardDescription>Creator &amp; Maintainer</CardDescription>
+            </CardHeader>
+            <CardContent className="space-y-3">
+              <p className="leading-relaxed text-muted-foreground">
+                iOS developer passionate about building tools that make debugging easier. Created
+                Trace to solve real network debugging pain points on iOS.
+              </p>
+              <div className="flex gap-4">
+                <a
+                  href="https://github.com/lujuncheng"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-sm text-primary hover:underline"
+                >
+                  GitHub
+                </a>
+                <a
+                  href="https://twitter.com/justinlu_site"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-sm text-primary hover:underline"
+                >
+                  Twitter
+                </a>
+              </div>
+            </CardContent>
+          </Card>
+
+          <div className="mt-6">
+            <h3 className="mb-4 text-lg font-semibold">Contributors</h3>
+            <p className="leading-relaxed text-muted-foreground">
+              Trace is shaped by contributions from developers around the world. Thank you to
+              everyone who has submitted code, reported bugs, improved documentation, or provided
+              feedback. See the{' '}
+              <a
+                href="https://github.com/Trace-iOS/Trace/graphs/contributors"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-primary hover:underline"
+              >
+                full list of contributors
+              </a>{' '}
+              on GitHub.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <Separator />
+
+      {/* CTA */}
+      <section className="container py-section">
+        <div className="mx-auto max-w-readable text-center">
+          <Heart className="mx-auto mb-4 h-10 w-10 text-primary sm:mb-6 sm:h-12 sm:w-12" />
+          <h2 className="mb-3 text-2xl font-bold tracking-tight sm:mb-4 sm:text-3xl">
+            Join the journey
+          </h2>
+          <p className="mb-6 text-sm text-muted-foreground sm:mb-8 sm:text-base">
+            Trace is built in the open with the community. Contribute code, report bugs, suggest
+            features, or simply star the project to show your support.
+          </p>
+          <div className="flex flex-col justify-center gap-3 sm:flex-row sm:gap-4">
+            <a
+              href="https://github.com/Trace-iOS/Trace"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex h-10 items-center justify-center rounded-md bg-primary px-6 text-sm font-medium text-primary-foreground hover:bg-primary/90 sm:h-11 sm:px-8"
+            >
+              <Code className="mr-2 h-4 w-4" />
+              View on GitHub
+            </a>
+            <Link
+              href="/contributing"
+              className="inline-flex h-10 items-center justify-center rounded-md border border-input bg-background px-6 text-sm font-medium hover:bg-accent hover:text-accent-foreground sm:h-11 sm:px-8"
+            >
+              <Rocket className="mr-2 h-4 w-4" />
+              Start contributing
+            </Link>
+          </div>
+        </div>
+      </section>
+    </div>
+  );
+}

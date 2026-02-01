@@ -1,4 +1,18 @@
 import { Separator } from '@/components/ui/separator';
+import { Shield } from 'lucide-react';
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Privacy Policy',
+  description:
+    'Trace privacy policy. Learn how Trace handles your data with complete transparency and privacy-first principles.',
+  keywords: ['Trace privacy', 'privacy policy', 'data handling', 'privacy-first'],
+  openGraph: {
+    title: 'Privacy Policy - Trace',
+    description: 'How Trace handles your data with complete transparency.',
+    url: 'https://trace.justinl.site/privacy',
+  },
+};
 
 export default function PrivacyPage() {
   return (
@@ -6,6 +20,7 @@ export default function PrivacyPage() {
       {/* Header */}
       <section className="container py-section">
         <div className="mx-auto max-w-readable text-center">
+          <Shield className="mx-auto mb-4 h-10 w-10 text-muted-foreground sm:mb-6 sm:h-12 sm:w-12" />
           <h1 className="mb-3 text-3xl font-bold tracking-tight sm:mb-4 sm:text-4xl md:text-5xl">
             Privacy Policy
           </h1>

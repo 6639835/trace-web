@@ -1,0 +1,58 @@
+export const metadata = {
+  title: 'Introducing Trace 1.0',
+  description:
+    'After months of development, Trace 1.0 is here. A professional iOS network debugger built entirely on-device with no compromises on privacy or performance.',
+  date: '2025-12-15',
+  category: 'Releases',
+  readTime: '5 min read',
+  author: {
+    name: 'Justin Lu',
+    role: 'Creator',
+  },
+};
+
+# Introducing Trace 1.0
+
+We're excited to announce the first stable release of Trace, a professional iOS network debugger designed from the ground up for developers who need precise, low-level visibility into their apps' network behavior.
+
+## Why Trace exists
+
+iOS network debugging has traditionally required desktop tools like Charles or Proxyman, manual proxy configuration, and accepting the limitations of external tooling. We built Trace to solve this differently: entirely on-device, privacy-first, and designed specifically for the iOS debugging workflow.
+
+## What makes Trace different
+
+### On-device architecture
+
+Everything runs locally on your iPhone or iPad. No data leaves your device. No desktop companion app. No cloud services. Trace uses Network Extension to implement a system-level packet tunnel that captures traffic directly on your device.
+
+### TLS MITM done right
+
+Trace includes an on-device certificate authority that dynamically generates certificates for intercepted domains. Install the root CA once, enable it in Settings, and Trace handles the rest. All cryptographic operations happen locally with complete transparency about what's being intercepted.
+
+### First-class protocol support
+
+HTTP/1.1, HTTP/2, WebSocket, and Server-Sent Events are all supported with dedicated inspection UIs. WebSocket frames are captured and displayed in real-time. SSE streams are parsed and shown with full event context. No protocol is treated as an afterthought.
+
+## Core features in 1.0
+
+**Device-wide capture**: Network Extension-based proxy configuration captures traffic from any app that honors system proxy settings. No per-app setup required.
+
+**Traffic modification**: Rewrite rules, request maps, host overrides, and JavaScript scripts give you complete control over requests and responses. Test error conditions, mock APIs, or redirect traffic to staging environments.
+
+**Request builder**: Craft custom requests with full header and body control. Import cURL commands directly or export any captured request as cURL.
+
+**Advanced filtering**: Filter by domain, method, status code, content type, or custom patterns. Save filter presets for common debugging scenarios.
+
+**Export everything**: HAR format for compatibility with other tools. PCAP export for offline protocol analysis. Configuration export to share rewrite rules and scripts.
+
+## What's next
+
+This is just the beginning. We have plans for advanced filtering, performance optimizations, collaboration features, and extensibility APIs. The roadmap is public and shaped by community feedback.
+
+## Try it today
+
+Trace is available on TestFlight for free. It's open source under the MIT license, and contributions are welcome.
+
+[Download on TestFlight](https://testflight.apple.com/join/DPt8BIup) • [View on GitHub](https://github.com/Trace-iOS/Trace)
+
+Thank you to everyone who tested early builds and provided feedback. This release wouldn't exist without you.

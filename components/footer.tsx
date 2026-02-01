@@ -54,18 +54,33 @@ export function Footer() {
                 </Link>
               </li>
               <li>
-                <Link href="/open-source" className="transition-colors hover:text-foreground">
-                  Open Source
+                <Link href="/blog" className="transition-colors hover:text-foreground">
+                  Blog
                 </Link>
               </li>
               <li>
-                <Link
-                  href="https://stats.uptimerobot.com/37hByzDJwT"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="transition-colors hover:text-foreground"
-                >
-                  Status Page
+                <Link href="/faq" className="transition-colors hover:text-foreground">
+                  FAQ
+                </Link>
+              </li>
+              <li>
+                <Link href="/support" className="transition-colors hover:text-foreground">
+                  Support
+                </Link>
+              </li>
+              <li>
+                <Link href="/showcase" className="transition-colors hover:text-foreground">
+                  Showcase
+                </Link>
+              </li>
+              <li>
+                <Link href="/comparison" className="transition-colors hover:text-foreground">
+                  Comparison
+                </Link>
+              </li>
+              <li>
+                <Link href="/open-source" className="transition-colors hover:text-foreground">
+                  Open Source
                 </Link>
               </li>
             </ul>
@@ -84,6 +99,26 @@ export function Footer() {
                   GitHub
                 </Link>
               </li>
+              <li>
+                <Link href="/about" className="transition-colors hover:text-foreground">
+                  About
+                </Link>
+              </li>
+              <li>
+                <Link href="/contributing" className="transition-colors hover:text-foreground">
+                  Contributing
+                </Link>
+              </li>
+              <li>
+                <Link href="/sponsors" className="transition-colors hover:text-foreground">
+                  Sponsors
+                </Link>
+              </li>
+              <li>
+                <Link href="/press" className="transition-colors hover:text-foreground">
+                  Press Kit
+                </Link>
+              </li>
             </ul>
           </div>
 
@@ -96,8 +131,13 @@ export function Footer() {
                 </Link>
               </li>
               <li>
-                <Link href="/open-source" className="transition-colors hover:text-foreground">
-                  License
+                <Link href="/terms" className="transition-colors hover:text-foreground">
+                  Terms of Service
+                </Link>
+              </li>
+              <li>
+                <Link href="/status" className="transition-colors hover:text-foreground">
+                  Status
                 </Link>
               </li>
             </ul>

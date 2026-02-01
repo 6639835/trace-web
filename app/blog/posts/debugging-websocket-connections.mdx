@@ -1,0 +1,192 @@
+export const metadata = {
+  title: 'Debugging WebSocket Connections with Trace',
+  description:
+    'Learn how to capture, inspect, and debug WebSocket traffic in iOS apps using Trace. Frame-by-frame analysis, connection lifecycle tracking, and common debugging patterns.',
+  date: '2026-01-05',
+  category: 'Tutorials',
+  readTime: '6 min read',
+  author: {
+    name: 'Justin Lu',
+    role: 'Creator',
+  },
+};
+
+# Debugging WebSocket Connections with Trace
+
+WebSockets are essential for real-time features in modern apps—chat, live updates, collaborative editing, and more. But debugging WebSocket connections can be challenging because of their bidirectional, long-lived nature. This tutorial shows you how to use Trace to debug WebSocket traffic effectively.
+
+## What makes WebSockets different
+
+Unlike HTTP, which follows a request-response pattern, WebSocket connections:
+
+- Start with an HTTP upgrade handshake
+- Maintain a persistent bidirectional connection
+- Send messages (frames) in both directions asynchronously
+- Can stay open for minutes or hours
+
+Traditional HTTP debugging tools often show the initial handshake but miss the actual message traffic. Trace treats WebSockets as first-class protocol with dedicated inspection.
+
+## Capturing WebSocket traffic
+
+WebSocket capture in Trace is automatic. When your app establishes a WebSocket connection:
+
+1. Start a capture session in Trace
+2. Use your app's real-time features
+3. Find the WebSocket connection in the request list (look for status code 101 Switching Protocols)
+4. Tap the request to see the full connection details
+
+## Understanding the handshake
+
+Every WebSocket connection begins with an HTTP upgrade request:
+
+```
+GET /chat HTTP/1.1
+Host: api.example.com
+Upgrade: websocket
+Connection: Upgrade
+Sec-WebSocket-Key: x3JJHMbDL1EzLkh9GBhXDw==
+Sec-WebSocket-Version: 13
+```
+
+The server responds with:
+
+```
+HTTP/1.1 101 Switching Protocols
+Upgrade: websocket
+Connection: Upgrade
+Sec-WebSocket-Accept: HSmrc0sMlYUkAGmm5OPpG2HaGWk=
+```
+
+Trace captures both the request and response headers. The 101 status code indicates the connection was successfully upgraded to WebSocket.
+
+## Frame-by-frame inspection
+
+After the handshake, Trace shows all WebSocket frames in chronological order:
+
+### Frame types
+
+WebSocket defines several frame types:
+
+- **Text frames**: UTF-8 encoded text messages
+- **Binary frames**: Raw binary data
+- **Ping/Pong frames**: Keep-alive messages
+- **Close frames**: Connection termination
+
+Trace displays each frame with:
+
+- Timestamp (relative to connection start)
+- Direction (sent or received)
+- Frame type and opcode
+- Payload size
+- Full payload content
+
+### Reading frame content
+
+For text frames, Trace automatically formats JSON payloads for readability:
+
+```json
+{
+  "type": "message",
+  "user": "alice",
+  "content": "Hello, world!",
+  "timestamp": 1704470400
+}
+```
+
+For binary frames, Trace shows a hex dump with ASCII representation.
+
+## Common debugging scenarios
+
+### Debugging connection failures
+
+If your WebSocket connection fails to establish:
+
+1. Check the initial HTTP request—are the `Upgrade` and `Connection` headers present?
+2. Verify the server response—is the status 101 or an error code?
+3. Look for certificate pinning warnings if using WSS (secure WebSocket)
+
+Common failure modes:
+
+- **403 Forbidden**: Authentication or authorization issue
+- **404 Not Found**: Wrong endpoint URL
+- **Timeout**: Server not responding or network issue
+
+### Tracking message flow
+
+For debugging message ordering or timing issues:
+
+1. Open the WebSocket detail view
+2. Use the frame timeline to see message sequence
+3. Check timestamps to identify delays
+4. Filter frames by direction (sent vs received)
+
+Example: If your app expects a response within 5 seconds but receives it after 10, the timeline will show the delay.
+
+### Identifying protocol violations
+
+WebSocket has specific rules about frame structure and message flow. Trace helps identify violations:
+
+- **Unexpected close**: Connection closed without a close frame
+- **Invalid frame opcode**: Server sent an unknown frame type
+- **Fragmentation issues**: Message fragments in wrong order
+
+Trace flags protocol violations with warnings in the UI.
+
+## Advanced tips
+
+### Filtering WebSocket connections
+
+In a busy capture session, filter for WebSocket traffic:
+
+1. Use the filter bar to search for status code `101`
+2. Or filter by URL pattern if you know the WebSocket endpoint
+3. Save common filters as presets
+
+### Exporting WebSocket data
+
+Export WebSocket traffic for offline analysis:
+
+- **HAR export**: Includes handshake and frame data
+- **Copy frames**: Copy individual frame payloads to clipboard
+- **Screenshot**: Share frame details with team members
+
+### Testing with request builder
+
+Trace's request builder doesn't currently support WebSocket connections (HTTP-only), but you can:
+
+1. Capture a real WebSocket handshake
+2. Export as cURL to see the exact headers
+3. Modify your app's WebSocket client based on findings
+
+## Real-world example
+
+Let's debug a chat app that occasionally misses messages:
+
+1. Start Trace capture
+2. Open the chat app and send/receive several messages
+3. Find the WebSocket connection (URL contains `/ws/chat`)
+4. Examine the frame timeline
+
+**Finding**: Some sent messages don't have corresponding received acknowledgment frames. This suggests either:
+
+- Server isn't sending ACKs (check server logs)
+- Network is dropping frames (check connection stability)
+- App isn't handling ACKs correctly (check app logic)
+
+The frame timestamps show the issue occurs when frames arrive within 100ms of each other—potential race condition.
+
+## Limitations
+
+A few things to be aware of:
+
+- **Compression**: WebSocket per-message compression is not currently decompressed in the UI
+- **Binary protocols**: Proprietary binary protocols require manual interpretation
+- **Multiple subprotocols**: Trace shows raw frames without protocol-specific parsing
+
+These are areas for future improvement.
+
+## Conclusion
+
+WebSocket debugging is crucial for modern iOS apps with real-time features. Trace gives you complete visibility into connection lifecycle, frame content, and timing—everything you need to debug real-time communication effectively.
+
+For more on WebSocket support, see the [WebSocket documentation](/docs/websockets).

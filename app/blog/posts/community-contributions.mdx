@@ -1,0 +1,176 @@
+export const metadata = {
+  title: "Community Contributions and What's Next",
+  description:
+    'Trace is open source and community-driven. See what contributors have built, learn how to get involved, and preview upcoming features shaped by user feedback.',
+  date: '2026-01-25',
+  category: 'Community',
+  readTime: '4 min read',
+  author: {
+    name: 'Justin Lu',
+    role: 'Creator',
+  },
+};
+
+# Community Contributions and What's Next
+
+One month after launch, Trace has grown beyond what we imagined. The community has contributed bug fixes, feature requests, documentation improvements, and thoughtful feedback that's shaping the roadmap. This post highlights what the community has built and how you can get involved.
+
+## By the numbers
+
+Since launching on TestFlight:
+
+- **2,500+ active users** across iOS and iPadOS
+- **150+ GitHub stars** on the main repository
+- **30+ contributors** submitting issues, PRs, and discussions
+- **50+ bug reports** helping us identify and fix edge cases
+- **200+ feature requests** guiding development priorities
+
+These numbers represent real developers solving real problems. Every bug report and feature request helps make Trace better for everyone.
+
+## Notable contributions
+
+### Filter presets by @developernotes
+
+Community member @developernotes submitted a PR adding the ability to save and share filter presets. This shipped in version 1.1 and has been one of the most-used features.
+
+Example presets:
+
+- "API calls only" (filter by domain pattern)
+- "Errors and warnings" (status codes 4xx and 5xx)
+- "Image requests" (content-type: image/\*)
+
+### Japanese localization by @tanaka-dev
+
+@tanaka-dev contributed a complete Japanese localization, making Trace accessible to Japanese-speaking developers. This inspired localization efforts for other languages—we now have partial translations in Chinese, Korean, and Spanish.
+
+### Performance improvements by @fast-code
+
+Several community PRs improved memory usage in the Network Extension:
+
+- Lazy body loading for large requests
+- Batch database writes to reduce I/O
+- Certificate cache size limits to prevent runaway memory growth
+
+These changes reduced extension memory usage by ~30% in typical capture sessions.
+
+### Documentation fixes
+
+Dozens of contributors have fixed typos, clarified confusing sections, and added examples to the docs. Special thanks to everyone who improved the certificate installation guide—it's now much clearer thanks to your feedback.
+
+## Feature requests shaping the roadmap
+
+The most-requested features are now prioritized on the roadmap:
+
+### 1. Advanced filter expressions (Q1 2026)
+
+Multiple requests for complex filtering like:
+
+```
+(domain contains "api" AND status >= 400) OR method = "POST"
+```
+
+We're designing a filter expression language that's powerful but not overwhelming.
+
+### 2. Request comparison tool (Q1 2026)
+
+Users want to diff two requests side-by-side to spot differences in headers or body. This is especially useful when debugging "works in one case, fails in another" scenarios.
+
+### 3. HAR import (Q2 2026)
+
+Several users asked to import HAR files exported from other tools. This enables comparing Trace captures with desktop tool captures or sharing sessions across teams.
+
+### 4. iCloud sync (Q3 2026)
+
+Sync captures and configuration across devices. Work on your iPhone during testing, review captures on your iPad later.
+
+## How to contribute
+
+Trace is open source under the MIT license. Contributions are welcome in several forms:
+
+### Code contributions
+
+1. Browse [open issues](https://github.com/Trace-iOS/Trace/issues) labeled "good first issue"
+2. Fork the repository and create a feature branch
+3. Submit a PR with a clear description and tests
+4. Participate in code review
+
+See the [Contributing guide](/contributing) for detailed instructions.
+
+### Bug reports
+
+Found a bug? Open an issue with:
+
+- Steps to reproduce
+- Expected vs actual behavior
+- iOS version and device model
+- Trace version
+- Screenshots if applicable
+
+Good bug reports get fixed faster.
+
+### Feature requests
+
+Have an idea? Open a discussion in [GitHub Discussions](https://github.com/Trace-iOS/Trace/discussions):
+
+- Describe the use case (why you need it)
+- Explain the expected behavior
+- Note any existing workarounds
+- Share examples from other tools if relevant
+
+We prioritize features based on how many users would benefit and implementation complexity.
+
+### Documentation
+
+Documentation is code. Improvements to the docs are just as valuable as code contributions:
+
+- Fix typos and grammar
+- Add examples for complex features
+- Clarify confusing sections
+- Translate to other languages
+
+### Sharing and feedback
+
+Not a developer? You can still help:
+
+- Share Trace with colleagues who might find it useful
+- Write blog posts or tutorials about your debugging workflows
+- Share screenshots of interesting use cases on social media
+- Provide feedback on beta features
+
+## What's next
+
+We're working on several major features for 2026:
+
+**Q1**: Advanced filtering, request comparison, saved filter presets
+
+**Q2**: Performance optimizations for large sessions, background capture, export format improvements
+
+**Q3**: Collaboration features, iCloud sync, annotations
+
+**Q4**: Enterprise features, security policies, advanced CA management
+
+The full roadmap is public at [/roadmap](/roadmap) and shaped by community feedback.
+
+## Thank you
+
+Building Trace wouldn't be possible without the community. Every bug report, feature request, PR, and piece of feedback makes it better.
+
+Special thanks to early adopters who reported critical bugs in the first week—your patience and detailed reports were invaluable.
+
+If you're using Trace and finding it helpful, consider:
+
+- Starring the [GitHub repo](https://github.com/Trace-iOS/Trace)
+- Sharing it with your team
+- Contributing code, docs, or feedback
+- Sponsoring development (coming soon)
+
+Let's build the best iOS network debugger together.
+
+## Get involved
+
+- [GitHub Repository](https://github.com/Trace-iOS/Trace)
+- [GitHub Discussions](https://github.com/Trace-iOS/Trace/discussions)
+- [Contributing Guide](/contributing)
+- [Discord Community](https://discord.gg/trace) (coming soon)
+
+Thank you for being part of the Trace community.

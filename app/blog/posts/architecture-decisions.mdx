@@ -1,0 +1,281 @@
+export const metadata = {
+  title: 'Architecture Decisions Behind Trace',
+  description:
+    'Why Trace uses Network Extension, how the app and extension communicate, and the technical decisions that shaped its architecture. A look at the trade-offs and reasoning.',
+  date: '2026-01-15',
+  category: 'Technical',
+  readTime: '10 min read',
+  author: {
+    name: 'Justin Lu',
+    role: 'Creator',
+  },
+};
+
+# Architecture Decisions Behind Trace
+
+Building a network debugger for iOS involves navigating Apple's sandbox restrictions, performance constraints, and privacy requirements. This post explores the key architectural decisions behind Trace and the trade-offs we made.
+
+## Network Extension vs packet capture
+
+The fundamental question: How do you capture network traffic on iOS?
+
+### Option 1: Packet capture (rejected)
+
+iOS doesn't provide packet capture APIs for third-party apps. Even with a Network Extension, you can't capture raw packets from other apps like you can with tcpdump on macOS.
+
+Why not: API doesn't exist, would require jailbreak.
+
+### Option 2: VPN (rejected)
+
+A VPN can route all traffic through your app, but VPNs on iOS have limitations:
+
+- Users can only have one VPN active at a time
+- Conflicts with corporate VPNs, personal VPNs, or other debugging tools
+- "VPN" in the status bar creates user confusion
+- VPN profiles require MDM or manual installation
+
+Why not: Poor user experience, conflicts with existing VPNs.
+
+### Option 3: Network Extension packet tunnel (chosen)
+
+`NEPacketTunnelProvider` is designed for VPN implementations, but can also be used in "proxy-only" mode where you configure system proxy settings without routing all IP traffic.
+
+Why this works:
+
+- System-level proxy configuration captures traffic from apps that honor proxies
+- No conflict with VPNs (proxies and VPNs coexist)
+- Clean activation UI (iOS handles permission prompts)
+- Runs in a separate process with elevated privileges
+
+**Trade-off**: Only captures traffic from apps that respect system proxy settings. Apps that bypass the proxy (using custom networking, ignoring proxy configs) won't be captured.
+
+This is acceptable because the vast majority of apps use `URLSession` or similar APIs that honor system settings.
+
+## App Group storage
+
+The app and Network Extension run in separate processes and sandboxes. They need shared storage for:
+
+- Captured requests and responses
+- Configuration (rewrite rules, scripts, etc.)
+- The root CA certificate and private key
+
+### Why App Groups?
+
+App Groups provide a shared container accessible to both the app and extension:
+
+```swift
+let container = FileManager.default.containerURL(
+    forSecurityApplicationGroupIdentifier: "group.com.trace"
+)
+```
+
+Both processes can read and write to this container. We use it for:
+
+- **SQLite database**: Stores captured requests, responses, and metadata
+- **Configuration files**: JSON files for rules, maps, scripts
+- **Certificate storage**: Root CA and generated certificates
+- **Temporary files**: Large request/response bodies
+
+**Trade-off**: No built-in synchronization. We handle concurrent access with SQLite's built-in locking and careful file coordination.
+
+## Two-process architecture
+
+### Network Extension process
+
+The extension runs continuously when capture is active:
+
+- Receives all proxied traffic from iOS
+- Performs TLS MITM if enabled
+- Applies rewrite rules and request maps
+- Writes captured data to the shared database
+- Forwards traffic to destination servers
+
+This process is resource-constrained—iOS can terminate it if it uses too much memory or CPU.
+
+### Main app process
+
+The main app:
+
+- Provides the UI for viewing captures
+- Reads from the shared database
+- Allows configuration of rules and settings
+- Manages the extension lifecycle (start/stop)
+
+**Trade-off**: Two processes mean two memory budgets, but also isolation—if the UI crashes, capture continues.
+
+## Database design
+
+We use SQLite for structured capture data:
+
+### Schema
+
+```sql
+CREATE TABLE requests (
+    id INTEGER PRIMARY KEY,
+    url TEXT,
+    method TEXT,
+    status_code INTEGER,
+    timestamp REAL,
+    body_path TEXT,
+    ...
+);
+
+CREATE TABLE headers (
+    request_id INTEGER,
+    name TEXT,
+    value TEXT,
+    is_request INTEGER,
+    ...
+);
+```
+
+Bodies are stored as separate files (referenced by `body_path`) to avoid SQLite's size limits and memory pressure.
+
+**Trade-off**: File I/O overhead vs memory efficiency. We chose memory efficiency because iOS aggressively terminates memory-heavy extensions.
+
+## SwiftUI for UI
+
+The app is built entirely in SwiftUI:
+
+- Declarative UI matches iOS platform conventions
+- Built-in state management with `@State` and `@Observable`
+- Native performance and animations
+- Easier to maintain than UIKit for this use case
+
+**Trade-off**: Some advanced UI patterns (like virtualized lists for 10,000+ items) are harder in SwiftUI. We'll optimize if this becomes a bottleneck.
+
+## Certificate generation strategy
+
+Dynamically generating certificates during TLS handshakes introduces latency. How do we minimize it?
+
+### Approach 1: Generate on-demand (chosen)
+
+Generate certificates when first needed, cache them:
+
+```swift
+func getCertificate(for host: String) -> SecCertificate {
+    if let cached = certificateCache[host] {
+        return cached
+    }
+    let cert = generateCertificate(for: host)
+    certificateCache[host] = cert
+    return cert
+}
+```
+
+**Trade-off**: First connection to a domain is slightly slower (50-100ms), but subsequent connections are fast.
+
+### Approach 2: Pre-generate (rejected)
+
+Pre-generate certificates for common domains on app launch.
+
+Why not: Can't predict which domains users will access. Would waste CPU and storage.
+
+## Why Swift Package Manager?
+
+Trace is structured as multiple SPM modules:
+
+- **TraceCore**: Shared models and utilities
+- **TraceProxy**: Proxy server and MITM logic
+- **TraceExtension**: Network Extension provider
+- **TraceApp**: SwiftUI app
+
+### Benefits
+
+- Clear module boundaries prevent accidental coupling
+- Faster incremental builds (only changed modules rebuild)
+- Easier to test individual modules
+- Potential for code reuse in future macOS or iPadOS variants
+
+**Trade-off**: More boilerplate for module setup, but better long-term maintainability.
+
+## Performance optimizations
+
+### Lazy body loading
+
+Large request/response bodies aren't loaded into memory until the user taps to view them:
+
+```swift
+struct RequestDetail: View {
+    let request: Request
+    @State private var body: Data?
+
+    var body: some View {
+        VStack {
+            // ... headers, metadata ...
+            if let body = body {
+                BodyView(body)
+            }
+        }
+        .task {
+            body = await loadBody(request.bodyPath)
+        }
+    }
+}
+```
+
+### Database indexing
+
+Indexes on common query patterns:
+
+```sql
+CREATE INDEX idx_timestamp ON requests(timestamp);
+CREATE INDEX idx_url ON requests(url);
+CREATE INDEX idx_status ON requests(status_code);
+```
+
+### Background processing
+
+Non-critical work (like calculating request size stats) happens on background queues to keep the UI responsive.
+
+## What didn't work
+
+Some approaches we tried and abandoned:
+
+### In-memory capture storage
+
+Initially, we stored captures in memory (arrays of structs). This was simple but caused memory pressure in the extension, leading to termination by iOS.
+
+**Lesson**: Always use persistent storage for unbounded data in Network Extensions.
+
+### Shared memory via XPC
+
+We tried using XPC for fast communication between processes. It worked but added complexity without meaningful performance gains over database polling.
+
+**Lesson**: Simpler is better. SQLite as a message queue is good enough.
+
+### Custom binary protocol for storage
+
+We experimented with a custom binary format for captures instead of SQLite. It was faster but much harder to debug and query.
+
+**Lesson**: Use proven tools. SQLite's query capabilities are worth the slight overhead.
+
+## Lessons learned
+
+1. **iOS will terminate your extension**: Design for minimal memory usage
+2. **Debugging extensions is hard**: Invest in logging infrastructure early
+3. **Users won't read documentation**: Make the UI self-explanatory
+4. **Certificate trust is confusing**: Provide step-by-step visual guides
+5. **Performance matters**: Even a debugging tool needs to be fast
+
+## Future improvements
+
+Areas we're actively working on:
+
+- **Memory optimization**: Handle sessions with 10,000+ requests without slowdown
+- **Better filtering**: Complex queries with AND/OR logic
+- **Export formats**: Postman collections, Paw files
+- **Collaborative features**: Share sessions with annotations
+
+## Conclusion
+
+Architectural decisions are always trade-offs. Trace prioritizes:
+
+1. Privacy (on-device, no telemetry)
+2. Reliability (crash-resistant two-process design)
+3. Compatibility (works with existing VPNs)
+4. Performance (efficient storage, lazy loading)
+
+The result is a tool that works well within iOS's constraints while providing the features developers need.
+
+For implementation details, see the [Architecture documentation](/docs/architecture) or browse the [source code](https://github.com/Trace-iOS/Trace).

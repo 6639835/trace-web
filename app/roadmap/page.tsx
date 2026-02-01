@@ -13,7 +13,6 @@ import {
   Globe,
   Code,
   GitBranch,
-  Cloud,
   Lock,
 } from 'lucide-react';
 
@@ -238,8 +237,8 @@ export default function RoadmapPage() {
             Product Roadmap
           </h1>
           <p className="mx-auto max-w-readable text-sm leading-relaxed text-muted-foreground sm:text-base lg:text-lg">
-            Our vision for the future of iOS network debugging. Track progress, see what's coming
-            next, and help shape the development of Trace.
+            Our vision for the future of iOS network debugging. Track progress, see what&apos;s
+            coming next, and help shape the development of Trace.
           </p>
         </div>
       </section>
@@ -251,7 +250,7 @@ export default function RoadmapPage() {
         <div className="mx-auto max-w-readable">
           <div className="relative">
             {/* Vertical line */}
-            <div className="absolute left-[19px] top-0 h-full w-0.5 bg-border sm:left-[23px]" />
+            <div className="absolute top-0 left-[19px] h-full w-0.5 bg-border sm:left-[23px]" />
 
             {/* Milestones */}
             <div className="space-y-8 sm:space-y-10 md:space-y-12">
@@ -262,7 +261,7 @@ export default function RoadmapPage() {
                 return (
                   <div key={index} className="relative pl-12 sm:pl-16">
                     {/* Timeline dot */}
-                    <div className="absolute left-0 top-0">
+                    <div className="absolute top-0 left-0">
                       <div className="flex h-10 w-10 items-center justify-center rounded-full border-2 border-border bg-background sm:h-12 sm:w-12">
                         <StatusIcon
                           className={`h-5 w-5 sm:h-6 sm:w-6 ${
@@ -313,9 +312,7 @@ export default function RoadmapPage() {
                                 <div className="h-1.5 w-1.5 rounded-full bg-muted-foreground sm:h-2 sm:w-2" />
                               </div>
                               <div className="min-w-0 flex-1">
-                                <div className="text-xs font-medium sm:text-sm">
-                                  {feature.name}
-                                </div>
+                                <div className="text-xs font-medium sm:text-sm">{feature.name}</div>
                                 <div className="mt-0.5 text-2xs text-muted-foreground sm:text-xs">
                                   {feature.description}
                                 </div>
@@ -343,8 +340,8 @@ export default function RoadmapPage() {
             Open source and community-driven
           </h2>
           <p className="mb-6 text-sm leading-relaxed text-muted-foreground sm:mb-8 sm:text-base">
-            This roadmap reflects our vision, but your feedback shapes our priorities. Trace is
-            open source, and we welcome contributions, feature requests, and discussions from the
+            This roadmap reflects our vision, but your feedback shapes our priorities. Trace is open
+            source, and we welcome contributions, feature requests, and discussions from the
             community.
           </p>
           <div className="flex flex-col justify-center gap-3 sm:flex-row sm:gap-4">
