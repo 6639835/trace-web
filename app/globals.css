@@ -9,19 +9,19 @@
     --card-foreground: 0 0% 3.9%;
     --popover: 0 0% 100%;
     --popover-foreground: 0 0% 3.9%;
-    --primary: 0 0% 9%;
+    --primary: 221 83% 53%;
     --primary-foreground: 0 0% 98%;
     --secondary: 0 0% 96.1%;
     --secondary-foreground: 0 0% 9%;
     --muted: 0 0% 96.1%;
     --muted-foreground: 0 0% 45.1%;
-    --accent: 0 0% 96.1%;
-    --accent-foreground: 0 0% 9%;
+    --accent: 221 83% 53%;
+    --accent-foreground: 0 0% 98%;
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 98%;
     --border: 0 0% 89.8%;
     --input: 0 0% 89.8%;
-    --ring: 0 0% 3.9%;
+    --ring: 221 83% 53%;
     --radius: 0.5rem;
   }
 
@@ -32,19 +32,19 @@
     --card-foreground: 0 0% 98%;
     --popover: 0 0% 3.9%;
     --popover-foreground: 0 0% 98%;
-    --primary: 0 0% 98%;
-    --primary-foreground: 0 0% 9%;
+    --primary: 221 83% 63%;
+    --primary-foreground: 0 0% 98%;
     --secondary: 0 0% 14.9%;
     --secondary-foreground: 0 0% 98%;
     --muted: 0 0% 14.9%;
     --muted-foreground: 0 0% 63.9%;
-    --accent: 0 0% 14.9%;
+    --accent: 221 83% 63%;
     --accent-foreground: 0 0% 98%;
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 0 0% 98%;
     --border: 0 0% 14.9%;
     --input: 0 0% 14.9%;
-    --ring: 0 0% 83.1%;
+    --ring: 221 83% 63%;
   }
 }
 
@@ -97,30 +97,32 @@
   }
 
   .prose a {
-    @apply font-medium text-primary hover:underline;
+    font-weight: 500 !important;
+    color: hsl(var(--primary)) !important;
+    text-decoration: none !important;
   }
 
-  .prose a.docs-card {
-    text-decoration: none;
+  .prose a:hover {
+    color: hsl(var(--primary)) !important;
+    text-decoration: underline !important;
+    text-decoration-color: hsl(var(--primary)) !important;
   }
 
+  .prose a.docs-card,
   .prose a.docs-card:hover {
-    text-decoration: none;
+    text-decoration: none !important;
   }
 
-  /* Inline code styling */
-  .prose code {
-    @apply rounded-sm bg-muted px-1.5 py-0.5 font-mono text-sm break-words;
-  }
-
-  /* Code block wrapper - handled by CodeBlock component */
-  .prose pre {
-    @apply my-0;
-  }
-
-  /* Ensure code blocks from shiki maintain proper styling */
+  /* Inline code styling - only for code NOT inside pre (code blocks) */
   .prose :not(pre) > code {
-    @apply rounded-sm bg-muted px-1.5 py-0.5 font-mono text-sm;
+    @apply rounded-sm bg-muted px-1.5 py-0.5 font-mono text-sm break-words;
+    word-wrap: break-word;
+  }
+
+  /* Reset code styling inside pre elements (code blocks) */
+  .prose pre code {
+    @apply rounded-none bg-transparent p-0 break-normal;
+    word-wrap: normal;
   }
 
   /* Override default pre styling for our custom component */
@@ -157,17 +159,19 @@
 
   /* Better code block handling on mobile */
   .prose pre {
-    @apply overflow-x-auto;
+    @apply my-0 overflow-x-auto;
   }
 
-  /* Ensure long URLs and code don't break layout on mobile */
-  .prose code {
-    @apply break-words;
-    word-wrap: break-word;
+  /* Shiki dual-theme support for code blocks */
+  .shiki,
+  .shiki span {
+    color: var(--shiki-light) !important;
+    background-color: transparent !important;
   }
 
-  .prose pre code {
-    @apply break-normal;
-    word-wrap: normal;
+  .dark .shiki,
+  .dark .shiki span {
+    color: var(--shiki-dark) !important;
+    background-color: transparent !important;
   }
 }

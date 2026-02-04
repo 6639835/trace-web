@@ -1,7 +1,11 @@
 import type { Metadata } from 'next';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import { Card, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Separator } from '@/components/ui/separator';
-import { Heart, Coffee, Zap, Award } from 'lucide-react';
+import { PageHeader } from '@/components/shared/page-header';
+import { FeatureCard } from '@/components/marketing/feature-card';
+import { BulletList, BulletItem } from '@/components/shared/bullet-list';
+import { Heart, Coffee, Zap, Award, Github } from 'lucide-react';
 
 export const metadata: Metadata = {
   title: 'Sponsors',
@@ -11,26 +15,21 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Sponsors - Trace',
     description: 'Support Trace development through GitHub Sponsors.',
-    url: 'https://trace.justinl.site/sponsors',
+    url: '/sponsors',
+  },
+  alternates: {
+    canonical: '/sponsors',
   },
 };
 
 export default function SponsorsPage() {
   return (
     <div className="flex flex-col">
-      {/* Header */}
-      <section className="container py-section">
-        <div className="mx-auto max-w-readable text-center">
-          <Heart className="mx-auto mb-4 h-10 w-10 text-primary sm:mb-6 sm:h-12 sm:w-12" />
-          <h1 className="mb-3 text-3xl font-bold tracking-tight sm:mb-4 sm:text-4xl md:text-5xl">
-            Sponsors
-          </h1>
-          <p className="text-sm leading-relaxed text-muted-foreground sm:text-base lg:text-lg">
-            Trace is free and open source. Sponsorships help sustain development and keep the
-            project thriving.
-          </p>
-        </div>
-      </section>
+      <PageHeader
+        icon={Heart}
+        title="Sponsors"
+        description="Trace is free and open source. Sponsorships help sustain development and keep the project thriving."
+      />
 
       <Separator />
 
@@ -57,57 +56,26 @@ export default function SponsorsPage() {
             How funds are used
           </h2>
           <div className="grid gap-4 sm:grid-cols-2 sm:gap-5 md:gap-6">
-            <Card>
-              <CardHeader>
-                <Coffee className="mb-2 h-8 w-8 text-primary" />
-                <CardTitle>Development time</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <CardDescription className="leading-relaxed">
-                  Sponsorships allow dedicating more time to building features, fixing bugs, and
-                  improving performance. Every dollar supports active development.
-                </CardDescription>
-              </CardContent>
-            </Card>
-
-            <Card>
-              <CardHeader>
-                <Zap className="mb-2 h-8 w-8 text-primary" />
-                <CardTitle>Infrastructure</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <CardDescription className="leading-relaxed">
-                  Hosting for the website, documentation, and CI/CD pipelines. Apple Developer
-                  Program membership for TestFlight distribution.
-                </CardDescription>
-              </CardContent>
-            </Card>
-
-            <Card>
-              <CardHeader>
-                <Award className="mb-2 h-8 w-8 text-primary" />
-                <CardTitle>Testing devices</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <CardDescription className="leading-relaxed">
-                  iOS devices for testing compatibility across different models and iOS versions.
-                  Ensuring Trace works reliably on all supported hardware.
-                </CardDescription>
-              </CardContent>
-            </Card>
-
-            <Card>
-              <CardHeader>
-                <Heart className="mb-2 h-8 w-8 text-primary" />
-                <CardTitle>Community</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <CardDescription className="leading-relaxed">
-                  Supporting contributors, organizing community events, and recognizing valuable
-                  contributions. Building a sustainable open source community.
-                </CardDescription>
-              </CardContent>
-            </Card>
+            <FeatureCard
+              icon={Coffee}
+              title="Development time"
+              description="Sponsorships allow dedicating more time to building features, fixing bugs, and improving performance. Every dollar supports active development."
+            />
+            <FeatureCard
+              icon={Zap}
+              title="Infrastructure"
+              description="Hosting for the website, documentation, and CI/CD pipelines. Apple Developer Program membership for TestFlight distribution."
+            />
+            <FeatureCard
+              icon={Award}
+              title="Testing devices"
+              description="iOS devices for testing compatibility across different models and iOS versions. Ensuring Trace works reliably on all supported hardware."
+            />
+            <FeatureCard
+              icon={Heart}
+              title="Community"
+              description="Supporting contributors, organizing community events, and recognizing valuable contributions. Building a sustainable open source community."
+            />
           </div>
         </div>
       </section>
@@ -124,28 +92,13 @@ export default function SponsorsPage() {
             <p>
               Not ready to sponsor financially? There are many ways to support Trace development:
             </p>
-            <ul className="space-y-2">
-              <li className="flex gap-2">
-                <div className="mt-2 h-1 w-1 shrink-0 rounded-full bg-foreground" />
-                <span>Contribute code, documentation, or translations</span>
-              </li>
-              <li className="flex gap-2">
-                <div className="mt-2 h-1 w-1 shrink-0 rounded-full bg-foreground" />
-                <span>Report bugs and suggest features</span>
-              </li>
-              <li className="flex gap-2">
-                <div className="mt-2 h-1 w-1 shrink-0 rounded-full bg-foreground" />
-                <span>Star the project on GitHub</span>
-              </li>
-              <li className="flex gap-2">
-                <div className="mt-2 h-1 w-1 shrink-0 rounded-full bg-foreground" />
-                <span>Share Trace with colleagues who might find it useful</span>
-              </li>
-              <li className="flex gap-2">
-                <div className="mt-2 h-1 w-1 shrink-0 rounded-full bg-foreground" />
-                <span>Write blog posts or tutorials about your workflows</span>
-              </li>
-            </ul>
+            <BulletList>
+              <BulletItem>Contribute code, documentation, or translations</BulletItem>
+              <BulletItem>Report bugs and suggest features</BulletItem>
+              <BulletItem>Star the project on GitHub</BulletItem>
+              <BulletItem>Share Trace with colleagues who might find it useful</BulletItem>
+              <BulletItem>Write blog posts or tutorials about your workflows</BulletItem>
+            </BulletList>
           </div>
         </div>
       </section>
@@ -185,20 +138,22 @@ export default function SponsorsPage() {
             sponsorship opens.
           </p>
           <div className="flex flex-col justify-center gap-3 sm:flex-row sm:gap-4">
-            <a
-              href="https://github.com/Trace-iOS/Trace"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex h-10 items-center justify-center rounded-md bg-primary px-6 text-sm font-medium text-primary-foreground hover:bg-primary/90 sm:h-11 sm:px-8"
-            >
-              Star on GitHub
-            </a>
-            <a
-              href="/contributing"
-              className="inline-flex h-10 items-center justify-center rounded-md border border-input bg-background px-6 text-sm font-medium hover:bg-accent hover:text-accent-foreground sm:h-11 sm:px-8"
-            >
-              Contribute
-            </a>
+            <Button size="lg" asChild>
+              <a
+                href="https://github.com/Trace-iOS/Trace"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Github className="mr-2 h-5 w-5" />
+                Star on GitHub
+              </a>
+            </Button>
+            <Button size="lg" variant="outline" asChild>
+              <a href="/contributing">
+                <Heart className="mr-2 h-5 w-5" />
+                Contribute
+              </a>
+            </Button>
           </div>
         </div>
       </section>

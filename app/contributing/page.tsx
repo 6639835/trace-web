@@ -1,7 +1,9 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
+import { PageHeader } from '@/components/shared/page-header';
+import { FeatureCard } from '@/components/marketing/feature-card';
 import {
   Heart,
   Code,
@@ -30,26 +32,21 @@ export const metadata: Metadata = {
     title: 'Contributing - Trace iOS Network Debugger',
     description:
       'Help build the best iOS network debugger. Contributions welcome in code, docs, translations, and more.',
-    url: 'https://trace.justinl.site/contributing',
+    url: '/contributing',
+  },
+  alternates: {
+    canonical: '/contributing',
   },
 };
 
 export default function ContributingPage() {
   return (
     <div className="flex flex-col">
-      {/* Header */}
-      <section className="container py-section">
-        <div className="mx-auto max-w-readable text-center">
-          <Heart className="mx-auto mb-4 h-10 w-10 text-primary sm:mb-6 sm:h-12 sm:w-12" />
-          <h1 className="mb-3 text-3xl font-bold tracking-tight sm:mb-4 sm:text-4xl md:text-5xl">
-            Contributing
-          </h1>
-          <p className="text-sm leading-relaxed text-muted-foreground sm:text-base lg:text-lg">
-            Trace is open source and community-driven. Contributions are welcome in many forms—code,
-            documentation, bug reports, feature requests, and more.
-          </p>
-        </div>
-      </section>
+      <PageHeader
+        icon={Heart}
+        title="Contributing"
+        description="Trace is open source and community-driven. Contributions are welcome in many forms—code, documentation, bug reports, feature requests, and more."
+      />
 
       <Separator />
 
@@ -60,126 +57,95 @@ export default function ContributingPage() {
             Ways to contribute
           </h2>
           <div className="grid gap-4 sm:grid-cols-2 sm:gap-5 md:gap-6 lg:grid-cols-3">
-            <Card>
-              <CardHeader>
-                <Code className="mb-2 h-8 w-8 text-primary" />
-                <CardTitle>Code</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <CardDescription className="mb-4 leading-relaxed">
+            <FeatureCard
+              icon={Code}
+              title="Code"
+              description={
+                <>
                   Fix bugs, implement features, or optimize performance. Browse issues labeled
                   &quot;good first issue&quot; to get started.
-                </CardDescription>
-                <a
-                  href="https://github.com/Trace-iOS/Trace/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-sm text-primary hover:underline"
-                >
-                  View good first issues →
-                </a>
-              </CardContent>
-            </Card>
+                </>
+              }
+            >
+              <a
+                href="https://github.com/Trace-iOS/Trace/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-4 inline-block text-sm text-primary hover:underline"
+              >
+                View good first issues →
+              </a>
+            </FeatureCard>
 
-            <Card>
-              <CardHeader>
-                <FileText className="mb-2 h-8 w-8 text-primary" />
-                <CardTitle>Documentation</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <CardDescription className="mb-4 leading-relaxed">
-                  Improve guides, fix typos, add examples, or clarify confusing sections.
-                  Documentation is just as important as code.
-                </CardDescription>
-                <Link href="/docs" className="text-sm text-primary hover:underline">
-                  Browse documentation →
-                </Link>
-              </CardContent>
-            </Card>
+            <FeatureCard
+              icon={FileText}
+              title="Documentation"
+              description="Improve guides, fix typos, add examples, or clarify confusing sections. Documentation is just as important as code."
+            >
+              <Link href="/docs" className="mt-4 inline-block text-sm text-primary hover:underline">
+                Browse documentation →
+              </Link>
+            </FeatureCard>
 
-            <Card>
-              <CardHeader>
-                <Bug className="mb-2 h-8 w-8 text-primary" />
-                <CardTitle>Bug reports</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <CardDescription className="mb-4 leading-relaxed">
-                  Found a bug? Report it with steps to reproduce, device details, and expected
-                  behavior. Good bug reports help us fix issues faster.
-                </CardDescription>
-                <a
-                  href="https://github.com/Trace-iOS/Trace/issues/new"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-sm text-primary hover:underline"
-                >
-                  Report a bug →
-                </a>
-              </CardContent>
-            </Card>
+            <FeatureCard
+              icon={Bug}
+              title="Bug reports"
+              description="Found a bug? Report it with steps to reproduce, device details, and expected behavior. Good bug reports help us fix issues faster."
+            >
+              <a
+                href="https://github.com/Trace-iOS/Trace/issues/new"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-4 inline-block text-sm text-primary hover:underline"
+              >
+                Report a bug →
+              </a>
+            </FeatureCard>
 
-            <Card>
-              <CardHeader>
-                <Lightbulb className="mb-2 h-8 w-8 text-primary" />
-                <CardTitle>Feature requests</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <CardDescription className="mb-4 leading-relaxed">
-                  Have an idea? Open a discussion describing the use case and expected behavior. We
-                  prioritize features based on user feedback.
-                </CardDescription>
-                <a
-                  href="https://github.com/Trace-iOS/Trace/discussions/new?category=ideas"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-sm text-primary hover:underline"
-                >
-                  Suggest a feature →
-                </a>
-              </CardContent>
-            </Card>
+            <FeatureCard
+              icon={Lightbulb}
+              title="Feature requests"
+              description="Have an idea? Open a discussion describing the use case and expected behavior. We prioritize features based on user feedback."
+            >
+              <a
+                href="https://github.com/Trace-iOS/Trace/discussions/new?category=ideas"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-4 inline-block text-sm text-primary hover:underline"
+              >
+                Suggest a feature →
+              </a>
+            </FeatureCard>
 
-            <Card>
-              <CardHeader>
-                <Globe className="mb-2 h-8 w-8 text-primary" />
-                <CardTitle>Translations</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <CardDescription className="mb-4 leading-relaxed">
-                  Help make Trace accessible to non-English speakers. Translate the app or
-                  documentation to your language.
-                </CardDescription>
-                <a
-                  href="https://github.com/Trace-iOS/Trace/tree/main/Localization"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-sm text-primary hover:underline"
-                >
-                  View translations →
-                </a>
-              </CardContent>
-            </Card>
+            <FeatureCard
+              icon={Globe}
+              title="Translations"
+              description="Help make Trace accessible to non-English speakers. Translate the app or documentation to your language."
+            >
+              <a
+                href="https://github.com/Trace-iOS/Trace/tree/main/Localization"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-4 inline-block text-sm text-primary hover:underline"
+              >
+                View translations →
+              </a>
+            </FeatureCard>
 
-            <Card>
-              <CardHeader>
-                <MessageCircle className="mb-2 h-8 w-8 text-primary" />
-                <CardTitle>Community</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <CardDescription className="mb-4 leading-relaxed">
-                  Help others in discussions, share your debugging workflows, or write tutorials.
-                  Community support is valuable.
-                </CardDescription>
-                <a
-                  href="https://github.com/Trace-iOS/Trace/discussions"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-sm text-primary hover:underline"
-                >
-                  Join discussions →
-                </a>
-              </CardContent>
-            </Card>
+            <FeatureCard
+              icon={MessageCircle}
+              title="Community"
+              description="Help others in discussions, share your debugging workflows, or write tutorials. Community support is valuable."
+            >
+              <a
+                href="https://github.com/Trace-iOS/Trace/discussions"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-4 inline-block text-sm text-primary hover:underline"
+              >
+                Join discussions →
+              </a>
+            </FeatureCard>
           </div>
         </div>
       </section>
@@ -225,9 +191,7 @@ export default function ContributingPage() {
                   Fork the repository on GitHub, then clone your fork locally:
                 </p>
                 <div className="mt-2 rounded-lg border bg-muted/30 p-3">
-                  <code className="text-xs">
-                    git clone https://github.com/YOUR_USERNAME/Trace.git
-                  </code>
+                  <code className="text-xs">git clone https://github.com/Trace-iOS/Trace</code>
                 </div>
               </div>
             </div>
@@ -413,7 +377,7 @@ export default function ContributingPage() {
       {/* CTA */}
       <section className="container py-section">
         <div className="mx-auto max-w-readable text-center">
-          <Github className="mx-auto mb-4 h-10 w-10 text-muted-foreground sm:mb-6 sm:h-12 sm:w-12" />
+          <Github className="mx-auto mb-4 h-10 w-10 text-primary sm:mb-6 sm:h-12 sm:w-12" />
           <h2 className="mb-3 text-2xl font-bold tracking-tight sm:mb-4 sm:text-3xl">
             Ready to contribute?
           </h2>
@@ -422,24 +386,26 @@ export default function ContributingPage() {
             helps make Trace better for everyone.
           </p>
           <div className="flex flex-col justify-center gap-3 sm:flex-row sm:gap-4">
-            <a
-              href="https://github.com/Trace-iOS/Trace"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex h-10 items-center justify-center gap-2 rounded-md bg-primary px-6 text-sm font-medium text-primary-foreground hover:bg-primary/90 sm:h-11 sm:px-8"
-            >
-              <GitFork className="h-4 w-4" />
-              Fork on GitHub
-            </a>
-            <a
-              href="https://github.com/Trace-iOS/Trace/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex h-10 items-center justify-center gap-2 rounded-md border border-input bg-background px-6 text-sm font-medium hover:bg-accent hover:text-accent-foreground sm:h-11 sm:px-8"
-            >
-              <CheckCircle className="h-4 w-4" />
-              Good first issues
-            </a>
+            <Button size="lg" asChild className="w-full gap-2 sm:w-auto">
+              <a
+                href="https://github.com/Trace-iOS/Trace"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <GitFork className="h-4 w-4" />
+                Fork on GitHub
+              </a>
+            </Button>
+            <Button size="lg" variant="outline" asChild className="w-full gap-2 sm:w-auto">
+              <a
+                href="https://github.com/Trace-iOS/Trace/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <CheckCircle className="h-4 w-4" />
+                Good first issues
+              </a>
+            </Button>
           </div>
         </div>
       </section>

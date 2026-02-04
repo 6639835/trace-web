@@ -59,22 +59,36 @@ Generated certificates are cached to avoid regenerating them on every connection
 
 Here's what happens when your app makes an HTTPS request through Trace:
 
-```
-App → Trace Proxy → Server
-
-1. App: ClientHello to Trace
-2. Trace: ServerHello with dynamically generated cert
-3. App: Validates cert (checks trust chain to Trace root CA)
-4. App: Sends encrypted request to Trace
-5. Trace: Decrypts request, logs it
-6. Trace: ClientHello to actual server
-7. Server: ServerHello with real certificate
-8. Trace: Validates server cert, establishes connection
-9. Trace: Re-encrypts request, sends to server
-10. Server: Sends encrypted response
-11. Trace: Decrypts response, logs it
-12. Trace: Re-encrypts response, sends to app
-```
+<Mermaid>
+  {`sequenceDiagram
+    participant App as iOS App
+    participant Trace as Trace Proxy
+    participant Server as Destination Server
+    
+    rect rgb(59, 130, 246, 0.1)
+        Note over App,Trace: TLS Connection 1 (App ↔ Trace)
+        App->>Trace: ClientHello
+        Trace->>Trace: Generate cert for domain
+        Trace-->>App: ServerHello + Generated Cert
+        App->>App: Validate cert (trusts Trace CA)
+        App->>Trace: Encrypted Request
+        Trace->>Trace: Decrypt & Log
+    end
+    
+    rect rgb(34, 197, 94, 0.1)
+        Note over Trace,Server: TLS Connection 2 (Trace ↔ Server)
+        Trace->>Server: ClientHello
+        Server-->>Trace: ServerHello + Real Cert
+        Trace->>Trace: Validate server cert
+        Trace->>Server: Re-encrypted Request
+        Server-->>Trace: Encrypted Response
+        Trace->>Trace: Decrypt & Log
+    end
+    
+    Trace-->>App: Re-encrypted Response
+    App->>App: Decrypt & Use
+`}
+</Mermaid>
 
 Both connections use real TLS. Trace isn't "breaking" encryption—it's acting as a trusted intermediary.
 
@@ -100,17 +114,21 @@ You'll see a warning icon on affected requests in the UI.
 
 ## Security implications
 
-### Trust is critical
-
-Installing the Trace root CA means your device trusts any certificate signed by it. Never install root CAs from untrusted sources. Trace's root CA is generated on your device and never leaves it.
-
-### Uninstall when done
-
-When you're finished debugging, you can remove the root CA from Settings. Trace will continue to capture traffic, but HTTPS inspection will stop working.
-
-### Sandboxed storage
-
-The root CA private key is stored in the App Group container with standard iOS app sandbox protections. Other apps cannot access it.
+<ToggleList>
+  <ToggleItem title="Trust is critical" defaultOpen>
+    Installing the Trace root CA means your device trusts any certificate signed by it. Never
+    install root CAs from untrusted sources. Trace's root CA is generated on your device and never
+    leaves it.
+  </ToggleItem>
+  <ToggleItem title="Uninstall when done">
+    When you're finished debugging, you can remove the root CA from Settings. Trace will continue to
+    capture traffic, but HTTPS inspection will stop working.
+  </ToggleItem>
+  <ToggleItem title="Sandboxed storage">
+    The root CA private key is stored in the App Group container with standard iOS app sandbox
+    protections. Other apps cannot access it.
+  </ToggleItem>
+</ToggleList>
 
 ## Implementation details
 
@@ -126,10 +144,25 @@ All certificate generation happens synchronously during the TLS handshake to avo
 
 MITM inspection can fail in several scenarios:
 
-1. **Certificate pinning**: App rejects the proxy certificate
-2. **Root CA not trusted**: User hasn't enabled full trust in Settings
-3. **Client certificate authentication**: Server requires client certificates
-4. **Custom TLS implementations**: Apps using non-standard TLS libraries
+<ToggleList>
+  <ToggleItem title="Certificate pinning">
+    The app explicitly validates the server's certificate or public key and rejects the
+    Trace-generated certificate. This is common in banking apps, social media apps, and
+    security-conscious applications.
+  </ToggleItem>
+  <ToggleItem title="Root CA not trusted">
+    The user hasn't enabled "Full Trust" for the Trace root CA in Settings → General → About →
+    Certificate Trust Settings. Without this, iOS won't trust certificates signed by Trace.
+  </ToggleItem>
+  <ToggleItem title="Client certificate authentication">
+    The server requires the client to present a certificate (mutual TLS). Trace can't automatically
+    forward client certificates without additional configuration.
+  </ToggleItem>
+  <ToggleItem title="Custom TLS implementations">
+    Apps using non-standard TLS libraries or custom certificate validation logic may not respect
+    system trust settings.
+  </ToggleItem>
+</ToggleList>
 
 Trace handles these gracefully by capturing what it can (HTTP headers, connection metadata) without failing the request.
 

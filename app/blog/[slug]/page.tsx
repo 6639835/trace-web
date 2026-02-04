@@ -1,10 +1,13 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
+import { Suspense } from 'react';
 import { Badge } from '@/components/ui/badge';
 import { Separator } from '@/components/ui/separator';
+import { Skeleton } from '@/components/ui/skeleton';
 import { Calendar, Clock, ArrowLeft } from 'lucide-react';
 import { getAllPosts, getPostBySlug } from '@/lib/blog';
+import { absoluteUrl, siteUrl } from '@/lib/config/site';
 
 interface BlogPostPageProps {
   params: Promise<{
@@ -32,12 +35,59 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
   return {
     title: post.title,
     description: post.description,
+    authors: [{ name: post.author.name }],
     openGraph: {
+      type: 'article',
       title: post.title,
       description: post.description,
-      url: `https://trace.justinl.site/blog/${post.slug}`,
+      url: `/blog/${post.slug}`,
+      publishedTime: post.date,
+      authors: [post.author.name],
+      tags: [post.category],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: post.title,
+      description: post.description,
+    },
+    alternates: {
+      canonical: `/blog/${post.slug}`,
     },
   };
+}
+
+function ArticleContentSkeleton() {
+  return (
+    <article className="mx-auto max-w-readable">
+      <div className="space-y-4">
+        <Skeleton className="h-6 w-3/4" />
+        <Skeleton className="h-6 w-full" />
+        <Skeleton className="h-6 w-5/6" />
+        <Skeleton className="mt-6 h-4 w-full" />
+        <Skeleton className="h-4 w-full" />
+        <Skeleton className="h-4 w-4/5" />
+        <Skeleton className="mt-6 h-6 w-2/3" />
+        <Skeleton className="h-4 w-full" />
+        <Skeleton className="h-4 w-full" />
+        <Skeleton className="h-4 w-3/4" />
+      </div>
+    </article>
+  );
+}
+
+interface ArticleContentProps {
+  slug: string;
+}
+
+async function ArticleContent({ slug }: ArticleContentProps) {
+  // Dynamically import the MDX content
+  const MDXContent = await import(`../posts/${slug}.mdx`).then((mod) => mod.default);
+
+  return (
+    <article className="mx-auto prose max-w-readable prose-slate dark:prose-invert prose-headings:font-bold prose-headings:tracking-tight prose-code:rounded prose-code:bg-muted prose-code:px-1 prose-code:py-0.5 prose-code:font-mono prose-code:text-sm prose-code:before:content-none prose-code:after:content-none">
+      <MDXContent />
+    </article>
+  );
 }
 
 export default async function BlogPostPage({ params }: BlogPostPageProps) {
@@ -48,9 +98,6 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
     notFound();
   }
 
-  // Dynamically import the MDX content
-  const MDXContent = await import(`../posts/${slug}.mdx`).then((mod) => mod.default);
-
   const categoryColors: Record<typeof post.category, 'default' | 'secondary' | 'outline'> = {
     Releases: 'default',
     Features: 'secondary',
@@ -59,8 +106,34 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
     Community: 'secondary',
   };
 
+  // Article structured data for better SEO
+  const articleStructuredData = {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    headline: post.title,
+    description: post.description,
+    datePublished: post.date,
+    author: {
+      '@type': 'Person',
+      name: post.author.name,
+    },
+    publisher: {
+      '@type': 'Organization',
+      name: 'Trace',
+      url: siteUrl,
+    },
+    mainEntityOfPage: {
+      '@type': 'WebPage',
+      '@id': absoluteUrl(`/blog/${post.slug}`),
+    },
+  };
+
   return (
     <div className="flex flex-col">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleStructuredData) }}
+      />
       {/* Back to Blog */}
       <section className="container py-6">
         <Link
@@ -109,9 +182,9 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
 
       {/* Content */}
       <section className="container py-section">
-        <article className="mx-auto prose max-w-readable prose-slate dark:prose-invert prose-headings:font-bold prose-headings:tracking-tight prose-a:text-primary prose-a:no-underline hover:prose-a:underline prose-code:rounded prose-code:bg-muted prose-code:px-1 prose-code:py-0.5 prose-code:font-mono prose-code:text-sm prose-code:before:content-none prose-code:after:content-none">
-          <MDXContent />
-        </article>
+        <Suspense fallback={<ArticleContentSkeleton />}>
+          <ArticleContent slug={slug} />
+        </Suspense>
       </section>
 
       <Separator />

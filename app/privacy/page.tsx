@@ -1,4 +1,5 @@
 import { Separator } from '@/components/ui/separator';
+import { PageHeader } from '@/components/shared/page-header';
 import { Shield } from 'lucide-react';
 import type { Metadata } from 'next';
 
@@ -10,42 +11,39 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Privacy Policy - Trace',
     description: 'How Trace handles your data with complete transparency.',
-    url: 'https://trace.justinl.site/privacy',
+    url: '/privacy',
+  },
+  alternates: {
+    canonical: '/privacy',
   },
 };
 
 export default function PrivacyPage() {
   return (
     <div className="flex flex-col">
-      {/* Header */}
-      <section className="container py-section">
-        <div className="mx-auto max-w-readable text-center">
-          <Shield className="mx-auto mb-4 h-10 w-10 text-muted-foreground sm:mb-6 sm:h-12 sm:w-12" />
-          <h1 className="mb-3 text-3xl font-bold tracking-tight sm:mb-4 sm:text-4xl md:text-5xl">
-            Privacy Policy
-          </h1>
-          <p className="mb-4 text-sm leading-relaxed text-muted-foreground sm:mb-6 sm:text-base lg:text-lg">
-            How Trace handles your data with complete transparency and privacy-first principles.
+      <PageHeader
+        icon={Shield}
+        title="Privacy Policy"
+        description="How Trace handles your data with complete transparency and privacy-first principles."
+      >
+        <div className="space-y-1 text-sm text-muted-foreground">
+          <p className="text-xs sm:text-sm">
+            <strong>Effective Date:</strong> January 14, 2026
           </p>
-          <div className="space-y-1 text-sm text-muted-foreground">
-            <p className="text-xs sm:text-sm">
-              <strong>Effective Date:</strong> January 14, 2026
-            </p>
-            <p className="text-xs sm:text-sm">
-              <strong>App Name:</strong> Trace
-            </p>
-            <p className="text-xs sm:text-sm">
-              <strong>Developer/Controller:</strong> Justin
-            </p>
-            <p className="text-xs sm:text-sm">
-              <strong>Contact:</strong>{' '}
-              <a href="mailto:epa6643@gmail.com" className="text-foreground hover:underline">
-                epa6643@gmail.com
-              </a>
-            </p>
-          </div>
+          <p className="text-xs sm:text-sm">
+            <strong>App Name:</strong> Trace
+          </p>
+          <p className="text-xs sm:text-sm">
+            <strong>Developer/Controller:</strong> Justin
+          </p>
+          <p className="text-xs sm:text-sm">
+            <strong>Contact:</strong>{' '}
+            <a href="mailto:epa6643@gmail.com" className="text-foreground hover:underline">
+              epa6643@gmail.com
+            </a>
+          </p>
         </div>
-      </section>
+      </PageHeader>
 
       <Separator />
 

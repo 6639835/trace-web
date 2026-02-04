@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import { Button } from '@/components/ui/button';
 import {
   Table,
   TableBody,
@@ -10,6 +11,8 @@ import {
 } from '@/components/ui/table';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Separator } from '@/components/ui/separator';
+import { PageHeader } from '@/components/shared/page-header';
+import { BulletList, BulletItem } from '@/components/shared/bullet-list';
 import { Check, X, Scale } from 'lucide-react';
 
 export const metadata: Metadata = {
@@ -26,26 +29,21 @@ export const metadata: Metadata = {
     title: 'Comparison - Trace iOS Network Debugger',
     description:
       'Compare Trace with Charles and Proxyman. Feature comparison for iOS network debugging.',
-    url: 'https://trace.justinl.site/comparison',
+    url: '/comparison',
+  },
+  alternates: {
+    canonical: '/comparison',
   },
 };
 
 export default function ComparisonPage() {
   return (
     <div className="flex flex-col">
-      {/* Header */}
-      <section className="container py-section">
-        <div className="mx-auto max-w-readable text-center">
-          <Scale className="mx-auto mb-4 h-10 w-10 text-muted-foreground sm:mb-6 sm:h-12 sm:w-12" />
-          <h1 className="mb-3 text-3xl font-bold tracking-tight sm:mb-4 sm:text-4xl md:text-5xl">
-            Comparison
-          </h1>
-          <p className="text-sm leading-relaxed text-muted-foreground sm:text-base lg:text-lg">
-            How Trace compares to other network debugging tools. An honest look at features,
-            trade-offs, and when each tool makes sense.
-          </p>
-        </div>
-      </section>
+      <PageHeader
+        icon={Scale}
+        title="Comparison"
+        description="How Trace compares to other network debugging tools. An honest look at features, trade-offs, and when each tool makes sense."
+      />
 
       <Separator />
 
@@ -358,60 +356,30 @@ export default function ComparisonPage() {
           <div className="space-y-6">
             <div>
               <h3 className="mb-3 text-lg font-semibold">Choose Trace when:</h3>
-              <ul className="space-y-2 text-sm text-muted-foreground">
-                <li className="flex gap-2">
-                  <div className="mt-2 h-1 w-1 shrink-0 rounded-full bg-foreground" />
-                  <span>You need mobile-only debugging without a desktop</span>
-                </li>
-                <li className="flex gap-2">
-                  <div className="mt-2 h-1 w-1 shrink-0 rounded-full bg-foreground" />
-                  <span>Privacy is a critical requirement</span>
-                </li>
-                <li className="flex gap-2">
-                  <div className="mt-2 h-1 w-1 shrink-0 rounded-full bg-foreground" />
-                  <span>You want to audit or customize the tool</span>
-                </li>
-                <li className="flex gap-2">
-                  <div className="mt-2 h-1 w-1 shrink-0 rounded-full bg-foreground" />
-                  <span>Budget is constrained (Trace is free)</span>
-                </li>
-              </ul>
+              <BulletList>
+                <BulletItem>You need mobile-only debugging without a desktop</BulletItem>
+                <BulletItem>Privacy is a critical requirement</BulletItem>
+                <BulletItem>You want to audit or customize the tool</BulletItem>
+                <BulletItem>Budget is constrained (Trace is free)</BulletItem>
+              </BulletList>
             </div>
 
             <div>
               <h3 className="mb-3 text-lg font-semibold">Choose Charles when:</h3>
-              <ul className="space-y-2 text-sm text-muted-foreground">
-                <li className="flex gap-2">
-                  <div className="mt-2 h-1 w-1 shrink-0 rounded-full bg-foreground" />
-                  <span>You need cross-platform support (Windows/Linux)</span>
-                </li>
-                <li className="flex gap-2">
-                  <div className="mt-2 h-1 w-1 shrink-0 rounded-full bg-foreground" />
-                  <span>You require mature enterprise features</span>
-                </li>
-                <li className="flex gap-2">
-                  <div className="mt-2 h-1 w-1 shrink-0 rounded-full bg-foreground" />
-                  <span>Your team already uses Charles</span>
-                </li>
-              </ul>
+              <BulletList>
+                <BulletItem>You need cross-platform support (Windows/Linux)</BulletItem>
+                <BulletItem>You require mature enterprise features</BulletItem>
+                <BulletItem>Your team already uses Charles</BulletItem>
+              </BulletList>
             </div>
 
             <div>
               <h3 className="mb-3 text-lg font-semibold">Choose Proxyman when:</h3>
-              <ul className="space-y-2 text-sm text-muted-foreground">
-                <li className="flex gap-2">
-                  <div className="mt-2 h-1 w-1 shrink-0 rounded-full bg-foreground" />
-                  <span>You want a modern, polished macOS app</span>
-                </li>
-                <li className="flex gap-2">
-                  <div className="mt-2 h-1 w-1 shrink-0 rounded-full bg-foreground" />
-                  <span>You need both desktop and mobile options</span>
-                </li>
-                <li className="flex gap-2">
-                  <div className="mt-2 h-1 w-1 shrink-0 rounded-full bg-foreground" />
-                  <span>Team collaboration features are valuable</span>
-                </li>
-              </ul>
+              <BulletList>
+                <BulletItem>You want a modern, polished macOS app</BulletItem>
+                <BulletItem>You need both desktop and mobile options</BulletItem>
+                <BulletItem>Team collaboration features are valuable</BulletItem>
+              </BulletList>
             </div>
           </div>
         </div>
@@ -431,20 +399,18 @@ export default function ComparisonPage() {
             for different scenarios.
           </p>
           <div className="flex flex-col justify-center gap-3 sm:flex-row sm:gap-4">
-            <a
-              href="https://testflight.apple.com/join/DPt8BIup"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex h-10 items-center justify-center rounded-md bg-primary px-6 text-sm font-medium text-primary-foreground hover:bg-primary/90 sm:h-11 sm:px-8"
-            >
-              Try Trace
-            </a>
-            <Link
-              href="/features"
-              className="inline-flex h-10 items-center justify-center rounded-md border border-input bg-background px-6 text-sm font-medium hover:bg-accent hover:text-accent-foreground sm:h-11 sm:px-8"
-            >
-              View all features
-            </Link>
+            <Button size="lg" asChild className="w-full sm:w-auto">
+              <a
+                href="https://testflight.apple.com/join/fmYFd8ud"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Try Trace
+              </a>
+            </Button>
+            <Button size="lg" variant="outline" asChild className="w-full sm:w-auto">
+              <Link href="/features">View all features</Link>
+            </Button>
           </div>
         </div>
       </section>

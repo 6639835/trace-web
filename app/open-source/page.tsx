@@ -1,9 +1,10 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Separator } from '@/components/ui/separator';
-import { Github, Code, Users, Shield, BookOpen } from 'lucide-react';
+import { PageHeader } from '@/components/shared/page-header';
+import { FeatureCard } from '@/components/marketing/feature-card';
+import { Github, Code, Users, Shield, BookOpen, CirclePlus } from 'lucide-react';
 
 export const metadata: Metadata = {
   title: 'Open Source - Free MIT Licensed iOS Network Debugger',
@@ -21,25 +22,21 @@ export const metadata: Metadata = {
     title: 'Trace - Open Source iOS Network Debugger',
     description:
       'Free and open source under MIT license. Build from source, contribute, and verify what runs on your device.',
-    url: 'https://trace.justinl.site/open-source',
+    url: '/open-source',
+  },
+  alternates: {
+    canonical: '/open-source',
   },
 };
 
 export default function OpenSourcePage() {
   return (
     <div className="flex flex-col">
-      {/* Header */}
-      <section className="container py-section">
-        <div className="mx-auto max-w-readable text-center">
-          <h1 className="mb-3 text-3xl font-bold tracking-tight sm:mb-4 sm:text-4xl md:text-5xl">
-            Open source
-          </h1>
-          <p className="text-sm leading-relaxed text-muted-foreground sm:text-base lg:text-lg">
-            Free to use, free to modify, free to distribute. Built transparently for the iOS
-            developer community.
-          </p>
-        </div>
-      </section>
+      <PageHeader
+        icon={Code}
+        title="Open source"
+        description="Free to use, free to modify, free to distribute. Built transparently for the iOS developer community."
+      />
 
       <Separator />
 
@@ -55,59 +52,30 @@ export default function OpenSourcePage() {
           </p>
 
           <div className="grid gap-4 sm:grid-cols-2 sm:gap-5 md:gap-6">
-            <Card>
-              <CardHeader>
-                <Shield className="mb-2 h-8 w-8 text-muted-foreground" />
-                <CardTitle className="text-lg">Transparency</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <CardDescription className="leading-relaxed">
-                  Network debugging involves sensitive data. Open source code enables security
-                  audits and verification that no data leaves your device. Build from source to
-                  ensure binary integrity.
-                </CardDescription>
-              </CardContent>
-            </Card>
-
-            <Card>
-              <CardHeader>
-                <Users className="mb-2 h-8 w-8 text-muted-foreground" />
-                <CardTitle className="text-lg">Community driven</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <CardDescription className="leading-relaxed">
-                  Contributions from iOS developers improve the tool for everyone. Feature requests,
-                  bug reports, and code contributions welcome. Community feedback shapes the
-                  roadmap.
-                </CardDescription>
-              </CardContent>
-            </Card>
-
-            <Card>
-              <CardHeader>
-                <Code className="mb-2 h-8 w-8 text-muted-foreground" />
-                <CardTitle className="text-lg">Learning resource</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <CardDescription className="leading-relaxed">
-                  Complete implementation of Network Extension and TLS interception. Demonstrates
-                  advanced iOS networking concepts. Reference for developers building similar tools.
-                </CardDescription>
-              </CardContent>
-            </Card>
-
-            <Card>
-              <CardHeader>
-                <BookOpen className="mb-2 h-8 w-8 text-muted-foreground" />
-                <CardTitle className="text-lg">No vendor lock-in</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <CardDescription className="leading-relaxed">
-                  No subscriptions, no feature paywalls, no SaaS dependencies. Fork and modify for
-                  specific needs. Always available regardless of company status.
-                </CardDescription>
-              </CardContent>
-            </Card>
+            <FeatureCard
+              icon={Shield}
+              title="Transparency"
+              titleClassName="text-lg"
+              description="Network debugging involves sensitive data. Open source code enables security audits and verification that no data leaves your device. Build from source to ensure binary integrity."
+            />
+            <FeatureCard
+              icon={Users}
+              title="Community driven"
+              titleClassName="text-lg"
+              description="Contributions from iOS developers improve the tool for everyone. Feature requests, bug reports, and code contributions welcome. Community feedback shapes the roadmap."
+            />
+            <FeatureCard
+              icon={Code}
+              title="Learning resource"
+              titleClassName="text-lg"
+              description="Complete implementation of Network Extension and TLS interception. Demonstrates advanced iOS networking concepts. Reference for developers building similar tools."
+            />
+            <FeatureCard
+              icon={BookOpen}
+              title="No vendor lock-in"
+              titleClassName="text-lg"
+              description="No subscriptions, no feature paywalls, no SaaS dependencies. Fork and modify for specific needs. Always available regardless of company status."
+            />
           </div>
         </div>
       </section>
@@ -412,6 +380,7 @@ SOFTWARE.`}
               target="_blank"
               rel="noopener noreferrer"
             >
+              <CirclePlus className="mr-2 h-5 w-5" />
               Open an issue
             </Link>
           </Button>

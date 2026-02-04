@@ -42,7 +42,7 @@ export function HeroPhone() {
         }`}
       >
         {/* Screenshot layer - positioned behind the frame */}
-        <div className="absolute inset-[5%] top-[1.5%] bottom-[1.5%] overflow-hidden rounded-[12%]">
+        <div className="absolute inset-[5%] top-[2.5%] bottom-[2.5%] overflow-hidden rounded-[10%]">
           <Image
             src="/iphone-screenshot-dark.png"
             alt={isDark ? 'Trace iOS App Screenshot' : ''}
@@ -50,7 +50,6 @@ export function HeroPhone() {
             className={`object-cover transition-opacity duration-200 ${isDark ? 'opacity-100' : 'opacity-0'}`}
             sizes="(min-width: 1024px) 360px, (min-width: 768px) 320px, 280px"
             priority
-            quality={100}
             unoptimized
             onLoad={handleLoaded}
           />
@@ -61,7 +60,6 @@ export function HeroPhone() {
             className={`object-cover transition-opacity duration-200 ${isDark ? 'opacity-0' : 'opacity-100'}`}
             sizes="(min-width: 1024px) 360px, (min-width: 768px) 320px, 280px"
             priority
-            quality={100}
             unoptimized
             onLoad={handleLoaded}
           />
@@ -75,7 +73,6 @@ export function HeroPhone() {
           height={1778}
           className="pointer-events-none relative h-auto w-full select-none"
           priority
-          quality={100}
           unoptimized
           aria-hidden="true"
         />

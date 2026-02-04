@@ -1,7 +1,9 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Separator } from '@/components/ui/separator';
+import { PageHeader } from '@/components/shared/page-header';
+import { FeatureCard } from '@/components/marketing/feature-card';
+import { BulletList, BulletItem } from '@/components/shared/bullet-list';
 import {
   LifeBuoy,
   Book,
@@ -30,26 +32,21 @@ export const metadata: Metadata = {
     title: 'Support - Trace iOS Network Debugger',
     description:
       'Get help with Trace. Troubleshooting guides, documentation, community support, and ways to report issues.',
-    url: 'https://trace.justinl.site/support',
+    url: '/support',
+  },
+  alternates: {
+    canonical: '/support',
   },
 };
 
 export default function SupportPage() {
   return (
     <div className="flex flex-col">
-      {/* Header */}
-      <section className="container py-section">
-        <div className="mx-auto max-w-readable text-center">
-          <LifeBuoy className="mx-auto mb-4 h-10 w-10 text-muted-foreground sm:mb-6 sm:h-12 sm:w-12" />
-          <h1 className="mb-3 text-3xl font-bold tracking-tight sm:mb-4 sm:text-4xl md:text-5xl">
-            Support
-          </h1>
-          <p className="text-sm leading-relaxed text-muted-foreground sm:text-base lg:text-lg">
-            Get help with Trace. Find answers in the documentation, report bugs on GitHub, or ask
-            questions in the community.
-          </p>
-        </div>
-      </section>
+      <PageHeader
+        icon={LifeBuoy}
+        title="Support"
+        description="Get help with Trace. Find answers in the documentation, report bugs on GitHub, or ask questions in the community."
+      />
 
       <Separator />
 
@@ -60,147 +57,86 @@ export default function SupportPage() {
             Common issues
           </h2>
           <div className="grid gap-4 sm:grid-cols-2 sm:gap-5 md:gap-6">
-            <Card>
-              <CardHeader>
-                <AlertCircle className="mb-2 h-8 w-8 text-muted-foreground" />
-                <CardTitle>Traffic not being captured</CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-3">
-                <CardDescription>
-                  If Trace isn&apos;t capturing traffic, check these items:
-                </CardDescription>
-                <ul className="space-y-2 text-sm text-muted-foreground">
-                  <li className="flex gap-2">
-                    <div className="mt-2 h-1 w-1 shrink-0 rounded-full bg-foreground" />
-                    <span>Ensure capture is started (Network tab, start button)</span>
-                  </li>
-                  <li className="flex gap-2">
-                    <div className="mt-2 h-1 w-1 shrink-0 rounded-full bg-foreground" />
-                    <span>Verify VPN permission is enabled in iOS Settings</span>
-                  </li>
-                  <li className="flex gap-2">
-                    <div className="mt-2 h-1 w-1 shrink-0 rounded-full bg-foreground" />
-                    <span>Test with Safari to confirm Trace is working</span>
-                  </li>
-                  <li className="flex gap-2">
-                    <div className="mt-2 h-1 w-1 shrink-0 rounded-full bg-foreground" />
-                    <span>Some apps bypass system proxy settings and won&apos;t be captured</span>
-                  </li>
-                </ul>
-                <Link
-                  href="/docs/quick-start"
-                  className="mt-4 inline-block text-sm text-primary hover:underline"
-                >
-                  View quick start guide →
-                </Link>
-              </CardContent>
-            </Card>
+            <FeatureCard
+              icon={AlertCircle}
+              title="Traffic not being captured"
+              description={<>If Trace isn&apos;t capturing traffic, check these items:</>}
+            >
+              <BulletList className="mt-3">
+                <BulletItem>Ensure capture is started (Network tab, start button)</BulletItem>
+                <BulletItem>Verify VPN permission is enabled in iOS Settings</BulletItem>
+                <BulletItem>Test with Safari to confirm Trace is working</BulletItem>
+                <BulletItem>
+                  Some apps bypass system proxy settings and won&apos;t be captured
+                </BulletItem>
+              </BulletList>
+              <Link
+                href="/docs/quick-start"
+                className="mt-4 inline-block text-sm text-primary hover:underline"
+              >
+                View quick start guide →
+              </Link>
+            </FeatureCard>
 
-            <Card>
-              <CardHeader>
-                <Shield className="mb-2 h-8 w-8 text-muted-foreground" />
-                <CardTitle>HTTPS traffic shows as encrypted</CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-3">
-                <CardDescription>
-                  To inspect HTTPS traffic, you need to install and trust the root certificate:
-                </CardDescription>
-                <ul className="space-y-2 text-sm text-muted-foreground">
-                  <li className="flex gap-2">
-                    <div className="mt-2 h-1 w-1 shrink-0 rounded-full bg-foreground" />
-                    <span>Generate and install the certificate profile in Trace</span>
-                  </li>
-                  <li className="flex gap-2">
-                    <div className="mt-2 h-1 w-1 shrink-0 rounded-full bg-foreground" />
-                    <span>Enable full trust in Settings &gt; Certificate Trust Settings</span>
-                  </li>
-                  <li className="flex gap-2">
-                    <div className="mt-2 h-1 w-1 shrink-0 rounded-full bg-foreground" />
-                    <span>Certificate pinning may prevent inspection for some apps</span>
-                  </li>
-                </ul>
-                <Link
-                  href="/docs/certificates"
-                  className="mt-4 inline-block text-sm text-primary hover:underline"
-                >
-                  Certificate setup guide →
-                </Link>
-              </CardContent>
-            </Card>
+            <FeatureCard
+              icon={Shield}
+              title="HTTPS traffic shows as encrypted"
+              description="To inspect HTTPS traffic, you need to install and trust the root certificate:"
+            >
+              <BulletList className="mt-3">
+                <BulletItem>Generate and install the certificate profile in Trace</BulletItem>
+                <BulletItem>
+                  Enable full trust in Settings &gt; Certificate Trust Settings
+                </BulletItem>
+                <BulletItem>Certificate pinning may prevent inspection for some apps</BulletItem>
+              </BulletList>
+              <Link
+                href="/docs/certificates"
+                className="mt-4 inline-block text-sm text-primary hover:underline"
+              >
+                Certificate setup guide →
+              </Link>
+            </FeatureCard>
 
-            <Card>
-              <CardHeader>
-                <Settings className="mb-2 h-8 w-8 text-muted-foreground" />
-                <CardTitle>App crashes on launch or capture</CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-3">
-                <CardDescription>
-                  If Trace is crashing, try these troubleshooting steps:
-                </CardDescription>
-                <ul className="space-y-2 text-sm text-muted-foreground">
-                  <li className="flex gap-2">
-                    <div className="mt-2 h-1 w-1 shrink-0 rounded-full bg-foreground" />
-                    <span>Force quit Trace and reopen the app</span>
-                  </li>
-                  <li className="flex gap-2">
-                    <div className="mt-2 h-1 w-1 shrink-0 rounded-full bg-foreground" />
-                    <span>Restart your device to clear any stuck state</span>
-                  </li>
-                  <li className="flex gap-2">
-                    <div className="mt-2 h-1 w-1 shrink-0 rounded-full bg-foreground" />
-                    <span>Delete and reinstall from TestFlight</span>
-                  </li>
-                  <li className="flex gap-2">
-                    <div className="mt-2 h-1 w-1 shrink-0 rounded-full bg-foreground" />
-                    <span>Check if you&apos;re on the latest TestFlight build</span>
-                  </li>
-                </ul>
-                <a
-                  href="https://github.com/Trace-iOS/Trace/issues"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="mt-4 inline-block text-sm text-primary hover:underline"
-                >
-                  Report persistent crashes →
-                </a>
-              </CardContent>
-            </Card>
+            <FeatureCard
+              icon={Settings}
+              title="App crashes on launch or capture"
+              description="If Trace is crashing, try these troubleshooting steps:"
+            >
+              <BulletList className="mt-3">
+                <BulletItem>Force quit Trace and reopen the app</BulletItem>
+                <BulletItem>Restart your device to clear any stuck state</BulletItem>
+                <BulletItem>Delete and reinstall from TestFlight</BulletItem>
+                <BulletItem>Check if you&apos;re on the latest TestFlight build</BulletItem>
+              </BulletList>
+              <a
+                href="https://github.com/Trace-iOS/Trace/issues"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-4 inline-block text-sm text-primary hover:underline"
+              >
+                Report persistent crashes →
+              </a>
+            </FeatureCard>
 
-            <Card>
-              <CardHeader>
-                <Zap className="mb-2 h-8 w-8 text-muted-foreground" />
-                <CardTitle>Performance or battery impact</CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-3">
-                <CardDescription>
-                  Minimize performance impact while capturing traffic:
-                </CardDescription>
-                <ul className="space-y-2 text-sm text-muted-foreground">
-                  <li className="flex gap-2">
-                    <div className="mt-2 h-1 w-1 shrink-0 rounded-full bg-foreground" />
-                    <span>Use filtering to capture only relevant traffic</span>
-                  </li>
-                  <li className="flex gap-2">
-                    <div className="mt-2 h-1 w-1 shrink-0 rounded-full bg-foreground" />
-                    <span>Clear old capture sessions to free memory</span>
-                  </li>
-                  <li className="flex gap-2">
-                    <div className="mt-2 h-1 w-1 shrink-0 rounded-full bg-foreground" />
-                    <span>Disable modification features you&apos;re not using</span>
-                  </li>
-                  <li className="flex gap-2">
-                    <div className="mt-2 h-1 w-1 shrink-0 rounded-full bg-foreground" />
-                    <span>Stop capture when not actively debugging</span>
-                  </li>
-                </ul>
-                <Link
-                  href="/docs/performance"
-                  className="mt-4 inline-block text-sm text-primary hover:underline"
-                >
-                  Performance tips →
-                </Link>
-              </CardContent>
-            </Card>
+            <FeatureCard
+              icon={Zap}
+              title="Performance or battery impact"
+              description="Minimize performance impact while capturing traffic:"
+            >
+              <BulletList className="mt-3">
+                <BulletItem>Use filtering to capture only relevant traffic</BulletItem>
+                <BulletItem>Clear old capture sessions to free memory</BulletItem>
+                <BulletItem>Disable modification features you&apos;re not using</BulletItem>
+                <BulletItem>Stop capture when not actively debugging</BulletItem>
+              </BulletList>
+              <Link
+                href="/docs/performance"
+                className="mt-4 inline-block text-sm text-primary hover:underline"
+              >
+                Performance tips →
+              </Link>
+            </FeatureCard>
           </div>
         </div>
       </section>

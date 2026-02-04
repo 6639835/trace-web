@@ -1,8 +1,11 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
 import { Badge } from '@/components/ui/badge';
+import { PageHeader } from '@/components/shared/page-header';
+import { FeatureCard } from '@/components/marketing/feature-card';
+import { BulletList, BulletItem } from '@/components/shared/bullet-list';
 import { Sparkles, Code, Radio, Gauge, ShieldCheck, GitBranch, Edit3, Share2 } from 'lucide-react';
 
 export const metadata: Metadata = {
@@ -19,26 +22,21 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Showcase - Trace iOS Network Debugger',
     description: 'Real-world examples and use cases for iOS network debugging with Trace.',
-    url: 'https://trace.justinl.site/showcase',
+    url: '/showcase',
+  },
+  alternates: {
+    canonical: '/showcase',
   },
 };
 
 export default function ShowcasePage() {
   return (
     <div className="flex flex-col">
-      {/* Header */}
-      <section className="container py-section">
-        <div className="mx-auto max-w-readable text-center">
-          <Sparkles className="mx-auto mb-4 h-10 w-10 text-muted-foreground sm:mb-6 sm:h-12 sm:w-12" />
-          <h1 className="mb-3 text-3xl font-bold tracking-tight sm:mb-4 sm:text-4xl md:text-5xl">
-            Showcase
-          </h1>
-          <p className="text-sm leading-relaxed text-muted-foreground sm:text-base lg:text-lg">
-            Real-world use cases and examples of how developers use Trace for debugging, testing,
-            and analysis. From API development to security auditing.
-          </p>
-        </div>
-      </section>
+      <PageHeader
+        icon={Sparkles}
+        title="Showcase"
+        description="Real-world use cases and examples of how developers use Trace for debugging, testing, and analysis. From API development to security auditing."
+      />
 
       <Separator />
 
@@ -49,167 +47,77 @@ export default function ShowcasePage() {
             Use cases
           </h2>
           <div className="grid gap-4 sm:grid-cols-2 sm:gap-5 md:gap-6 lg:grid-cols-3">
-            <Card>
-              <CardHeader>
-                <Code className="mb-2 h-8 w-8 text-primary" />
-                <CardTitle>API development &amp; testing</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <CardDescription className="mb-4 leading-relaxed">
-                  Debug API integrations in real-time. Inspect request/response payloads, validate
-                  headers, and test against staging environments.
-                </CardDescription>
-                <div className="space-y-2 text-sm">
-                  <div className="flex items-start gap-2">
-                    <div className="mt-2 h-1 w-1 shrink-0 rounded-full bg-foreground" />
-                    <span className="text-muted-foreground">Validate API response structure</span>
-                  </div>
-                  <div className="flex items-start gap-2">
-                    <div className="mt-2 h-1 w-1 shrink-0 rounded-full bg-foreground" />
-                    <span className="text-muted-foreground">Test authentication flows</span>
-                  </div>
-                  <div className="flex items-start gap-2">
-                    <div className="mt-2 h-1 w-1 shrink-0 rounded-full bg-foreground" />
-                    <span className="text-muted-foreground">Debug error responses</span>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
+            <FeatureCard
+              icon={Code}
+              title="API development & testing"
+              description="Debug API integrations in real-time. Inspect request/response payloads, validate headers, and test against staging environments."
+            >
+              <BulletList className="mt-4">
+                <BulletItem>Validate API response structure</BulletItem>
+                <BulletItem>Test authentication flows</BulletItem>
+                <BulletItem>Debug error responses</BulletItem>
+              </BulletList>
+            </FeatureCard>
 
-            <Card>
-              <CardHeader>
-                <Radio className="mb-2 h-8 w-8 text-primary" />
-                <CardTitle>WebSocket debugging</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <CardDescription className="mb-4 leading-relaxed">
-                  Capture and analyze real-time communication. Frame-by-frame inspection with
-                  timestamps and full payload visibility.
-                </CardDescription>
-                <div className="space-y-2 text-sm">
-                  <div className="flex items-start gap-2">
-                    <div className="mt-2 h-1 w-1 shrink-0 rounded-full bg-foreground" />
-                    <span className="text-muted-foreground">Debug chat applications</span>
-                  </div>
-                  <div className="flex items-start gap-2">
-                    <div className="mt-2 h-1 w-1 shrink-0 rounded-full bg-foreground" />
-                    <span className="text-muted-foreground">Analyze live data streams</span>
-                  </div>
-                  <div className="flex items-start gap-2">
-                    <div className="mt-2 h-1 w-1 shrink-0 rounded-full bg-foreground" />
-                    <span className="text-muted-foreground">Validate message ordering</span>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
+            <FeatureCard
+              icon={Radio}
+              title="WebSocket debugging"
+              description="Capture and analyze real-time communication. Frame-by-frame inspection with timestamps and full payload visibility."
+            >
+              <BulletList className="mt-4">
+                <BulletItem>Debug chat applications</BulletItem>
+                <BulletItem>Analyze live data streams</BulletItem>
+                <BulletItem>Validate message ordering</BulletItem>
+              </BulletList>
+            </FeatureCard>
 
-            <Card>
-              <CardHeader>
-                <Gauge className="mb-2 h-8 w-8 text-primary" />
-                <CardTitle>Performance analysis</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <CardDescription className="mb-4 leading-relaxed">
-                  Identify slow requests, optimize payload sizes, and analyze timing breakdowns for
-                  DNS, TLS, and data transfer.
-                </CardDescription>
-                <div className="space-y-2 text-sm">
-                  <div className="flex items-start gap-2">
-                    <div className="mt-2 h-1 w-1 shrink-0 rounded-full bg-foreground" />
-                    <span className="text-muted-foreground">Find performance bottlenecks</span>
-                  </div>
-                  <div className="flex items-start gap-2">
-                    <div className="mt-2 h-1 w-1 shrink-0 rounded-full bg-foreground" />
-                    <span className="text-muted-foreground">Optimize request timing</span>
-                  </div>
-                  <div className="flex items-start gap-2">
-                    <div className="mt-2 h-1 w-1 shrink-0 rounded-full bg-foreground" />
-                    <span className="text-muted-foreground">Reduce payload sizes</span>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
+            <FeatureCard
+              icon={Gauge}
+              title="Performance analysis"
+              description="Identify slow requests, optimize payload sizes, and analyze timing breakdowns for DNS, TLS, and data transfer."
+            >
+              <BulletList className="mt-4">
+                <BulletItem>Find performance bottlenecks</BulletItem>
+                <BulletItem>Optimize request timing</BulletItem>
+                <BulletItem>Reduce payload sizes</BulletItem>
+              </BulletList>
+            </FeatureCard>
 
-            <Card>
-              <CardHeader>
-                <ShieldCheck className="mb-2 h-8 w-8 text-primary" />
-                <CardTitle>Security auditing</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <CardDescription className="mb-4 leading-relaxed">
-                  Verify TLS configurations, check for sensitive data leaks, and validate
-                  certificate pinning implementations.
-                </CardDescription>
-                <div className="space-y-2 text-sm">
-                  <div className="flex items-start gap-2">
-                    <div className="mt-2 h-1 w-1 shrink-0 rounded-full bg-foreground" />
-                    <span className="text-muted-foreground">Audit TLS security</span>
-                  </div>
-                  <div className="flex items-start gap-2">
-                    <div className="mt-2 h-1 w-1 shrink-0 rounded-full bg-foreground" />
-                    <span className="text-muted-foreground">Detect data leaks</span>
-                  </div>
-                  <div className="flex items-start gap-2">
-                    <div className="mt-2 h-1 w-1 shrink-0 rounded-full bg-foreground" />
-                    <span className="text-muted-foreground">Verify certificate pinning</span>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
+            <FeatureCard
+              icon={ShieldCheck}
+              title="Security auditing"
+              description="Verify TLS configurations, check for sensitive data leaks, and validate certificate pinning implementations."
+            >
+              <BulletList className="mt-4">
+                <BulletItem>Audit TLS security</BulletItem>
+                <BulletItem>Detect data leaks</BulletItem>
+                <BulletItem>Verify certificate pinning</BulletItem>
+              </BulletList>
+            </FeatureCard>
 
-            <Card>
-              <CardHeader>
-                <GitBranch className="mb-2 h-8 w-8 text-primary" />
-                <CardTitle>CI/CD integration</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <CardDescription className="mb-4 leading-relaxed">
-                  Automate network testing in CI pipelines. Export HAR files for regression testing
-                  and validate API contracts.
-                </CardDescription>
-                <div className="space-y-2 text-sm">
-                  <div className="flex items-start gap-2">
-                    <div className="mt-2 h-1 w-1 shrink-0 rounded-full bg-foreground" />
-                    <span className="text-muted-foreground">Automated API testing</span>
-                  </div>
-                  <div className="flex items-start gap-2">
-                    <div className="mt-2 h-1 w-1 shrink-0 rounded-full bg-foreground" />
-                    <span className="text-muted-foreground">Regression testing</span>
-                  </div>
-                  <div className="flex items-start gap-2">
-                    <div className="mt-2 h-1 w-1 shrink-0 rounded-full bg-foreground" />
-                    <span className="text-muted-foreground">Contract validation</span>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
+            <FeatureCard
+              icon={GitBranch}
+              title="CI/CD integration"
+              description="Automate network testing in CI pipelines. Export HAR files for regression testing and validate API contracts."
+            >
+              <BulletList className="mt-4">
+                <BulletItem>Automated API testing</BulletItem>
+                <BulletItem>Regression testing</BulletItem>
+                <BulletItem>Contract validation</BulletItem>
+              </BulletList>
+            </FeatureCard>
 
-            <Card>
-              <CardHeader>
-                <Edit3 className="mb-2 h-8 w-8 text-primary" />
-                <CardTitle>Request modification</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <CardDescription className="mb-4 leading-relaxed">
-                  Mock API responses, test error conditions, and redirect traffic to staging servers
-                  without modifying app code.
-                </CardDescription>
-                <div className="space-y-2 text-sm">
-                  <div className="flex items-start gap-2">
-                    <div className="mt-2 h-1 w-1 shrink-0 rounded-full bg-foreground" />
-                    <span className="text-muted-foreground">Mock API responses</span>
-                  </div>
-                  <div className="flex items-start gap-2">
-                    <div className="mt-2 h-1 w-1 shrink-0 rounded-full bg-foreground" />
-                    <span className="text-muted-foreground">Test error handling</span>
-                  </div>
-                  <div className="flex items-start gap-2">
-                    <div className="mt-2 h-1 w-1 shrink-0 rounded-full bg-foreground" />
-                    <span className="text-muted-foreground">Environment switching</span>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
+            <FeatureCard
+              icon={Edit3}
+              title="Request modification"
+              description="Mock API responses, test error conditions, and redirect traffic to staging servers without modifying app code."
+            >
+              <BulletList className="mt-4">
+                <BulletItem>Mock API responses</BulletItem>
+                <BulletItem>Test error handling</BulletItem>
+                <BulletItem>Environment switching</BulletItem>
+              </BulletList>
+            </FeatureCard>
           </div>
         </div>
       </section>
@@ -344,7 +252,7 @@ export default function ShowcasePage() {
       <section className="container py-section">
         <div className="mx-auto max-w-content">
           <div className="text-center">
-            <Share2 className="mx-auto mb-4 h-10 w-10 text-muted-foreground sm:mb-6 sm:h-12 sm:w-12" />
+            <Share2 className="mx-auto mb-4 h-10 w-10 text-primary sm:mb-6 sm:h-12 sm:w-12" />
             <h2 className="mb-3 text-2xl font-bold tracking-tight sm:mb-4 sm:text-3xl">
               Share your use case
             </h2>
@@ -352,20 +260,18 @@ export default function ShowcasePage() {
               Found a creative way to use Trace? Share it with the community in GitHub Discussions.
             </p>
             <div className="flex flex-col justify-center gap-3 sm:flex-row sm:gap-4">
-              <a
-                href="https://github.com/Trace-iOS/Trace/discussions/categories/show-and-tell"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex h-10 items-center justify-center rounded-md bg-primary px-6 text-sm font-medium text-primary-foreground hover:bg-primary/90 sm:h-11 sm:px-8"
-              >
-                Share your workflow
-              </a>
-              <Link
-                href="/docs"
-                className="inline-flex h-10 items-center justify-center rounded-md border border-input bg-background px-6 text-sm font-medium hover:bg-accent hover:text-accent-foreground sm:h-11 sm:px-8"
-              >
-                Browse documentation
-              </Link>
+              <Button size="lg" asChild className="w-full sm:w-auto">
+                <a
+                  href="https://github.com/Trace-iOS/Trace/discussions/categories/show-and-tell"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Share your workflow
+                </a>
+              </Button>
+              <Button size="lg" variant="outline" asChild className="w-full sm:w-auto">
+                <Link href="/docs">Browse documentation</Link>
+              </Button>
             </div>
           </div>
         </div>

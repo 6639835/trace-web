@@ -1,8 +1,11 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Separator } from '@/components/ui/separator';
 import { Timeline, TimelineItem } from '@/components/ui/timeline';
+import { PageHeader } from '@/components/shared/page-header';
+import { FeatureCard } from '@/components/marketing/feature-card';
 import {
   Target,
   Code,
@@ -31,26 +34,21 @@ export const metadata: Metadata = {
     title: 'About - Trace iOS Network Debugger',
     description:
       'Learn about Trace: our mission, principles, and the story behind the best iOS network debugger.',
-    url: 'https://trace.justinl.site/about',
+    url: '/about',
+  },
+  alternates: {
+    canonical: '/about',
   },
 };
 
 export default function AboutPage() {
   return (
     <div className="flex flex-col">
-      {/* Header */}
-      <section className="container py-section">
-        <div className="mx-auto max-w-readable text-center">
-          <Target className="mx-auto mb-4 h-10 w-10 text-muted-foreground sm:mb-6 sm:h-12 sm:w-12" />
-          <h1 className="mb-3 text-3xl font-bold tracking-tight sm:mb-4 sm:text-4xl md:text-5xl">
-            About Trace
-          </h1>
-          <p className="text-sm leading-relaxed text-muted-foreground sm:text-base lg:text-lg">
-            Building the best iOS network debugger. On-device, privacy-first, and designed for
-            developers who need precise visibility into their apps&apos; network behavior.
-          </p>
-        </div>
-      </section>
+      <PageHeader
+        icon={Target}
+        title="About Trace"
+        description="Building the best iOS network debugger. On-device, privacy-first, and designed for developers who need precise visibility into their apps' network behavior."
+      />
 
       <Separator />
 
@@ -124,61 +122,32 @@ export default function AboutPage() {
             Our principles
           </h2>
           <div className="grid gap-4 sm:grid-cols-2 sm:gap-5 md:gap-6">
-            <Card>
-              <CardHeader>
-                <Shield className="mb-2 h-8 w-8 text-primary" />
-                <CardTitle>Privacy first</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <CardDescription className="leading-relaxed">
-                  All traffic capture and analysis happens on-device. No telemetry, no analytics, no
-                  external servers. Your data never leaves your device. The architecture is designed
-                  to make privacy violations impossible, not just unlikely.
-                </CardDescription>
-              </CardContent>
-            </Card>
-
-            <Card>
-              <CardHeader>
-                <Code className="mb-2 h-8 w-8 text-primary" />
-                <CardTitle>Open source</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <CardDescription className="leading-relaxed">
-                  Complete source code is available under the MIT license. Audit the implementation,
-                  verify security claims, or fork it for your needs. Transparency builds trust, and
-                  trust is essential for debugging tools.
-                </CardDescription>
-              </CardContent>
-            </Card>
-
-            <Card>
-              <CardHeader>
-                <Zap className="mb-2 h-8 w-8 text-primary" />
-                <CardTitle>Performance matters</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <CardDescription className="leading-relaxed">
+            <FeatureCard
+              icon={Shield}
+              title="Privacy first"
+              description="All traffic capture and analysis happens on-device. No telemetry, no analytics, no external servers. Your data never leaves your device. The architecture is designed to make privacy violations impossible, not just unlikely."
+            />
+            <FeatureCard
+              icon={Code}
+              title="Open source"
+              description="Complete source code is available under the MIT license. Audit the implementation, verify security claims, or fork it for your needs. Transparency builds trust, and trust is essential for debugging tools."
+            />
+            <FeatureCard
+              icon={Zap}
+              title="Performance matters"
+              description={
+                <>
                   Network debugging is time-sensitive work. Trace is optimized for minimal latency,
                   efficient memory usage, and fast UI responsiveness. Even a debugging tool needs to
                   be fast enough that it doesn&apos;t slow down your workflow.
-                </CardDescription>
-              </CardContent>
-            </Card>
-
-            <Card>
-              <CardHeader>
-                <Users className="mb-2 h-8 w-8 text-primary" />
-                <CardTitle>Community driven</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <CardDescription className="leading-relaxed">
-                  Feature priorities and roadmap decisions are shaped by user feedback.
-                  Contributions are welcome—code, documentation, bug reports, and feature requests
-                  all move the project forward. This is built with the community, not just for it.
-                </CardDescription>
-              </CardContent>
-            </Card>
+                </>
+              }
+            />
+            <FeatureCard
+              icon={Users}
+              title="Community driven"
+              description="Feature priorities and roadmap decisions are shaped by user feedback. Contributions are welcome—code, documentation, bug reports, and feature requests all move the project forward. This is built with the community, not just for it."
+            />
           </div>
         </div>
       </section>
@@ -360,22 +329,22 @@ export default function AboutPage() {
             features, or simply star the project to show your support.
           </p>
           <div className="flex flex-col justify-center gap-3 sm:flex-row sm:gap-4">
-            <a
-              href="https://github.com/Trace-iOS/Trace"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex h-10 items-center justify-center rounded-md bg-primary px-6 text-sm font-medium text-primary-foreground hover:bg-primary/90 sm:h-11 sm:px-8"
-            >
-              <Code className="mr-2 h-4 w-4" />
-              View on GitHub
-            </a>
-            <Link
-              href="/contributing"
-              className="inline-flex h-10 items-center justify-center rounded-md border border-input bg-background px-6 text-sm font-medium hover:bg-accent hover:text-accent-foreground sm:h-11 sm:px-8"
-            >
-              <Rocket className="mr-2 h-4 w-4" />
-              Start contributing
-            </Link>
+            <Button size="lg" asChild>
+              <a
+                href="https://github.com/Trace-iOS/Trace"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Code className="mr-2 h-5 w-5" />
+                View on GitHub
+              </a>
+            </Button>
+            <Button size="lg" variant="outline" asChild>
+              <Link href="/contributing">
+                <Rocket className="mr-2 h-5 w-5" />
+                Start contributing
+              </Link>
+            </Button>
           </div>
         </div>
       </section>

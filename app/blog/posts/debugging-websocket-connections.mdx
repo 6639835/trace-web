@@ -24,6 +24,33 @@ Unlike HTTP, which follows a request-response pattern, WebSocket connections:
 - Send messages (frames) in both directions asynchronously
 - Can stay open for minutes or hours
 
+<Mermaid>
+  {`sequenceDiagram
+    participant App as iOS App
+    participant Trace as Trace Proxy
+    participant Server as WebSocket Server
+    
+    App->>Trace: HTTP Upgrade Request
+    Trace->>Server: HTTP Upgrade Request
+    Server-->>Trace: 101 Switching Protocols
+    Trace-->>App: 101 Switching Protocols
+    
+    Note over App,Server: WebSocket Connection Established
+    
+    App->>Trace: Text Frame (message)
+    Trace->>Server: Text Frame (message)
+    Server-->>Trace: Text Frame (response)
+    Trace-->>App: Text Frame (response)
+    
+    loop Keep-alive
+        Server-->>Trace: Ping
+        Trace-->>App: Ping
+        App->>Trace: Pong
+        Trace->>Server: Pong
+    end
+`}
+</Mermaid>
+
 Traditional HTTP debugging tools often show the initial handshake but miss the actual message traffic. Trace treats WebSockets as first-class protocol with dedicated inspection.
 
 ## Capturing WebSocket traffic
@@ -97,40 +124,42 @@ For binary frames, Trace shows a hex dump with ASCII representation.
 
 ## Common debugging scenarios
 
-### Debugging connection failures
+<ToggleList>
+  <ToggleItem title="Debugging connection failures" defaultOpen>
+    If your WebSocket connection fails to establish:
 
-If your WebSocket connection fails to establish:
+    1. Check the initial HTTP request—are the `Upgrade` and `Connection` headers present?
+    2. Verify the server response—is the status 101 or an error code?
+    3. Look for certificate pinning warnings if using WSS (secure WebSocket)
 
-1. Check the initial HTTP request—are the `Upgrade` and `Connection` headers present?
-2. Verify the server response—is the status 101 or an error code?
-3. Look for certificate pinning warnings if using WSS (secure WebSocket)
+    Common failure modes:
+    - **403 Forbidden**: Authentication or authorization issue
+    - **404 Not Found**: Wrong endpoint URL
+    - **Timeout**: Server not responding or network issue
 
-Common failure modes:
+  </ToggleItem>
+  <ToggleItem title="Tracking message flow">
+    For debugging message ordering or timing issues:
 
-- **403 Forbidden**: Authentication or authorization issue
-- **404 Not Found**: Wrong endpoint URL
-- **Timeout**: Server not responding or network issue
+    1. Open the WebSocket detail view
+    2. Use the frame timeline to see message sequence
+    3. Check timestamps to identify delays
+    4. Filter frames by direction (sent vs received)
 
-### Tracking message flow
+    Example: If your app expects a response within 5 seconds but receives it after 10, the timeline will show the delay.
 
-For debugging message ordering or timing issues:
+  </ToggleItem>
+  <ToggleItem title="Identifying protocol violations">
+    WebSocket has specific rules about frame structure and message flow. Trace helps identify violations:
 
-1. Open the WebSocket detail view
-2. Use the frame timeline to see message sequence
-3. Check timestamps to identify delays
-4. Filter frames by direction (sent vs received)
+    - **Unexpected close**: Connection closed without a close frame
+    - **Invalid frame opcode**: Server sent an unknown frame type
+    - **Fragmentation issues**: Message fragments in wrong order
 
-Example: If your app expects a response within 5 seconds but receives it after 10, the timeline will show the delay.
+    Trace flags protocol violations with warnings in the UI.
 
-### Identifying protocol violations
-
-WebSocket has specific rules about frame structure and message flow. Trace helps identify violations:
-
-- **Unexpected close**: Connection closed without a close frame
-- **Invalid frame opcode**: Server sent an unknown frame type
-- **Fragmentation issues**: Message fragments in wrong order
-
-Trace flags protocol violations with warnings in the UI.
+  </ToggleItem>
+</ToggleList>
 
 ## Advanced tips
 

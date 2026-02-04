@@ -15,6 +15,31 @@ export const metadata = {
 
 Building a network debugger for iOS involves navigating Apple's sandbox restrictions, performance constraints, and privacy requirements. This post explores the key architectural decisions behind Trace and the trade-offs we made.
 
+## High-Level Architecture
+
+<Mermaid>
+  {`flowchart TB
+    subgraph Device["iOS Device"]
+        App["📱 Trace App"]
+        Ext["🔌 Network Extension"]
+        DB[(SQLite)]
+        CA["🔐 Certificate Authority"]
+        
+        App <-->|"App Groups"| DB
+        Ext <-->|"App Groups"| DB
+        Ext --> CA
+    end
+    
+    subgraph Network["Network Traffic"]
+        iOS["iOS Apps"]
+        Server["🌐 Destination Servers"]
+    end
+    
+    iOS -->|"System Proxy"| Ext
+    Ext <-->|"TLS MITM"| Server
+`}
+</Mermaid>
+
 ## Network Extension vs packet capture
 
 The fundamental question: How do you capture network traffic on iOS?
@@ -175,10 +200,40 @@ Why not: Can't predict which domains users will access. Would waste CPU and stor
 
 Trace is structured as multiple SPM modules:
 
-- **TraceCore**: Shared models and utilities
-- **TraceProxy**: Proxy server and MITM logic
-- **TraceExtension**: Network Extension provider
-- **TraceApp**: SwiftUI app
+<FileTree>
+  <TreeFolder name="Trace">
+    <TreeFolder name="Packages">
+      <TreeFolder name="TraceCore">
+        <TreeFile name="Package.swift" />
+        <TreeFolder name="Sources">
+          <TreeFile name="Models.swift" />
+          <TreeFile name="Utilities.swift" />
+        </TreeFolder>
+      </TreeFolder>
+      <TreeFolder name="TraceProxy">
+        <TreeFile name="Package.swift" />
+        <TreeFolder name="Sources">
+          <TreeFile name="ProxyServer.swift" />
+          <TreeFile name="MITMHandler.swift" highlight />
+        </TreeFolder>
+      </TreeFolder>
+      <TreeFolder name="TraceExtension">
+        <TreeFile name="Package.swift" />
+        <TreeFolder name="Sources">
+          <TreeFile name="PacketTunnelProvider.swift" highlight />
+        </TreeFolder>
+      </TreeFolder>
+    </TreeFolder>
+    <TreeFolder name="TraceApp">
+      <TreeFile name="TraceApp.swift" />
+      <TreeFolder name="Views">
+        <TreeFile name="RequestList.swift" />
+        <TreeFile name="RequestDetail.swift" />
+      </TreeFolder>
+    </TreeFolder>
+    <TreeFile name="Package.swift" />
+  </TreeFolder>
+</FileTree>
 
 ### Benefits
 
@@ -252,11 +307,28 @@ We experimented with a custom binary format for captures instead of SQLite. It w
 
 ## Lessons learned
 
-1. **iOS will terminate your extension**: Design for minimal memory usage
-2. **Debugging extensions is hard**: Invest in logging infrastructure early
-3. **Users won't read documentation**: Make the UI self-explanatory
-4. **Certificate trust is confusing**: Provide step-by-step visual guides
-5. **Performance matters**: Even a debugging tool needs to be fast
+<ToggleList>
+  <ToggleItem title="iOS will terminate your extension" defaultOpen>
+    Network Extensions run in a separate process with strict memory limits. Design for minimal
+    memory usage from the start—store data in SQLite, not in-memory arrays.
+  </ToggleItem>
+  <ToggleItem title="Debugging extensions is hard">
+    You can't attach a debugger to a running Network Extension the same way you can with your main
+    app. Invest in comprehensive logging infrastructure early—it will save hours of debugging time.
+  </ToggleItem>
+  <ToggleItem title="Users won't read documentation">
+    Make the UI self-explanatory with contextual help, clear labels, and progressive disclosure. The
+    best documentation is the one users don't need to read.
+  </ToggleItem>
+  <ToggleItem title="Certificate trust is confusing">
+    The iOS certificate trust flow is confusing for many users. Provide step-by-step visual guides
+    and in-app verification to confirm the certificate is correctly installed.
+  </ToggleItem>
+  <ToggleItem title="Performance matters">
+    Even a debugging tool needs to be fast. Slow UI or laggy capture will frustrate developers who
+    are already dealing with bugs in their own apps.
+  </ToggleItem>
+</ToggleList>
 
 ## Future improvements
 

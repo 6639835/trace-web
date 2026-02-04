@@ -5,16 +5,23 @@ import { Separator } from '@/components/ui/separator';
 export function Footer() {
   return (
     <footer className="border-t bg-background">
-      <div className="container py-12 md:py-16 lg:py-20">
+      <div className="container py-10 sm:py-12 md:py-16 lg:py-20">
         {/* Top Section: Logo & Brand */}
-        <div className="mb-12 flex flex-col items-center text-center">
+        <div className="mb-10 flex flex-col items-center text-center sm:mb-12">
           <Link href="/" className="mb-4 inline-block">
             <Image
-              src="/logos/trace-logo.svg"
+              src="/logos/trace-logo-bright.svg"
               alt="Trace"
               width={200}
               height={62}
-              className="h-14 w-auto sm:h-16"
+              className="h-14 w-auto sm:h-16 dark:hidden"
+            />
+            <Image
+              src="/logos/trace-logo-dark.svg"
+              alt="Trace"
+              width={200}
+              height={62}
+              className="hidden h-14 w-auto sm:h-16 dark:block"
             />
           </Link>
           <p className="max-w-sm text-sm text-muted-foreground sm:text-base">
@@ -23,7 +30,7 @@ export function Footer() {
         </div>
 
         {/* Middle Section: Navigation Links */}
-        <div className="mx-auto grid max-w-4xl grid-cols-2 gap-8 md:grid-cols-4">
+        <div className="mx-auto grid max-w-4xl grid-cols-2 gap-8 sm:gap-10 md:grid-cols-4 md:gap-8">
           <div className="flex flex-col items-center space-y-3 md:items-start">
             <h3 className="text-sm font-semibold">Product</h3>
             <ul className="space-y-2 text-center text-sm text-muted-foreground md:text-left">
@@ -144,7 +151,7 @@ export function Footer() {
           </div>
         </div>
 
-        <Separator className="my-12" />
+        <Separator className="my-10 sm:my-12" />
 
         {/* Bottom Section: Copyright */}
         <div className="flex flex-col items-center justify-between gap-4 text-sm text-muted-foreground sm:flex-row">

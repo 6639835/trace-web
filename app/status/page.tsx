@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Separator } from '@/components/ui/separator';
+import { PageHeader } from '@/components/shared/page-header';
 import { Activity, CheckCircle2, AlertCircle } from 'lucide-react';
 
 export const metadata: Metadata = {
@@ -12,7 +13,10 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Status - Trace',
     description: 'Check the current status of Trace services.',
-    url: 'https://trace.justinl.site/status',
+    url: '/status',
+  },
+  alternates: {
+    canonical: '/status',
   },
 };
 
@@ -44,18 +48,11 @@ export default function StatusPage() {
 
   return (
     <div className="flex flex-col">
-      {/* Header */}
-      <section className="container py-section">
-        <div className="mx-auto max-w-readable text-center">
-          <Activity className="mx-auto mb-4 h-10 w-10 text-muted-foreground sm:mb-6 sm:h-12 sm:w-12" />
-          <h1 className="mb-3 text-3xl font-bold tracking-tight sm:mb-4 sm:text-4xl md:text-5xl">
-            Status
-          </h1>
-          <p className="text-sm leading-relaxed text-muted-foreground sm:text-base lg:text-lg">
-            Current status of Trace services and infrastructure.
-          </p>
-        </div>
-      </section>
+      <PageHeader
+        icon={Activity}
+        title="Status"
+        description="Current status of Trace services and infrastructure."
+      />
 
       <Separator />
 

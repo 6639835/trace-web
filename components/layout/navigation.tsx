@@ -35,18 +35,25 @@ export function Navigation() {
             />
           </Link>
           <div className="hidden items-center gap-4 md:flex lg:gap-6">
-            {navItems.map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                className={cn(
-                  'text-sm font-medium transition-colors hover:text-foreground/80',
-                  pathname === item.href ? 'text-foreground' : 'text-foreground/60',
-                )}
-              >
-                {item.name}
-              </Link>
-            ))}
+            {navItems.map((item) => {
+              const isActive = pathname === item.href || pathname.startsWith(`${item.href}/`);
+
+              return (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  aria-current={isActive ? 'page' : undefined}
+                  className={cn(
+                    'relative text-sm font-medium transition-colors hover:text-foreground',
+                    isActive
+                      ? 'text-foreground after:absolute after:right-0 after:-bottom-[1.3rem] after:left-0 after:h-0.5 after:bg-primary after:content-[""]'
+                      : 'text-foreground/60',
+                  )}
+                >
+                  {item.name}
+                </Link>
+              );
+            })}
           </div>
         </div>
         <div className="flex items-center gap-2">
@@ -55,6 +62,8 @@ export function Navigation() {
             className="rounded-md p-2 transition-colors hover:bg-accent md:hidden"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             aria-label="Toggle menu"
+            aria-expanded={mobileMenuOpen}
+            aria-controls="primary-navigation-mobile"
           >
             {mobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
           </button>
@@ -63,23 +72,28 @@ export function Navigation() {
 
       {/* Mobile Menu */}
       {mobileMenuOpen && (
-        <div className="border-t bg-background md:hidden">
+        <div id="primary-navigation-mobile" className="border-t bg-background md:hidden">
           <div className="container space-y-3 py-4">
-            {navItems.map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                onClick={() => setMobileMenuOpen(false)}
-                className={cn(
-                  'block rounded-md px-3 py-2 text-sm font-medium transition-colors',
-                  pathname === item.href
-                    ? 'bg-accent text-foreground'
-                    : 'text-foreground/60 hover:bg-accent/50 hover:text-foreground',
-                )}
-              >
-                {item.name}
-              </Link>
-            ))}
+            {navItems.map((item) => {
+              const isActive = pathname === item.href || pathname.startsWith(`${item.href}/`);
+
+              return (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  aria-current={isActive ? 'page' : undefined}
+                  onClick={() => setMobileMenuOpen(false)}
+                  className={cn(
+                    'block rounded-md px-3 py-2 text-sm font-medium transition-colors',
+                    isActive
+                      ? 'bg-primary/10 font-semibold text-foreground'
+                      : 'text-foreground/60 hover:bg-accent/50 hover:text-foreground',
+                  )}
+                >
+                  {item.name}
+                </Link>
+              );
+            })}
           </div>
         </div>
       )}

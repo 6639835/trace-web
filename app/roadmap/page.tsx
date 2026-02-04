@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Separator } from '@/components/ui/separator';
 import {
@@ -20,10 +21,20 @@ export const metadata: Metadata = {
   title: 'Product Roadmap',
   description:
     'Explore the future of Trace. See what features are coming next and track our progress building the best iOS network debugging tool.',
+  keywords: [
+    'Trace roadmap',
+    'iOS network debugger features',
+    'Trace upcoming features',
+    'network debugging roadmap',
+  ],
   openGraph: {
     title: 'Product Roadmap | Trace',
     description:
       'Explore the future of Trace. See what features are coming next and track our progress building the best iOS network debugging tool.',
+    url: '/roadmap',
+  },
+  alternates: {
+    canonical: '/roadmap',
   },
 };
 
@@ -232,7 +243,7 @@ export default function RoadmapPage() {
       {/* Hero Section */}
       <section className="container py-section">
         <div className="mx-auto max-w-content text-center">
-          <Globe className="mx-auto mb-4 h-10 w-10 text-muted-foreground sm:mb-6 sm:h-12 sm:w-12" />
+          <Globe className="mx-auto mb-4 h-10 w-10 text-primary sm:mb-6 sm:h-12 sm:w-12" />
           <h1 className="mb-3 text-2xl font-bold tracking-tight sm:mb-4 sm:text-3xl md:text-4xl lg:text-5xl">
             Product Roadmap
           </h1>
@@ -335,7 +346,7 @@ export default function RoadmapPage() {
       {/* CTA Section */}
       <section className="container py-section-lg">
         <div className="mx-auto max-w-readable text-center">
-          <Lock className="mx-auto mb-4 h-10 w-10 text-muted-foreground sm:mb-6 sm:h-12 sm:w-12" />
+          <Lock className="mx-auto mb-4 h-10 w-10 text-primary sm:mb-6 sm:h-12 sm:w-12" />
           <h2 className="mb-3 text-2xl font-bold tracking-tight sm:mb-4 sm:text-3xl md:text-4xl">
             Open source and community-driven
           </h2>
@@ -345,22 +356,24 @@ export default function RoadmapPage() {
             community.
           </p>
           <div className="flex flex-col justify-center gap-3 sm:flex-row sm:gap-4">
-            <a
-              href="https://github.com/Trace-iOS/Trace/discussions"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex h-10 items-center justify-center rounded-md bg-primary px-6 text-sm font-medium text-primary-foreground hover:bg-primary/90 sm:h-11 sm:px-8"
-            >
-              Share Feedback
-            </a>
-            <a
-              href="https://github.com/Trace-iOS/Trace/issues"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex h-10 items-center justify-center rounded-md border border-input bg-background px-6 text-sm font-medium hover:bg-accent hover:text-accent-foreground sm:h-11 sm:px-8"
-            >
-              Report Issues
-            </a>
+            <Button size="lg" asChild className="w-full sm:w-auto">
+              <a
+                href="https://github.com/Trace-iOS/Trace/discussions"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Share Feedback
+              </a>
+            </Button>
+            <Button size="lg" variant="outline" asChild className="w-full sm:w-auto">
+              <a
+                href="https://github.com/Trace-iOS/Trace/issues"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Report Issues
+              </a>
+            </Button>
           </div>
         </div>
       </section>

@@ -1,20 +1,21 @@
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.css';
-import { Navigation } from '@/components/navigation';
-import { Footer } from '@/components/footer';
-import { ThemeProvider } from '@/components/theme-provider';
+import { Navigation } from '@/components/layout/navigation';
+import { Footer } from '@/components/layout/footer';
+import { ThemeProvider } from '@/components/providers/theme-provider';
+import { siteUrl } from '@/lib/config/site';
 
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://trace.justinl.site'),
+  metadataBase: new URL(siteUrl),
   title: {
     default: 'Trace - Professional iOS Network Debugger & Traffic Inspector',
     template: '%s | Trace',
   },
   description:
-    'Professional network debugging tool for iOS developers. Device-wide HTTP(S), WebSocket, and SSE traffic capture with TLS MITM inspection. Built on Network Extension APIs for system-level visibility. Open source and free.',
+    'An iOS network debugger for capturing and inspecting HTTP(S), WebSocket, and SSE traffic at L3 IP layer.',
   keywords: [
     'iOS network debugger',
     'iOS traffic inspector',
@@ -43,7 +44,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
     locale: 'en_US',
-    url: 'https://trace.justinl.site',
+    url: siteUrl,
     siteName: 'Trace',
     title: 'Trace - Professional iOS Network Debugger',
     description:
@@ -102,9 +103,19 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           enableSystem
           disableTransitionOnChange
         >
+          {/* Skip to content link for accessibility */}
+          <a
+            href="#main-content"
+            className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:rounded-md focus:bg-primary focus:px-4 focus:py-2 focus:text-primary-foreground focus:ring-2 focus:ring-ring focus:ring-offset-2 focus:outline-none"
+          >
+            Skip to content
+          </a>
+
           <div className="flex min-h-screen flex-col">
             <Navigation />
-            <main className="w-full flex-1">{children}</main>
+            <main id="main-content" className="w-full flex-1">
+              {children}
+            </main>
             <Footer />
           </div>
         </ThemeProvider>

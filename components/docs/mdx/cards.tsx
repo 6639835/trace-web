@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import type { ReactNode } from 'react';
 import {
   BookOpen,
   Rocket,
@@ -38,16 +39,10 @@ type CardProps = {
   title: string;
   href?: string;
   icon?: keyof typeof iconMap;
-  children: React.ReactNode;
+  children: ReactNode;
 };
 
-export function CardGroup({
-  children,
-  className,
-}: {
-  children: React.ReactNode;
-  className?: string;
-}) {
+export function CardGroup({ children, className }: { children: ReactNode; className?: string }) {
   return (
     <div
       data-toc="ignore"
@@ -71,7 +66,7 @@ export function Card({ title, href, icon, children }: CardProps) {
             {children}
           </div>
         </div>
-        {Icon ? <Icon className="h-4 w-4 shrink-0 text-muted-foreground" /> : null}
+        {Icon ? <Icon className="h-4 w-4 shrink-0 text-primary" /> : null}
       </div>
       <span className="text-xs font-medium text-primary">Learn more →</span>
     </>

@@ -1,8 +1,8 @@
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Separator } from '@/components/ui/separator';
+import { FeatureCard } from '@/components/marketing/feature-card';
 import {
   Github,
   Network,
@@ -14,6 +14,7 @@ import {
   Smartphone,
 } from 'lucide-react';
 import { HeroPhone } from '@/components/marketing/hero-phone';
+import { absoluteUrl } from '@/lib/config/site';
 
 export default function Home() {
   const structuredData = {
@@ -28,7 +29,7 @@ export default function Home() {
       priceCurrency: 'USD',
     },
     description:
-      'Professional network debugging tool for iOS developers. Device-wide HTTP(S), WebSocket, and SSE traffic capture with TLS MITM inspection.',
+      'An iOS network debugger for capturing and inspecting HTTP(S), WebSocket, and SSE traffic at L3 IP layer.',
     softwareVersion: '1.0',
     applicationSubCategory: 'Network Debugging Tool',
     featureList: [
@@ -40,15 +41,10 @@ export default function Home() {
       'Deep packet inspection',
     ],
     downloadUrl: 'https://testflight.apple.com/join/fmYFd8ud',
-    screenshot: 'https://trace.justinl.site/images/screenshot.png',
+    screenshot: absoluteUrl('/trace-web.png'),
     author: {
       '@type': 'Person',
       name: 'Justin',
-    },
-    aggregateRating: {
-      '@type': 'AggregateRating',
-      ratingValue: '5',
-      ratingCount: '1',
     },
     codeRepository: 'https://github.com/Trace-iOS/Trace',
     license: 'https://github.com/Trace-iOS/Trace/blob/main/LICENSE',
@@ -63,50 +59,55 @@ export default function Home() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
       />
       {/* Hero Section with Phone Mockup */}
-      <section className="container flex min-h-[calc(100vh-4rem)] items-start py-section">
-        <div className="mx-auto grid w-full max-w-wide items-start gap-8 pt-8 sm:gap-10 sm:pt-12 lg:grid-cols-2 lg:gap-12 lg:pt-16">
-          {/* Left Column - Hero Text */}
-          <div className="flex max-w-full flex-col space-y-4 sm:space-y-6 lg:space-y-8">
-            <div className="max-w-full">
-              <h1 className="mb-3 text-2xl leading-tight font-bold tracking-tight break-words hyphens-auto xs:text-3xl sm:mb-4 sm:text-4xl md:text-5xl lg:mb-6 lg:text-6xl">
-                Redefining iOS network debugging.
-              </h1>
-              <p className="mb-3 text-sm leading-relaxed break-words text-muted-foreground sm:mb-4 sm:text-base lg:text-lg">
-                Professional network debugging tool for iOS developers. Captures HTTP(S), WebSocket,
-                and SSE traffic through a proxy-only packet tunnel with on-device TLS MITM. Built on
-                Network Extension APIs for system-level visibility when apps honor the system proxy.
-              </p>
-              <p className="max-w-full text-xs break-words text-muted-foreground sm:text-sm">
-                Real-time network inspection at the system level. See requests from apps that honor
-                the system proxy settings.
-              </p>
-            </div>
-            <div className="flex max-w-full flex-col gap-3 sm:flex-row sm:gap-4">
-              <Button size="lg" asChild className="w-full sm:w-auto">
-                <Link
-                  href="https://testflight.apple.com/join/fmYFd8ud"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <Smartphone className="mr-2 h-5 w-5" />
-                  Get on TestFlight
-                </Link>
-              </Button>
-              <Button size="lg" variant="outline" asChild className="w-full sm:w-auto">
-                <Link
-                  href="https://github.com/Trace-iOS/Trace"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <Github className="mr-2 h-5 w-5" />
-                  View on GitHub
-                </Link>
-              </Button>
-            </div>
-          </div>
+      <section className="relative flex min-h-[calc(100vh-4rem)] items-start overflow-hidden py-section">
+        {/* Gradient Background - Full Width */}
+        <div className="absolute inset-0 -z-10 bg-gradient-to-br from-primary/5 via-background to-primary/10 dark:from-primary/10 dark:to-background" />
+        <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_30%_20%,rgba(59,130,246,0.05),transparent_50%)] dark:bg-[radial-gradient(circle_at_30%_20%,rgba(59,130,246,0.1),transparent_50%)]" />
 
-          {/* Right Column - Phone Mockup with Screenshot */}
-          <HeroPhone />
+        <div className="container">
+          <div className="mx-auto grid w-full max-w-wide items-start gap-8 pt-8 sm:gap-10 sm:pt-12 lg:grid-cols-2 lg:gap-12 lg:pt-16">
+            {/* Left Column - Hero Text */}
+            <div className="flex max-w-full flex-col space-y-4 sm:space-y-6 lg:space-y-8">
+              <div className="max-w-full">
+                <h1 className="mb-3 text-2xl leading-tight font-bold tracking-tight break-words hyphens-auto xs:text-3xl sm:mb-4 sm:text-4xl md:text-5xl lg:mb-6 lg:text-6xl">
+                  Redefining iOS network debugging.
+                </h1>
+                <p className="mb-3 text-sm leading-relaxed break-words text-muted-foreground sm:mb-4 sm:text-base lg:text-lg">
+                  An iOS network debugger for capturing and inspecting HTTP(S), WebSocket, and SSE
+                  traffic at L3 IP layer.
+                </p>
+                <p className="max-w-full text-xs break-words text-muted-foreground sm:text-sm">
+                  Perfect for iOS developers debugging API calls, security researchers analyzing app
+                  behavior, or anyone who needs deep insight into mobile network traffic.
+                </p>
+              </div>
+              <div className="flex max-w-full flex-col gap-3 sm:flex-row sm:gap-4">
+                <Button size="lg" asChild className="w-full sm:w-auto">
+                  <Link
+                    href="https://testflight.apple.com/join/fmYFd8ud"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <Smartphone className="mr-2 h-5 w-5" />
+                    Get on TestFlight
+                  </Link>
+                </Button>
+                <Button size="lg" variant="outline" asChild className="w-full sm:w-auto">
+                  <Link
+                    href="https://github.com/Trace-iOS/Trace"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <Github className="mr-2 h-5 w-5" />
+                    View on GitHub
+                  </Link>
+                </Button>
+              </div>
+            </div>
+
+            {/* Right Column - Phone Mockup with Screenshot */}
+            <HeroPhone />
+          </div>
         </div>
       </section>
 
@@ -126,85 +127,42 @@ export default function Home() {
           </div>
 
           <div className="grid gap-4 sm:grid-cols-2 sm:gap-5 md:gap-6 lg:grid-cols-3">
-            <Card>
-              <CardHeader>
-                <Network className="mb-2 h-8 w-8 text-muted-foreground" />
-                <CardTitle className="text-lg">Device-wide capture</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <CardDescription>
-                  Network Extension-based packet tunnel configures a system proxy to capture HTTP(S)
-                  for apps that honor it. No per-app setup required.
-                </CardDescription>
-              </CardContent>
-            </Card>
-
-            <Card>
-              <CardHeader>
-                <Fingerprint className="mb-2 h-8 w-8 text-muted-foreground" />
-                <CardTitle className="text-lg">TLS inspection</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <CardDescription>
-                  On-device TLS MITM enables full request and response body inspection for encrypted
-                  traffic. Certificate pinning detection included.
-                </CardDescription>
-              </CardContent>
-            </Card>
-
-            <Card>
-              <CardHeader>
-                <Radio className="mb-2 h-8 w-8 text-muted-foreground" />
-                <CardTitle className="text-lg">WebSocket & SSE</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <CardDescription>
-                  Real-time protocol support for WebSocket connections and Server-Sent Events. View
-                  frame-by-frame communication as it happens.
-                </CardDescription>
-              </CardContent>
-            </Card>
-
-            <Card>
-              <CardHeader>
-                <Repeat className="mb-2 h-8 w-8 text-muted-foreground" />
-                <CardTitle className="text-lg">Traffic modification</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <CardDescription>
-                  Comprehensive modification tools: rewrite rules, request maps, host overrides,
-                  breakpoints, JavaScript scripts, and network condition profiles. Replay requests
-                  with the built-in request builder or import cURL commands.
-                </CardDescription>
-              </CardContent>
-            </Card>
-
-            <Card>
-              <CardHeader>
-                <Activity className="mb-2 h-8 w-8 text-muted-foreground" />
-                <CardTitle className="text-lg">PCAP export</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <CardDescription>
-                  Optional PCAP export of captured HTTP frames for offline analysis, plus event
-                  logging for diagnostics and troubleshooting.
-                </CardDescription>
-              </CardContent>
-            </Card>
-
-            <Card>
-              <CardHeader>
-                <Layers className="mb-2 h-8 w-8 text-muted-foreground" />
-                <CardTitle className="text-lg">Deep inspection</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <CardDescription>
-                  Comprehensive analysis with headers, body viewers (JSON, XML, images, SVG,
-                  multipart), timing breakdowns, TLS certificate chains, HTTP/2 stream info with
-                  HPACK table, request comparison, and saved filter presets.
-                </CardDescription>
-              </CardContent>
-            </Card>
+            <FeatureCard
+              icon={Network}
+              title="Device-wide capture"
+              titleClassName="text-lg"
+              description="Network Extension-based packet tunnel configures a system proxy to capture HTTP(S) for apps that honor it. No per-app setup required."
+            />
+            <FeatureCard
+              icon={Fingerprint}
+              title="TLS inspection"
+              titleClassName="text-lg"
+              description="On-device TLS MITM enables full request and response body inspection for encrypted traffic. Certificate pinning detection included."
+            />
+            <FeatureCard
+              icon={Radio}
+              title="WebSocket & SSE"
+              titleClassName="text-lg"
+              description="Real-time protocol support for WebSocket connections and Server-Sent Events. View frame-by-frame communication as it happens."
+            />
+            <FeatureCard
+              icon={Repeat}
+              title="Traffic modification"
+              titleClassName="text-lg"
+              description="Comprehensive modification tools: rewrite rules, request maps, host overrides, breakpoints, JavaScript scripts, and network condition profiles. Replay requests with the built-in request builder or import cURL commands."
+            />
+            <FeatureCard
+              icon={Activity}
+              title="PCAP export"
+              titleClassName="text-lg"
+              description="Optional PCAP export of captured HTTP frames for offline analysis, plus event logging for diagnostics and troubleshooting."
+            />
+            <FeatureCard
+              icon={Layers}
+              title="Deep inspection"
+              titleClassName="text-lg"
+              description="Comprehensive analysis with headers, body viewers (JSON, XML, images, SVG, multipart), timing breakdowns, TLS certificate chains, HTTP/2 stream info with HPACK table, request comparison, and saved filter presets."
+            />
           </div>
         </div>
       </section>

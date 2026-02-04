@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { DocsSidebar } from '@/components/docs/docs-sidebar';
 import { DocsTableOfContents } from '@/components/docs/docs-toc';
 import { DocsMobileNav } from '@/components/docs/docs-mobile-nav';
+import { Breadcrumbs } from '@/components/docs/breadcrumbs';
 
 export const metadata: Metadata = {
   title: {
@@ -22,7 +23,10 @@ export const metadata: Metadata = {
     title: 'Trace Documentation',
     description:
       'Learn how to use Trace for iOS network debugging: installation, certificate setup, traffic capture, and advanced features.',
-    url: 'https://trace.justinl.site/docs',
+    url: '/docs',
+  },
+  alternates: {
+    canonical: '/docs',
   },
 };
 
@@ -44,6 +48,7 @@ export default function DocsLayout({ children }: { children: React.ReactNode }) 
 
         {/* Main Content */}
         <main className="min-w-0 flex-1">
+          <Breadcrumbs />
           <article className="prose max-w-none prose-slate dark:prose-invert prose-headings:break-words prose-p:break-words">
             {children}
           </article>

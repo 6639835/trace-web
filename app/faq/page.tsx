@@ -6,7 +6,9 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from '@/components/ui/accordion';
+import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
+import { PageHeader } from '@/components/shared/page-header';
 import { HelpCircle, Github, MessageCircle } from 'lucide-react';
 
 export const metadata: Metadata = {
@@ -23,21 +25,97 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'FAQ - Trace iOS Network Debugger',
     description: 'Find answers to common questions about using Trace for iOS network debugging.',
-    url: 'https://trace.justinl.site/faq',
+    url: '/faq',
   },
+  alternates: {
+    canonical: '/faq',
+  },
+};
+
+// FAQ structured data for rich snippets in search results
+const faqStructuredData = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    {
+      '@type': 'Question',
+      name: 'How do I install Trace?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: "Trace is currently available via TestFlight. Join the beta at testflight.apple.com/join/fmYFd8ud. You'll need iOS 16.0 or later and a physical device (Network Extension doesn't work in the simulator).",
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Do I need to install a certificate?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Only if you want to inspect HTTPS traffic. For HTTP-only debugging, no certificate is needed. To inspect HTTPS, generate the root CA in Trace, install the profile, and enable full trust in Settings.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Can Trace capture WebSocket traffic?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Yes. Trace has first-class WebSocket support. It captures the initial HTTP upgrade handshake and all subsequent WebSocket frames (text, binary, ping, pong, close).',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'How does Trace capture traffic?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: "Trace uses a Network Extension packet tunnel provider to configure system-level proxy settings. When capture is active, iOS routes HTTP/HTTPS traffic through Trace's local proxy server.",
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'What is TLS MITM and is it safe?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'TLS Man-in-the-Middle (MITM) is a technique for inspecting encrypted HTTPS traffic. Trace generates a root CA on your device that never leaves it, making it safe for debugging purposes.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Is my captured data secure?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: "Captured data is stored in your device's App Group container with standard iOS sandbox protections. Trace doesn't send any data off your device.",
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Is Trace really open source?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Yes. Trace is licensed under MIT, one of the most permissive open source licenses. The complete source code is on GitHub.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Can I use Trace on the simulator?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: "No. Network Extension packet tunnels require entitlements that only work on physical devices. Apple doesn't allow Network Extensions in the iOS simulator.",
+      },
+    },
+  ],
 };
 
 export default function FAQPage() {
   return (
     <div className="flex flex-col">
-      {/* Header */}
-      <section className="container py-section">
-        <div className="mx-auto max-w-readable text-center">
-          <HelpCircle className="mx-auto mb-4 h-10 w-10 text-muted-foreground sm:mb-6 sm:h-12 sm:w-12" />
-          <h1 className="mb-3 text-3xl font-bold tracking-tight sm:mb-4 sm:text-4xl md:text-5xl">
-            Frequently Asked Questions
-          </h1>
-          <p className="text-sm leading-relaxed text-muted-foreground sm:text-base lg:text-lg">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqStructuredData) }}
+      />
+      <PageHeader
+        icon={HelpCircle}
+        title="Frequently Asked Questions"
+        description={
+          <>
             Quick answers to common questions about Trace. Can&apos;t find what you&apos;re looking
             for? Check the{' '}
             <Link href="/docs" className="text-primary hover:underline">
@@ -48,9 +126,9 @@ export default function FAQPage() {
               get support
             </Link>
             .
-          </p>
-        </div>
-      </section>
+          </>
+        }
+      />
 
       <Separator />
 
@@ -66,12 +144,12 @@ export default function FAQPage() {
               <AccordionContent>
                 Trace is currently available via TestFlight. Join the beta at{' '}
                 <a
-                  href="https://testflight.apple.com/join/DPt8BIup"
+                  href="https://testflight.apple.com/join/fmYFd8ud"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-primary hover:underline"
                 >
-                  testflight.apple.com/join/DPt8BIup
+                  testflight.apple.com/join/fmYFd8ud
                 </a>
                 . You&apos;ll need iOS 16.0 or later and a physical device (Network Extension
                 doesn&apos;t work in the simulator). Once installed, open Trace and follow the
@@ -505,28 +583,25 @@ export default function FAQPage() {
             Check the documentation, get support, or reach out to the community.
           </p>
           <div className="flex flex-col justify-center gap-3 sm:flex-row sm:gap-4">
-            <Link
-              href="/docs"
-              className="inline-flex h-10 items-center justify-center gap-2 rounded-md bg-primary px-6 text-sm font-medium text-primary-foreground hover:bg-primary/90 sm:h-11 sm:px-8"
-            >
-              Read the docs
-            </Link>
-            <Link
-              href="/support"
-              className="inline-flex h-10 items-center justify-center gap-2 rounded-md border border-input bg-background px-6 text-sm font-medium hover:bg-accent hover:text-accent-foreground sm:h-11 sm:px-8"
-            >
-              <MessageCircle className="h-4 w-4" />
-              Get support
-            </Link>
-            <a
-              href="https://github.com/Trace-iOS/Trace/discussions"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex h-10 items-center justify-center gap-2 rounded-md border border-input bg-background px-6 text-sm font-medium hover:bg-accent hover:text-accent-foreground sm:h-11 sm:px-8"
-            >
-              <Github className="h-4 w-4" />
-              GitHub Discussions
-            </a>
+            <Button size="lg" asChild className="w-full sm:w-auto">
+              <Link href="/docs">Read the docs</Link>
+            </Button>
+            <Button size="lg" variant="outline" asChild className="w-full gap-2 sm:w-auto">
+              <Link href="/support">
+                <MessageCircle className="h-4 w-4" />
+                Get support
+              </Link>
+            </Button>
+            <Button size="lg" variant="outline" asChild className="w-full gap-2 sm:w-auto">
+              <a
+                href="https://github.com/Trace-iOS/Trace/discussions"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Github className="h-4 w-4" />
+                GitHub Discussions
+              </a>
+            </Button>
           </div>
         </div>
       </section>

@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { Separator } from '@/components/ui/separator';
+import { PageHeader } from '@/components/shared/page-header';
 import { FileText } from 'lucide-react';
 
 export const metadata: Metadata = {
@@ -11,29 +12,24 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Terms of Service - Trace',
     description: 'Terms of service for Trace iOS network debugger.',
-    url: 'https://trace.justinl.site/terms',
+    url: '/terms',
+  },
+  alternates: {
+    canonical: '/terms',
   },
 };
 
 export default function TermsPage() {
   return (
     <div className="flex flex-col">
-      <section className="container py-section">
-        <div className="mx-auto max-w-readable">
-          <FileText className="mx-auto mb-4 h-10 w-10 text-muted-foreground sm:mb-6 sm:h-12 sm:w-12" />
-          <h1 className="mb-3 text-center text-3xl font-bold tracking-tight sm:mb-4 sm:text-4xl md:text-5xl">
-            Terms of Service
-          </h1>
-          <p className="mb-6 text-center text-sm text-muted-foreground">
-            Last updated: January 30, 2026
-          </p>
-        </div>
-      </section>
+      <PageHeader icon={FileText} title="Terms of Service">
+        <p className="text-sm text-muted-foreground">Last updated: January 30, 2026</p>
+      </PageHeader>
 
       <Separator />
 
       <section className="container py-section">
-        <div className="mx-auto prose max-w-readable prose-slate dark:prose-invert">
+        <div className="mx-auto prose max-w-readable prose-slate dark:prose-invert prose-a:no-underline">
           <h2>1. Acceptance of Terms</h2>
           <p>
             By downloading, installing, or using Trace, you agree to these Terms of Service. If you
@@ -106,15 +102,10 @@ export default function TermsPage() {
               href="https://github.com/Trace-iOS/Trace/issues"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-primary hover:underline"
             >
               GitHub Issues
             </a>{' '}
-            or email{' '}
-            <a href="mailto:epa6643@gmail.com" className="text-primary hover:underline">
-              epa6643@gmail.com
-            </a>
-            .
+            or email <a href="mailto:epa6643@gmail.com">epa6643@gmail.com</a>.
           </p>
         </div>
       </section>

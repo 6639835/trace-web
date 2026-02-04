@@ -1,7 +1,8 @@
 import type { Metadata } from 'next';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Separator } from '@/components/ui/separator';
 import { Badge } from '@/components/ui/badge';
+import { PageHeader } from '@/components/shared/page-header';
+import { FeatureCard } from '@/components/marketing/feature-card';
 import {
   Smartphone,
   Server,
@@ -10,8 +11,9 @@ import {
   Radio,
   MessageSquare,
   Activity,
+  Layers,
 } from 'lucide-react';
-import { NetworkFlowDiagram } from '@/components/network-flow-diagram';
+import { NetworkFlowDiagram } from '@/components/marketing/network-flow-diagram';
 
 export const metadata: Metadata = {
   title: 'Architecture - How Trace Works Under the Hood',
@@ -30,25 +32,21 @@ export const metadata: Metadata = {
     title: 'Trace Architecture - Technical Deep Dive',
     description:
       'Learn how Trace uses NEPacketTunnelProvider, proxy-only VPN mode, and TLS MITM for iOS network debugging.',
-    url: 'https://trace.justinl.site/architecture',
+    url: '/architecture',
+  },
+  alternates: {
+    canonical: '/architecture',
   },
 };
 
 export default function ArchitecturePage() {
   return (
     <div className="flex flex-col">
-      {/* Header */}
-      <section className="container py-section">
-        <div className="mx-auto max-w-readable text-center">
-          <h1 className="mb-3 text-3xl font-bold tracking-tight sm:mb-4 sm:text-4xl md:text-5xl">
-            Architecture
-          </h1>
-          <p className="text-sm leading-relaxed text-muted-foreground sm:text-base lg:text-lg">
-            A deep look at how Trace works under the hood. Understanding the technical foundation
-            and design decisions.
-          </p>
-        </div>
-      </section>
+      <PageHeader
+        icon={Layers}
+        title="Architecture"
+        description="A deep look at how Trace works under the hood. Understanding the technical foundation and design decisions."
+      />
 
       <Separator />
 
@@ -67,48 +65,24 @@ export default function ArchitecturePage() {
           </p>
 
           <div className="mb-8 grid gap-4 sm:mb-10 sm:grid-cols-2 sm:gap-5 md:mb-12 md:gap-6 lg:grid-cols-3">
-            <Card>
-              <CardHeader>
-                <Smartphone className="mb-2 h-8 w-8 text-muted-foreground" />
-                <CardTitle className="text-lg">Main application</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <CardDescription className="leading-relaxed">
-                  SwiftUI-based interface for viewing captured traffic, managing filters, and
-                  configuring settings. Reads data from shared App Group container and provides
-                  real-time updates. Handles export, search, replay, modification tools, and
-                  built-in utilities.
-                </CardDescription>
-              </CardContent>
-            </Card>
-
-            <Card>
-              <CardHeader>
-                <Server className="mb-2 h-8 w-8 text-muted-foreground" />
-                <CardTitle className="text-lg">Network extension (TraceVPN)</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <CardDescription className="leading-relaxed">
-                  Separate process running NEPacketTunnelProvider in proxy-only mode. Configures
-                  system proxy settings and runs the local MITM proxy for HTTP/HTTPS. Handles TLS,
-                  HTTP/2, WebSocket, and SSE before writing captures to the App Group.
-                </CardDescription>
-              </CardContent>
-            </Card>
-
-            <Card>
-              <CardHeader>
-                <LayoutGrid className="mb-2 h-8 w-8 text-muted-foreground" />
-                <CardTitle className="text-lg">Widget extension</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <CardDescription className="leading-relaxed">
-                  WidgetKit bundle with standard widget, control widget, and Live Activity.
-                  Real-time network statistics and quick actions. Shares data through App Group
-                  container.
-                </CardDescription>
-              </CardContent>
-            </Card>
+            <FeatureCard
+              icon={Smartphone}
+              title="Main application"
+              titleClassName="text-lg"
+              description="SwiftUI-based interface for viewing captured traffic, managing filters, and configuring settings. Reads data from shared App Group container and provides real-time updates. Handles export, search, replay, modification tools, and built-in utilities."
+            />
+            <FeatureCard
+              icon={Server}
+              title="Network extension (TraceVPN)"
+              titleClassName="text-lg"
+              description="Separate process running NEPacketTunnelProvider in proxy-only mode. Configures system proxy settings and runs the local MITM proxy for HTTP/HTTPS. Handles TLS, HTTP/2, WebSocket, and SSE before writing captures to the App Group."
+            />
+            <FeatureCard
+              icon={LayoutGrid}
+              title="Widget extension"
+              titleClassName="text-lg"
+              description="WidgetKit bundle with standard widget, control widget, and Live Activity. Real-time network statistics and quick actions. Shares data through App Group container."
+            />
           </div>
 
           <div>
@@ -252,58 +226,30 @@ export default function ArchitecturePage() {
           </h2>
 
           <div className="grid gap-4 sm:grid-cols-2 sm:gap-5 md:gap-6">
-            <Card>
-              <CardHeader>
-                <Network className="mb-2 h-8 w-8 text-muted-foreground" />
-                <CardTitle className="text-lg">HTTP/HTTPS</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <CardDescription className="leading-relaxed">
-                  Full HTTP/1.1 and HTTP/2 support with complete parsing. HTTPS via TLS MITM with
-                  dynamic certificate generation. HTTP/2 stream info with HPACK table viewer.
-                </CardDescription>
-              </CardContent>
-            </Card>
-
-            <Card>
-              <CardHeader>
-                <Radio className="mb-2 h-8 w-8 text-muted-foreground" />
-                <CardTitle className="text-lg">WebSocket</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <CardDescription className="leading-relaxed">
-                  Detects WebSocket upgrade handshake. Captures and parses individual frames.
-                  Distinguishes text and binary frames. Tracks connection lifecycle.
-                </CardDescription>
-              </CardContent>
-            </Card>
-
-            <Card>
-              <CardHeader>
-                <MessageSquare className="mb-2 h-8 w-8 text-muted-foreground" />
-                <CardTitle className="text-lg">Server-Sent Events</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <CardDescription className="leading-relaxed">
-                  Recognizes SSE Content-Type header. Parses event stream format. Displays
-                  individual events with timing. Tracks connection duration.
-                </CardDescription>
-              </CardContent>
-            </Card>
-
-            <Card>
-              <CardHeader>
-                <Activity className="mb-2 h-8 w-8 text-muted-foreground" />
-                <CardTitle className="text-lg">Limitations</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <CardDescription className="leading-relaxed">
-                  Proxy-only mode captures HTTP/HTTPS for apps that honor system proxy settings.
-                  QUIC/HTTP/3 traffic is not captured in this mode. Apps that bypass proxy settings
-                  will not appear in captures.
-                </CardDescription>
-              </CardContent>
-            </Card>
+            <FeatureCard
+              icon={Network}
+              title="HTTP/HTTPS"
+              titleClassName="text-lg"
+              description="Full HTTP/1.1 and HTTP/2 support with complete parsing. HTTPS via TLS MITM with dynamic certificate generation. HTTP/2 stream info with HPACK table viewer."
+            />
+            <FeatureCard
+              icon={Radio}
+              title="WebSocket"
+              titleClassName="text-lg"
+              description="Detects WebSocket upgrade handshake. Captures and parses individual frames. Distinguishes text and binary frames. Tracks connection lifecycle."
+            />
+            <FeatureCard
+              icon={MessageSquare}
+              title="Server-Sent Events"
+              titleClassName="text-lg"
+              description="Recognizes SSE Content-Type header. Parses event stream format. Displays individual events with timing. Tracks connection duration."
+            />
+            <FeatureCard
+              icon={Activity}
+              title="Limitations"
+              titleClassName="text-lg"
+              description="Proxy-only mode captures HTTP/HTTPS for apps that honor system proxy settings. QUIC/HTTP/3 traffic is not captured in this mode. Apps that bypass proxy settings will not appear in captures."
+            />
           </div>
         </div>
       </section>

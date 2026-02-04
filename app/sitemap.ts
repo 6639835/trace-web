@@ -1,151 +1,124 @@
 import { MetadataRoute } from 'next';
 import { getAllPosts } from '@/lib/blog';
+import { docsNavigation } from '@/lib/config/docs-navigation';
+import { siteUrl } from '@/lib/config/site';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const baseUrl = 'https://trace.justinl.site';
   const currentDate = new Date();
 
   // Main pages
   const routes = [
     {
-      url: baseUrl,
+      url: siteUrl,
       lastModified: currentDate,
       changeFrequency: 'weekly' as const,
       priority: 1,
     },
     {
-      url: `${baseUrl}/features`,
+      url: `${siteUrl}/features`,
       lastModified: currentDate,
       changeFrequency: 'monthly' as const,
       priority: 0.8,
     },
     {
-      url: `${baseUrl}/architecture`,
+      url: `${siteUrl}/architecture`,
       lastModified: currentDate,
       changeFrequency: 'monthly' as const,
       priority: 0.7,
     },
     {
-      url: `${baseUrl}/roadmap`,
+      url: `${siteUrl}/roadmap`,
       lastModified: currentDate,
       changeFrequency: 'monthly' as const,
       priority: 0.7,
     },
     {
-      url: `${baseUrl}/open-source`,
+      url: `${siteUrl}/open-source`,
       lastModified: currentDate,
       changeFrequency: 'monthly' as const,
       priority: 0.7,
     },
     {
-      url: `${baseUrl}/blog`,
+      url: `${siteUrl}/blog`,
       lastModified: currentDate,
       changeFrequency: 'weekly' as const,
       priority: 0.8,
     },
     {
-      url: `${baseUrl}/faq`,
+      url: `${siteUrl}/faq`,
       lastModified: currentDate,
       changeFrequency: 'monthly' as const,
       priority: 0.8,
     },
     {
-      url: `${baseUrl}/support`,
+      url: `${siteUrl}/support`,
       lastModified: currentDate,
       changeFrequency: 'monthly' as const,
       priority: 0.8,
     },
     {
-      url: `${baseUrl}/about`,
+      url: `${siteUrl}/about`,
       lastModified: currentDate,
       changeFrequency: 'monthly' as const,
       priority: 0.7,
     },
     {
-      url: `${baseUrl}/showcase`,
+      url: `${siteUrl}/showcase`,
       lastModified: currentDate,
       changeFrequency: 'monthly' as const,
       priority: 0.6,
     },
     {
-      url: `${baseUrl}/comparison`,
+      url: `${siteUrl}/comparison`,
       lastModified: currentDate,
       changeFrequency: 'monthly' as const,
       priority: 0.6,
     },
     {
-      url: `${baseUrl}/contributing`,
+      url: `${siteUrl}/contributing`,
       lastModified: currentDate,
       changeFrequency: 'monthly' as const,
       priority: 0.6,
     },
     {
-      url: `${baseUrl}/status`,
+      url: `${siteUrl}/status`,
       lastModified: currentDate,
       changeFrequency: 'weekly' as const,
       priority: 0.5,
     },
     {
-      url: `${baseUrl}/press`,
+      url: `${siteUrl}/press`,
       lastModified: currentDate,
       changeFrequency: 'monthly' as const,
       priority: 0.5,
     },
     {
-      url: `${baseUrl}/sponsors`,
+      url: `${siteUrl}/sponsors`,
       lastModified: currentDate,
       changeFrequency: 'monthly' as const,
       priority: 0.4,
     },
     {
-      url: `${baseUrl}/terms`,
+      url: `${siteUrl}/terms`,
       lastModified: currentDate,
       changeFrequency: 'yearly' as const,
       priority: 0.3,
     },
     {
-      url: `${baseUrl}/privacy`,
+      url: `${siteUrl}/privacy`,
       lastModified: currentDate,
       changeFrequency: 'yearly' as const,
       priority: 0.3,
     },
   ];
 
-  // Documentation pages
-  const docPages = [
-    'quick-start',
-    'installation',
-    'architecture',
-    'websockets',
-    'sse',
-    'udp',
-    'certificates',
-    'cert-pinning',
-    'request-inspection',
-    'filtering',
-    'favorites',
-    'throttling',
-    'scripts',
-    'breakpoints',
-    'request-maps',
-    'hosts',
-    'dns',
-    'request-builder',
-    'charles-import',
-    'postman-export',
-    'exporting',
-    'sessions',
-    'utilities',
-    'diagnostics',
-    'performance',
-    'cicd',
-    'development',
-    'proxy-modes',
-    'api',
-  ];
+  // Documentation pages (single source of truth: docsNavigation)
+  const docHrefs = Array.from(
+    new Set(docsNavigation.flatMap((section) => section.items.map((item) => item.href))),
+  ).filter((href) => href.startsWith('/docs/') && href !== '/docs');
 
-  const docRoutes = docPages.map((page) => ({
-    url: `${baseUrl}/docs/${page}`,
+  const docRoutes = docHrefs.map((href) => ({
+    url: `${siteUrl}${href}`,
     lastModified: currentDate,
     changeFrequency: 'weekly' as const,
     priority: 0.6,
@@ -153,7 +126,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   // Main docs page
   const docsIndex = {
-    url: `${baseUrl}/docs`,
+    url: `${siteUrl}/docs`,
     lastModified: currentDate,
     changeFrequency: 'weekly' as const,
     priority: 0.9,
@@ -162,7 +135,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   // Blog posts
   const posts = await getAllPosts();
   const blogRoutes = posts.map((post) => ({
-    url: `${baseUrl}/blog/${post.slug}`,
+    url: `${siteUrl}/blog/${post.slug}`,
     lastModified: new Date(post.date),
     changeFrequency: 'monthly' as const,
     priority: 0.7,

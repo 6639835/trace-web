@@ -19,7 +19,10 @@ export const metadata: Metadata = {
     title: 'Trace Blog',
     description:
       'Updates, tutorials, and technical insights about iOS network debugging with Trace.',
-    url: 'https://trace.justinl.site/blog',
+    url: '/blog',
+  },
+  alternates: {
+    canonical: '/blog',
   },
 };
 
