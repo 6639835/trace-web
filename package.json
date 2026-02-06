@@ -5,8 +5,10 @@
   "main": "index.js",
   "scripts": {
     "dev": "next dev --turbopack",
-    "build": "next build",
+    "build": "next build --webpack",
     "start": "next start",
+    "typecheck": "tsc --noEmit",
+    "check": "npm run typecheck && npm run lint && npm run build",
     "lint": "eslint . --max-warnings=0 && prettier --check .",
     "format": "prettier --write ."
   },
@@ -21,6 +23,9 @@
     "url": "https://github.com/Trace-iOS/trace-web/issues"
   },
   "homepage": "https://github.com/Trace-iOS/trace-web#readme",
+  "engines": {
+    "node": ">=20.11.0"
+  },
   "dependencies": {
     "@radix-ui/react-accordion": "^1.2.12",
     "@radix-ui/react-separator": "^1.1.8",

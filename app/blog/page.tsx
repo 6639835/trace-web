@@ -6,6 +6,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Separator } from '@/components/ui/separator';
 import { Skeleton } from '@/components/ui/skeleton';
 import { PageHeader } from '@/components/shared/page-header';
+import { PageSection } from '@/components/shared/page-section';
 import { Calendar, Clock, BookOpen } from 'lucide-react';
 import { getAllPosts, type BlogPost } from '@/lib/blog';
 
@@ -127,13 +128,13 @@ export default function BlogPage() {
       <Separator />
 
       {/* Blog Posts Grid */}
-      <section className="container py-section">
+      <PageSection>
         <div className="mx-auto max-w-content">
           <Suspense fallback={<BlogPostsSkeleton />}>
             <BlogPosts />
           </Suspense>
         </div>
-      </section>
+      </PageSection>
     </div>
   );
 }

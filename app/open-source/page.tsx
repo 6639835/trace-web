@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
 import { PageHeader } from '@/components/shared/page-header';
+import { PageSection } from '@/components/shared/page-section';
 import { FeatureCard } from '@/components/marketing/feature-card';
 import { Github, Code, Users, Shield, BookOpen, CirclePlus } from 'lucide-react';
 
@@ -41,7 +42,7 @@ export default function OpenSourcePage() {
       <Separator />
 
       {/* Why Open Source */}
-      <section className="container py-section">
+      <PageSection>
         <div className="mx-auto max-w-content">
           <h2 className="mb-4 text-center text-xl font-bold tracking-tight sm:mb-6 sm:text-2xl">
             Why open source
@@ -78,12 +79,12 @@ export default function OpenSourcePage() {
             />
           </div>
         </div>
-      </section>
+      </PageSection>
 
       <Separator />
 
       {/* License */}
-      <section className="container py-section">
+      <PageSection>
         <div className="mx-auto max-w-content">
           <h2 className="mb-4 text-xl font-bold tracking-tight sm:mb-6 sm:text-2xl">License</h2>
 
@@ -137,12 +138,12 @@ SOFTWARE.`}
             </Button>
           </div>
         </div>
-      </section>
+      </PageSection>
 
       <Separator />
 
       {/* Contributing */}
-      <section className="container py-section">
+      <PageSection>
         <div className="mx-auto max-w-content">
           <h2 className="mb-4 text-xl font-bold tracking-tight sm:mb-6 sm:text-2xl">
             Contributing
@@ -264,12 +265,12 @@ SOFTWARE.`}
             </Button>
           </div>
         </div>
-      </section>
+      </PageSection>
 
       <Separator />
 
       {/* Build from Source */}
-      <section className="container py-section">
+      <PageSection>
         <div className="mx-auto max-w-content">
           <h2 className="mb-4 text-xl font-bold tracking-tight sm:mb-6 sm:text-2xl">
             Build from source
@@ -360,12 +361,12 @@ SOFTWARE.`}
             </Button>
           </div>
         </div>
-      </section>
+      </PageSection>
 
       <Separator />
 
       {/* Support */}
-      <section className="container py-section">
+      <PageSection>
         <div className="mx-auto max-w-readable text-center">
           <h2 className="mb-3 text-xl font-bold tracking-tight sm:mb-4 sm:text-2xl">
             Questions or feedback
@@ -385,7 +386,7 @@ SOFTWARE.`}
             </Link>
           </Button>
         </div>
-      </section>
+      </PageSection>
     </div>
   );
 }

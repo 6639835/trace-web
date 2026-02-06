@@ -5,6 +5,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Separator } from '@/components/ui/separator';
 import { Timeline, TimelineItem } from '@/components/ui/timeline';
 import { PageHeader } from '@/components/shared/page-header';
+import { PageSection } from '@/components/shared/page-section';
 import { FeatureCard } from '@/components/marketing/feature-card';
 import {
   Target,
@@ -53,7 +54,7 @@ export default function AboutPage() {
       <Separator />
 
       {/* Mission */}
-      <section className="container py-section">
+      <PageSection>
         <div className="mx-auto max-w-readable">
           <h2 className="mb-6 text-2xl font-bold tracking-tight sm:mb-8 sm:text-3xl">
             Our mission
@@ -73,12 +74,12 @@ export default function AboutPage() {
             essential for a tool that handles sensitive network data.
           </p>
         </div>
-      </section>
+      </PageSection>
 
       <Separator />
 
       {/* Story */}
-      <section className="container py-section">
+      <PageSection>
         <div className="mx-auto max-w-readable">
           <h2 className="mb-6 text-2xl font-bold tracking-tight sm:mb-8 sm:text-3xl">
             The story behind Trace
@@ -111,12 +112,12 @@ export default function AboutPage() {
             </p>
           </div>
         </div>
-      </section>
+      </PageSection>
 
       <Separator />
 
       {/* Principles */}
-      <section className="container py-section">
+      <PageSection>
         <div className="mx-auto max-w-content">
           <h2 className="mb-8 text-2xl font-bold tracking-tight sm:mb-10 sm:text-3xl md:mb-12">
             Our principles
@@ -150,12 +151,12 @@ export default function AboutPage() {
             />
           </div>
         </div>
-      </section>
+      </PageSection>
 
       <Separator />
 
       {/* Milestones */}
-      <section className="container py-section">
+      <PageSection>
         <div className="mx-auto max-w-readable">
           <h2 className="mb-8 text-2xl font-bold tracking-tight sm:mb-10 sm:text-3xl md:mb-12">
             Milestones
@@ -256,12 +257,12 @@ export default function AboutPage() {
             </TimelineItem>
           </Timeline>
         </div>
-      </section>
+      </PageSection>
 
       <Separator />
 
       {/* Team */}
-      <section className="container py-section">
+      <PageSection>
         <div className="mx-auto max-w-readable">
           <h2 className="mb-6 text-2xl font-bold tracking-tight sm:mb-8 sm:text-3xl">Team</h2>
           <Card>
@@ -313,12 +314,12 @@ export default function AboutPage() {
             </p>
           </div>
         </div>
-      </section>
+      </PageSection>
 
       <Separator />
 
       {/* CTA */}
-      <section className="container py-section">
+      <PageSection>
         <div className="mx-auto max-w-readable text-center">
           <Heart className="mx-auto mb-4 h-10 w-10 text-primary sm:mb-6 sm:h-12 sm:w-12" />
           <h2 className="mb-3 text-2xl font-bold tracking-tight sm:mb-4 sm:text-3xl">
@@ -347,7 +348,7 @@ export default function AboutPage() {
             </Button>
           </div>
         </div>
-      </section>
+      </PageSection>
     </div>
   );
 }

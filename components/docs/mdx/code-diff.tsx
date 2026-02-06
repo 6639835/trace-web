@@ -66,26 +66,28 @@ export function CodeDiff({ children, language = 'diff', filename, className }: C
         // Highlight each line individually for proper syntax highlighting
         for (let i = 0; i < diffLines.length; i++) {
           const line = diffLines[i];
-          if (line.content) {
-            try {
-              const html = await codeToHtml(line.content, {
-                lang: language === 'diff' ? 'typescript' : language,
-                themes: {
-                  light: 'github-light',
-                  dark: 'github-dark',
-                },
-                defaultColor: false,
-              });
-              // Extract just the code content
-              const match = /<code[^>]*>([\s\S]*?)<\/code>/i.exec(html);
-              if (match && !cancelled) {
-                newHighlighted.set(i, match[1]);
-              }
-            } catch {
-              // Use plain text if highlighting fails
-              if (!cancelled) {
-                newHighlighted.set(i, line.content);
-              }
+          if (!line || !line.content) {
+            continue;
+          }
+
+          try {
+            const html = await codeToHtml(line.content, {
+              lang: language === 'diff' ? 'typescript' : language,
+              themes: {
+                light: 'github-light',
+                dark: 'github-dark',
+              },
+              defaultColor: false,
+            });
+            // Extract just the code content
+            const match = /<code[^>]*>([\s\S]*?)<\/code>/i.exec(html);
+            if (match?.[1] && !cancelled) {
+              newHighlighted.set(i, match[1]);
+            }
+          } catch {
+            // Use plain text if highlighting fails
+            if (!cancelled) {
+              newHighlighted.set(i, line.content);
             }
           }
         }

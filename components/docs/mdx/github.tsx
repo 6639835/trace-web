@@ -45,10 +45,11 @@ export function GitHubUser(props: GitHubUserProps) {
   const username =
     'username' in props ? props.username : parsed?.kind === 'account' ? parsed.login : '';
   const isValid = Boolean(username);
+  const safeUsername = username || 'github-user';
 
-  const displayName = props.name ?? fetched?.name ?? username;
+  const displayName = props.name ?? fetched?.name ?? safeUsername;
   const displayBio = props.bio ?? fetched?.bio;
-  const avatarUrl = props.avatar ?? fetched?.avatar ?? `https://github.com/${username}.png`;
+  const avatarUrl = props.avatar ?? fetched?.avatar ?? `https://github.com/${safeUsername}.png`;
 
   useEffect(() => {
     if (!isValid) return;
@@ -107,7 +108,7 @@ export function GitHubUser(props: GitHubUserProps) {
         <h4 className="truncate text-sm font-semibold text-foreground sm:text-base">
           {displayName}
         </h4>
-        <p className="truncate text-xs text-muted-foreground sm:text-sm">@{username}</p>
+        <p className="truncate text-xs text-muted-foreground sm:text-sm">@{safeUsername}</p>
         {displayBio && (
           <p className="mt-1 line-clamp-2 text-xs text-muted-foreground sm:text-sm">{displayBio}</p>
         )}
@@ -155,7 +156,9 @@ export function GitHubRepo(props: GitHubRepoProps) {
 
   const owner = parsed && parsed.kind === 'repo' ? parsed.owner : '';
   const repo = parsed && parsed.kind === 'repo' ? parsed.repo : '';
-  const avatarUrl = fetched?.avatar ?? `https://github.com/${owner}.png`;
+  const ownerLabel = owner || 'github';
+  const repoLabel = owner && repo ? `${owner}/${repo}` : 'github/repository';
+  const avatarUrl = fetched?.avatar ?? `https://github.com/${ownerLabel}.png`;
 
   const displayDescription = props.description ?? fetched?.description;
   const displayStars = props.stars ?? fetched?.stars;
@@ -220,7 +223,7 @@ export function GitHubRepo(props: GitHubRepoProps) {
       <div className="flex items-start gap-3">
         <Image
           src={avatarUrl}
-          alt={owner}
+          alt={ownerLabel}
           width={40}
           height={40}
           sizes="(min-width: 640px) 40px, 32px"
@@ -237,7 +240,7 @@ export function GitHubRepo(props: GitHubRepoProps) {
               <path d="M2 2.5A2.5 2.5 0 0 1 4.5 0h8.75a.75.75 0 0 1 .75.75v12.5a.75.75 0 0 1-.75.75h-2.5a.75.75 0 0 1 0-1.5h1.75v-2h-8a1 1 0 0 0-.714 1.7.75.75 0 1 1-1.072 1.05A2.495 2.495 0 0 1 2 11.5Zm10.5-1h-8a1 1 0 0 0-1 1v6.708A2.486 2.486 0 0 1 4.5 9h8ZM5 12.25a.25.25 0 0 1 .25-.25h3.5a.25.25 0 0 1 .25.25v3.25a.25.25 0 0 1-.4.2l-1.45-1.087a.249.249 0 0 0-.3 0L5.4 15.7a.25.25 0 0 1-.4-.2Z" />
             </svg>
             <span className="truncate text-sm font-semibold text-foreground sm:text-base">
-              {owner}/{repo}
+              {repoLabel}
             </span>
           </div>
           {displayDescription && (
@@ -303,10 +306,11 @@ export function GitHubOrg(props: GitHubOrgProps) {
   const parsed = parseGitHubUrl(orgUrl);
   const org = 'org' in props ? props.org : parsed?.kind === 'account' ? parsed.login : '';
   const isValid = Boolean(org);
+  const orgLabel = org || 'github-org';
 
-  const displayName = props.name ?? fetched?.name ?? org;
+  const displayName = props.name ?? fetched?.name ?? orgLabel;
   const displayDescription = props.description ?? fetched?.description;
-  const avatarUrl = props.avatar ?? fetched?.avatar ?? `https://github.com/${org}.png`;
+  const avatarUrl = props.avatar ?? fetched?.avatar ?? `https://github.com/${orgLabel}.png`;
 
   useEffect(() => {
     if (!isValid) return;
@@ -365,7 +369,7 @@ export function GitHubOrg(props: GitHubOrgProps) {
         <h4 className="truncate text-sm font-semibold text-foreground sm:text-base">
           {displayName}
         </h4>
-        <p className="truncate text-xs text-muted-foreground sm:text-sm">@{org}</p>
+        <p className="truncate text-xs text-muted-foreground sm:text-sm">@{orgLabel}</p>
         {displayDescription && (
           <p className="mt-1 line-clamp-2 text-xs text-muted-foreground sm:text-sm">
             {displayDescription}

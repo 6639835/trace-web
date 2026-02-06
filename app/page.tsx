@@ -3,6 +3,7 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Separator } from '@/components/ui/separator';
 import { FeatureCard } from '@/components/marketing/feature-card';
+import { PageSection } from '@/components/shared/page-section';
 import {
   Github,
   Network,
@@ -114,7 +115,7 @@ export default function Home() {
       <Separator />
 
       {/* Core Capabilities Section */}
-      <section className="container py-section-lg">
+      <PageSection spacing="lg">
         <div className="mx-auto max-w-content">
           <div className="mb-10 text-center sm:mb-12 md:mb-16">
             <h2 className="mb-3 text-2xl font-bold tracking-tight sm:mb-4 sm:text-3xl md:text-4xl">
@@ -165,12 +166,12 @@ export default function Home() {
             />
           </div>
         </div>
-      </section>
+      </PageSection>
 
       <Separator />
 
       {/* Technical Credibility Section */}
-      <section className="container py-section-lg">
+      <PageSection spacing="lg">
         <div className="mx-auto max-w-content">
           <div className="mb-10 text-center sm:mb-12 md:mb-16">
             <h2 className="mb-3 text-2xl font-bold tracking-tight sm:mb-4 sm:text-3xl md:text-4xl">
@@ -261,12 +262,12 @@ export default function Home() {
             </Badge>
           </div>
         </div>
-      </section>
+      </PageSection>
 
       <Separator />
 
       {/* Open Source Section */}
-      <section className="container py-section-lg">
+      <PageSection spacing="lg">
         <div className="mx-auto max-w-readable text-center">
           <Github className="mx-auto mb-4 h-10 w-10 text-muted-foreground sm:mb-6 sm:h-12 sm:w-12" />
           <h2 className="mb-3 text-2xl font-bold tracking-tight sm:mb-4 sm:text-3xl md:text-4xl">
@@ -293,7 +294,7 @@ export default function Home() {
             </Button>
           </div>
         </div>
-      </section>
+      </PageSection>
     </div>
   );
 }

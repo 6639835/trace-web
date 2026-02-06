@@ -3,6 +3,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Separator } from '@/components/ui/separator';
 import { PageHeader } from '@/components/shared/page-header';
+import { PageSection } from '@/components/shared/page-section';
 import { FeatureCard } from '@/components/marketing/feature-card';
 import { BulletList, BulletItem } from '@/components/shared/bullet-list';
 import { Heart, Coffee, Zap, Award, Github } from 'lucide-react';
@@ -34,7 +35,7 @@ export default function SponsorsPage() {
       <Separator />
 
       {/* Current Status */}
-      <section className="container py-section">
+      <PageSection>
         <div className="mx-auto max-w-content">
           <Card className="border-primary/20 bg-primary/5">
             <CardHeader>
@@ -47,10 +48,10 @@ export default function SponsorsPage() {
             </CardHeader>
           </Card>
         </div>
-      </section>
+      </PageSection>
 
       {/* How Funds Are Used */}
-      <section className="container py-section">
+      <PageSection>
         <div className="mx-auto max-w-content">
           <h2 className="mb-8 text-xl font-bold tracking-tight sm:mb-10 sm:text-2xl">
             How funds are used
@@ -78,12 +79,12 @@ export default function SponsorsPage() {
             />
           </div>
         </div>
-      </section>
+      </PageSection>
 
       <Separator />
 
       {/* Alternative Support */}
-      <section className="container py-section">
+      <PageSection>
         <div className="mx-auto max-w-readable">
           <h2 className="mb-6 text-2xl font-bold tracking-tight sm:mb-8 sm:text-3xl">
             Other ways to support
@@ -101,12 +102,12 @@ export default function SponsorsPage() {
             </BulletList>
           </div>
         </div>
-      </section>
+      </PageSection>
 
       <Separator />
 
       {/* Transparency */}
-      <section className="container py-section">
+      <PageSection>
         <div className="mx-auto max-w-readable">
           <h2 className="mb-6 text-2xl font-bold tracking-tight sm:mb-8 sm:text-3xl">
             Transparency commitment
@@ -123,12 +124,12 @@ export default function SponsorsPage() {
             </p>
           </div>
         </div>
-      </section>
+      </PageSection>
 
       <Separator />
 
       {/* CTA */}
-      <section className="container py-section">
+      <PageSection>
         <div className="mx-auto max-w-readable text-center">
           <h2 className="mb-3 text-2xl font-bold tracking-tight sm:mb-4 sm:text-3xl">
             Coming soon
@@ -156,7 +157,7 @@ export default function SponsorsPage() {
             </Button>
           </div>
         </div>
-      </section>
+      </PageSection>
     </div>
   );
 }

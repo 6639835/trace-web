@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { parsePublicHttpUrl } from '@/lib/server/safe-url';
+import { hasPublicDnsResolution, parsePublicHttpUrl } from '@/lib/server/safe-url';
 
 export const runtime = 'nodejs';
 
@@ -7,14 +7,14 @@ type GitHubKind = 'repo' | 'user' | 'org';
 
 function parseGitHubPath(url: URL) {
   if (url.hostname.toLowerCase() !== 'github.com') return null;
-  const parts = url.pathname.split('/').filter(Boolean);
-  if (parts.length === 1) return { kind: 'account' as const, login: parts[0] };
-  if (parts.length >= 2) return { kind: 'repo' as const, owner: parts[0], repo: parts[1] };
+  const [first, second] = url.pathname.split('/').filter(Boolean);
+  if (first && !second) return { kind: 'account' as const, login: first };
+  if (first && second) return { kind: 'repo' as const, owner: first, repo: second };
   return null;
 }
 
 function githubHeaders() {
-  const token = process.env.GITHUB_TOKEN;
+  const token = process.env['GITHUB_TOKEN'];
   return {
     accept: 'application/vnd.github+json',
     'user-agent': 'trace-web/1.0 (+https://github.com/Trace-iOS/trace-web)',
@@ -29,6 +29,10 @@ export async function GET(request: Request) {
 
   const target = parsePublicHttpUrl(urlParam);
   if (!target) return NextResponse.json({ error: 'Invalid or blocked url' }, { status: 400 });
+  const hasPublicDns = await hasPublicDnsResolution(target.hostname);
+  if (!hasPublicDns) {
+    return NextResponse.json({ error: 'Invalid or blocked url' }, { status: 400 });
+  }
 
   const parsed = parseGitHubPath(target);
   if (!parsed) return NextResponse.json({ error: 'Not a github.com url' }, { status: 400 });

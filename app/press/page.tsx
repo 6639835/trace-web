@@ -3,6 +3,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Separator } from '@/components/ui/separator';
 import { Badge } from '@/components/ui/badge';
 import { PageHeader } from '@/components/shared/page-header';
+import { PageSection } from '@/components/shared/page-section';
 import { Newspaper, Mail, Palette } from 'lucide-react';
 
 export const metadata: Metadata = {
@@ -32,7 +33,7 @@ export default function PressPage() {
       <Separator />
 
       {/* Quick Facts */}
-      <section className="container py-section">
+      <PageSection>
         <div className="mx-auto max-w-content">
           <h2 className="mb-8 text-xl font-bold tracking-tight sm:mb-10 sm:text-2xl">
             Quick facts
@@ -95,12 +96,12 @@ export default function PressPage() {
             </Card>
           </div>
         </div>
-      </section>
+      </PageSection>
 
       <Separator />
 
       {/* About Trace */}
-      <section className="container py-section">
+      <PageSection>
         <div className="mx-auto max-w-readable">
           <h2 className="mb-6 text-2xl font-bold tracking-tight sm:mb-8 sm:text-3xl">
             About Trace
@@ -155,12 +156,12 @@ export default function PressPage() {
             </div>
           </div>
         </div>
-      </section>
+      </PageSection>
 
       <Separator />
 
       {/* Key Features */}
-      <section className="container py-section">
+      <PageSection>
         <div className="mx-auto max-w-content">
           <h2 className="mb-6 text-2xl font-bold tracking-tight sm:mb-8 sm:text-3xl">
             Key features
@@ -178,12 +179,12 @@ export default function PressPage() {
             <Badge variant="secondary">Open source</Badge>
           </div>
         </div>
-      </section>
+      </PageSection>
 
       <Separator />
 
       {/* Brand Assets */}
-      <section className="container py-section">
+      <PageSection>
         <div className="mx-auto max-w-content">
           <Palette className="mx-auto mb-4 h-10 w-10 text-muted-foreground sm:mb-6" />
           <h2 className="mb-6 text-center text-2xl font-bold tracking-tight sm:mb-8 sm:text-3xl">
@@ -258,12 +259,12 @@ export default function PressPage() {
             </Card>
           </div>
         </div>
-      </section>
+      </PageSection>
 
       <Separator />
 
       {/* Usage Guidelines */}
-      <section className="container py-section">
+      <PageSection>
         <div className="mx-auto max-w-readable">
           <h2 className="mb-6 text-2xl font-bold tracking-tight sm:mb-8 sm:text-3xl">
             Usage guidelines
@@ -287,12 +288,12 @@ export default function PressPage() {
             </p>
           </div>
         </div>
-      </section>
+      </PageSection>
 
       <Separator />
 
       {/* Media Contact */}
-      <section className="container py-section">
+      <PageSection>
         <div className="mx-auto max-w-readable text-center">
           <Mail className="mx-auto mb-4 h-10 w-10 text-muted-foreground sm:mb-6" />
           <h2 className="mb-3 text-2xl font-bold tracking-tight sm:mb-4 sm:text-3xl">
@@ -319,7 +320,7 @@ export default function PressPage() {
             </a>
           </div>
         </div>
-      </section>
+      </PageSection>
     </div>
   );
 }

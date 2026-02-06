@@ -16,7 +16,7 @@ export function CodeBlock({ children, className }: CodeBlockProps) {
 
   // Extract language from className (e.g., "language-typescript" -> "typescript")
   const match = /language-([\w-]+)/.exec(className || '');
-  const language = match ? match[1] : 'text';
+  const language = match?.[1] ?? 'text';
   const code = children?.toString().trim() || '';
 
   useEffect(() => {

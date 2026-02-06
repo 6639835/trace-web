@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { Separator } from '@/components/ui/separator';
 import { Badge } from '@/components/ui/badge';
 import { PageHeader } from '@/components/shared/page-header';
+import { PageSection } from '@/components/shared/page-section';
 import { FeatureCard } from '@/components/marketing/feature-card';
 import {
   Smartphone,
@@ -51,7 +52,7 @@ export default function ArchitecturePage() {
       <Separator />
 
       {/* System Overview */}
-      <section className="container py-section">
+      <PageSection>
         <div className="mx-auto max-w-content">
           <h2 className="mb-4 text-xl font-bold tracking-tight sm:mb-6 sm:text-2xl">
             System overview
@@ -94,12 +95,12 @@ export default function ArchitecturePage() {
             <NetworkFlowDiagram />
           </div>
         </div>
-      </section>
+      </PageSection>
 
       <Separator />
 
       {/* Network Extension */}
-      <section className="container py-section">
+      <PageSection>
         <div className="mx-auto max-w-content">
           <h2 className="mb-4 text-xl font-bold tracking-tight sm:mb-6 sm:text-2xl">
             Network extension implementation
@@ -168,12 +169,12 @@ export default function ArchitecturePage() {
             </div>
           </div>
         </div>
-      </section>
+      </PageSection>
 
       <Separator />
 
       {/* Data Storage */}
-      <section className="container py-section">
+      <PageSection>
         <div className="mx-auto max-w-content">
           <h2 className="mb-4 text-xl font-bold tracking-tight sm:mb-6 sm:text-2xl">
             Data storage and IPC
@@ -214,12 +215,12 @@ export default function ArchitecturePage() {
             </div>
           </div>
         </div>
-      </section>
+      </PageSection>
 
       <Separator />
 
       {/* Protocol Support */}
-      <section className="container py-section">
+      <PageSection>
         <div className="mx-auto max-w-content">
           <h2 className="mb-4 text-xl font-bold tracking-tight sm:mb-6 sm:text-2xl">
             Protocol support
@@ -252,12 +253,12 @@ export default function ArchitecturePage() {
             />
           </div>
         </div>
-      </section>
+      </PageSection>
 
       <Separator />
 
       {/* Performance */}
-      <section className="container py-section">
+      <PageSection>
         <div className="mx-auto max-w-content">
           <h2 className="mb-4 text-xl font-bold tracking-tight sm:mb-6 sm:text-2xl">
             Performance considerations
@@ -292,12 +293,12 @@ export default function ArchitecturePage() {
             </div>
           </div>
         </div>
-      </section>
+      </PageSection>
 
       <Separator />
 
       {/* Security Model */}
-      <section className="container py-section">
+      <PageSection>
         <div className="mx-auto max-w-content">
           <h2 className="mb-4 text-xl font-bold tracking-tight sm:mb-6 sm:text-2xl">
             Security model
@@ -338,12 +339,12 @@ export default function ArchitecturePage() {
             </div>
           </div>
         </div>
-      </section>
+      </PageSection>
 
       <Separator />
 
       {/* Technical Stack */}
-      <section className="container py-section">
+      <PageSection>
         <div className="mx-auto max-w-readable text-center">
           <h2 className="mb-3 text-xl font-bold tracking-tight sm:mb-4 sm:text-2xl">Built with</h2>
           <p className="mb-6 text-sm text-muted-foreground sm:mb-8 sm:text-base">
@@ -382,7 +383,7 @@ export default function ArchitecturePage() {
             </Badge>
           </div>
         </div>
-      </section>
+      </PageSection>
     </div>
   );
 }

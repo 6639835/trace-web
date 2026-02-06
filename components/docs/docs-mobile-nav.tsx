@@ -4,6 +4,7 @@ import { useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { cn } from '@/lib/utils';
+import { Button } from '@/components/ui/button';
 import { Menu, X, ChevronDown } from 'lucide-react';
 import { docsNavigation } from '@/lib/config/docs-navigation';
 
@@ -34,9 +35,11 @@ export function DocsMobileNav() {
 
   return (
     <div className="w-full">
-      <button
+      <Button
+        type="button"
+        variant="outline"
         onClick={() => setIsOpen(!isOpen)}
-        className="flex w-full items-center justify-between rounded-lg border bg-card px-4 py-3 text-sm font-medium transition-colors hover:bg-accent"
+        className="h-auto w-full justify-between bg-card px-4 py-3 text-sm font-medium hover:bg-accent"
         aria-label="Toggle navigation menu"
         aria-expanded={isOpen}
         aria-controls="docs-navigation-mobile"
@@ -46,7 +49,7 @@ export function DocsMobileNav() {
           {getCurrentPageTitle()}
         </span>
         {isOpen ? <X className="h-4 w-4" /> : <ChevronDown className="h-4 w-4" />}
-      </button>
+      </Button>
 
       {isOpen && (
         <div
@@ -60,15 +63,17 @@ export function DocsMobileNav() {
 
               return (
                 <div key={section.title} className="mb-1">
-                  <button
+                  <Button
+                    type="button"
+                    variant="ghost"
                     onClick={() => toggleSection(section.title)}
-                    className="flex w-full items-center justify-between rounded-md px-3 py-2 text-sm font-semibold text-foreground hover:bg-accent"
+                    className="h-auto w-full justify-between rounded-md px-3 py-2 text-sm font-semibold text-foreground hover:bg-accent"
                   >
                     {section.title}
                     <ChevronDown
                       className={cn('h-4 w-4 transition-transform', isExpanded && 'rotate-180')}
                     />
-                  </button>
+                  </Button>
 
                   {(isExpanded || hasActiveItem) && (
                     <div className="ml-2 space-y-1 border-l pl-2">

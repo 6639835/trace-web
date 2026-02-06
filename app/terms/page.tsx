@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { Separator } from '@/components/ui/separator';
 import { PageHeader } from '@/components/shared/page-header';
+import { PageSection } from '@/components/shared/page-section';
 import { FileText } from 'lucide-react';
 
 export const metadata: Metadata = {
@@ -28,7 +29,7 @@ export default function TermsPage() {
 
       <Separator />
 
-      <section className="container py-section">
+      <PageSection>
         <div className="mx-auto prose max-w-readable prose-slate dark:prose-invert prose-a:no-underline">
           <h2>1. Acceptance of Terms</h2>
           <p>
@@ -108,7 +109,7 @@ export default function TermsPage() {
             or email <a href="mailto:epa6643@gmail.com">epa6643@gmail.com</a>.
           </p>
         </div>
-      </section>
+      </PageSection>
     </div>
   );
 }

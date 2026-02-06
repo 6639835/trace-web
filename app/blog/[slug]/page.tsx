@@ -5,6 +5,7 @@ import { Suspense } from 'react';
 import { Badge } from '@/components/ui/badge';
 import { Separator } from '@/components/ui/separator';
 import { Skeleton } from '@/components/ui/skeleton';
+import { PageSection } from '@/components/shared/page-section';
 import { Calendar, Clock, ArrowLeft } from 'lucide-react';
 import { getAllPosts, getPostBySlug } from '@/lib/blog';
 import { absoluteUrl, siteUrl } from '@/lib/config/site';
@@ -181,16 +182,16 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
       <Separator />
 
       {/* Content */}
-      <section className="container py-section">
+      <PageSection>
         <Suspense fallback={<ArticleContentSkeleton />}>
           <ArticleContent slug={slug} />
         </Suspense>
-      </section>
+      </PageSection>
 
       <Separator />
 
       {/* Footer */}
-      <section className="container py-section">
+      <PageSection>
         <div className="mx-auto max-w-readable text-center">
           <Link
             href="/blog"
@@ -200,7 +201,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
             Back to all posts
           </Link>
         </div>
-      </section>
+      </PageSection>
     </div>
   );
 }

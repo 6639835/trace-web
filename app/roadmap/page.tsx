@@ -3,6 +3,7 @@ import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Separator } from '@/components/ui/separator';
+import { PageSection } from '@/components/shared/page-section';
 import {
   CheckCircle2,
   Circle,
@@ -241,7 +242,7 @@ export default function RoadmapPage() {
   return (
     <div className="flex w-full flex-col">
       {/* Hero Section */}
-      <section className="container py-section">
+      <PageSection>
         <div className="mx-auto max-w-content text-center">
           <Globe className="mx-auto mb-4 h-10 w-10 text-primary sm:mb-6 sm:h-12 sm:w-12" />
           <h1 className="mb-3 text-2xl font-bold tracking-tight sm:mb-4 sm:text-3xl md:text-4xl lg:text-5xl">
@@ -252,12 +253,12 @@ export default function RoadmapPage() {
             coming next, and help shape the development of Trace.
           </p>
         </div>
-      </section>
+      </PageSection>
 
       <Separator />
 
       {/* Timeline Section */}
-      <section className="container py-section-lg">
+      <PageSection spacing="lg">
         <div className="mx-auto max-w-readable">
           <div className="relative">
             {/* Vertical line */}
@@ -339,12 +340,12 @@ export default function RoadmapPage() {
             </div>
           </div>
         </div>
-      </section>
+      </PageSection>
 
       <Separator />
 
       {/* CTA Section */}
-      <section className="container py-section-lg">
+      <PageSection spacing="lg">
         <div className="mx-auto max-w-readable text-center">
           <Lock className="mx-auto mb-4 h-10 w-10 text-primary sm:mb-6 sm:h-12 sm:w-12" />
           <h2 className="mb-3 text-2xl font-bold tracking-tight sm:mb-4 sm:text-3xl md:text-4xl">
@@ -376,7 +377,7 @@ export default function RoadmapPage() {
             </Button>
           </div>
         </div>
-      </section>
+      </PageSection>
     </div>
   );
 }

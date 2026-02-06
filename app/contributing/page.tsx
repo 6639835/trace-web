@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
 import { PageHeader } from '@/components/shared/page-header';
+import { PageSection } from '@/components/shared/page-section';
 import { FeatureCard } from '@/components/marketing/feature-card';
 import {
   Heart,
@@ -51,7 +52,7 @@ export default function ContributingPage() {
       <Separator />
 
       {/* Ways to Contribute */}
-      <section className="container py-section">
+      <PageSection>
         <div className="mx-auto max-w-content">
           <h2 className="mb-8 text-xl font-bold tracking-tight sm:mb-10 sm:text-2xl md:mb-12">
             Ways to contribute
@@ -148,12 +149,12 @@ export default function ContributingPage() {
             </FeatureCard>
           </div>
         </div>
-      </section>
+      </PageSection>
 
       <Separator />
 
       {/* Code Contribution Workflow */}
-      <section className="container py-section">
+      <PageSection>
         <div className="mx-auto max-w-readable">
           <h2 className="mb-8 text-xl font-bold tracking-tight sm:mb-10 sm:text-2xl">
             Code contribution workflow
@@ -242,12 +243,12 @@ export default function ContributingPage() {
             </div>
           </div>
         </div>
-      </section>
+      </PageSection>
 
       <Separator />
 
       {/* Guidelines */}
-      <section className="container py-section">
+      <PageSection>
         <div className="mx-auto max-w-readable">
           <h2 className="mb-6 text-xl font-bold tracking-tight sm:mb-8 sm:text-2xl">Guidelines</h2>
           <div className="space-y-4 text-sm leading-relaxed text-muted-foreground">
@@ -294,12 +295,12 @@ export default function ContributingPage() {
             </div>
           </div>
         </div>
-      </section>
+      </PageSection>
 
       <Separator />
 
       {/* Recognition */}
-      <section className="container py-section">
+      <PageSection>
         <div className="mx-auto max-w-readable">
           <Star className="mx-auto mb-4 h-10 w-10 text-primary sm:mb-6 sm:h-12 sm:w-12" />
           <h2 className="mb-4 text-center text-2xl font-bold tracking-tight sm:text-3xl">
@@ -320,12 +321,12 @@ export default function ContributingPage() {
             </a>
           </div>
         </div>
-      </section>
+      </PageSection>
 
       <Separator />
 
       {/* Resources */}
-      <section className="container py-section">
+      <PageSection>
         <div className="mx-auto max-w-content">
           <h2 className="mb-8 text-xl font-bold tracking-tight sm:mb-10 sm:text-2xl">Resources</h2>
           <div className="grid gap-4 sm:grid-cols-2 sm:gap-5 md:gap-6">
@@ -370,12 +371,12 @@ export default function ContributingPage() {
             </a>
           </div>
         </div>
-      </section>
+      </PageSection>
 
       <Separator />
 
       {/* CTA */}
-      <section className="container py-section">
+      <PageSection>
         <div className="mx-auto max-w-readable text-center">
           <Github className="mx-auto mb-4 h-10 w-10 text-primary sm:mb-6 sm:h-12 sm:w-12" />
           <h2 className="mb-3 text-2xl font-bold tracking-tight sm:mb-4 sm:text-3xl">
@@ -408,7 +409,7 @@ export default function ContributingPage() {
             </Button>
           </div>
         </div>
-      </section>
+      </PageSection>
     </div>
   );
 }

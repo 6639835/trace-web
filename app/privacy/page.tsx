@@ -1,5 +1,6 @@
 import { Separator } from '@/components/ui/separator';
 import { PageHeader } from '@/components/shared/page-header';
+import { PageSection } from '@/components/shared/page-section';
 import { Shield } from 'lucide-react';
 import type { Metadata } from 'next';
 
@@ -48,19 +49,19 @@ export default function PrivacyPage() {
       <Separator />
 
       {/* Introduction */}
-      <section className="container py-section">
+      <PageSection>
         <div className="mx-auto max-w-readable">
           <p className="text-sm leading-relaxed text-muted-foreground sm:text-base">
             This Privacy Policy explains how Trace (&quot;the App&quot;) handles information when
             you use the App on iOS.
           </p>
         </div>
-      </section>
+      </PageSection>
 
       <Separator />
 
       {/* Summary Section */}
-      <section className="container py-section">
+      <PageSection>
         <div className="mx-auto max-w-readable">
           <h2 className="mb-6 text-xl font-bold tracking-tight sm:mb-8 sm:text-2xl">1. Summary</h2>
           <ul className="list-inside list-disc space-y-3 text-sm leading-relaxed text-muted-foreground sm:text-base">
@@ -78,12 +79,12 @@ export default function PrivacyPage() {
             </li>
           </ul>
         </div>
-      </section>
+      </PageSection>
 
       <Separator />
 
       {/* Definitions */}
-      <section className="container py-section">
+      <PageSection>
         <div className="mx-auto max-w-readable">
           <h2 className="mb-6 text-xl font-bold tracking-tight sm:mb-8 sm:text-2xl">
             2. Definitions
@@ -106,12 +107,12 @@ export default function PrivacyPage() {
             </div>
           </div>
         </div>
-      </section>
+      </PageSection>
 
       <Separator />
 
       {/* Information the App Handles */}
-      <section className="container py-section">
+      <PageSection>
         <div className="mx-auto max-w-readable">
           <h2 className="mb-6 text-xl font-bold tracking-tight sm:mb-8 sm:text-2xl">
             3. Information the App Handles
@@ -204,12 +205,12 @@ export default function PrivacyPage() {
             </div>
           </div>
         </div>
-      </section>
+      </PageSection>
 
       <Separator />
 
       {/* How Information Is Used */}
-      <section className="container py-section">
+      <PageSection>
         <div className="mx-auto max-w-readable">
           <h2 className="mb-6 text-xl font-bold tracking-tight sm:mb-8 sm:text-2xl">
             4. How Information Is Used
@@ -223,12 +224,12 @@ export default function PrivacyPage() {
             <li>storing your sessions and configuration locally so you can use the App</li>
           </ul>
         </div>
-      </section>
+      </PageSection>
 
       <Separator />
 
       {/* Data Sharing and Disclosure */}
-      <section className="container py-section">
+      <PageSection>
         <div className="mx-auto max-w-readable">
           <h2 className="mb-6 text-xl font-bold tracking-tight sm:mb-8 sm:text-2xl">
             5. Data Sharing and Disclosure
@@ -257,12 +258,12 @@ export default function PrivacyPage() {
             </div>
           </div>
         </div>
-      </section>
+      </PageSection>
 
       <Separator />
 
       {/* Tracking */}
-      <section className="container py-section">
+      <PageSection>
         <div className="mx-auto max-w-readable">
           <h2 className="mb-6 text-xl font-bold tracking-tight sm:mb-8 sm:text-2xl">6. Tracking</h2>
           <p className="text-sm leading-relaxed text-muted-foreground sm:text-base">
@@ -270,12 +271,12 @@ export default function PrivacyPage() {
             identifiers for tracking purposes.
           </p>
         </div>
-      </section>
+      </PageSection>
 
       <Separator />
 
       {/* Data Retention */}
-      <section className="container py-section">
+      <PageSection>
         <div className="mx-auto max-w-readable">
           <h2 className="mb-6 text-xl font-bold tracking-tight sm:mb-8 sm:text-2xl">
             7. Data Retention
@@ -292,12 +293,12 @@ export default function PrivacyPage() {
             </li>
           </ul>
         </div>
-      </section>
+      </PageSection>
 
       <Separator />
 
       {/* Security */}
-      <section className="container py-section">
+      <PageSection>
         <div className="mx-auto max-w-readable">
           <h2 className="mb-6 text-xl font-bold tracking-tight sm:mb-8 sm:text-2xl">8. Security</h2>
           <p className="mb-3 text-sm leading-relaxed text-muted-foreground sm:text-base">
@@ -314,12 +315,12 @@ export default function PrivacyPage() {
             <li>ensuring you only intercept traffic you are authorized to inspect</li>
           </ul>
         </div>
-      </section>
+      </PageSection>
 
       <Separator />
 
       {/* Your Choices and Controls */}
-      <section className="container py-section">
+      <PageSection>
         <div className="mx-auto max-w-readable">
           <h2 className="mb-6 text-xl font-bold tracking-tight sm:mb-8 sm:text-2xl">
             9. Your Choices and Controls
@@ -334,12 +335,12 @@ export default function PrivacyPage() {
             <li>choosing whether to export/share and what to export/share</li>
           </ul>
         </div>
-      </section>
+      </PageSection>
 
       <Separator />
 
       {/* Legal Compliance */}
-      <section className="container py-section">
+      <PageSection>
         <div className="mx-auto max-w-readable">
           <h2 className="mb-6 text-xl font-bold tracking-tight sm:mb-8 sm:text-2xl">
             10. Legal Compliance and Authorized Use
@@ -351,12 +352,12 @@ export default function PrivacyPage() {
             laws, regulations, and third-party terms.
           </p>
         </div>
-      </section>
+      </PageSection>
 
       <Separator />
 
       {/* Children&apos;s Privacy */}
-      <section className="container py-section">
+      <PageSection>
         <div className="mx-auto max-w-readable">
           <h2 className="mb-6 text-xl font-bold tracking-tight sm:mb-8 sm:text-2xl">
             11. Children&apos;s Privacy
@@ -367,12 +368,12 @@ export default function PrivacyPage() {
             to identify users&apos; ages.
           </p>
         </div>
-      </section>
+      </PageSection>
 
       <Separator />
 
       {/* International Users */}
-      <section className="container py-section">
+      <PageSection>
         <div className="mx-auto max-w-readable">
           <h2 className="mb-6 text-xl font-bold tracking-tight sm:mb-8 sm:text-2xl">
             12. International Users
@@ -383,12 +384,12 @@ export default function PrivacyPage() {
             responsible for your sharing choices.
           </p>
         </div>
-      </section>
+      </PageSection>
 
       <Separator />
 
       {/* Changes to This Policy */}
-      <section className="container py-section">
+      <PageSection>
         <div className="mx-auto max-w-readable">
           <h2 className="mb-6 text-xl font-bold tracking-tight sm:mb-8 sm:text-2xl">
             13. Changes to This Policy
@@ -399,12 +400,12 @@ export default function PrivacyPage() {
             (e.g., in the App listing or repository page).
           </p>
         </div>
-      </section>
+      </PageSection>
 
       <Separator />
 
       {/* Contact Us */}
-      <section className="container py-section">
+      <PageSection>
         <div className="mx-auto max-w-readable text-center">
           <h2 className="mb-3 text-xl font-bold tracking-tight sm:mb-4 sm:text-2xl">
             14. Contact Us
@@ -419,7 +420,7 @@ export default function PrivacyPage() {
             epa6643@gmail.com
           </a>
         </div>
-      </section>
+      </PageSection>
     </div>
   );
 }

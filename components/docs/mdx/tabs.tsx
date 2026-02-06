@@ -29,7 +29,7 @@ export function Tabs({ children, defaultValue }: TabsProps) {
     React.isValidElement,
   ) as React.ReactElement<TabProps>[];
   const values = tabs.map((child, index) => child.props.value ?? toSlug(child.props.title, index));
-  const activeValue = defaultValue ?? values[0];
+  const activeValue = defaultValue ?? values[0] ?? 'tab-1';
 
   return (
     <TabsPrimitive.Root
@@ -37,26 +37,32 @@ export function Tabs({ children, defaultValue }: TabsProps) {
       defaultValue={activeValue}
     >
       <TabsPrimitive.List className="flex flex-wrap gap-2 border-b pb-2">
-        {tabs.map((child, index) => (
-          <TabsPrimitive.Trigger
-            key={values[index]}
-            value={values[index]}
-            className={cn(
-              'rounded-full px-3 py-1 text-xs font-medium transition-colors',
-              'data-[state=active]:bg-primary data-[state=active]:text-primary-foreground',
-              'text-muted-foreground hover:text-foreground',
-            )}
-          >
-            {child.props.title}
-          </TabsPrimitive.Trigger>
-        ))}
+        {tabs.map((child, index) => {
+          const value = values[index] ?? `tab-${index + 1}`;
+          return (
+            <TabsPrimitive.Trigger
+              key={value}
+              value={value}
+              className={cn(
+                'rounded-full px-3 py-1 text-xs font-medium transition-colors',
+                'data-[state=active]:bg-primary data-[state=active]:text-primary-foreground',
+                'text-muted-foreground hover:text-foreground',
+              )}
+            >
+              {child.props.title}
+            </TabsPrimitive.Trigger>
+          );
+        })}
       </TabsPrimitive.List>
       <div className="pt-4">
-        {tabs.map((child, index) => (
-          <TabsPrimitive.Content key={values[index]} value={values[index]}>
-            <div className="space-y-3 text-sm text-muted-foreground">{child.props.children}</div>
-          </TabsPrimitive.Content>
-        ))}
+        {tabs.map((child, index) => {
+          const value = values[index] ?? `tab-${index + 1}`;
+          return (
+            <TabsPrimitive.Content key={value} value={value}>
+              <div className="space-y-3 text-sm text-muted-foreground">{child.props.children}</div>
+            </TabsPrimitive.Content>
+          );
+        })}
       </div>
     </TabsPrimitive.Root>
   );

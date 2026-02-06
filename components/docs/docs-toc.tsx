@@ -99,8 +99,9 @@ export function DocsTableOfContents() {
           .filter((entry) => entry.isIntersecting)
           .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top);
 
-        if (visible.length > 0) {
-          setActiveId(visible[0].target.id);
+        const firstVisible = visible[0];
+        if (firstVisible) {
+          setActiveId(firstVisible.target.id);
         }
       },
       {

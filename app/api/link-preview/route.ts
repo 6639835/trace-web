@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { parsePublicHttpUrl } from '@/lib/server/safe-url';
+import { hasPublicDnsResolution, parsePublicHttpUrl } from '@/lib/server/safe-url';
 import { extractHtmlMetadata } from '@/lib/server/html-metadata';
 
 export const runtime = 'nodejs';
@@ -28,6 +28,10 @@ export async function GET(request: Request) {
 
   const target = parsePublicHttpUrl(urlParam);
   if (!target) {
+    return NextResponse.json({ error: 'Invalid or blocked url' }, { status: 400 });
+  }
+  const hasPublicDns = await hasPublicDnsResolution(target.hostname);
+  if (!hasPublicDns) {
     return NextResponse.json({ error: 'Invalid or blocked url' }, { status: 400 });
   }
 

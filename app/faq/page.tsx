@@ -9,6 +9,7 @@ import {
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
 import { PageHeader } from '@/components/shared/page-header';
+import { PageSection } from '@/components/shared/page-section';
 import { HelpCircle, Github, MessageCircle } from 'lucide-react';
 
 export const metadata: Metadata = {
@@ -133,7 +134,7 @@ export default function FAQPage() {
       <Separator />
 
       {/* Getting Started */}
-      <section className="container py-section">
+      <PageSection>
         <div className="mx-auto max-w-readable">
           <h2 className="mb-6 text-xl font-bold tracking-tight sm:mb-8 sm:text-2xl">
             Getting started
@@ -206,12 +207,12 @@ export default function FAQPage() {
             </AccordionItem>
           </Accordion>
         </div>
-      </section>
+      </PageSection>
 
       <Separator />
 
       {/* Features */}
-      <section className="container py-section">
+      <PageSection>
         <div className="mx-auto max-w-readable">
           <h2 className="mb-6 text-xl font-bold tracking-tight sm:mb-8 sm:text-2xl">Features</h2>
           <Accordion type="single" collapsible className="w-full">
@@ -280,12 +281,12 @@ export default function FAQPage() {
             </AccordionItem>
           </Accordion>
         </div>
-      </section>
+      </PageSection>
 
       <Separator />
 
       {/* Technical */}
-      <section className="container py-section">
+      <PageSection>
         <div className="mx-auto max-w-readable">
           <h2 className="mb-6 text-xl font-bold tracking-tight sm:mb-8 sm:text-2xl">Technical</h2>
           <Accordion type="single" collapsible className="w-full">
@@ -357,12 +358,12 @@ export default function FAQPage() {
             </AccordionItem>
           </Accordion>
         </div>
-      </section>
+      </PageSection>
 
       <Separator />
 
       {/* Privacy & Security */}
-      <section className="container py-section">
+      <PageSection>
         <div className="mx-auto max-w-readable">
           <h2 className="mb-6 text-xl font-bold tracking-tight sm:mb-8 sm:text-2xl">
             Privacy &amp; Security
@@ -413,12 +414,12 @@ export default function FAQPage() {
             </AccordionItem>
           </Accordion>
         </div>
-      </section>
+      </PageSection>
 
       <Separator />
 
       {/* Troubleshooting */}
-      <section className="container py-section">
+      <PageSection>
         <div className="mx-auto max-w-readable">
           <h2 className="mb-6 text-xl font-bold tracking-tight sm:mb-8 sm:text-2xl">
             Troubleshooting
@@ -503,12 +504,12 @@ export default function FAQPage() {
             </AccordionItem>
           </Accordion>
         </div>
-      </section>
+      </PageSection>
 
       <Separator />
 
       {/* Open Source */}
-      <section className="container py-section">
+      <PageSection>
         <div className="mx-auto max-w-readable">
           <h2 className="mb-6 text-xl font-bold tracking-tight sm:mb-8 sm:text-2xl">Open source</h2>
           <Accordion type="single" collapsible className="w-full">
@@ -569,12 +570,12 @@ export default function FAQPage() {
             </AccordionItem>
           </Accordion>
         </div>
-      </section>
+      </PageSection>
 
       <Separator />
 
       {/* CTA */}
-      <section className="container py-section">
+      <PageSection>
         <div className="mx-auto max-w-readable text-center">
           <h2 className="mb-3 text-2xl font-bold tracking-tight sm:mb-4 sm:text-3xl">
             Still have questions?
@@ -604,7 +605,7 @@ export default function FAQPage() {
             </Button>
           </div>
         </div>
-      </section>
+      </PageSection>
     </div>
   );
 }
