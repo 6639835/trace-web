@@ -60,7 +60,7 @@ const milestones: Milestone[] = [
   {
     quarter: 'Q4',
     year: '2025',
-    title: 'Initial Release',
+    title: 'v1.0.0 - Initial Release',
     description:
       'Foundation release with core network capture and inspection capabilities for iOS developers.',
     status: 'completed',
@@ -72,24 +72,63 @@ const milestones: Milestone[] = [
       },
       {
         name: 'TLS MITM inspection',
-        description: 'On-device certificate authority for encrypted traffic analysis',
+        description: 'On-device certificate authority with per-domain cert storage',
       },
       {
         name: 'WebSocket & SSE support',
-        description: 'Real-time protocol debugging with frame-by-frame inspection',
+        description: 'Real-time protocol debugging with streaming frame inspection',
       },
       {
         name: 'Traffic modification tools',
-        description: 'Rewrite rules, request maps, and host overrides',
+        description: 'Rewrite rules, request builder, and host overrides',
+      },
+      {
+        name: 'PCAP export',
+        description: 'Export captured traffic in PCAP format for Wireshark analysis',
       },
     ],
   },
   {
     quarter: 'Q1',
     year: '2026',
-    title: 'Advanced Filtering & Analysis',
+    title: 'v1.0.1-1.0.3 - Stability & Polish',
     description:
-      'Enhanced filtering capabilities and analysis tools for faster debugging workflows.',
+      'Production hardening with comprehensive fixes, test coverage, and developer experience improvements.',
+    status: 'completed',
+    icon: Shield,
+    features: [
+      {
+        name: 'Advanced capture modes',
+        description: 'Full-tunnel VPN capture with IPv6 support and SOCKS5 fallback',
+      },
+      {
+        name: 'Compression hardening',
+        description: 'Fixed Brotli/Deflate streaming decoders and chunked transfer encoding',
+      },
+      {
+        name: 'Widget & intents',
+        description: 'App shortcuts, Control Center widgets, and deep-link navigation',
+      },
+      {
+        name: 'Enhanced UX',
+        description: 'Accessibility improvements, consistent empty states, and refined animations',
+      },
+      {
+        name: 'CI/CD & testing',
+        description: 'GitHub Actions workflow, comprehensive unit tests, and Swift 6 concurrency',
+      },
+      {
+        name: 'Core refactoring',
+        description: 'Improved PCAP parsing, VPN lifecycle, persistence, and rule matching',
+      },
+    ],
+  },
+  {
+    quarter: 'Q1',
+    year: '2026',
+    title: 'Current Sprint - Advanced Filtering',
+    description:
+      'Enhanced filtering, search capabilities, and analysis tools for faster debugging workflows.',
     status: 'in-progress',
     icon: Zap,
     features: [
@@ -108,6 +147,10 @@ const milestones: Milestone[] = [
       {
         name: 'Enhanced search',
         description: 'Full-text search across headers, bodies, and metadata',
+      },
+      {
+        name: 'Performance metrics',
+        description: 'Detailed timing breakdowns and waterfall visualizations',
       },
     ],
   },
@@ -129,11 +172,15 @@ const milestones: Milestone[] = [
       },
       {
         name: 'Export enhancements',
-        description: 'HAR, cURL, Postman collections, and custom export formats',
+        description: 'HAR, Postman collections, and custom export formats',
       },
       {
         name: 'Background capture',
         description: 'Continue capturing network traffic when app is backgrounded',
+      },
+      {
+        name: 'Advanced caching',
+        description: 'Smart caching strategies to reduce memory footprint',
       },
     ],
   },
@@ -161,6 +208,10 @@ const milestones: Milestone[] = [
         name: 'Shared configurations',
         description: 'Share rewrite rules, scripts, and settings with team members',
       },
+      {
+        name: 'Team workspaces',
+        description: 'Organize sessions and configs by project or team',
+      },
     ],
   },
   {
@@ -169,15 +220,15 @@ const milestones: Milestone[] = [
     title: 'Enterprise & Security',
     description: 'Advanced security features and enterprise-grade capabilities.',
     status: 'planned',
-    icon: Shield,
+    icon: Lock,
     features: [
       {
         name: 'Custom CA certificates',
         description: 'Import enterprise CA certificates for corporate environments',
       },
       {
-        name: 'SSO integration',
-        description: 'Single sign-on support for enterprise authentication',
+        name: 'Advanced certificate management',
+        description: 'Certificate pinning, custom trust stores, and cert validation',
       },
       {
         name: 'Audit logging',
@@ -186,6 +237,10 @@ const milestones: Milestone[] = [
       {
         name: 'Advanced security policies',
         description: 'Granular controls for data retention, export, and access',
+      },
+      {
+        name: 'Privacy controls',
+        description: 'Selective data masking and PII redaction capabilities',
       },
     ],
   },
@@ -202,8 +257,8 @@ const milestones: Milestone[] = [
         description: 'Build custom analyzers, exporters, and UI extensions',
       },
       {
-        name: 'Scripting API',
-        description: 'Advanced JavaScript API for automated traffic manipulation',
+        name: 'Enhanced scripting',
+        description: 'Advanced JavaScript API with better debugging and timeout controls',
       },
       {
         name: 'REST API',
@@ -212,6 +267,10 @@ const milestones: Milestone[] = [
       {
         name: 'CI/CD integrations',
         description: 'GitHub Actions, GitLab CI, and Jenkins plugins for automated testing',
+      },
+      {
+        name: 'Custom protocols',
+        description: 'Support for custom protocol parsers and decoders',
       },
     ],
   },

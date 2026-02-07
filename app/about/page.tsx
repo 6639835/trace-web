@@ -166,12 +166,13 @@ export default function AboutPage() {
               <Card>
                 <CardHeader>
                   <div className="mb-2 text-xs font-medium text-muted-foreground sm:text-sm">
-                    September 2024
+                    January 24, 2026
                   </div>
-                  <CardTitle>Project started</CardTitle>
+                  <CardTitle>Project launched & open sourced</CardTitle>
                   <CardDescription>
-                    Initial exploration of Network Extension APIs and feasibility research. Proof of
-                    concept for on-device TLS MITM.
+                    Initial Trace codebase published on GitHub under MIT license. Project started
+                    with v1.0.0-testflight featuring device-wide capture, TLS MITM inspection,
+                    WebSocket/SSE support, PCAP export, and traffic modification tools.
                   </CardDescription>
                 </CardHeader>
               </Card>
@@ -181,12 +182,12 @@ export default function AboutPage() {
               <Card>
                 <CardHeader>
                   <div className="mb-2 text-xs font-medium text-muted-foreground sm:text-sm">
-                    October 2024
+                    January 2026
                   </div>
-                  <CardTitle>Alpha builds</CardTitle>
+                  <CardTitle>v1.0.1 - Enhanced capture & widgets</CardTitle>
                   <CardDescription>
-                    First functional builds with basic HTTP capture and inspection. Early testing
-                    with a small group of developers to validate the approach.
+                    Full-tunnel VPN capture with IPv6 support, PCAP enhancements, widget/control
+                    intents, and comprehensive test coverage. First major stability release.
                   </CardDescription>
                 </CardHeader>
               </Card>
@@ -196,12 +197,12 @@ export default function AboutPage() {
               <Card>
                 <CardHeader>
                   <div className="mb-2 text-xs font-medium text-muted-foreground sm:text-sm">
-                    November 2024
+                    February 2026
                   </div>
-                  <CardTitle>Open source release</CardTitle>
+                  <CardTitle>v1.0.2 - Core refactoring</CardTitle>
                   <CardDescription>
-                    Published source code on GitHub under MIT license. Established contribution
-                    guidelines and project structure for community involvement.
+                    Fixed compression streaming (Brotli/Deflate), hardened PCAP/TCP parsing, improved
+                    VPN lifecycle, and enhanced settings UI. Added GitHub Actions CI/CD pipeline.
                   </CardDescription>
                 </CardHeader>
               </Card>
@@ -211,12 +212,12 @@ export default function AboutPage() {
               <Card>
                 <CardHeader>
                   <div className="mb-2 text-xs font-medium text-muted-foreground sm:text-sm">
-                    December 2024
+                    February 2026
                   </div>
-                  <CardTitle>TestFlight launch</CardTitle>
+                  <CardTitle>v1.0.3 - Polish & accessibility</CardTitle>
                   <CardDescription>
-                    Trace 1.0 released on TestFlight with core features: device-wide capture, TLS
-                    inspection, WebSocket support, and traffic modification tools.
+                    SOCKS5 fallback, SSE stream persistence, widget deep-linking, accessibility
+                    improvements, Swift 6 concurrency, and UI polish across network/rule views.
                   </CardDescription>
                 </CardHeader>
               </Card>
@@ -228,12 +229,12 @@ export default function AboutPage() {
               <Card>
                 <CardHeader>
                   <div className="mb-2 text-xs font-medium text-muted-foreground sm:text-sm">
-                    Q1 2026
+                    Q1 2026 (In Progress)
                   </div>
-                  <CardTitle>Advanced features</CardTitle>
+                  <CardTitle>Advanced filtering & analysis</CardTitle>
                   <CardDescription>
-                    Planned: Advanced filtering, request comparison tool, saved filter presets, and
-                    performance optimizations for large sessions.
+                    In development: Advanced filter engine with regex support, saved filter presets,
+                    request comparison tool, full-text search, and performance metrics visualization.
                   </CardDescription>
                 </CardHeader>
               </Card>
@@ -249,8 +250,8 @@ export default function AboutPage() {
                   </div>
                   <CardTitle>App Store release</CardTitle>
                   <CardDescription>
-                    Target: Submit to the App Store after gathering feedback from TestFlight users
-                    and implementing major features.
+                    Target: Submit to the App Store after implementing advanced filtering, performance
+                    optimizations, and gathering extensive feedback from TestFlight users.
                   </CardDescription>
                 </CardHeader>
               </Card>
