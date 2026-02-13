@@ -7,7 +7,7 @@ import { cn } from '@/lib/utils';
 import { ThemeSwitcher } from '@/components/theme-switcher';
 import { Button } from '@/components/ui/button';
 import { Menu, X } from 'lucide-react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 const navItems = [
   { name: 'Features', href: '/features' },
@@ -20,9 +20,27 @@ const navItems = [
 export function Navigation() {
   const pathname = usePathname();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+  const isHomePage = pathname === '/';
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 10);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   return (
-    <nav className="sticky top-0 z-50 border-b bg-background/95 backdrop-blur-sm supports-[backdrop-filter]:bg-background/60">
+    <nav
+      className={cn(
+        'sticky top-0 z-50 transition-all duration-300',
+        isHomePage && !isScrolled
+          ? 'border-transparent bg-transparent'
+          : 'border-b bg-background/95 backdrop-blur-sm supports-[backdrop-filter]:bg-background/60',
+      )}
+    >
       <div className="container flex h-16 items-center justify-between">
         <div className="flex items-center gap-6 lg:gap-10">
           <Link href="/" className="flex items-center space-x-2">

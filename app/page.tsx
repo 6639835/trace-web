@@ -61,10 +61,6 @@ export default function Home() {
       />
       {/* Hero Section with Phone Mockup */}
       <section className="relative flex min-h-[calc(100vh-4rem)] items-start overflow-hidden py-section">
-        {/* Gradient Background - Full Width */}
-        <div className="absolute inset-0 -z-10 bg-gradient-to-br from-primary/5 via-background to-primary/10 dark:from-primary/10 dark:to-background" />
-        <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_30%_20%,rgba(59,130,246,0.05),transparent_50%)] dark:bg-[radial-gradient(circle_at_30%_20%,rgba(59,130,246,0.1),transparent_50%)]" />
-
         <div className="container">
           <div className="mx-auto grid w-full max-w-wide items-start gap-8 pt-8 sm:gap-10 sm:pt-12 lg:grid-cols-2 lg:gap-12 lg:pt-16">
             {/* Left Column - Hero Text */}
