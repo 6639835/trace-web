@@ -49,6 +49,11 @@ export function Footer() {
                   Roadmap
                 </Link>
               </li>
+              <li>
+                <Link href="/changelog" className="transition-colors hover:text-foreground">
+                  Changelog
+                </Link>
+              </li>
             </ul>
           </div>
 

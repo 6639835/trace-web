@@ -6,7 +6,7 @@ import { usePathname } from 'next/navigation';
 import { cn } from '@/lib/utils';
 import { ThemeSwitcher } from '@/components/theme-switcher';
 import { Button } from '@/components/ui/button';
-import { Menu, X, Layers, FileText, Code, Rocket, Heart } from 'lucide-react';
+import { Menu, X, Layers, FileText, Code, Rocket, Heart, ScrollText } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import {
   NavigationMenu,
@@ -50,6 +50,12 @@ const communityItems = [
     href: '/roadmap',
     description: "What's planned next and which improvements are in progress",
     icon: Rocket,
+  },
+  {
+    title: 'Changelog',
+    href: '/changelog',
+    description: 'Release history with every feature, fix, and improvement',
+    icon: ScrollText,
   },
 ];
 
