@@ -3,6 +3,7 @@ import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Separator } from '@/components/ui/separator';
+import { Timeline, TimelineItem } from '@/components/ui/timeline';
 import { PageSection } from '@/components/shared/page-section';
 import {
   CheckCircle2,
@@ -319,85 +320,76 @@ export default function RoadmapPage() {
       {/* Timeline Section */}
       <PageSection spacing="lg">
         <div className="mx-auto max-w-readable">
-          <div className="relative">
-            {/* Vertical line */}
-            <div className="absolute top-0 left-[19px] h-full w-0.5 bg-border sm:left-[23px]" />
+          <Timeline>
+            {milestones.map((milestone) => {
+              const StatusIcon = statusConfig[milestone.status].icon;
+              const MilestoneIcon = milestone.icon;
 
-            {/* Milestones */}
-            <div className="space-y-8 sm:space-y-10 md:space-y-12">
-              {milestones.map((milestone, index) => {
-                const StatusIcon = statusConfig[milestone.status].icon;
-                const MilestoneIcon = milestone.icon;
-
-                return (
-                  <div key={index} className="relative pl-12 sm:pl-16">
-                    {/* Timeline dot */}
-                    <div className="absolute top-0 left-0">
-                      <div className="flex h-10 w-10 items-center justify-center rounded-full border-2 border-border bg-background sm:h-12 sm:w-12">
-                        <StatusIcon
-                          className={`h-5 w-5 sm:h-6 sm:w-6 ${
-                            milestone.status === 'completed'
-                              ? 'text-primary'
-                              : milestone.status === 'in-progress'
-                                ? 'text-muted-foreground'
-                                : 'text-muted-foreground/50'
-                          }`}
-                        />
-                      </div>
-                    </div>
-
-                    {/* Milestone Card */}
-                    <Card
-                      className={`${
+              return (
+                <TimelineItem
+                  key={`${milestone.year}-${milestone.quarter}-${milestone.title}`}
+                  icon={
+                    <StatusIcon
+                      className={`h-5 w-5 sm:h-6 sm:w-6 ${
                         milestone.status === 'completed'
-                          ? 'border-primary/20'
+                          ? 'text-primary'
                           : milestone.status === 'in-progress'
-                            ? 'border-primary/10'
-                            : ''
+                            ? 'text-muted-foreground'
+                            : 'text-muted-foreground/50'
                       }`}
-                    >
-                      <CardHeader>
-                        <div className="mb-3 flex flex-wrap items-center gap-2 sm:mb-4">
-                          <Badge variant={statusConfig[milestone.status].variant}>
-                            {statusConfig[milestone.status].label}
-                          </Badge>
-                          <span className="text-xs font-medium text-muted-foreground sm:text-sm">
-                            {milestone.quarter} {milestone.year}
-                          </span>
+                    />
+                  }
+                >
+                  <Card
+                    className={`${
+                      milestone.status === 'completed'
+                        ? 'border-primary/20'
+                        : milestone.status === 'in-progress'
+                          ? 'border-primary/10'
+                          : ''
+                    }`}
+                  >
+                    <CardHeader>
+                      <div className="mb-3 flex flex-wrap items-center gap-2 sm:mb-4">
+                        <Badge variant={statusConfig[milestone.status].variant}>
+                          {statusConfig[milestone.status].label}
+                        </Badge>
+                        <span className="text-xs font-medium text-muted-foreground sm:text-sm">
+                          {milestone.quarter} {milestone.year}
+                        </span>
+                      </div>
+                      <div className="flex items-start gap-3 sm:gap-4">
+                        <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-secondary sm:h-12 sm:w-12">
+                          <MilestoneIcon className="h-5 w-5 text-secondary-foreground sm:h-6 sm:w-6" />
                         </div>
-                        <div className="flex items-start gap-3 sm:gap-4">
-                          <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-secondary sm:h-12 sm:w-12">
-                            <MilestoneIcon className="h-5 w-5 text-secondary-foreground sm:h-6 sm:w-6" />
-                          </div>
-                          <div className="min-w-0 flex-1">
-                            <CardTitle className="mb-1.5 sm:mb-2">{milestone.title}</CardTitle>
-                            <CardDescription>{milestone.description}</CardDescription>
-                          </div>
+                        <div className="min-w-0 flex-1">
+                          <CardTitle className="mb-1.5 sm:mb-2">{milestone.title}</CardTitle>
+                          <CardDescription>{milestone.description}</CardDescription>
                         </div>
-                      </CardHeader>
-                      <CardContent>
-                        <ul className="space-y-3 sm:space-y-4">
-                          {milestone.features.map((feature, featureIndex) => (
-                            <li key={featureIndex} className="flex gap-3">
-                              <div className="mt-0.5 shrink-0">
-                                <div className="h-1.5 w-1.5 rounded-full bg-muted-foreground sm:h-2 sm:w-2" />
+                      </div>
+                    </CardHeader>
+                    <CardContent>
+                      <ul className="space-y-3 sm:space-y-4">
+                        {milestone.features.map((feature, featureIndex) => (
+                          <li key={featureIndex} className="flex gap-3">
+                            <div className="mt-0.5 shrink-0">
+                              <div className="h-1.5 w-1.5 rounded-full bg-muted-foreground sm:h-2 sm:w-2" />
+                            </div>
+                            <div className="min-w-0 flex-1">
+                              <div className="text-xs font-medium sm:text-sm">{feature.name}</div>
+                              <div className="mt-0.5 text-2xs text-muted-foreground sm:text-xs">
+                                {feature.description}
                               </div>
-                              <div className="min-w-0 flex-1">
-                                <div className="text-xs font-medium sm:text-sm">{feature.name}</div>
-                                <div className="mt-0.5 text-2xs text-muted-foreground sm:text-xs">
-                                  {feature.description}
-                                </div>
-                              </div>
-                            </li>
-                          ))}
-                        </ul>
-                      </CardContent>
-                    </Card>
-                  </div>
-                );
-              })}
-            </div>
-          </div>
+                            </div>
+                          </li>
+                        ))}
+                      </ul>
+                    </CardContent>
+                  </Card>
+                </TimelineItem>
+              );
+            })}
+          </Timeline>
         </div>
       </PageSection>
 

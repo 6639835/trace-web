@@ -118,9 +118,9 @@ export function CodeBlock({ children, className }: CodeBlockProps) {
             'flex items-center gap-1 rounded-md px-1.5 py-1 text-[10px] font-medium transition-all sm:gap-1.5 sm:px-2 sm:text-xs',
             'active:scale-95',
             copyState === 'success'
-              ? 'text-emerald-600 dark:text-emerald-400'
+              ? 'text-primary'
               : copyState === 'error'
-                ? 'text-red-600 dark:text-red-400'
+                ? 'text-destructive'
                 : 'text-muted-foreground hover:text-foreground',
           )}
           aria-label="Copy code"
@@ -145,7 +145,7 @@ export function CodeBlock({ children, className }: CodeBlockProps) {
       </div>
 
       {/* Code content */}
-      <div className="overflow-hidden rounded-b-lg border border-border bg-white dark:bg-zinc-950">
+      <div className="overflow-hidden rounded-b-lg border border-border bg-card">
         {highlightedCode ? (
           <div
             className={cn(
@@ -161,7 +161,7 @@ export function CodeBlock({ children, className }: CodeBlockProps) {
             dangerouslySetInnerHTML={{ __html: highlightedCode }}
           />
         ) : (
-          <pre className="overflow-x-auto bg-slate-50 p-3 text-slate-900 sm:p-4 md:p-5 dark:bg-zinc-950 dark:text-slate-100">
+          <pre className="overflow-x-auto bg-muted/40 p-3 text-foreground sm:p-4 md:p-5">
             <code className="text-[12px] leading-relaxed sm:text-[13px] md:text-sm">{code}</code>
           </pre>
         )}

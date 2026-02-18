@@ -54,7 +54,7 @@ export function YouTubeEmbed({
               }}
             />
             <div className="absolute inset-0 bg-black/20 transition-colors group-hover:bg-black/30" />
-            <div className="relative flex h-14 w-14 items-center justify-center rounded-full bg-red-600 transition-transform group-hover:scale-110 sm:h-16 sm:w-16">
+            <div className="relative flex h-14 w-14 items-center justify-center rounded-full bg-primary transition-transform group-hover:scale-110 sm:h-16 sm:w-16">
               <Play className="h-6 w-6 fill-white text-white sm:h-7 sm:w-7" />
             </div>
           </button>

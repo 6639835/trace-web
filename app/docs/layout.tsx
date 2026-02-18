@@ -32,7 +32,7 @@ export const metadata: Metadata = {
 
 export default function DocsLayout({ children }: { children: React.ReactNode }) {
   return (
-    <div className="container px-4 py-6 sm:px-6 lg:py-8">
+    <div className="container py-6 lg:py-8">
       {/* Mobile Navigation */}
       <div className="mb-6 md:hidden">
         <DocsMobileNav />

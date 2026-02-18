@@ -117,25 +117,25 @@ export function CodeDiff({ children, language = 'diff', filename, className }: C
           </span>
         </div>
         <div className="flex items-center gap-2 text-[10px] sm:text-xs">
-          <span className="text-emerald-600 dark:text-emerald-400">
+          <span className="text-primary">
             +{diffLines.filter((l) => l.type === 'addition').length}
           </span>
-          <span className="text-red-600 dark:text-red-400">
+          <span className="text-destructive">
             -{diffLines.filter((l) => l.type === 'deletion').length}
           </span>
         </div>
       </div>
 
       {/* Diff content */}
-      <div className="overflow-x-auto rounded-b-lg border border-border bg-white dark:bg-zinc-950">
+      <div className="overflow-x-auto rounded-b-lg border border-border bg-card">
         <table className="w-full border-collapse text-[12px] leading-relaxed sm:text-[13px] md:text-sm">
           <tbody>
             {diffLines.map((line, index) => (
               <tr
                 key={index}
                 className={cn(
-                  line.type === 'addition' && 'bg-emerald-500/10 dark:bg-emerald-500/15',
-                  line.type === 'deletion' && 'bg-red-500/10 dark:bg-red-500/15',
+                  line.type === 'addition' && 'bg-primary/10',
+                  line.type === 'deletion' && 'bg-destructive/10',
                 )}
               >
                 {/* Line numbers */}
@@ -150,8 +150,8 @@ export function CodeDiff({ children, language = 'diff', filename, className }: C
                 <td
                   className={cn(
                     'px-2 py-0 text-center font-mono select-none',
-                    line.type === 'addition' && 'text-emerald-600 dark:text-emerald-400',
-                    line.type === 'deletion' && 'text-red-600 dark:text-red-400',
+                    line.type === 'addition' && 'text-primary',
+                    line.type === 'deletion' && 'text-destructive',
                   )}
                 >
                   {line.type === 'addition' ? '+' : line.type === 'deletion' ? '-' : ' '}

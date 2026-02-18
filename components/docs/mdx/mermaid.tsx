@@ -94,12 +94,10 @@ export function Mermaid({ children, chart, className }: MermaidProps) {
   if (error) {
     return (
       <div className={cn('not-prose my-4 sm:my-6', className)}>
-        <div className="rounded-lg border border-red-500/20 bg-red-500/10 p-4">
-          <p className="text-sm font-medium text-red-600 dark:text-red-400">
-            Failed to render diagram
-          </p>
-          <p className="mt-1 text-xs text-red-500/80">{error}</p>
-          <pre className="mt-2 overflow-x-auto rounded bg-red-500/10 p-2 text-xs text-red-600 dark:text-red-400">
+        <div className="rounded-lg border border-destructive/20 bg-destructive/10 p-4">
+          <p className="text-sm font-medium text-destructive">Failed to render diagram</p>
+          <p className="mt-1 text-xs text-destructive/80">{error}</p>
+          <pre className="mt-2 overflow-x-auto rounded bg-destructive/10 p-2 text-xs text-destructive">
             {code}
           </pre>
         </div>
@@ -146,9 +144,9 @@ export function Mermaid({ children, chart, className }: MermaidProps) {
             className={cn(
               'flex items-center gap-1 rounded p-1 text-[10px] font-medium transition-colors sm:text-xs',
               copyState === 'success'
-                ? 'text-emerald-600 dark:text-emerald-400'
+                ? 'text-primary'
                 : copyState === 'error'
-                  ? 'text-red-600 dark:text-red-400'
+                  ? 'text-destructive'
                   : 'text-muted-foreground hover:bg-muted hover:text-foreground',
             )}
             aria-label="Copy diagram code"
@@ -165,7 +163,7 @@ export function Mermaid({ children, chart, className }: MermaidProps) {
       </div>
 
       {/* Diagram container */}
-      <div className="overflow-hidden rounded-b-lg border border-border bg-white dark:bg-zinc-950">
+      <div className="overflow-hidden rounded-b-lg border border-border bg-card">
         <div className="overflow-auto p-4 sm:p-6">
           <div
             ref={containerRef}

@@ -27,7 +27,7 @@ export function DocsSidebar() {
                   className={cn(
                     'group flex w-full items-center rounded-sm px-2 py-1.5 transition-colors',
                     isActive
-                      ? 'bg-muted font-medium text-foreground'
+                      ? 'bg-primary/10 font-medium text-primary'
                       : 'text-muted-foreground hover:text-foreground',
                   )}
                 >

@@ -7,6 +7,7 @@ import { PageHeader } from '@/components/shared/page-header';
 import { PageSection, SectionHeading } from '@/components/shared/page-section';
 import { FeatureCard } from '@/components/marketing/feature-card';
 import { BulletList, BulletItem } from '@/components/shared/bullet-list';
+import { CodeBlock } from '@/components/docs/mdx/code-block';
 import { Sparkles, Code, Radio, Gauge, ShieldCheck, GitBranch, Edit3, Share2 } from 'lucide-react';
 
 export const metadata: Metadata = {
@@ -136,9 +137,7 @@ export default function ShowcasePage() {
               Automatically inject authorization headers or feature flags into requests matching a
               pattern.
             </p>
-            <div className="rounded-lg border bg-muted/30 p-4">
-              <pre className="overflow-x-auto text-xs sm:text-sm">
-                <code>{`{
+            <CodeBlock className="language-json">{`{
   "name": "Add Auth Header",
   "enabled": true,
   "pattern": "api.example.com/*",
@@ -149,9 +148,7 @@ export default function ShowcasePage() {
       "X-Feature-Flag": "new-ui-enabled"
     }
   }
-}`}</code>
-              </pre>
-            </div>
+}`}</CodeBlock>
           </div>
 
           {/* Example 2 */}
@@ -164,9 +161,7 @@ export default function ShowcasePage() {
               Return a static JSON response without hitting the real API, perfect for testing error
               states.
             </p>
-            <div className="rounded-lg border bg-muted/30 p-4">
-              <pre className="overflow-x-auto text-xs sm:text-sm">
-                <code>{`{
+            <CodeBlock className="language-json">{`{
   "name": "Mock User Profile",
   "enabled": true,
   "pattern": "api.example.com/user/profile",
@@ -181,9 +176,7 @@ export default function ShowcasePage() {
       "email": "test@example.com"
     }
   }
-}`}</code>
-              </pre>
-            </div>
+}`}</CodeBlock>
           </div>
 
           {/* Example 3 */}
@@ -195,16 +188,12 @@ export default function ShowcasePage() {
             <p className="mb-4 text-sm text-muted-foreground">
               Test against staging servers without modifying your app&apos;s configuration.
             </p>
-            <div className="rounded-lg border bg-muted/30 p-4">
-              <pre className="overflow-x-auto text-xs sm:text-sm">
-                <code>{`{
+            <CodeBlock className="language-json">{`{
   "hosts": {
     "api.example.com": "staging-api.example.com",
     "cdn.example.com": "staging-cdn.example.com"
   }
-}`}</code>
-              </pre>
-            </div>
+}`}</CodeBlock>
           </div>
 
           {/* Example 4 */}
@@ -216,9 +205,7 @@ export default function ShowcasePage() {
             <p className="mb-4 text-sm text-muted-foreground">
               Quickly filter for errors and warnings to focus on what needs fixing.
             </p>
-            <div className="rounded-lg border bg-muted/30 p-4">
-              <pre className="overflow-x-auto text-xs sm:text-sm">
-                <code>{`{
+            <CodeBlock className="language-json">{`{
   "name": "Errors Only",
   "filters": [
     {
@@ -232,9 +219,7 @@ export default function ShowcasePage() {
       "value": "api.example.com"
     }
   ]
-}`}</code>
-              </pre>
-            </div>
+}`}</CodeBlock>
           </div>
         </div>
       </PageSection>

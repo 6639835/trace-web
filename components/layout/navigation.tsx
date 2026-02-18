@@ -231,17 +231,14 @@ const ListItem = ({
   href: string;
   icon: React.ElementType;
 }) => {
-  const [isHovered, setIsHovered] = useState(false);
-
   return (
     <li>
       <NavigationMenuLink asChild>
         <Link
           href={href}
-          onMouseEnter={() => setIsHovered(true)}
-          onMouseLeave={() => setIsHovered(false)}
           className={cn(
             'group relative block rounded-md p-3 leading-none no-underline transition-none outline-none select-none',
+            'focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2',
             className,
           )}
           {...props}
@@ -252,8 +249,8 @@ const ListItem = ({
               {/* Default icon */}
               <div
                 className={cn(
-                  'absolute inset-0 flex items-center justify-center text-muted-foreground transition-opacity duration-[90ms] ease-out',
-                  isHovered ? 'opacity-0' : 'opacity-100',
+                  'absolute inset-0 flex items-center justify-center text-muted-foreground opacity-100 transition-opacity duration-[90ms] ease-out',
+                  'group-hover:opacity-0 group-focus-visible:opacity-0',
                 )}
               >
                 <Icon className="h-4 w-4" />
@@ -261,8 +258,8 @@ const ListItem = ({
               {/* Hover icon (inverted colors) */}
               <div
                 className={cn(
-                  'absolute inset-0 flex items-center justify-center bg-foreground text-background transition-opacity duration-[90ms] ease-out',
-                  isHovered ? 'opacity-100' : 'opacity-0',
+                  'absolute inset-0 flex items-center justify-center bg-foreground text-background opacity-0 transition-opacity duration-[90ms] ease-out',
+                  'group-hover:opacity-100 group-focus-visible:opacity-100',
                 )}
               >
                 <Icon className="h-4 w-4" />
@@ -273,8 +270,8 @@ const ListItem = ({
             <div className="flex-1 space-y-1">
               <div
                 className={cn(
-                  'text-sm leading-none font-medium transition-colors duration-[90ms] ease-out',
-                  isHovered ? 'text-foreground' : 'text-muted-foreground',
+                  'text-sm leading-none font-medium text-muted-foreground transition-colors duration-[90ms] ease-out',
+                  'group-hover:text-foreground group-focus-visible:text-foreground',
                 )}
               >
                 {title}

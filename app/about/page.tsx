@@ -201,8 +201,9 @@ export default function AboutPage() {
                   </div>
                   <CardTitle>v1.0.2 - Core refactoring</CardTitle>
                   <CardDescription>
-                    Fixed compression streaming (Brotli/Deflate), hardened PCAP/TCP parsing, improved
-                    VPN lifecycle, and enhanced settings UI. Added GitHub Actions CI/CD pipeline.
+                    Fixed compression streaming (Brotli/Deflate), hardened PCAP/TCP parsing,
+                    improved VPN lifecycle, and enhanced settings UI. Added GitHub Actions CI/CD
+                    pipeline.
                   </CardDescription>
                 </CardHeader>
               </Card>
@@ -234,7 +235,8 @@ export default function AboutPage() {
                   <CardTitle>Advanced filtering & analysis</CardTitle>
                   <CardDescription>
                     In development: Advanced filter engine with regex support, saved filter presets,
-                    request comparison tool, full-text search, and performance metrics visualization.
+                    request comparison tool, full-text search, and performance metrics
+                    visualization.
                   </CardDescription>
                 </CardHeader>
               </Card>
@@ -250,8 +252,9 @@ export default function AboutPage() {
                   </div>
                   <CardTitle>App Store release</CardTitle>
                   <CardDescription>
-                    Target: Submit to the App Store after implementing advanced filtering, performance
-                    optimizations, and gathering extensive feedback from TestFlight users.
+                    Target: Submit to the App Store after implementing advanced filtering,
+                    performance optimizations, and gathering extensive feedback from TestFlight
+                    users.
                   </CardDescription>
                 </CardHeader>
               </Card>

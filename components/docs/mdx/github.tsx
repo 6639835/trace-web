@@ -164,7 +164,7 @@ export function GitHubRepo(props: GitHubRepoProps) {
   const displayStars = props.stars ?? fetched?.stars;
   const displayForks = props.forks ?? fetched?.forks;
   const displayLanguage = props.language ?? fetched?.language;
-  const languageColor = props.languageColor ?? '#3178c6';
+  const languageColor = props.languageColor ?? 'hsl(var(--primary))';
 
   useEffect(() => {
     if (!isValid) return;

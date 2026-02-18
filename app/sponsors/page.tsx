@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Card, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Separator } from '@/components/ui/separator';
@@ -150,10 +151,10 @@ export default function SponsorsPage() {
               </a>
             </Button>
             <Button size="lg" variant="outline" asChild>
-              <a href="/contributing">
+              <Link href="/contributing">
                 <Heart className="mr-2 h-5 w-5" />
                 Contribute
-              </a>
+              </Link>
             </Button>
           </div>
         </div>

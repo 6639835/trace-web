@@ -74,28 +74,25 @@ export function TreeFile({ name, highlight, className }: FileProps) {
     switch (ext) {
       case 'ts':
       case 'tsx':
-        return 'text-blue-500';
       case 'js':
       case 'jsx':
-        return 'text-yellow-500';
       case 'json':
-        return 'text-yellow-600';
+        return 'text-primary';
       case 'css':
       case 'scss':
-        return 'text-pink-500';
       case 'html':
-        return 'text-orange-500';
+        return 'text-foreground';
       case 'md':
       case 'mdx':
-        return 'text-gray-500';
+        return 'text-muted-foreground';
       case 'svg':
       case 'png':
       case 'jpg':
       case 'gif':
-        return 'text-purple-500';
+        return 'text-foreground/70';
       case 'yml':
       case 'yaml':
-        return 'text-red-400';
+        return 'text-destructive/80';
       default:
         return 'text-muted-foreground';
     }

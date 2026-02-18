@@ -121,6 +121,7 @@ export default function BlogPage() {
   return (
     <div className="flex flex-col">
       <PageHeader
+        icon={BookOpen}
         title="Blog"
         description="Updates, tutorials, and technical deep-dives from the Trace team. Learn about new features, debugging techniques, and development insights."
       />

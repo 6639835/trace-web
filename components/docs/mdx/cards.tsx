@@ -14,6 +14,12 @@ import {
   Lock,
   GraduationCap,
   FileText,
+  Shuffle,
+  Download,
+  Filter,
+  Users,
+  Plug,
+  Send,
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
@@ -31,6 +37,12 @@ const iconMap = {
   lock: Lock,
   'graduation-cap': GraduationCap,
   'file-text': FileText,
+  shuffle: Shuffle,
+  download: Download,
+  filter: Filter,
+  users: Users,
+  plug: Plug,
+  send: Send,
   gear: Settings,
   code: Terminal,
 };

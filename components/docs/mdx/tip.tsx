@@ -5,12 +5,12 @@ type CalloutVariant = 'tip' | 'info';
 
 const variantStyles: Record<CalloutVariant, { wrapper: string; title: string }> = {
   tip: {
-    wrapper: 'border-emerald-500/20 bg-emerald-500/10 text-emerald-950 dark:text-emerald-50',
-    title: 'text-emerald-950 dark:text-emerald-50',
+    wrapper: 'border-primary/20 bg-primary/10 text-foreground',
+    title: 'text-foreground',
   },
   info: {
-    wrapper: 'border-blue-500/20 bg-blue-500/10 text-blue-950 dark:text-blue-50',
-    title: 'text-blue-950 dark:text-blue-50',
+    wrapper: 'border-border bg-muted/50 text-foreground',
+    title: 'text-foreground',
   },
 };
 
