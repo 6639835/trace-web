@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import { usePathname } from 'next/navigation';
 
 type TocItem = {
@@ -17,14 +17,40 @@ const slugify = (value: string) =>
     .replace(/\s+/g, '-')
     .replace(/-+/g, '-');
 
+const FALLBACK_SCROLL_OFFSET_PX = 96;
+
+const getTocRoot = () =>
+  document.querySelector<HTMLElement>('[data-toc-root]') ??
+  document.querySelector<HTMLElement>('article');
+
+const getScrollOffset = (heading: HTMLElement | undefined) => {
+  if (!heading) {
+    return FALLBACK_SCROLL_OFFSET_PX;
+  }
+
+  const scrollMarginTop = Number.parseFloat(getComputedStyle(heading).scrollMarginTop);
+  if (Number.isFinite(scrollMarginTop) && scrollMarginTop > 0) {
+    return scrollMarginTop;
+  }
+
+  return FALLBACK_SCROLL_OFFSET_PX;
+};
+
 export function DocsTableOfContents() {
   const pathname = usePathname();
   const [items, setItems] = useState<TocItem[]>([]);
   const [activeId, setActiveId] = useState<string>('');
 
+  const scrollToHeading = useCallback((id: string) => {
+    const heading = document.getElementById(id);
+    if (!heading) return;
+
+    heading.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }, []);
+
   useEffect(() => {
     const updateItems = () => {
-      const article = document.querySelector('article');
+      const article = getTocRoot();
       if (!article) {
         setItems([]);
         setActiveId('');
@@ -62,7 +88,7 @@ export function DocsTableOfContents() {
     };
 
     let frame = requestAnimationFrame(updateItems);
-    const article = document.querySelector('article');
+    const article = getTocRoot();
     if (!article) {
       return () => cancelAnimationFrame(frame);
     }
@@ -93,26 +119,39 @@ export function DocsTableOfContents() {
       return;
     }
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const visible = entries
-          .filter((entry) => entry.isIntersecting)
-          .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top);
+    let frame = 0;
 
-        const firstVisible = visible[0];
-        if (firstVisible) {
-          setActiveId(firstVisible.target.id);
+    const updateActiveId = () => {
+      const threshold = window.scrollY + getScrollOffset(headings[0]) + 1;
+      const firstHeading = headings[0];
+      if (!firstHeading) return;
+      let currentId = firstHeading.id;
+
+      for (const heading of headings) {
+        if (heading.offsetTop <= threshold) {
+          currentId = heading.id;
+        } else {
+          break;
         }
-      },
-      {
-        rootMargin: '0px 0px -70% 0px',
-        threshold: [0.1, 0.5, 1],
-      },
-    );
+      }
 
-    headings.forEach((heading) => observer.observe(heading));
+      setActiveId((previous) => (previous === currentId ? previous : currentId));
+    };
 
-    return () => observer.disconnect();
+    const onScroll = () => {
+      cancelAnimationFrame(frame);
+      frame = requestAnimationFrame(updateActiveId);
+    };
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll);
+    onScroll();
+
+    return () => {
+      cancelAnimationFrame(frame);
+      window.removeEventListener('scroll', onScroll);
+      window.removeEventListener('resize', onScroll);
+    };
   }, [items]);
 
   const renderedItems = useMemo(() => {
@@ -122,6 +161,15 @@ export function DocsTableOfContents() {
         <a
           key={item.id}
           href={`#${item.id}`}
+          onClick={(event) => {
+            event.preventDefault();
+            setActiveId(item.id);
+            scrollToHeading(item.id);
+
+            if (window.location.hash !== `#${item.id}`) {
+              window.history.replaceState(null, '', `#${item.id}`);
+            }
+          }}
           className={[
             'block rounded-sm px-2 py-1 text-sm transition',
             item.level === 3 ? 'ml-3 text-xs' : 'font-medium',
@@ -132,7 +180,7 @@ export function DocsTableOfContents() {
         </a>
       );
     });
-  }, [activeId, items]);
+  }, [activeId, items, scrollToHeading]);
 
   return (
     <div className="space-y-2">

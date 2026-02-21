@@ -1,6 +1,9 @@
 /* eslint-disable @typescript-eslint/no-require-imports */
 const withMDX = require('@next/mdx')({
   extension: /\.mdx?$/,
+  options: {
+    rehypePlugins: ['rehype-slug'],
+  },
 });
 
 /** @type {import('next').NextConfig} */

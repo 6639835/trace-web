@@ -5,6 +5,7 @@ import { Badge } from '@/components/ui/badge';
 import { PageHeader } from '@/components/shared/page-header';
 import { PageSection } from '@/components/shared/page-section';
 import { Newspaper, Mail, Palette } from 'lucide-react';
+import { EmailLink } from '@/components/shared/email-link';
 
 export const metadata: Metadata = {
   title: 'Press Kit',
@@ -300,24 +301,10 @@ export default function PressPage() {
             Media contact
           </h2>
           <p className="mb-6 text-sm text-muted-foreground sm:text-base">
-            For press inquiries, interviews, or additional materials, contact us via email or
-            GitHub.
+            For press inquiries, interviews, or additional materials, reach out via email.
           </p>
           <div className="flex flex-col items-center gap-2">
-            <a
-              href="mailto:epa6643@gmail.com"
-              className="text-sm text-muted-foreground hover:text-foreground"
-            >
-              epa6643@gmail.com
-            </a>
-            <a
-              href="https://github.com/Trace-iOS/Trace"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-sm text-muted-foreground hover:text-foreground"
-            >
-              GitHub Repository
-            </a>
+            <EmailLink email="epa6643@gmail.com" />
           </div>
         </div>
       </PageSection>

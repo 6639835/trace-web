@@ -34,7 +34,7 @@ Marketing and documentation site for Trace, a professional iOS network debugging
 
 ### Prerequisites
 
-- Node.js 18+
+- Node.js 20.19+
 - npm, yarn, or pnpm
 
 ### Installation

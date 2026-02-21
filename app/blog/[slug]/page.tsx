@@ -9,6 +9,7 @@ import { PageSection } from '@/components/shared/page-section';
 import { Calendar, Clock, ArrowLeft } from 'lucide-react';
 import { getAllPosts, getPostBySlug } from '@/lib/blog';
 import { absoluteUrl, siteUrl } from '@/lib/config/site';
+import { DocsTableOfContents } from '@/components/docs/docs-toc';
 
 interface BlogPostPageProps {
   params: Promise<{
@@ -59,7 +60,7 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
 
 function ArticleContentSkeleton() {
   return (
-    <article className="mx-auto max-w-readable">
+    <article data-toc-root className="mx-auto max-w-readable">
       <div className="space-y-4">
         <Skeleton className="h-6 w-3/4" />
         <Skeleton className="h-6 w-full" />
@@ -85,7 +86,10 @@ async function ArticleContent({ slug }: ArticleContentProps) {
   const MDXContent = await import(`../posts/${slug}.mdx`).then((mod) => mod.default);
 
   return (
-    <article className="mx-auto prose max-w-readable prose-slate dark:prose-invert prose-headings:font-bold prose-headings:tracking-tight prose-code:rounded prose-code:bg-muted prose-code:px-1 prose-code:py-0.5 prose-code:font-mono prose-code:text-sm prose-code:before:content-none prose-code:after:content-none">
+    <article
+      data-toc-root
+      className="mx-auto prose max-w-readable prose-slate dark:prose-invert prose-headings:scroll-mt-24 prose-headings:font-bold prose-headings:tracking-tight prose-code:rounded prose-code:bg-muted prose-code:px-1 prose-code:py-0.5 prose-code:font-mono prose-code:text-sm prose-code:before:content-none prose-code:after:content-none"
+    >
       <MDXContent />
     </article>
   );
@@ -183,9 +187,20 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
 
       {/* Content */}
       <PageSection>
-        <Suspense fallback={<ArticleContentSkeleton />}>
-          <ArticleContent slug={slug} />
-        </Suspense>
+        <div className="flex gap-10">
+          {/* Phantom spacer to keep article centered when TOC is visible */}
+          <div className="hidden w-56 shrink-0 xl:block" aria-hidden="true" />
+          <div className="min-w-0 flex-1">
+            <Suspense fallback={<ArticleContentSkeleton />}>
+              <ArticleContent slug={slug} />
+            </Suspense>
+          </div>
+          <aside className="hidden w-56 shrink-0 xl:block">
+            <div className="sticky top-20">
+              <DocsTableOfContents />
+            </div>
+          </aside>
+        </div>
       </PageSection>
 
       <Separator />

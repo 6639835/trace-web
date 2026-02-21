@@ -43,7 +43,10 @@ export async function GET(request: Request) {
       const res = await fetch(apiUrl, { headers: githubHeaders() });
       if (!res.ok) {
         const status = res.status === 404 || res.status === 403 ? 404 : 502;
-        return NextResponse.json({ error: status === 404 ? 'Not found' : 'GitHub API error' }, { status });
+        return NextResponse.json(
+          { error: status === 404 ? 'Not found' : 'GitHub API error' },
+          { status },
+        );
       }
       const data = (await res.json()) as {
         html_url: string;
@@ -79,7 +82,10 @@ export async function GET(request: Request) {
     const res = await fetch(apiUrl, { headers: githubHeaders() });
     if (!res.ok) {
       const status = res.status === 404 || res.status === 403 ? 404 : 502;
-      return NextResponse.json({ error: status === 404 ? 'Not found' : 'GitHub API error' }, { status });
+      return NextResponse.json(
+        { error: status === 404 ? 'Not found' : 'GitHub API error' },
+        { status },
+      );
     }
     const data = (await res.json()) as {
       html_url: string;

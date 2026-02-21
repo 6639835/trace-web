@@ -49,7 +49,10 @@ export default function DocsLayout({ children }: { children: React.ReactNode }) 
         {/* Main Content */}
         <main className="min-w-0 flex-1">
           <Breadcrumbs />
-          <article className="prose max-w-none prose-slate dark:prose-invert prose-headings:break-words prose-p:break-words">
+          <article
+            data-toc-root
+            className="prose max-w-none prose-slate dark:prose-invert prose-headings:scroll-mt-24 prose-headings:break-words prose-p:break-words"
+          >
             {children}
           </article>
         </main>

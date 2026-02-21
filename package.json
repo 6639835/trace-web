@@ -24,7 +24,7 @@
   },
   "homepage": "https://github.com/Trace-iOS/trace-web#readme",
   "engines": {
-    "node": ">=20.11.0"
+    "node": ">=20.19.0"
   },
   "dependencies": {
     "@radix-ui/react-accordion": "^1.2.12",
@@ -34,32 +34,33 @@
     "@radix-ui/react-tabs": "^1.1.13",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
-    "framer-motion": "^12.30.1",
-    "lucide-react": "^0.563.0",
-    "mermaid": "^11.12.2",
+    "framer-motion": "^12.34.3",
+    "lucide-react": "^0.575.0",
+    "mermaid": "^11.12.3",
     "next": "^16.1.6",
     "next-themes": "^0.4.6",
     "react": "^19.2.4",
     "react-dom": "^19.2.4",
     "shiki": "^3.22.0",
-    "tailwind-merge": "^3.4.0",
+    "tailwind-merge": "^3.5.0",
     "tailwindcss-animate": "^1.0.7"
   },
   "devDependencies": {
-    "@mdx-js/loader": "^3.1.0",
+    "@mdx-js/loader": "^3.1.1",
     "@next/mdx": "^16.1.6",
-    "@tailwindcss/postcss": "^4.1.18",
-    "@tailwindcss/typography": "^0.5.16",
-    "@types/node": "^25.2.0",
-    "@types/react": "^19.2.10",
+    "@tailwindcss/postcss": "^4.2.0",
+    "@tailwindcss/typography": "^0.5.19",
+    "@types/node": "^25.3.0",
+    "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",
     "autoprefixer": "^10.4.24",
-    "eslint": "^9.20.0",
+    "eslint": "9.20.0",
     "eslint-config-next": "^16.1.6",
     "postcss": "^8.5.6",
     "prettier": "^3.8.1",
     "prettier-plugin-tailwindcss": "^0.7.2",
-    "tailwindcss": "^4.1.18",
+    "rehype-slug": "^6.0.0",
+    "tailwindcss": "^4.2.0",
     "typescript": "^5.9.3"
   }
 }

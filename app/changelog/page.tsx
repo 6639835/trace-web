@@ -6,16 +6,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Separator } from '@/components/ui/separator';
 import { PageHeader } from '@/components/shared/page-header';
 import { PageSection } from '@/components/shared/page-section';
-import {
-  ScrollText,
-  Plus,
-  Wrench,
-  Bug,
-  ArrowRight,
-  Tag,
-  GitCommit,
-  Code,
-} from 'lucide-react';
+import { ScrollText, Plus, Wrench, Bug, ArrowRight, Tag, GitCommit, Code } from 'lucide-react';
 
 export const metadata: Metadata = {
   title: 'Changelog',
@@ -87,7 +78,8 @@ const releases: Release[] = [
     changes: [
       {
         category: 'added',
-        description: 'cURL command import with analyzer-driven execution and multi-transfer planning',
+        description:
+          'cURL command import with analyzer-driven execution and multi-transfer planning',
       },
       {
         category: 'added',
@@ -111,7 +103,8 @@ const releases: Release[] = [
       },
       {
         category: 'improved',
-        description: 'Migrated certificate handling to swift-certificates and compression to libzstd',
+        description:
+          'Migrated certificate handling to swift-certificates and compression to libzstd',
       },
       {
         category: 'improved',
@@ -181,7 +174,8 @@ const releases: Release[] = [
     changes: [
       {
         category: 'added',
-        description: 'Local SOCKS5 fallback embedded for environments where VPN tunneling is unavailable',
+        description:
+          'Local SOCKS5 fallback embedded for environments where VPN tunneling is unavailable',
       },
       {
         category: 'added',
@@ -347,7 +341,8 @@ const releases: Release[] = [
       },
       {
         category: 'added',
-        description: 'TLS MITM inspection with on-device certificate authority and per-domain cert storage',
+        description:
+          'TLS MITM inspection with on-device certificate authority and per-domain cert storage',
       },
       {
         category: 'added',
@@ -379,7 +374,8 @@ const releases: Release[] = [
       },
       {
         category: 'added',
-        description: 'Privacy-first architecture with zero telemetry and fully on-device processing',
+        description:
+          'Privacy-first architecture with zero telemetry and fully on-device processing',
       },
     ],
   },
@@ -423,11 +419,7 @@ export default function ChangelogPage() {
                   {/* Timeline dot */}
                   <div className="absolute top-5 left-[13px] z-10 hidden h-3.5 w-3.5 rounded-full border-2 border-primary bg-background sm:left-[17px] sm:block" />
 
-                  <Card
-                    className={
-                      index === 0 ? 'border-primary/20' : ''
-                    }
-                  >
+                  <Card className={index === 0 ? 'border-primary/20' : ''}>
                     <CardHeader>
                       <div className="mb-3 flex flex-wrap items-center gap-2 sm:mb-4">
                         <div className="flex items-center gap-1.5">
@@ -469,9 +461,11 @@ export default function ChangelogPage() {
 
                           return (
                             <div key={category}>
-                              <div className={`mb-2.5 flex items-center gap-1.5 sm:mb-3 ${config.className}`}>
+                              <div
+                                className={`mb-2.5 flex items-center gap-1.5 sm:mb-3 ${config.className}`}
+                              >
                                 <CategoryIcon className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
-                                <span className="text-xs font-semibold uppercase tracking-wide sm:text-sm">
+                                <span className="text-xs font-semibold tracking-wide uppercase sm:text-sm">
                                   {config.label}
                                 </span>
                               </div>
