@@ -8,6 +8,8 @@ export interface BlogPost {
   date: string;
   category: 'Releases' | 'Features' | 'Tutorials' | 'Technical' | 'Community';
   readTime: string;
+  /** Lucide icon name, e.g. "Rocket" or "ShieldCheck". Falls back to BookOpen. */
+  icon?: string;
   author: {
     name: string;
     role: string;

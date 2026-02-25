@@ -1,14 +1,21 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { Suspense } from 'react';
-import { Badge } from '@/components/ui/badge';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Separator } from '@/components/ui/separator';
-import { Skeleton } from '@/components/ui/skeleton';
-import { PageHeader } from '@/components/shared/page-header';
-import { PageSection } from '@/components/shared/page-section';
-import { Calendar, Clock, BookOpen } from 'lucide-react';
+import { Badge } from '@/components/ui/badge';
+import { BookOpen, Calendar, Clock, ArrowRight } from 'lucide-react';
+import type { LucideIcon } from 'lucide-react';
+import * as LucideIcons from 'lucide-react';
 import { getAllPosts, type BlogPost } from '@/lib/blog';
+
+/** Resolve a Lucide icon by name string. Falls back to BookOpen. */
+function resolveIcon(name?: string): LucideIcon {
+  if (name) {
+    const candidate = (LucideIcons as Record<string, unknown>)[name];
+    // Lucide icons are React.forwardRef objects, not plain functions
+    if (candidate != null && typeof candidate === 'object') return candidate as LucideIcon;
+  }
+  return BookOpen;
+}
 
 export const metadata: Metadata = {
   title: 'Blog',
@@ -32,7 +39,15 @@ export const metadata: Metadata = {
   },
 };
 
-const categoryColors: Record<BlogPost['category'], 'default' | 'secondary' | 'outline'> = {
+const ALL_CATEGORIES = [
+  'Releases',
+  'Features',
+  'Tutorials',
+  'Technical',
+  'Community',
+] as const satisfies BlogPost['category'][];
+
+const categoryVariant: Record<BlogPost['category'], 'default' | 'secondary' | 'outline'> = {
   Releases: 'default',
   Features: 'secondary',
   Tutorials: 'outline',
@@ -40,102 +55,214 @@ const categoryColors: Record<BlogPost['category'], 'default' | 'secondary' | 'ou
   Community: 'secondary',
 };
 
-function BlogPostsSkeleton() {
+function FeaturedCard({ post }: { post: BlogPost }) {
+  const Icon = resolveIcon(post.icon);
   return (
-    <div className="grid gap-4 sm:gap-5 md:gap-6">
-      {[...Array(3)].map((_, i) => (
-        <Card key={i}>
-          <CardHeader>
-            <div className="mb-3 flex flex-wrap items-center gap-2">
-              <Skeleton className="h-5 w-20" />
-              <Skeleton className="h-4 w-32" />
-            </div>
-            <Skeleton className="mb-2 h-8 w-3/4" />
-            <Skeleton className="h-4 w-full" />
-            <Skeleton className="h-4 w-5/6" />
-          </CardHeader>
-          <CardContent>
-            <Skeleton className="h-4 w-48" />
-          </CardContent>
-        </Card>
-      ))}
-    </div>
-  );
-}
+    <Link href={`/blog/${post.slug}`} className="group block">
+      <div className="grid gap-6 overflow-hidden rounded-2xl border bg-card p-7 transition-all hover:border-primary/40 hover:shadow-md sm:grid-cols-5">
+        {/* Text side */}
+        <div className="flex flex-col sm:col-span-3">
+          <div className="mb-4 flex items-center gap-3">
+            <Badge variant={categoryVariant[post.category]}>{post.category}</Badge>
+            <span className="text-xs font-medium uppercase tracking-widest text-muted-foreground">
+              Featured
+            </span>
+          </div>
+          <h2 className="mb-3 text-2xl font-bold leading-snug tracking-tight group-hover:text-primary sm:text-3xl">
+            {post.title}
+          </h2>
+          <p className="mb-5 flex-1 leading-relaxed text-muted-foreground">{post.description}</p>
+          <div className="flex flex-wrap items-center gap-4 text-sm text-muted-foreground">
+            <span className="flex items-center gap-1.5">
+              <Calendar className="h-3.5 w-3.5" />
+              {new Date(post.date).toLocaleDateString('en-US', {
+                month: 'long',
+                day: 'numeric',
+                year: 'numeric',
+              })}
+            </span>
+            <span className="flex items-center gap-1.5">
+              <Clock className="h-3.5 w-3.5" />
+              {post.readTime}
+            </span>
+            <span>
+              {post.author.name} · {post.author.role}
+            </span>
+          </div>
+          <div className="mt-5 flex items-center gap-1.5 text-sm font-semibold text-primary">
+            Read article
+            <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+          </div>
+        </div>
 
-async function BlogPosts() {
-  const posts = await getAllPosts();
-
-  if (posts.length === 0) {
-    return (
-      <div className="flex min-h-[400px] items-center justify-center">
-        <div className="text-center">
-          <BookOpen className="mx-auto mb-4 h-12 w-12 text-muted-foreground" />
-          <p className="text-muted-foreground">No blog posts yet. Check back soon!</p>
+        {/* Visual placeholder — replace with <Image> when posts have cover images */}
+        <div className="hidden items-center justify-center rounded-xl bg-gradient-to-br from-primary/10 via-primary/5 to-transparent sm:col-span-2 sm:flex">
+          <Icon className="h-20 w-20 text-primary/20" />
         </div>
       </div>
-    );
-  }
-
-  return (
-    <div className="grid gap-4 sm:gap-5 md:gap-6">
-      {posts.map((post) => (
-        <Link key={post.slug} href={`/blog/${post.slug}`} className="group">
-          <Card className="transition-colors hover:border-primary/50">
-            <CardHeader>
-              <div className="mb-3 flex flex-wrap items-center gap-2">
-                <Badge variant={categoryColors[post.category]}>{post.category}</Badge>
-                <div className="flex items-center gap-3 text-xs text-muted-foreground sm:text-sm">
-                  <span className="flex items-center gap-1">
-                    <Calendar className="h-3 w-3 sm:h-4 sm:w-4" />
-                    {new Date(post.date).toLocaleDateString('en-US', {
-                      month: 'short',
-                      day: 'numeric',
-                      year: 'numeric',
-                    })}
-                  </span>
-                  <span className="flex items-center gap-1">
-                    <Clock className="h-3 w-3 sm:h-4 sm:w-4" />
-                    {post.readTime}
-                  </span>
-                </div>
-              </div>
-              <CardTitle className="text-xl decoration-primary/50 underline-offset-4 group-hover:underline sm:text-2xl">
-                {post.title}
-              </CardTitle>
-              <CardDescription className="leading-relaxed">{post.description}</CardDescription>
-            </CardHeader>
-            <CardContent>
-              <div className="text-xs text-muted-foreground sm:text-sm">
-                By {post.author.name} • {post.author.role}
-              </div>
-            </CardContent>
-          </Card>
-        </Link>
-      ))}
-    </div>
+    </Link>
   );
 }
 
-export default function BlogPage() {
+function GridCard({ post }: { post: BlogPost }) {
+  const Icon = resolveIcon(post.icon);
+  return (
+    <Link href={`/blog/${post.slug}`} className="group">
+      <article className="flex h-full flex-col rounded-xl border bg-card p-5 transition-all hover:border-primary/40 hover:shadow-sm">
+        <div className="mb-4 flex h-10 w-10 items-center justify-center rounded-lg bg-muted">
+          <Icon className="h-5 w-5 text-muted-foreground" />
+        </div>
+
+        <Badge variant={categoryVariant[post.category]} className="mb-3 self-start text-xs">
+          {post.category}
+        </Badge>
+        <h3 className="mb-2 font-semibold leading-snug tracking-tight group-hover:text-primary">
+          {post.title}
+        </h3>
+        <p className="mb-4 flex-1 text-sm leading-relaxed text-muted-foreground line-clamp-3">
+          {post.description}
+        </p>
+
+        <div className="flex items-center gap-3 border-t pt-4 text-xs text-muted-foreground">
+          <span className="flex items-center gap-1">
+            <Calendar className="h-3 w-3" />
+            {new Date(post.date).toLocaleDateString('en-US', {
+              month: 'short',
+              day: 'numeric',
+              year: 'numeric',
+            })}
+          </span>
+          <span className="flex items-center gap-1">
+            <Clock className="h-3 w-3" />
+            {post.readTime}
+          </span>
+        </div>
+      </article>
+    </Link>
+  );
+}
+
+export default async function BlogPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ category?: string }>;
+}) {
+  const { category } = await searchParams;
+  const allPosts = await getAllPosts();
+
+  // Resolve active category — ignore invalid values
+  const activeCategory: BlogPost['category'] | null = (
+    ALL_CATEGORIES as readonly string[]
+  ).includes(category ?? '')
+    ? (category as BlogPost['category'])
+    : null;
+
+  // Count posts per category (always from full list)
+  const counts = Object.fromEntries(
+    ALL_CATEGORIES.map((cat) => [cat, allPosts.filter((p) => p.category === cat).length]),
+  ) as Record<BlogPost['category'], number>;
+
+  // Apply filter
+  const posts = activeCategory ? allPosts.filter((p) => p.category === activeCategory) : allPosts;
+  const [featured, ...rest] = posts;
+
   return (
     <div className="flex flex-col">
-      <PageHeader
-        icon={BookOpen}
-        title="Blog"
-        description="Updates, tutorials, and technical deep-dives from the Trace team. Learn about new features, debugging techniques, and development insights."
-      />
+      {/* Header */}
+      <section className="container py-section">
+        <div className="mx-auto max-w-content">
+          <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+            <div>
+              <p className="mb-1 text-sm font-medium uppercase tracking-widest text-primary">
+                Trace Blog
+              </p>
+              <h1 className="text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl">
+                {activeCategory ? `${activeCategory}` : 'Latest articles'}
+              </h1>
+              <p className="mt-2 text-muted-foreground">
+                {activeCategory
+                  ? `${posts.length} article${posts.length === 1 ? '' : 's'}`
+                  : 'Updates, tutorials, and technical deep-dives from the team.'}
+              </p>
+            </div>
+
+            {/* Category filter pills */}
+            <div className="flex flex-wrap gap-1.5">
+              <Link href="/blog">
+                <Badge
+                  variant={!activeCategory ? 'default' : 'outline'}
+                  className="cursor-pointer text-xs transition-colors hover:bg-primary hover:text-primary-foreground"
+                >
+                  All
+                  <span className="ml-1.5 tabular-nums opacity-60">{allPosts.length}</span>
+                </Badge>
+              </Link>
+              {ALL_CATEGORIES.map((cat) => (
+                <Link
+                  key={cat}
+                  href={activeCategory === cat ? '/blog' : `/blog?category=${cat}`}
+                >
+                  <Badge
+                    variant={activeCategory === cat ? 'default' : 'outline'}
+                    className="cursor-pointer text-xs transition-colors hover:bg-primary hover:text-primary-foreground"
+                  >
+                    {cat}
+                    {counts[cat] > 0 && (
+                      <span className="ml-1.5 tabular-nums opacity-60">{counts[cat]}</span>
+                    )}
+                  </Badge>
+                </Link>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
 
       <Separator />
 
-      {/* Blog Posts Grid */}
-      <PageSection>
+      {/* Posts */}
+      <section className="container py-section">
         <div className="mx-auto max-w-content">
-          <Suspense fallback={<BlogPostsSkeleton />}>
-            <BlogPosts />
-          </Suspense>
+          {posts.length === 0 ? (
+            <div className="flex min-h-[400px] items-center justify-center">
+              <div className="text-center">
+                <BookOpen className="mx-auto mb-4 h-12 w-12 text-muted-foreground" />
+                <p className="text-muted-foreground">No posts in this category yet.</p>
+                <Link
+                  href="/blog"
+                  className="mt-3 inline-block text-sm font-medium text-primary hover:underline"
+                >
+                  View all articles
+                </Link>
+              </div>
+            </div>
+          ) : activeCategory ? (
+            /* Filtered view — flat grid, no hero */
+            <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+              {posts.map((post) => (
+                <GridCard key={post.slug} post={post} />
+              ))}
+            </div>
+          ) : (
+            /* All posts — hero card + grid */
+            <div className="space-y-8">
+              {featured && <FeaturedCard post={featured} />}
+              {rest.length > 0 && (
+                <div>
+                  <p className="mb-5 text-sm font-semibold uppercase tracking-widest text-muted-foreground">
+                    More articles
+                  </p>
+                  <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+                    {rest.map((post) => (
+                      <GridCard key={post.slug} post={post} />
+                    ))}
+                  </div>
+                </div>
+              )}
+            </div>
+          )}
         </div>
-      </PageSection>
+      </section>
     </div>
   );
 }
