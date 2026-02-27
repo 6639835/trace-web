@@ -1,9 +1,6 @@
 import type { Metadata } from 'next';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { Separator } from '@/components/ui/separator';
-import { PageHeader } from '@/components/shared/page-header';
-import { PageSection, SectionHeading } from '@/components/shared/page-section';
+import { PageSection } from '@/components/shared/page-section';
 import { Activity, CheckCircle2, AlertCircle } from 'lucide-react';
 
 export const metadata: Metadata = {
@@ -48,101 +45,99 @@ export default function StatusPage() {
   const allOperational = services.every((s) => s.status === 'operational');
 
   return (
-    <div className="flex flex-col">
-      <PageHeader
-        icon={Activity}
-        title="Status"
-        description="Current status of Trace services and infrastructure."
-      />
-
-      <Separator />
-
-      {/* Overall Status */}
-      <PageSection>
-        <Card
-          className={
-            allOperational
-              ? 'border-primary/20 bg-primary/5'
-              : 'border-destructive/20 bg-destructive/5'
-          }
-        >
-          <CardHeader>
-            <div className="flex items-center gap-3">
+    <div className="flex w-full flex-col">
+      {/* ── Large status indicator strip ── */}
+      <div
+        className={`border-b ${allOperational ? 'bg-emerald-50 dark:bg-emerald-950/20' : 'bg-destructive/5'}`}
+      >
+        <div className="container py-section">
+          <div className="mx-auto max-w-content">
+            <div className="flex items-center gap-4">
               {allOperational ? (
-                <CheckCircle2 className="h-8 w-8 text-primary" />
+                <CheckCircle2 className="h-10 w-10 shrink-0 text-emerald-600 sm:h-12 sm:w-12 dark:text-emerald-400" />
               ) : (
-                <AlertCircle className="h-8 w-8 text-destructive" />
+                <AlertCircle className="h-10 w-10 shrink-0 text-destructive sm:h-12 sm:w-12" />
               )}
               <div>
-                <CardTitle>
+                <div className="mb-1 flex items-center gap-2">
+                  <Activity className="h-4 w-4 text-muted-foreground" />
+                  <span className="text-xs font-medium tracking-widest text-muted-foreground uppercase">
+                    System Status
+                  </span>
+                </div>
+                <h1 className="text-2xl font-bold tracking-tight sm:text-3xl md:text-4xl">
                   {allOperational ? 'All Systems Operational' : 'Service Degradation'}
-                </CardTitle>
-                <CardDescription>
+                </h1>
+                <p className="mt-1 text-sm text-muted-foreground sm:text-base">
                   {allOperational
-                    ? 'All services are running normally'
-                    : 'One or more services are experiencing issues'}
-                </CardDescription>
+                    ? 'All services are running normally.'
+                    : 'One or more services are experiencing issues.'}
+                </p>
               </div>
             </div>
-          </CardHeader>
-        </Card>
-      </PageSection>
+          </div>
+        </div>
+      </div>
 
-      {/* Service Components */}
+      {/* ── Service components ── */}
       <PageSection>
-        <SectionHeading title="Service components" titleClassName="md:mb-10" />
-        <div className="grid gap-4 sm:gap-5 md:gap-6">
-          {services.map((service) => (
-            <Card key={service.name}>
-              <CardHeader>
-                <div className="flex items-center justify-between">
-                  <div>
-                    <CardTitle className="text-lg">{service.name}</CardTitle>
-                    <CardDescription>{service.description}</CardDescription>
-                  </div>
-                  <Badge variant={service.status === 'operational' ? 'default' : 'destructive'}>
-                    {service.status === 'operational' ? 'Operational' : 'Degraded'}
-                  </Badge>
+        <div className="mx-auto max-w-content">
+          <h2 className="mb-6 text-xl font-bold tracking-tight sm:mb-8 sm:text-2xl">
+            Service components
+          </h2>
+          <div className="divide-y rounded-xl border">
+            {services.map((service) => (
+              <div
+                key={service.name}
+                className="flex items-center justify-between px-5 py-4 sm:px-6 sm:py-5"
+              >
+                <div>
+                  <div className="font-semibold">{service.name}</div>
+                  <div className="text-sm text-muted-foreground">{service.description}</div>
                 </div>
-              </CardHeader>
-            </Card>
-          ))}
+                <Badge
+                  variant={service.status === 'operational' ? 'default' : 'destructive'}
+                  className="shrink-0"
+                >
+                  {service.status === 'operational' ? 'Operational' : 'Degraded'}
+                </Badge>
+              </div>
+            ))}
+          </div>
         </div>
       </PageSection>
 
-      <Separator />
-
-      {/* Important Note */}
-      <PageSection>
-        <Card>
-          <CardHeader>
-            <CardTitle>About Trace status</CardTitle>
-          </CardHeader>
-          <CardContent className="space-y-3 text-sm text-muted-foreground">
-            <p>
-              Trace operates entirely on-device and doesn&apos;t depend on external services for
-              core functionality. This status page tracks supporting services like TestFlight
-              distribution, GitHub repository, and documentation website.
-            </p>
-            <p>
-              Even if external services are down, Trace will continue to work normally on your
-              device for traffic capture and inspection.
-            </p>
-            <p>
-              For real-time incident updates, follow{' '}
-              <a
-                href="https://github.com/Trace-iOS/Trace/issues"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-primary hover:underline"
-              >
-                GitHub Issues
-              </a>
-              .
-            </p>
-          </CardContent>
-        </Card>
-      </PageSection>
+      {/* ── About this page ── */}
+      <div className="border-y bg-muted/30">
+        <div className="container py-section">
+          <div className="mx-auto max-w-readable">
+            <h2 className="mb-4 text-lg font-bold tracking-tight sm:text-xl">About Trace status</h2>
+            <div className="space-y-3 text-sm leading-relaxed text-muted-foreground">
+              <p>
+                Trace operates entirely on-device and doesn&apos;t depend on external services for
+                core functionality. This status page tracks supporting services like TestFlight
+                distribution, GitHub repository, and documentation website.
+              </p>
+              <p>
+                Even if external services are down, Trace will continue to work normally on your
+                device for traffic capture and inspection.
+              </p>
+              <p>
+                For real-time incident updates, follow{' '}
+                <a
+                  href="https://github.com/Trace-iOS/Trace/issues"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-primary hover:underline"
+                >
+                  GitHub Issues
+                </a>
+                .
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }

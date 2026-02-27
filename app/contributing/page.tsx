@@ -2,21 +2,22 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
-import { PageHeader } from '@/components/shared/page-header';
 import { PageSection } from '@/components/shared/page-section';
-import { FeatureCard } from '@/components/marketing/feature-card';
+import { PageHeader } from '@/components/shared/page-header';
+import { BentoGrid, BentoItem } from '@/components/sections/bento-grid';
+import { EditorialBanner } from '@/components/sections/editorial-banner';
+import { CodeBlock, InlineCode } from '@/components/docs/mdx/code-block';
 import {
-  Heart,
   Code,
   FileText,
   Bug,
   Lightbulb,
   Globe,
   MessageCircle,
-  Star,
   GitFork,
   CheckCircle,
   Github,
+  ArrowRight,
 } from 'lucide-react';
 
 export const metadata: Metadata = {
@@ -43,373 +44,378 @@ export const metadata: Metadata = {
 export default function ContributingPage() {
   return (
     <div className="flex flex-col">
+      {/* ── Split hero: headline left, quick links right ── */}
       <PageHeader
-        icon={Heart}
-        title="Contributing"
+        variant="split"
+        title="Help build the best iOS network debugger."
         description="Trace is open source and community-driven. Contributions are welcome in many forms—code, documentation, bug reports, feature requests, and more."
-      />
+        aside={
+          <div className="w-full max-w-sm space-y-3 lg:max-w-none">
+            {[
+              {
+                href: 'https://github.com/Trace-iOS/Trace/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22',
+                label: 'Good first issues',
+                icon: CheckCircle,
+              },
+              {
+                href: 'https://github.com/Trace-iOS/Trace/discussions/new?category=ideas',
+                label: 'Suggest a feature',
+                icon: Lightbulb,
+              },
+              {
+                href: 'https://github.com/Trace-iOS/Trace/issues/new',
+                label: 'Report a bug',
+                icon: Bug,
+              },
+              {
+                href: 'https://github.com/Trace-iOS/Trace/discussions',
+                label: 'Join discussions',
+                icon: MessageCircle,
+              },
+            ].map(({ href, label, icon: Icon }) => (
+              <a
+                key={href}
+                href={href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center justify-between rounded-xl border bg-card px-4 py-3 text-sm font-medium transition-colors hover:border-primary/50 hover:bg-muted/50"
+              >
+                <span className="flex items-center gap-2.5">
+                  <Icon className="h-4 w-4 text-primary" />
+                  {label}
+                </span>
+                <ArrowRight className="h-3.5 w-3.5 text-muted-foreground" />
+              </a>
+            ))}
+          </div>
+        }
+      >
+        <div className="flex flex-col gap-3 sm:flex-row sm:gap-4">
+          <Button asChild>
+            <a href="https://github.com/Trace-iOS/Trace" target="_blank" rel="noopener noreferrer">
+              <GitFork className="mr-2 h-4 w-4" />
+              Fork on GitHub
+            </a>
+          </Button>
+          <Button variant="outline" asChild>
+            <Link href="/docs/building">Build from source</Link>
+          </Button>
+        </div>
+      </PageHeader>
 
       <Separator />
 
-      {/* Ways to Contribute */}
+      {/* ── Ways to contribute: bento grid ── */}
       <PageSection>
         <div className="mx-auto max-w-content">
-          <h2 className="mb-8 text-xl font-bold tracking-tight sm:mb-10 sm:text-2xl md:mb-12">
+          <h2 className="mb-8 text-xl font-bold tracking-tight sm:mb-10 sm:text-2xl md:text-3xl">
             Ways to contribute
           </h2>
-          <div className="grid gap-4 sm:grid-cols-2 sm:gap-5 md:gap-6 lg:grid-cols-3">
-            <FeatureCard
-              icon={Code}
-              title="Code"
-              description={
-                <>
-                  Fix bugs, implement features, or optimize performance. Browse issues labeled
-                  &quot;good first issue&quot; to get started.
-                </>
-              }
-            >
+
+          <BentoGrid>
+            {/* Code — large */}
+            <BentoItem size="md" className="flex flex-col gap-3">
+              <Code className="h-7 w-7 text-primary" />
+              <h3 className="text-lg font-semibold">Code</h3>
+              <p className="flex-1 text-sm leading-relaxed text-muted-foreground">
+                Fix bugs, implement features, or optimize performance. Browse issues labeled
+                &quot;good first issue&quot; to get started with a manageable first contribution.
+              </p>
               <a
                 href="https://github.com/Trace-iOS/Trace/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="mt-4 inline-block text-sm text-primary hover:underline"
+                className="text-sm font-medium text-primary hover:underline"
               >
                 View good first issues →
               </a>
-            </FeatureCard>
+            </BentoItem>
 
-            <FeatureCard
-              icon={FileText}
-              title="Documentation"
-              description="Improve guides, fix typos, add examples, or clarify confusing sections. Documentation is just as important as code."
-            >
-              <Link href="/docs" className="mt-4 inline-block text-sm text-primary hover:underline">
-                Browse documentation →
+            {/* Documentation — small */}
+            <BentoItem size="sm">
+              <FileText className="mb-3 h-6 w-6 text-primary" />
+              <h3 className="mb-2 font-semibold">Documentation</h3>
+              <p className="mb-3 text-sm text-muted-foreground">
+                Improve guides, fix typos, add examples, or clarify confusing sections.
+              </p>
+              <Link href="/docs" className="text-sm font-medium text-primary hover:underline">
+                Browse docs →
               </Link>
-            </FeatureCard>
+            </BentoItem>
 
-            <FeatureCard
-              icon={Bug}
-              title="Bug reports"
-              description="Found a bug? Report it with steps to reproduce, device details, and expected behavior. Good bug reports help us fix issues faster."
-            >
-              <a
-                href="https://github.com/Trace-iOS/Trace/issues/new"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="mt-4 inline-block text-sm text-primary hover:underline"
-              >
-                Report a bug →
-              </a>
-            </FeatureCard>
-
-            <FeatureCard
-              icon={Lightbulb}
-              title="Feature requests"
-              description="Have an idea? Open a discussion describing the use case and expected behavior. We prioritize features based on user feedback."
-            >
-              <a
-                href="https://github.com/Trace-iOS/Trace/discussions/new?category=ideas"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="mt-4 inline-block text-sm text-primary hover:underline"
-              >
-                Suggest a feature →
-              </a>
-            </FeatureCard>
-
-            <FeatureCard
-              icon={Globe}
-              title="Translations"
-              description="Help make Trace accessible to non-English speakers. Translate the app or documentation to your language."
-            >
+            {/* Translations — small */}
+            <BentoItem size="sm">
+              <Globe className="mb-3 h-6 w-6 text-primary" />
+              <h3 className="mb-2 font-semibold">Translations</h3>
+              <p className="mb-3 text-sm text-muted-foreground">
+                Help make Trace accessible to non-English speakers.
+              </p>
               <a
                 href="https://github.com/Trace-iOS/Trace/tree/main/Localization"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="mt-4 inline-block text-sm text-primary hover:underline"
+                className="text-sm font-medium text-primary hover:underline"
               >
                 View translations →
               </a>
-            </FeatureCard>
+            </BentoItem>
 
-            <FeatureCard
-              icon={MessageCircle}
-              title="Community"
-              description="Help others in discussions, share your debugging workflows, or write tutorials. Community support is valuable."
-            >
+            {/* Community — small */}
+            <BentoItem size="sm">
+              <MessageCircle className="mb-3 h-6 w-6 text-primary" />
+              <h3 className="mb-2 font-semibold">Community</h3>
+              <p className="mb-3 text-sm text-muted-foreground">
+                Help others in discussions, share debugging workflows, or write tutorials.
+              </p>
               <a
                 href="https://github.com/Trace-iOS/Trace/discussions"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="mt-4 inline-block text-sm text-primary hover:underline"
+                className="text-sm font-medium text-primary hover:underline"
               >
                 Join discussions →
               </a>
-            </FeatureCard>
-          </div>
+            </BentoItem>
+
+            {/* Bug reports + Feature requests — large */}
+            <BentoItem size="md" className="flex flex-col gap-3">
+              <div className="flex gap-3">
+                <Bug className="h-7 w-7 text-primary" />
+                <Lightbulb className="h-7 w-7 text-primary" />
+              </div>
+              <h3 className="text-lg font-semibold">Bug reports & feature requests</h3>
+              <p className="flex-1 text-sm leading-relaxed text-muted-foreground">
+                Found a bug? Report it with steps to reproduce and device details. Have an idea?
+                Open a discussion describing the use case. We prioritize features based on user
+                feedback.
+              </p>
+              <div className="flex gap-4">
+                <a
+                  href="https://github.com/Trace-iOS/Trace/issues/new"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-sm font-medium text-primary hover:underline"
+                >
+                  Report a bug →
+                </a>
+                <a
+                  href="https://github.com/Trace-iOS/Trace/discussions/new?category=ideas"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-sm font-medium text-primary hover:underline"
+                >
+                  Suggest a feature →
+                </a>
+              </div>
+            </BentoItem>
+          </BentoGrid>
         </div>
       </PageSection>
 
       <Separator />
 
-      {/* Code Contribution Workflow */}
-      <PageSection>
+      {/* ── Code contribution workflow: numbered steps ── */}
+      <PageSection className="border-y bg-muted/30">
         <div className="mx-auto max-w-readable">
-          <h2 className="mb-8 text-xl font-bold tracking-tight sm:mb-10 sm:text-2xl">
+          <h2 className="mb-8 text-xl font-bold tracking-tight sm:mb-10 sm:text-2xl md:text-3xl">
             Code contribution workflow
           </h2>
           <div className="space-y-6">
-            <div className="flex gap-4">
-              <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-primary text-sm font-semibold text-primary-foreground">
-                1
-              </div>
-              <div>
-                <h3 className="mb-2 font-semibold">Find or create an issue</h3>
-                <p className="text-sm leading-relaxed text-muted-foreground">
-                  Browse{' '}
-                  <a
-                    href="https://github.com/Trace-iOS/Trace/issues"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-primary hover:underline"
-                  >
-                    open issues
-                  </a>{' '}
-                  or create a new one to discuss your proposed changes. For significant features,
-                  open a discussion first to validate the approach before writing code.
-                </p>
-              </div>
-            </div>
-
-            <div className="flex gap-4">
-              <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-primary text-sm font-semibold text-primary-foreground">
-                2
-              </div>
-              <div>
-                <h3 className="mb-2 font-semibold">Fork and clone</h3>
-                <p className="text-sm leading-relaxed text-muted-foreground">
-                  Fork the repository on GitHub, then clone your fork locally:
-                </p>
-                <div className="mt-2 rounded-lg border bg-muted/30 p-3">
-                  <code className="text-xs">git clone https://github.com/Trace-iOS/Trace</code>
+            {[
+              {
+                n: '1',
+                title: 'Find or create an issue',
+                body: (
+                  <>
+                    Browse{' '}
+                    <a
+                      href="https://github.com/Trace-iOS/Trace/issues"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-primary hover:underline"
+                    >
+                      open issues
+                    </a>{' '}
+                    or create a new one to discuss your proposed changes. For significant features,
+                    open a discussion first to validate the approach before writing code.
+                  </>
+                ),
+              },
+              {
+                n: '2',
+                title: 'Fork and clone',
+                body: (
+                  <>
+                    Fork the repository on GitHub, then clone your fork:
+                    <CodeBlock className="language-bash">
+                      {`git clone https://github.com/Trace-iOS/Trace`}
+                    </CodeBlock>
+                  </>
+                ),
+              },
+              {
+                n: '3',
+                title: 'Create a feature branch',
+                body: (
+                  <>
+                    Create a new branch from <InlineCode>main</InlineCode>:
+                    <CodeBlock className="language-bash">
+                      {`git checkout -b feature/your-feature-name`}
+                    </CodeBlock>
+                  </>
+                ),
+              },
+              {
+                n: '4',
+                title: 'Write and test your changes',
+                body: (
+                  <>
+                    Follow the project&apos;s coding style. Write tests for new features. Run
+                    existing tests to ensure nothing breaks. See the{' '}
+                    <Link href="/docs/building" className="text-primary hover:underline">
+                      building guide
+                    </Link>{' '}
+                    for development setup.
+                  </>
+                ),
+              },
+              {
+                n: '5',
+                title: 'Submit a pull request',
+                body: 'Push your branch and open a pull request on GitHub. Include a clear description of what changed and why. Reference any related issues. Participate in code review.',
+              },
+            ].map(({ n, title, body }) => (
+              <div key={n} className="flex gap-4">
+                <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-primary text-sm font-semibold text-primary-foreground">
+                  {n}
+                </div>
+                <div>
+                  <h3 className="mb-2 font-semibold">{title}</h3>
+                  <div className="text-sm leading-relaxed text-muted-foreground">{body}</div>
                 </div>
               </div>
-            </div>
-
-            <div className="flex gap-4">
-              <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-primary text-sm font-semibold text-primary-foreground">
-                3
-              </div>
-              <div>
-                <h3 className="mb-2 font-semibold">Create a feature branch</h3>
-                <p className="text-sm leading-relaxed text-muted-foreground">
-                  Create a new branch from <code className="rounded bg-muted px-1">main</code>:
-                </p>
-                <div className="mt-2 rounded-lg border bg-muted/30 p-3">
-                  <code className="text-xs">git checkout -b feature/your-feature-name</code>
-                </div>
-              </div>
-            </div>
-
-            <div className="flex gap-4">
-              <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-primary text-sm font-semibold text-primary-foreground">
-                4
-              </div>
-              <div>
-                <h3 className="mb-2 font-semibold">Write and test your changes</h3>
-                <p className="text-sm leading-relaxed text-muted-foreground">
-                  Follow the project&apos;s coding style. Write tests for new features. Run existing
-                  tests to ensure nothing breaks. See the{' '}
-                  <Link href="/docs/building" className="text-primary hover:underline">
-                    building guide
-                  </Link>{' '}
-                  for development setup.
-                </p>
-              </div>
-            </div>
-
-            <div className="flex gap-4">
-              <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-primary text-sm font-semibold text-primary-foreground">
-                5
-              </div>
-              <div>
-                <h3 className="mb-2 font-semibold">Submit a pull request</h3>
-                <p className="text-sm leading-relaxed text-muted-foreground">
-                  Push your branch and open a pull request on GitHub. Include a clear description of
-                  what changed and why. Reference any related issues. Participate in code review.
-                </p>
-              </div>
-            </div>
+            ))}
           </div>
         </div>
       </PageSection>
 
       <Separator />
 
-      {/* Guidelines */}
+      {/* ── Guidelines: 2-col ── */}
       <PageSection>
-        <div className="mx-auto max-w-readable">
-          <h2 className="mb-6 text-xl font-bold tracking-tight sm:mb-8 sm:text-2xl">Guidelines</h2>
-          <div className="space-y-4 text-sm leading-relaxed text-muted-foreground">
-            <div>
-              <h3 className="mb-2 font-semibold text-foreground">Code style</h3>
-              <p>
-                Follow Swift conventions and Apple&apos;s API Design Guidelines. Use SwiftLint
-                configuration from the repository. Keep functions focused and well-named. Add
-                comments for non-obvious logic.
-              </p>
-            </div>
-
-            <div>
-              <h3 className="mb-2 font-semibold text-foreground">Commit messages</h3>
-              <p>
-                Write clear commit messages in present tense: &quot;Add WebSocket frame
-                filtering&quot; not &quot;Added WebSocket frame filtering&quot;. Reference issue
-                numbers when relevant.
-              </p>
-            </div>
-
-            <div>
-              <h3 className="mb-2 font-semibold text-foreground">Testing</h3>
-              <p>
-                Add tests for new features. Ensure existing tests pass. Manual testing on physical
-                devices is important—simulators don&apos;t support Network Extension.
-              </p>
-            </div>
-
-            <div>
-              <h3 className="mb-2 font-semibold text-foreground">Documentation</h3>
-              <p>
-                Update relevant documentation when adding features. Include code examples where
-                helpful. Keep the README and guides in sync with actual behavior.
-              </p>
-            </div>
-
-            <div>
-              <h3 className="mb-2 font-semibold text-foreground">Breaking changes</h3>
-              <p>
-                Avoid breaking changes when possible. If necessary, discuss in an issue first.
-                Provide migration guides and deprecation warnings.
-              </p>
-            </div>
-          </div>
-        </div>
-      </PageSection>
-
-      <Separator />
-
-      {/* Recognition */}
-      <PageSection>
-        <div className="mx-auto max-w-readable">
-          <Star className="mx-auto mb-4 h-10 w-10 text-primary sm:mb-6 sm:h-12 sm:w-12" />
-          <h2 className="mb-4 text-center text-2xl font-bold tracking-tight sm:text-3xl">
-            Recognition
+        <div className="mx-auto max-w-content">
+          <h2 className="mb-8 text-xl font-bold tracking-tight sm:mb-10 sm:text-2xl md:text-3xl">
+            Guidelines
           </h2>
-          <p className="mb-6 text-center text-sm leading-relaxed text-muted-foreground sm:text-base">
-            Contributors are recognized in the project README, release notes, and on the website.
-            Significant contributions may be highlighted in blog posts or on social media.
-          </p>
-          <div className="text-center">
-            <a
-              href="https://github.com/Trace-iOS/Trace/graphs/contributors"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 text-sm text-primary hover:underline"
-            >
-              View all contributors →
-            </a>
+          <div className="grid gap-6 text-sm sm:grid-cols-2 sm:gap-8">
+            {[
+              {
+                title: 'Code style',
+                body: "Follow Swift conventions and Apple's API Design Guidelines. Use SwiftLint configuration from the repository. Keep functions focused and well-named. Add comments for non-obvious logic.",
+              },
+              {
+                title: 'Commit messages',
+                body: 'Write clear commit messages in present tense: "Add WebSocket frame filtering" not "Added...". Reference issue numbers when relevant.',
+              },
+              {
+                title: 'Testing',
+                body: "Add tests for new features. Ensure existing tests pass. Manual testing on physical devices is important—simulators don't support Network Extension.",
+              },
+              {
+                title: 'Documentation',
+                body: 'Update relevant documentation when adding features. Include code examples where helpful. Keep the README and guides in sync with actual behavior.',
+              },
+              {
+                title: 'Breaking changes',
+                body: 'Avoid breaking changes when possible. If necessary, discuss in an issue first. Provide migration guides and deprecation warnings.',
+              },
+            ].map(({ title, body }) => (
+              <div key={title} className="rounded-xl border p-4">
+                <h3 className="mb-2 font-semibold">{title}</h3>
+                <p className="leading-relaxed text-muted-foreground">{body}</p>
+              </div>
+            ))}
           </div>
         </div>
       </PageSection>
 
       <Separator />
 
-      {/* Resources */}
+      {/* ── Resources ── */}
       <PageSection>
         <div className="mx-auto max-w-content">
           <h2 className="mb-8 text-xl font-bold tracking-tight sm:mb-10 sm:text-2xl">Resources</h2>
           <div className="grid gap-4 sm:grid-cols-2 sm:gap-5 md:gap-6">
-            <Link
-              href="/docs/architecture"
-              className="group rounded-lg border p-4 transition-colors hover:border-primary/50"
-            >
-              <h3 className="mb-2 font-semibold group-hover:text-primary">Architecture guide</h3>
-              <p className="text-sm text-muted-foreground">
-                Understand how Trace is built and structured
-              </p>
-            </Link>
-
-            <Link
-              href="/docs/building"
-              className="group rounded-lg border p-4 transition-colors hover:border-primary/50"
-            >
-              <h3 className="mb-2 font-semibold group-hover:text-primary">Building from source</h3>
-              <p className="text-sm text-muted-foreground">Set up your development environment</p>
-            </Link>
-
-            <a
-              href="https://github.com/Trace-iOS/Trace/blob/main/CONTRIBUTING.md"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group rounded-lg border p-4 transition-colors hover:border-primary/50"
-            >
-              <h3 className="mb-2 font-semibold group-hover:text-primary">Contributing guide</h3>
-              <p className="text-sm text-muted-foreground">
-                Detailed contribution guidelines on GitHub
-              </p>
-            </a>
-
-            <a
-              href="https://github.com/Trace-iOS/Trace/blob/main/CODE_OF_CONDUCT.md"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group rounded-lg border p-4 transition-colors hover:border-primary/50"
-            >
-              <h3 className="mb-2 font-semibold group-hover:text-primary">Code of conduct</h3>
-              <p className="text-sm text-muted-foreground">Community guidelines and expectations</p>
-            </a>
+            {[
+              {
+                href: '/docs/architecture',
+                label: 'Architecture guide',
+                desc: 'Understand how Trace is built and structured',
+                internal: true,
+              },
+              {
+                href: '/docs/building',
+                label: 'Building from source',
+                desc: 'Set up your development environment',
+                internal: true,
+              },
+              {
+                href: 'https://github.com/Trace-iOS/Trace/blob/main/CONTRIBUTING.md',
+                label: 'Contributing guide',
+                desc: 'Detailed contribution guidelines on GitHub',
+                internal: false,
+              },
+              {
+                href: 'https://github.com/Trace-iOS/Trace/blob/main/CODE_OF_CONDUCT.md',
+                label: 'Code of conduct',
+                desc: 'Community guidelines and expectations',
+                internal: false,
+              },
+            ].map(({ href, label, desc, internal }) => {
+              const Tag = internal ? Link : 'a';
+              return (
+                <Tag
+                  key={href}
+                  href={href}
+                  {...(internal ? {} : { target: '_blank', rel: 'noopener noreferrer' })}
+                  className="group rounded-xl border p-4 transition-colors hover:border-primary/50"
+                >
+                  <h3 className="mb-2 font-semibold group-hover:text-primary">{label}</h3>
+                  <p className="text-sm text-muted-foreground">{desc}</p>
+                </Tag>
+              );
+            })}
           </div>
         </div>
       </PageSection>
 
-      <Separator />
-
-      {/* CTA */}
-      <PageSection>
-        <div className="mx-auto max-w-readable text-center">
-          <Github className="mx-auto mb-4 h-10 w-10 text-primary sm:mb-6 sm:h-12 sm:w-12" />
-          <h2 className="mb-3 text-2xl font-bold tracking-tight sm:mb-4 sm:text-3xl">
-            Ready to contribute?
-          </h2>
-          <p className="mb-6 text-sm text-muted-foreground sm:mb-8 sm:text-base">
-            Whether you&apos;re fixing a typo or implementing a major feature, your contribution
-            helps make Trace better for everyone.
-          </p>
-          <div className="flex flex-col justify-center gap-3 sm:flex-row sm:gap-4">
-            <Button size="lg" asChild className="w-full gap-2 sm:w-auto">
-              <a
-                href="https://github.com/Trace-iOS/Trace"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <GitFork className="h-4 w-4" />
-                Fork on GitHub
-              </a>
-            </Button>
-            <Button size="lg" variant="outline" asChild className="w-full gap-2 sm:w-auto">
-              <a
-                href="https://github.com/Trace-iOS/Trace/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <CheckCircle className="h-4 w-4" />
-                Good first issues
-              </a>
-            </Button>
-          </div>
+      {/* ── CTA: editorial banner ── */}
+      <EditorialBanner variant="muted">
+        <Github className="mx-auto mb-4 h-10 w-10 text-primary sm:h-12 sm:w-12" />
+        <h2 className="mb-3 text-2xl font-bold tracking-tight sm:text-3xl">Ready to contribute?</h2>
+        <p className="mb-8 text-sm text-muted-foreground sm:text-base">
+          Whether you&apos;re fixing a typo or implementing a major feature, your contribution helps
+          make Trace better for everyone.
+        </p>
+        <div className="flex flex-col justify-center gap-3 sm:flex-row sm:gap-4">
+          <Button size="lg" asChild>
+            <a href="https://github.com/Trace-iOS/Trace" target="_blank" rel="noopener noreferrer">
+              <GitFork className="mr-2 h-4 w-4" />
+              Fork on GitHub
+            </a>
+          </Button>
+          <Button size="lg" variant="outline" asChild>
+            <a
+              href="https://github.com/Trace-iOS/Trace/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <CheckCircle className="mr-2 h-4 w-4" />
+              Good first issues
+            </a>
+          </Button>
         </div>
-      </PageSection>
+      </EditorialBanner>
     </div>
   );
 }

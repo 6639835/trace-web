@@ -1,7 +1,5 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { Separator } from '@/components/ui/separator';
-import { PageHeader } from '@/components/shared/page-header';
 import { PageSection } from '@/components/shared/page-section';
 import { FileText } from 'lucide-react';
 
@@ -23,11 +21,19 @@ export const metadata: Metadata = {
 export default function TermsPage() {
   return (
     <div className="flex flex-col">
-      <PageHeader icon={FileText} title="Terms of Service">
-        <p className="text-sm text-muted-foreground">Last updated: January 30, 2026</p>
-      </PageHeader>
-
-      <Separator />
+      {/* ── Left-aligned legal hero ── */}
+      <section className="container py-section">
+        <div className="mx-auto max-w-readable">
+          <div className="mb-3 flex items-center gap-2">
+            <FileText className="h-5 w-5 text-primary" />
+            <span className="text-sm font-medium tracking-widest text-primary uppercase">
+              Legal
+            </span>
+          </div>
+          <h1 className="mb-3 text-3xl font-bold tracking-tight sm:text-4xl">Terms of Service</h1>
+          <p className="text-sm text-muted-foreground">Last updated: January 30, 2026</p>
+        </div>
+      </section>
 
       <PageSection>
         <div className="mx-auto prose max-w-readable prose-slate dark:prose-invert prose-a:no-underline">

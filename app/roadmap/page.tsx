@@ -2,9 +2,10 @@ import type { Metadata } from 'next';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Separator } from '@/components/ui/separator';
 import { Timeline, TimelineItem } from '@/components/ui/timeline';
 import { PageSection } from '@/components/shared/page-section';
+import { MetricsStrip } from '@/components/sections/metrics-strip';
+import { EditorialBanner } from '@/components/sections/editorial-banner';
 import {
   CheckCircle2,
   Circle,
@@ -13,10 +14,10 @@ import {
   Shield,
   Users,
   Database,
-  Globe,
+  Lock,
   Code,
   GitBranch,
-  Lock,
+  MessageSquare,
 } from 'lucide-react';
 
 export const metadata: Metadata = {
@@ -92,7 +93,7 @@ const milestones: Milestone[] = [
   {
     quarter: 'Q1',
     year: '2026',
-    title: 'v1.0.1-1.0.3 - Stability & Polish',
+    title: 'v1.0.1–1.0.3 - Stability & Polish',
     description:
       'Production hardening with comprehensive fixes, test coverage, and developer experience improvements.',
     status: 'completed',
@@ -117,10 +118,6 @@ const milestones: Milestone[] = [
       {
         name: 'CI/CD & testing',
         description: 'GitHub Actions workflow, comprehensive unit tests, and Swift 6 concurrency',
-      },
-      {
-        name: 'Core refactoring',
-        description: 'Improved PCAP parsing, VPN lifecycle, persistence, and rule matching',
       },
     ],
   },
@@ -179,10 +176,6 @@ const milestones: Milestone[] = [
         name: 'Background capture',
         description: 'Continue capturing network traffic when app is backgrounded',
       },
-      {
-        name: 'Advanced caching',
-        description: 'Smart caching strategies to reduce memory footprint',
-      },
     ],
   },
   {
@@ -209,10 +202,6 @@ const milestones: Milestone[] = [
         name: 'Shared configurations',
         description: 'Share rewrite rules, scripts, and settings with team members',
       },
-      {
-        name: 'Team workspaces',
-        description: 'Organize sessions and configs by project or team',
-      },
     ],
   },
   {
@@ -234,10 +223,6 @@ const milestones: Milestone[] = [
       {
         name: 'Audit logging',
         description: 'Comprehensive logging for security compliance and auditing',
-      },
-      {
-        name: 'Advanced security policies',
-        description: 'Granular controls for data retention, export, and access',
       },
       {
         name: 'Privacy controls',
@@ -269,10 +254,6 @@ const milestones: Milestone[] = [
         name: 'CI/CD integrations',
         description: 'GitHub Actions, GitLab CI, and Jenkins plugins for automated testing',
       },
-      {
-        name: 'Custom protocols',
-        description: 'Support for custom protocol parsers and decoders',
-      },
     ],
   },
 ];
@@ -281,43 +262,42 @@ const statusConfig: Record<
   MilestoneStatus,
   { label: string; variant: 'default' | 'secondary' | 'outline'; icon: React.ElementType }
 > = {
-  completed: {
-    label: 'Completed',
-    variant: 'default',
-    icon: CheckCircle2,
-  },
-  'in-progress': {
-    label: 'In Progress',
-    variant: 'secondary',
-    icon: GitBranch,
-  },
-  planned: {
-    label: 'Planned',
-    variant: 'outline',
-    icon: Circle,
-  },
+  completed: { label: 'Completed', variant: 'default', icon: CheckCircle2 },
+  'in-progress': { label: 'In Progress', variant: 'secondary', icon: GitBranch },
+  planned: { label: 'Planned', variant: 'outline', icon: Circle },
 };
 
 export default function RoadmapPage() {
+  const completed = milestones.filter((m) => m.status === 'completed').length;
+  const inProgress = milestones.filter((m) => m.status === 'in-progress').length;
+  const planned = milestones.filter((m) => m.status === 'planned').length;
+
   return (
     <div className="flex w-full flex-col">
-      {/* Hero Section */}
-      <PageSection>
-        <div className="mx-auto max-w-content text-center">
-          <Globe className="mx-auto mb-4 h-10 w-10 text-primary sm:mb-6 sm:h-12 sm:w-12" />
-          <h1 className="mb-3 text-2xl font-bold tracking-tight sm:mb-4 sm:text-3xl md:text-4xl lg:text-5xl">
+      {/* ── Left-aligned minimal hero ── */}
+      <section className="container py-section">
+        <div className="mx-auto max-w-content">
+          <h1 className="mb-4 text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl">
             Product Roadmap
           </h1>
-          <p className="mx-auto max-w-readable text-sm leading-relaxed text-muted-foreground sm:text-base lg:text-lg">
+          <p className="max-w-readable text-sm leading-relaxed text-muted-foreground sm:text-base lg:text-lg">
             Our vision for the future of iOS network debugging. Track progress, see what&apos;s
             coming next, and help shape the development of Trace.
           </p>
         </div>
-      </PageSection>
+      </section>
 
-      <Separator />
+      {/* ── Metrics strip: progress at a glance ── */}
+      <MetricsStrip
+        metrics={[
+          { value: String(completed), label: 'Completed' },
+          { value: String(inProgress), label: 'In progress' },
+          { value: String(planned), label: 'Planned' },
+          { value: '2027', label: 'Horizon' },
+        ]}
+      />
 
-      {/* Timeline Section */}
+      {/* ── Timeline ── */}
       <PageSection spacing="lg">
         <div className="mx-auto max-w-readable">
           <Timeline>
@@ -341,13 +321,13 @@ export default function RoadmapPage() {
                   }
                 >
                   <Card
-                    className={`${
+                    className={
                       milestone.status === 'completed'
                         ? 'border-primary/20'
                         : milestone.status === 'in-progress'
                           ? 'border-primary/10'
                           : ''
-                    }`}
+                    }
                   >
                     <CardHeader>
                       <div className="mb-3 flex flex-wrap items-center gap-2 sm:mb-4">
@@ -370,14 +350,14 @@ export default function RoadmapPage() {
                     </CardHeader>
                     <CardContent>
                       <ul className="space-y-3 sm:space-y-4">
-                        {milestone.features.map((feature, featureIndex) => (
-                          <li key={featureIndex} className="flex gap-3">
+                        {milestone.features.map((feature, i) => (
+                          <li key={i} className="flex gap-3">
                             <div className="mt-0.5 shrink-0">
                               <div className="h-1.5 w-1.5 rounded-full bg-muted-foreground sm:h-2 sm:w-2" />
                             </div>
                             <div className="min-w-0 flex-1">
                               <div className="text-xs font-medium sm:text-sm">{feature.name}</div>
-                              <div className="mt-0.5 text-2xs text-muted-foreground sm:text-xs">
+                              <div className="mt-0.5 text-xs text-muted-foreground sm:text-sm">
                                 {feature.description}
                               </div>
                             </div>
@@ -393,42 +373,37 @@ export default function RoadmapPage() {
         </div>
       </PageSection>
 
-      <Separator />
-
-      {/* CTA Section */}
-      <PageSection spacing="lg">
-        <div className="mx-auto max-w-readable text-center">
-          <Lock className="mx-auto mb-4 h-10 w-10 text-primary sm:mb-6 sm:h-12 sm:w-12" />
-          <h2 className="mb-3 text-2xl font-bold tracking-tight sm:mb-4 sm:text-3xl md:text-4xl">
-            Open source and community-driven
-          </h2>
-          <p className="mb-6 text-sm leading-relaxed text-muted-foreground sm:mb-8 sm:text-base">
-            This roadmap reflects our vision, but your feedback shapes our priorities. Trace is open
-            source, and we welcome contributions, feature requests, and discussions from the
-            community.
-          </p>
-          <div className="flex flex-col justify-center gap-3 sm:flex-row sm:gap-4">
-            <Button size="lg" asChild className="w-full sm:w-auto">
-              <a
-                href="https://github.com/Trace-iOS/Trace/discussions"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Share Feedback
-              </a>
-            </Button>
-            <Button size="lg" variant="outline" asChild className="w-full sm:w-auto">
-              <a
-                href="https://github.com/Trace-iOS/Trace/issues"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Report Issues
-              </a>
-            </Button>
-          </div>
+      {/* ── CTA: editorial banner ── */}
+      <EditorialBanner variant="muted">
+        <MessageSquare className="mx-auto mb-4 h-10 w-10 text-primary sm:h-12 sm:w-12" />
+        <h2 className="mb-3 text-2xl font-bold tracking-tight sm:text-3xl">
+          Open source and community-driven
+        </h2>
+        <p className="mb-8 text-sm leading-relaxed text-muted-foreground sm:text-base">
+          This roadmap reflects our vision, but your feedback shapes priorities. Trace is open
+          source—we welcome contributions, feature requests, and discussions from the community.
+        </p>
+        <div className="flex flex-col justify-center gap-3 sm:flex-row sm:gap-4">
+          <Button size="lg" asChild>
+            <a
+              href="https://github.com/Trace-iOS/Trace/discussions"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Share feedback
+            </a>
+          </Button>
+          <Button size="lg" variant="outline" asChild>
+            <a
+              href="https://github.com/Trace-iOS/Trace/issues"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Report issues
+            </a>
+          </Button>
         </div>
-      </PageSection>
+      </EditorialBanner>
     </div>
   );
 }

@@ -1,9 +1,10 @@
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { Separator } from '@/components/ui/separator';
-import { FeatureCard } from '@/components/marketing/feature-card';
 import { PageSection } from '@/components/shared/page-section';
+import { MetricsStrip } from '@/components/sections/metrics-strip';
+import { EditorialBanner } from '@/components/sections/editorial-banner';
+import { BentoGrid, BentoItem } from '@/components/sections/bento-grid';
 import {
   Github,
   Network,
@@ -13,6 +14,7 @@ import {
   Activity,
   Layers,
   Smartphone,
+  ArrowRight,
 } from 'lucide-react';
 import { HeroPhone } from '@/components/marketing/hero-phone';
 import { absoluteUrl } from '@/lib/config/site';
@@ -59,11 +61,12 @@ export default function Home() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
       />
-      {/* Hero Section with Phone Mockup */}
+
+      {/* ── Hero: split layout (left copy, right phone) ── */}
       <section className="relative flex min-h-[calc(100vh-4rem)] items-start overflow-hidden py-section">
         <div className="container">
           <div className="mx-auto grid w-full max-w-wide items-start gap-8 pt-8 sm:gap-10 sm:pt-12 lg:grid-cols-2 lg:gap-12 lg:pt-16">
-            {/* Left Column - Hero Text */}
+            {/* Left Column */}
             <div className="flex max-w-full flex-col space-y-4 sm:space-y-6 lg:space-y-8">
               <div className="max-w-full">
                 <h1 className="mb-3 text-2xl leading-tight font-bold tracking-tight break-words hyphens-auto xs:text-3xl sm:mb-4 sm:text-4xl md:text-5xl lg:mb-6 lg:text-6xl">
@@ -89,7 +92,7 @@ export default function Home() {
                     Get on TestFlight
                   </Link>
                 </Button>
-                <Button size="lg" variant="outline" asChild className="w-full sm:w-auto">
+                <Button size="lg" variant="secondary" asChild className="w-full sm:w-auto">
                   <Link
                     href="https://github.com/Trace-iOS/Trace"
                     target="_blank"
@@ -102,195 +105,214 @@ export default function Home() {
               </div>
             </div>
 
-            {/* Right Column - Phone Mockup with Screenshot */}
+            {/* Right Column */}
             <HeroPhone />
           </div>
         </div>
       </section>
 
-      <Separator />
+      {/* ── Metrics strip ── */}
+      <MetricsStrip
+        metrics={[
+          { value: 'MIT', label: 'License' },
+          { value: 'iOS 18+', label: 'Minimum OS' },
+          { value: 'L3', label: 'Capture layer' },
+          { value: 'On-device', label: 'Privacy model' },
+        ]}
+      />
 
-      {/* Core Capabilities Section */}
+      {/* ── Capabilities: bento grid ── */}
       <PageSection spacing="lg">
         <div className="mx-auto max-w-content">
-          <div className="mb-10 text-center sm:mb-12 md:mb-16">
-            <h2 className="mb-3 text-2xl font-bold tracking-tight sm:mb-4 sm:text-3xl md:text-4xl">
+          <div className="mb-10 sm:mb-12 md:mb-14">
+            <h2 className="mb-3 text-2xl font-bold tracking-tight sm:text-3xl md:text-4xl">
               Built for production debugging
             </h2>
-            <p className="mx-auto max-w-readable text-sm text-muted-foreground sm:text-base">
+            <p className="max-w-readable text-sm text-muted-foreground sm:text-base">
               Comprehensive network visibility with the tools you need to diagnose and resolve
-              issues quickly.
+              issues fast.
             </p>
           </div>
 
-          <div className="grid gap-4 sm:grid-cols-2 sm:gap-5 md:gap-6 lg:grid-cols-3">
-            <FeatureCard
-              icon={Network}
-              title="Device-wide capture"
-              titleClassName="text-lg"
-              description="Network Extension-based packet tunnel configures a system proxy to capture HTTP(S) for apps that honor it. No per-app setup required."
-            />
-            <FeatureCard
-              icon={Fingerprint}
-              title="TLS inspection"
-              titleClassName="text-lg"
-              description="On-device TLS MITM enables full request and response body inspection for encrypted traffic. Certificate pinning detection included."
-            />
-            <FeatureCard
-              icon={Radio}
-              title="WebSocket & SSE"
-              titleClassName="text-lg"
-              description="Real-time protocol support for WebSocket connections and Server-Sent Events. View frame-by-frame communication as it happens."
-            />
-            <FeatureCard
-              icon={Repeat}
-              title="Traffic modification"
-              titleClassName="text-lg"
-              description="Comprehensive modification tools: rewrite rules, request maps, host overrides, breakpoints, JavaScript scripts, and network condition profiles. Replay requests with the built-in request builder or import cURL commands."
-            />
-            <FeatureCard
-              icon={Activity}
-              title="PCAP export"
-              titleClassName="text-lg"
-              description="Optional PCAP export of captured HTTP frames for offline analysis, plus event logging for diagnostics and troubleshooting."
-            />
-            <FeatureCard
-              icon={Layers}
-              title="Deep inspection"
-              titleClassName="text-lg"
-              description="Comprehensive analysis with headers, body viewers (JSON, XML, images, SVG, multipart), timing breakdowns, TLS certificate chains, HTTP/2 stream info with HPACK table, request comparison, and saved filter presets."
-            />
-          </div>
+          <BentoGrid>
+            {/* Large card spans 2 cols */}
+            <BentoItem size="md" className="flex flex-col gap-3">
+              <Network className="h-8 w-8 text-primary" />
+              <h3 className="text-lg font-semibold">Device-wide capture</h3>
+              <p className="text-sm leading-relaxed text-muted-foreground">
+                Network Extension-based packet tunnel configures a system proxy to capture HTTP(S)
+                for apps that honor it. No per-app setup, no desktop companion required.
+              </p>
+            </BentoItem>
+
+            {/* Small card */}
+            <BentoItem size="sm">
+              <Fingerprint className="mb-3 h-7 w-7 text-primary" />
+              <h3 className="mb-2 font-semibold">TLS inspection</h3>
+              <p className="text-sm text-muted-foreground">
+                On-device MITM with dynamic certificate generation. Full request/response body
+                visibility for encrypted traffic.
+              </p>
+            </BentoItem>
+
+            {/* Small card */}
+            <BentoItem size="sm">
+              <Radio className="mb-3 h-7 w-7 text-primary" />
+              <h3 className="mb-2 font-semibold">WebSocket & SSE</h3>
+              <p className="text-sm text-muted-foreground">
+                Real-time frame-by-frame capture of WebSocket and Server-Sent Events with full
+                timing context.
+              </p>
+            </BentoItem>
+
+            {/* Small card */}
+            <BentoItem size="sm">
+              <Repeat className="mb-3 h-7 w-7 text-primary" />
+              <h3 className="mb-2 font-semibold">Traffic modification</h3>
+              <p className="text-sm text-muted-foreground">
+                Rewrite rules, breakpoints, JS scripts, host overrides, request maps, and network
+                throttling profiles.
+              </p>
+            </BentoItem>
+
+            {/* Large card spans 2 cols */}
+            <BentoItem size="md" className="flex flex-col gap-3">
+              <div className="flex gap-3">
+                <Activity className="h-7 w-7 text-primary" />
+                <Layers className="h-7 w-7 text-primary" />
+              </div>
+              <h3 className="text-lg font-semibold">Deep inspection + PCAP export</h3>
+              <p className="text-sm leading-relaxed text-muted-foreground">
+                Headers, JSON/XML/image body viewers, timing breakdowns, TLS certificate chains,
+                HTTP/2 HPACK table, request comparison, and saved filter presets—plus optional PCAP
+                export for offline analysis.
+              </p>
+              <div className="mt-auto">
+                <Link
+                  href="/features"
+                  className="inline-flex items-center gap-1 text-sm font-medium text-primary hover:underline"
+                >
+                  See all features <ArrowRight className="h-3.5 w-3.5" />
+                </Link>
+              </div>
+            </BentoItem>
+          </BentoGrid>
         </div>
       </PageSection>
 
-      <Separator />
-
-      {/* Technical Credibility Section */}
-      <PageSection spacing="lg">
+      {/* ── Engineering depth: 2-col list + tech badges ── */}
+      <PageSection spacing="lg" className="border-y bg-muted/30">
         <div className="mx-auto max-w-content">
-          <div className="mb-10 text-center sm:mb-12 md:mb-16">
-            <h2 className="mb-3 text-2xl font-bold tracking-tight sm:mb-4 sm:text-3xl md:text-4xl">
+          <div className="mb-10 sm:mb-12">
+            <h2 className="mb-3 text-2xl font-bold tracking-tight sm:text-3xl md:text-4xl">
               Engineering depth
             </h2>
-            <p className="mx-auto max-w-readable text-sm text-muted-foreground sm:text-base">
+            <p className="max-w-readable text-sm text-muted-foreground sm:text-base">
               Built on iOS system frameworks for reliable, low-level network access.
             </p>
           </div>
 
-          <div className="grid gap-6 sm:grid-cols-2 sm:gap-7 md:gap-8">
-            <div className="space-y-4 sm:space-y-5">
-              <div>
-                <h3 className="mb-2 text-sm font-semibold sm:text-base">Network Extension</h3>
-                <p className="text-xs leading-relaxed text-muted-foreground sm:text-sm">
-                  Implements NEPacketTunnelProvider to configure system proxy settings for capture.
-                  Runs in a separate process with elevated privileges to manage the local MITM
-                  proxy.
-                </p>
-              </div>
-              <div>
-                <h3 className="mb-2 text-sm font-semibold sm:text-base">TLS MITM</h3>
-                <p className="text-xs leading-relaxed text-muted-foreground sm:text-sm">
-                  On-device certificate authority and dynamic certificate generation. Intercepts TLS
-                  handshakes to enable encrypted traffic inspection.
-                </p>
-              </div>
-              <div>
-                <h3 className="mb-2 text-sm font-semibold sm:text-base">App Groups</h3>
-                <p className="text-xs leading-relaxed text-muted-foreground sm:text-sm">
-                  Shared container for IPC between main app and extension. Enables real-time traffic
-                  streaming and coordinated state management.
-                </p>
-              </div>
+          <div className="grid gap-6 sm:grid-cols-2 sm:gap-7 md:gap-10">
+            <div className="space-y-5">
+              {[
+                {
+                  label: 'Network Extension',
+                  body: 'Implements NEPacketTunnelProvider to configure system proxy settings. Runs in a separate process with elevated privileges.',
+                },
+                {
+                  label: 'TLS MITM',
+                  body: 'On-device certificate authority and dynamic certificate generation. Intercepts TLS handshakes locally with no external dependencies.',
+                },
+                {
+                  label: 'App Groups',
+                  body: 'Shared container for IPC between main app and extension. Enables real-time traffic streaming and coordinated state management.',
+                },
+              ].map(({ label, body }) => (
+                <div key={label} className="flex gap-4">
+                  <div className="mt-1 h-2 w-2 shrink-0 rounded-full bg-primary" />
+                  <div>
+                    <h3 className="mb-1 text-sm font-semibold">{label}</h3>
+                    <p className="text-xs leading-relaxed text-muted-foreground sm:text-sm">
+                      {body}
+                    </p>
+                  </div>
+                </div>
+              ))}
             </div>
 
-            <div className="space-y-4 sm:space-y-5">
-              <div>
-                <h3 className="mb-2 text-sm font-semibold sm:text-base">Packet Tunnel</h3>
-                <p className="text-xs leading-relaxed text-muted-foreground sm:text-sm">
-                  Proxy-only tunnel injects NEProxySettings without routing packets. HTTP/HTTPS
-                  traffic flows through the local proxy for inspection and tooling.
-                </p>
-              </div>
-              <div>
-                <h3 className="mb-2 text-sm font-semibold sm:text-base">
-                  Widgets & Live Activities
-                </h3>
-                <p className="text-xs leading-relaxed text-muted-foreground sm:text-sm">
-                  WidgetKit integration for at-a-glance network statistics. Live Activities show
-                  real-time request counts and data transfer rates.
-                </p>
-              </div>
-              <div>
-                <h3 className="mb-2 text-sm font-semibold sm:text-base">Background Processing</h3>
-                <p className="text-xs leading-relaxed text-muted-foreground sm:text-sm">
-                  Efficient proxy processing with minimal battery impact. Optimized memory usage for
-                  long-running capture sessions.
-                </p>
-              </div>
+            <div className="space-y-5">
+              {[
+                {
+                  label: 'Packet Tunnel',
+                  body: 'Proxy-only tunnel injects NEProxySettings without routing raw packets. HTTP/HTTPS flows through the local proxy for inspection.',
+                },
+                {
+                  label: 'Widgets & Live Activities',
+                  body: 'WidgetKit integration for at-a-glance network statistics. Live Activities show real-time request counts and transfer rates.',
+                },
+                {
+                  label: 'Background Processing',
+                  body: 'Efficient proxy processing with minimal battery impact. Optimized memory usage for extended capture sessions.',
+                },
+              ].map(({ label, body }) => (
+                <div key={label} className="flex gap-4">
+                  <div className="mt-1 h-2 w-2 shrink-0 rounded-full bg-primary" />
+                  <div>
+                    <h3 className="mb-1 text-sm font-semibold">{label}</h3>
+                    <p className="text-xs leading-relaxed text-muted-foreground sm:text-sm">
+                      {body}
+                    </p>
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
 
-          <div className="mt-8 flex flex-wrap justify-center gap-1.5 sm:mt-10 sm:gap-2 md:mt-12">
-            <Badge variant="secondary" className="whitespace-nowrap">
-              Swift 6.0
-            </Badge>
-            <Badge variant="secondary" className="whitespace-nowrap">
-              SwiftUI
-            </Badge>
-            <Badge variant="secondary" className="whitespace-nowrap">
-              Network Extension
-            </Badge>
-            <Badge variant="secondary" className="whitespace-nowrap">
-              NEPacketTunnelProvider
-            </Badge>
-            <Badge variant="secondary" className="whitespace-nowrap">
-              WidgetKit
-            </Badge>
-            <Badge variant="secondary" className="whitespace-nowrap">
-              Live Activities
-            </Badge>
-            <Badge variant="secondary" className="whitespace-nowrap">
-              App Groups
-            </Badge>
-            <Badge variant="secondary" className="whitespace-nowrap">
-              Swift Package Manager
-            </Badge>
+          <div className="mt-10 flex flex-wrap gap-2">
+            {[
+              'Swift 6.0',
+              'SwiftUI',
+              'Network Extension',
+              'NEPacketTunnelProvider',
+              'WidgetKit',
+              'Live Activities',
+              'App Groups',
+              'Swift Package Manager',
+            ].map((tag) => (
+              <Badge key={tag} variant="secondary" className="whitespace-nowrap">
+                {tag}
+              </Badge>
+            ))}
           </div>
         </div>
       </PageSection>
 
-      <Separator />
-
-      {/* Open Source Section */}
-      <PageSection spacing="lg">
-        <div className="mx-auto max-w-readable text-center">
-          <Github className="mx-auto mb-4 h-10 w-10 text-muted-foreground sm:mb-6 sm:h-12 sm:w-12" />
-          <h2 className="mb-3 text-2xl font-bold tracking-tight sm:mb-4 sm:text-3xl md:text-4xl">
-            Open source and transparent
-          </h2>
-          <p className="mb-6 text-sm leading-relaxed text-muted-foreground sm:mb-8 sm:text-base">
-            Trace is free and open source under the MIT license. No pricing tiers, no feature gates,
-            no telemetry. The entire codebase is available for inspection, modification, and
-            contribution.
-          </p>
-          <div className="flex flex-col justify-center gap-3 sm:flex-row sm:gap-4">
-            <Button size="lg" asChild className="w-full sm:w-auto">
-              <Link
-                href="https://github.com/Trace-iOS/Trace"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <Github className="mr-2 h-5 w-5" />
-                View repository
-              </Link>
-            </Button>
-            <Button size="lg" variant="outline" asChild className="w-full sm:w-auto">
-              <Link href="/open-source">Read more about the project</Link>
-            </Button>
-          </div>
+      {/* ── Open source CTA: editorial banner ── */}
+      <EditorialBanner variant="muted">
+        <Github className="mx-auto mb-5 h-10 w-10 text-muted-foreground sm:h-12 sm:w-12" />
+        <h2 className="mb-3 text-2xl font-bold tracking-tight sm:text-3xl md:text-4xl">
+          Open source and transparent
+        </h2>
+        <p className="mb-8 text-sm leading-relaxed text-muted-foreground sm:text-base">
+          Free under the MIT license. No pricing tiers, no feature gates, no telemetry. Inspect,
+          modify, and contribute to every line of code.
+        </p>
+        <div className="flex flex-col justify-center gap-3 sm:flex-row sm:gap-4">
+          <Button size="lg" asChild className="w-full sm:w-auto">
+            <Link
+              href="https://github.com/Trace-iOS/Trace"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <Github className="mr-2 h-5 w-5" />
+              View repository
+            </Link>
+          </Button>
+          <Button size="lg" variant="outline" asChild className="w-full sm:w-auto">
+            <Link href="/open-source">Read more about the project</Link>
+          </Button>
         </div>
-      </PageSection>
+      </EditorialBanner>
     </div>
   );
 }

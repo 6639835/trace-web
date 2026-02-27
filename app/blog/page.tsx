@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { createElement } from 'react';
 import Link from 'next/link';
 import { Separator } from '@/components/ui/separator';
 import { Badge } from '@/components/ui/badge';
@@ -15,6 +16,11 @@ function resolveIcon(name?: string): LucideIcon {
     if (candidate != null && typeof candidate === 'object') return candidate as LucideIcon;
   }
   return BookOpen;
+}
+
+/** Module-level component — avoids "component created during render" lint error. */
+function DynamicIcon({ name, className }: { name?: string; className?: string }) {
+  return createElement(resolveIcon(name), { className });
 }
 
 export const metadata: Metadata = {
@@ -56,7 +62,6 @@ const categoryVariant: Record<BlogPost['category'], 'default' | 'secondary' | 'o
 };
 
 function FeaturedCard({ post }: { post: BlogPost }) {
-  const Icon = resolveIcon(post.icon);
   return (
     <Link href={`/blog/${post.slug}`} className="group block">
       <div className="grid gap-6 overflow-hidden rounded-2xl border bg-card p-7 transition-all hover:border-primary/40 hover:shadow-md sm:grid-cols-5">
@@ -64,11 +69,11 @@ function FeaturedCard({ post }: { post: BlogPost }) {
         <div className="flex flex-col sm:col-span-3">
           <div className="mb-4 flex items-center gap-3">
             <Badge variant={categoryVariant[post.category]}>{post.category}</Badge>
-            <span className="text-xs font-medium uppercase tracking-widest text-muted-foreground">
+            <span className="text-xs font-medium tracking-widest text-muted-foreground uppercase">
               Featured
             </span>
           </div>
-          <h2 className="mb-3 text-2xl font-bold leading-snug tracking-tight group-hover:text-primary sm:text-3xl">
+          <h2 className="mb-3 text-2xl leading-snug font-bold tracking-tight group-hover:text-primary sm:text-3xl">
             {post.title}
           </h2>
           <p className="mb-5 flex-1 leading-relaxed text-muted-foreground">{post.description}</p>
@@ -97,7 +102,7 @@ function FeaturedCard({ post }: { post: BlogPost }) {
 
         {/* Visual placeholder — replace with <Image> when posts have cover images */}
         <div className="hidden items-center justify-center rounded-xl bg-gradient-to-br from-primary/10 via-primary/5 to-transparent sm:col-span-2 sm:flex">
-          <Icon className="h-20 w-20 text-primary/20" />
+          <DynamicIcon name={post.icon} className="h-20 w-20 text-primary/20" />
         </div>
       </div>
     </Link>
@@ -105,21 +110,20 @@ function FeaturedCard({ post }: { post: BlogPost }) {
 }
 
 function GridCard({ post }: { post: BlogPost }) {
-  const Icon = resolveIcon(post.icon);
   return (
     <Link href={`/blog/${post.slug}`} className="group">
       <article className="flex h-full flex-col rounded-xl border bg-card p-5 transition-all hover:border-primary/40 hover:shadow-sm">
         <div className="mb-4 flex h-10 w-10 items-center justify-center rounded-lg bg-muted">
-          <Icon className="h-5 w-5 text-muted-foreground" />
+          <DynamicIcon name={post.icon} className="h-5 w-5 text-muted-foreground" />
         </div>
 
         <Badge variant={categoryVariant[post.category]} className="mb-3 self-start text-xs">
           {post.category}
         </Badge>
-        <h3 className="mb-2 font-semibold leading-snug tracking-tight group-hover:text-primary">
+        <h3 className="mb-2 leading-snug font-semibold tracking-tight group-hover:text-primary">
           {post.title}
         </h3>
-        <p className="mb-4 flex-1 text-sm leading-relaxed text-muted-foreground line-clamp-3">
+        <p className="mb-4 line-clamp-3 flex-1 text-sm leading-relaxed text-muted-foreground">
           {post.description}
         </p>
 
@@ -173,7 +177,7 @@ export default async function BlogPage({
         <div className="mx-auto max-w-content">
           <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
             <div>
-              <p className="mb-1 text-sm font-medium uppercase tracking-widest text-primary">
+              <p className="mb-1 text-sm font-medium tracking-widest text-primary uppercase">
                 Trace Blog
               </p>
               <h1 className="text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl">
@@ -198,10 +202,7 @@ export default async function BlogPage({
                 </Badge>
               </Link>
               {ALL_CATEGORIES.map((cat) => (
-                <Link
-                  key={cat}
-                  href={activeCategory === cat ? '/blog' : `/blog?category=${cat}`}
-                >
+                <Link key={cat} href={activeCategory === cat ? '/blog' : `/blog?category=${cat}`}>
                   <Badge
                     variant={activeCategory === cat ? 'default' : 'outline'}
                     className="cursor-pointer text-xs transition-colors hover:bg-primary hover:text-primary-foreground"
@@ -249,7 +250,7 @@ export default async function BlogPage({
               {featured && <FeaturedCard post={featured} />}
               {rest.length > 0 && (
                 <div>
-                  <p className="mb-5 text-sm font-semibold uppercase tracking-widest text-muted-foreground">
+                  <p className="mb-5 text-sm font-semibold tracking-widest text-muted-foreground uppercase">
                     More articles
                   </p>
                   <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">

@@ -112,10 +112,10 @@ function RelatedPosts({
               <Badge variant={categoryVariant[post.category]} className="mb-3 self-start text-xs">
                 {post.category}
               </Badge>
-              <h3 className="mb-2 flex-1 font-semibold leading-snug tracking-tight group-hover:text-primary">
+              <h3 className="mb-2 flex-1 leading-snug font-semibold tracking-tight group-hover:text-primary">
                 {post.title}
               </h3>
-              <p className="mb-4 text-sm text-muted-foreground line-clamp-2">{post.description}</p>
+              <p className="mb-4 line-clamp-2 text-sm text-muted-foreground">{post.description}</p>
               <div className="flex items-center justify-between border-t pt-4">
                 <div className="flex items-center gap-2">
                   <div className="flex h-6 w-6 items-center justify-center rounded-full bg-primary/10 text-[10px] font-bold text-primary">
@@ -184,12 +184,12 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
             {post.category}
           </Link>
           <ChevronRight className="h-3.5 w-3.5" />
-          <span className="max-w-[200px] truncate text-foreground sm:max-w-xs">{post.title}</span>
+          <span className="max-w-[160px] truncate text-foreground sm:max-w-xs">{post.title}</span>
         </nav>
       </div>
 
       {/* ── Compact inline header ─────────────────────── */}
-      <section className="container pb-8 pt-6">
+      <section className="container pt-6 pb-8">
         <div className="mx-auto max-w-content">
           <div className="mb-3 flex flex-wrap items-center gap-3">
             <Badge variant={categoryVariant[post.category]}>{post.category}</Badge>
@@ -222,11 +222,11 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
       {/* ── Content: LEFT TOC + wide article ──────────── */}
       <section className="container py-section">
         <div className="mx-auto max-w-content">
-          <div className="flex gap-10 xl:gap-14">
+          <div className="flex gap-10 lg:gap-12 xl:gap-14">
             {/* LEFT sticky TOC */}
-            <aside className="hidden w-52 shrink-0 xl:block">
+            <aside className="hidden w-44 shrink-0 lg:block xl:w-52">
               <div className="sticky top-20">
-                <p className="mb-3 text-xs font-semibold uppercase tracking-widest text-muted-foreground">
+                <p className="mb-3 text-xs font-semibold tracking-widest text-muted-foreground uppercase">
                   Contents
                 </p>
                 <DocsTableOfContents />

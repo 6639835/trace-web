@@ -6,9 +6,9 @@ import { Separator } from '@/components/ui/separator';
 import { Timeline, TimelineItem } from '@/components/ui/timeline';
 import { PageHeader } from '@/components/shared/page-header';
 import { PageSection } from '@/components/shared/page-section';
-import { FeatureCard } from '@/components/marketing/feature-card';
+import { BentoGrid, BentoItem } from '@/components/sections/bento-grid';
+import { EditorialBanner } from '@/components/sections/editorial-banner';
 import {
-  Target,
   Code,
   Shield,
   Users,
@@ -42,18 +42,56 @@ export const metadata: Metadata = {
   },
 };
 
+/** Quick stats shown in the split hero aside slot */
+function HeroStats() {
+  return (
+    <div className="grid w-full max-w-sm grid-cols-2 gap-3 lg:max-w-none">
+      {[
+        { value: 'MIT', label: 'License' },
+        { value: 'Free', label: 'Always' },
+        { value: 'On-device', label: 'Privacy' },
+        { value: '2026', label: 'Founded' },
+      ].map(({ value, label }) => (
+        <div
+          key={label}
+          className="flex flex-col items-center justify-center rounded-xl border bg-muted/40 px-4 py-6 text-center"
+        >
+          <span className="text-2xl font-bold tracking-tight sm:text-3xl">{value}</span>
+          <span className="mt-1 text-xs font-medium tracking-wide text-muted-foreground uppercase">
+            {label}
+          </span>
+        </div>
+      ))}
+    </div>
+  );
+}
+
 export default function AboutPage() {
   return (
     <div className="flex flex-col">
+      {/* ── Split hero: headline left, stats right ── */}
       <PageHeader
-        icon={Target}
-        title="About Trace"
-        description="Building the best iOS network debugger. On-device, privacy-first, and designed for developers who need precise visibility into their apps' network behavior."
-      />
+        variant="split"
+        title="Building the best iOS network debugger."
+        description="On-device, privacy-first, and designed for developers who need precise visibility into their apps' network behavior."
+        aside={<HeroStats />}
+      >
+        <div className="flex flex-col gap-3 sm:flex-row sm:gap-4">
+          <Button asChild>
+            <a href="https://github.com/Trace-iOS/Trace" target="_blank" rel="noopener noreferrer">
+              <Code className="mr-2 h-4 w-4" />
+              View on GitHub
+            </a>
+          </Button>
+          <Button variant="outline" asChild>
+            <Link href="/contributing">Start contributing</Link>
+          </Button>
+        </div>
+      </PageHeader>
 
       <Separator />
 
-      {/* Mission */}
+      {/* ── Mission ── */}
       <PageSection>
         <div className="mx-auto max-w-readable">
           <h2 className="mb-6 text-2xl font-bold tracking-tight sm:mb-8 sm:text-3xl">
@@ -78,7 +116,7 @@ export default function AboutPage() {
 
       <Separator />
 
-      {/* Story */}
+      {/* ── Story ── */}
       <PageSection>
         <div className="mx-auto max-w-readable">
           <h2 className="mb-6 text-2xl font-bold tracking-tight sm:mb-8 sm:text-3xl">
@@ -116,46 +154,62 @@ export default function AboutPage() {
 
       <Separator />
 
-      {/* Principles */}
+      {/* ── Principles: bento grid ── */}
       <PageSection>
         <div className="mx-auto max-w-content">
           <h2 className="mb-8 text-2xl font-bold tracking-tight sm:mb-10 sm:text-3xl md:mb-12">
             Our principles
           </h2>
-          <div className="grid gap-4 sm:grid-cols-2 sm:gap-5 md:gap-6">
-            <FeatureCard
-              icon={Shield}
-              title="Privacy first"
-              description="All traffic capture and analysis happens on-device. No telemetry, no analytics, no external servers. Your data never leaves your device. The architecture is designed to make privacy violations impossible, not just unlikely."
-            />
-            <FeatureCard
-              icon={Code}
-              title="Open source"
-              description="Complete source code is available under the MIT license. Audit the implementation, verify security claims, or fork it for your needs. Transparency builds trust, and trust is essential for debugging tools."
-            />
-            <FeatureCard
-              icon={Zap}
-              title="Performance matters"
-              description={
-                <>
-                  Network debugging is time-sensitive work. Trace is optimized for minimal latency,
-                  efficient memory usage, and fast UI responsiveness. Even a debugging tool needs to
-                  be fast enough that it doesn&apos;t slow down your workflow.
-                </>
-              }
-            />
-            <FeatureCard
-              icon={Users}
-              title="Community driven"
-              description="Feature priorities and roadmap decisions are shaped by user feedback. Contributions are welcome—code, documentation, bug reports, and feature requests all move the project forward. This is built with the community, not just for it."
-            />
-          </div>
+
+          <BentoGrid>
+            {/* Privacy — large card */}
+            <BentoItem size="md" className="flex flex-col gap-3">
+              <Shield className="h-8 w-8 text-primary" />
+              <h3 className="text-lg font-semibold">Privacy first</h3>
+              <p className="text-sm leading-relaxed text-muted-foreground">
+                All traffic capture and analysis happens on-device. No telemetry, no analytics, no
+                external servers. Your data never leaves your device. The architecture is designed
+                to make privacy violations impossible, not just unlikely.
+              </p>
+            </BentoItem>
+
+            {/* Open source — small */}
+            <BentoItem size="sm">
+              <Code className="mb-3 h-7 w-7 text-primary" />
+              <h3 className="mb-2 font-semibold">Open source</h3>
+              <p className="text-sm text-muted-foreground">
+                Complete source under MIT license. Audit the implementation, verify security claims,
+                or fork it for your needs. Transparency builds trust.
+              </p>
+            </BentoItem>
+
+            {/* Performance — small */}
+            <BentoItem size="sm">
+              <Zap className="mb-3 h-7 w-7 text-primary" />
+              <h3 className="mb-2 font-semibold">Performance matters</h3>
+              <p className="text-sm text-muted-foreground">
+                Optimized for minimal latency, efficient memory usage, and fast UI responsiveness.
+                Even a debugging tool must be fast enough that it doesn&apos;t slow your workflow.
+              </p>
+            </BentoItem>
+
+            {/* Community — large card */}
+            <BentoItem size="md" className="flex flex-col gap-3">
+              <Users className="h-8 w-8 text-primary" />
+              <h3 className="text-lg font-semibold">Community driven</h3>
+              <p className="text-sm leading-relaxed text-muted-foreground">
+                Feature priorities and roadmap decisions are shaped by user feedback. Contributions
+                are welcome—code, documentation, bug reports, and feature requests all move the
+                project forward. This is built <em>with</em> the community, not just for it.
+              </p>
+            </BentoItem>
+          </BentoGrid>
         </div>
       </PageSection>
 
       <Separator />
 
-      {/* Milestones */}
+      {/* ── Milestones timeline ── */}
       <PageSection>
         <div className="mx-auto max-w-readable">
           <h2 className="mb-8 text-2xl font-bold tracking-tight sm:mb-10 sm:text-3xl md:mb-12">
@@ -265,7 +319,7 @@ export default function AboutPage() {
 
       <Separator />
 
-      {/* Team */}
+      {/* ── Team ── */}
       <PageSection>
         <div className="mx-auto max-w-readable">
           <h2 className="mb-6 text-2xl font-bold tracking-tight sm:mb-8 sm:text-3xl">Team</h2>
@@ -320,39 +374,29 @@ export default function AboutPage() {
         </div>
       </PageSection>
 
-      <Separator />
-
-      {/* CTA */}
-      <PageSection>
-        <div className="mx-auto max-w-readable text-center">
-          <Heart className="mx-auto mb-4 h-10 w-10 text-primary sm:mb-6 sm:h-12 sm:w-12" />
-          <h2 className="mb-3 text-2xl font-bold tracking-tight sm:mb-4 sm:text-3xl">
-            Join the journey
-          </h2>
-          <p className="mb-6 text-sm text-muted-foreground sm:mb-8 sm:text-base">
-            Trace is built in the open with the community. Contribute code, report bugs, suggest
-            features, or simply star the project to show your support.
-          </p>
-          <div className="flex flex-col justify-center gap-3 sm:flex-row sm:gap-4">
-            <Button size="lg" asChild>
-              <a
-                href="https://github.com/Trace-iOS/Trace"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <Code className="mr-2 h-5 w-5" />
-                View on GitHub
-              </a>
-            </Button>
-            <Button size="lg" variant="outline" asChild>
-              <Link href="/contributing">
-                <Rocket className="mr-2 h-5 w-5" />
-                Start contributing
-              </Link>
-            </Button>
-          </div>
+      {/* ── CTA: editorial banner ── */}
+      <EditorialBanner variant="muted">
+        <Heart className="mx-auto mb-5 h-10 w-10 text-primary sm:h-12 sm:w-12" />
+        <h2 className="mb-3 text-2xl font-bold tracking-tight sm:text-3xl">Join the journey</h2>
+        <p className="mb-8 text-sm text-muted-foreground sm:text-base">
+          Trace is built in the open with the community. Contribute code, report bugs, suggest
+          features, or simply star the project to show your support.
+        </p>
+        <div className="flex flex-col justify-center gap-3 sm:flex-row sm:gap-4">
+          <Button size="lg" asChild>
+            <a href="https://github.com/Trace-iOS/Trace" target="_blank" rel="noopener noreferrer">
+              <Code className="mr-2 h-5 w-5" />
+              View on GitHub
+            </a>
+          </Button>
+          <Button size="lg" variant="outline" asChild>
+            <Link href="/contributing">
+              <Rocket className="mr-2 h-5 w-5" />
+              Start contributing
+            </Link>
+          </Button>
         </div>
-      </PageSection>
+      </EditorialBanner>
     </div>
   );
 }

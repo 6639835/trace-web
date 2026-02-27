@@ -1,10 +1,9 @@
 import type { Metadata } from 'next';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Separator } from '@/components/ui/separator';
 import { Badge } from '@/components/ui/badge';
-import { PageHeader } from '@/components/shared/page-header';
 import { PageSection } from '@/components/shared/page-section';
-import { Newspaper, Mail, Palette } from 'lucide-react';
+import { MetricsStrip } from '@/components/sections/metrics-strip';
+import { EditorialBanner } from '@/components/sections/editorial-banner';
+import { Newspaper, Mail } from 'lucide-react';
 import { EmailLink } from '@/components/shared/email-link';
 
 export const metadata: Metadata = {
@@ -25,115 +24,78 @@ export const metadata: Metadata = {
 export default function PressPage() {
   return (
     <div className="flex flex-col">
-      <PageHeader
-        icon={Newspaper}
-        title="Press Kit"
-        description="Brand assets, logos, and media resources for writing about Trace."
+      {/* ── Minimal left-aligned hero ── */}
+      <section className="container py-section">
+        <div className="mx-auto max-w-content">
+          <div className="mb-3 flex items-center gap-2">
+            <Newspaper className="h-5 w-5 text-primary" />
+            <span className="text-sm font-medium tracking-widest text-primary uppercase">
+              Press Kit
+            </span>
+          </div>
+          <h1 className="mb-4 text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl">
+            Media resources for Trace.
+          </h1>
+          <p className="max-w-readable text-sm leading-relaxed text-muted-foreground sm:text-base lg:text-lg">
+            Brand assets, copy, and contact information for journalists, bloggers, and content
+            creators writing about Trace.
+          </p>
+        </div>
+      </section>
+
+      {/* ── Quick facts strip ── */}
+      <MetricsStrip
+        metrics={[
+          { value: 'Free', label: 'Pricing' },
+          { value: 'MIT', label: 'License' },
+          { value: 'iOS 16+', label: 'Platform' },
+          { value: 'Dec 2024', label: 'Launched' },
+        ]}
       />
 
-      <Separator />
-
-      {/* Quick Facts */}
-      <PageSection>
+      {/* ── About Trace: 2-col — blurbs left, full bio right ── */}
+      <PageSection spacing="lg">
         <div className="mx-auto max-w-content">
-          <h2 className="mb-8 text-xl font-bold tracking-tight sm:mb-10 sm:text-2xl">
-            Quick facts
-          </h2>
-          <div className="grid gap-4 sm:grid-cols-2 sm:gap-5 md:gap-6">
-            <Card>
-              <CardHeader>
-                <CardTitle className="text-lg">Name</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-sm text-muted-foreground">Trace iOS Network Debugger</p>
-              </CardContent>
-            </Card>
-
-            <Card>
-              <CardHeader>
-                <CardTitle className="text-lg">Category</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-sm text-muted-foreground">
-                  Developer Tools • Network Debugging • iOS Utilities
-                </p>
-              </CardContent>
-            </Card>
-
-            <Card>
-              <CardHeader>
-                <CardTitle className="text-lg">Platform</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-sm text-muted-foreground">iOS 16.0+ • iPadOS 16.0+</p>
-              </CardContent>
-            </Card>
-
-            <Card>
-              <CardHeader>
-                <CardTitle className="text-lg">License</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-sm text-muted-foreground">MIT License • Open Source</p>
-              </CardContent>
-            </Card>
-
-            <Card>
-              <CardHeader>
-                <CardTitle className="text-lg">Launch Date</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-sm text-muted-foreground">December 2024</p>
-              </CardContent>
-            </Card>
-
-            <Card>
-              <CardHeader>
-                <CardTitle className="text-lg">Pricing</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-sm text-muted-foreground">Free</p>
-              </CardContent>
-            </Card>
-          </div>
-        </div>
-      </PageSection>
-
-      <Separator />
-
-      {/* About Trace */}
-      <PageSection>
-        <div className="mx-auto max-w-readable">
-          <h2 className="mb-6 text-2xl font-bold tracking-tight sm:mb-8 sm:text-3xl">
+          <h2 className="mb-8 text-xl font-bold tracking-tight sm:mb-10 sm:text-2xl md:text-3xl">
             About Trace
           </h2>
 
-          <div className="space-y-6">
-            <div>
-              <h3 className="mb-2 text-sm font-semibold">Short (1-2 sentences)</h3>
-              <p className="text-sm leading-relaxed text-muted-foreground">
-                Trace is a free, open-source iOS network debugger that captures and inspects
-                HTTP(S), WebSocket, and SSE traffic entirely on-device. Built for developers who
-                need precise network visibility without compromising privacy.
-              </p>
+          <div className="grid gap-8 lg:grid-cols-[1fr_1.5fr] lg:gap-16">
+            {/* Left: short + medium */}
+            <div className="space-y-8">
+              <div>
+                <p className="mb-2 text-xs font-semibold tracking-widest text-muted-foreground uppercase">
+                  Short (1–2 sentences)
+                </p>
+                <p className="text-sm leading-relaxed text-muted-foreground">
+                  Trace is a free, open-source iOS network debugger that captures and inspects
+                  HTTP(S), WebSocket, and SSE traffic entirely on-device. Built for developers who
+                  need precise network visibility without compromising privacy.
+                </p>
+              </div>
+
+              <div>
+                <p className="mb-2 text-xs font-semibold tracking-widest text-muted-foreground uppercase">
+                  Medium (1 paragraph)
+                </p>
+                <p className="text-sm leading-relaxed text-muted-foreground">
+                  Trace brings professional-grade network debugging directly to iPhone and iPad.
+                  Using Network Extension APIs, it captures device-wide HTTP(S) traffic, provides
+                  TLS man-in-the-middle inspection with an on-device certificate authority, and
+                  offers first-class support for real-time protocols like WebSocket and Server-Sent
+                  Events. All processing happens locally—no data leaves your device. It&apos;s open
+                  source, privacy-first, and designed for developers who need powerful debugging
+                  tools on mobile.
+                </p>
+              </div>
             </div>
 
+            {/* Right: long bio */}
             <div>
-              <h3 className="mb-2 text-sm font-semibold">Medium (1 paragraph)</h3>
-              <p className="text-sm leading-relaxed text-muted-foreground">
-                Trace brings professional-grade network debugging directly to iPhone and iPad. Using
-                Network Extension APIs, it captures device-wide HTTP(S) traffic, provides TLS
-                man-in-the-middle inspection with an on-device certificate authority, and offers
-                first-class support for real-time protocols like WebSocket and Server-Sent Events.
-                All processing happens locally—no data leaves your device. It&apos;s open source,
-                privacy-first, and designed for developers who need powerful debugging tools on
-                mobile.
+              <p className="mb-2 text-xs font-semibold tracking-widest text-muted-foreground uppercase">
+                Long (2–3 paragraphs)
               </p>
-            </div>
-
-            <div>
-              <h3 className="mb-2 text-sm font-semibold">Long (2-3 paragraphs)</h3>
-              <div className="space-y-3 text-sm leading-relaxed text-muted-foreground">
+              <div className="space-y-4 text-sm leading-relaxed text-muted-foreground">
                 <p>
                   Trace is an open-source iOS network debugger that captures and inspects network
                   traffic entirely on your device. Unlike traditional desktop tools, Trace runs
@@ -159,155 +121,156 @@ export default function PressPage() {
         </div>
       </PageSection>
 
-      <Separator />
-
-      {/* Key Features */}
-      <PageSection>
-        <div className="mx-auto max-w-content">
-          <h2 className="mb-6 text-2xl font-bold tracking-tight sm:mb-8 sm:text-3xl">
-            Key features
-          </h2>
-          <div className="flex flex-wrap gap-2">
-            <Badge variant="secondary">Device-wide capture</Badge>
-            <Badge variant="secondary">TLS MITM inspection</Badge>
-            <Badge variant="secondary">WebSocket support</Badge>
-            <Badge variant="secondary">Traffic modification</Badge>
-            <Badge variant="secondary">Request builder</Badge>
-            <Badge variant="secondary">HAR export</Badge>
-            <Badge variant="secondary">PCAP export</Badge>
-            <Badge variant="secondary">On-device processing</Badge>
-            <Badge variant="secondary">Privacy-first</Badge>
-            <Badge variant="secondary">Open source</Badge>
+      {/* ── Key features badge strip ── */}
+      <div className="border-y bg-muted/30">
+        <div className="container py-8 sm:py-10">
+          <div className="mx-auto max-w-content">
+            <p className="mb-4 text-xs font-semibold tracking-widest text-muted-foreground uppercase sm:mb-5">
+              Key features
+            </p>
+            <div className="flex flex-wrap gap-2">
+              {[
+                'Device-wide capture',
+                'TLS MITM inspection',
+                'WebSocket support',
+                'Traffic modification',
+                'Request builder',
+                'HAR export',
+                'PCAP export',
+                'On-device processing',
+                'Privacy-first',
+                'Open source',
+              ].map((tag) => (
+                <Badge key={tag} variant="secondary">
+                  {tag}
+                </Badge>
+              ))}
+            </div>
           </div>
         </div>
-      </PageSection>
+      </div>
 
-      <Separator />
-
-      {/* Brand Assets */}
-      <PageSection>
+      {/* ── Brand assets: 2-col grid ── */}
+      <PageSection spacing="lg">
         <div className="mx-auto max-w-content">
-          <Palette className="mx-auto mb-4 h-10 w-10 text-muted-foreground sm:mb-6" />
-          <h2 className="mb-6 text-center text-2xl font-bold tracking-tight sm:mb-8 sm:text-3xl">
+          <h2 className="mb-8 text-xl font-bold tracking-tight sm:mb-10 sm:text-2xl md:text-3xl">
             Brand assets
           </h2>
 
-          <div className="space-y-6">
-            <Card>
-              <CardHeader>
-                <CardTitle>Logos</CardTitle>
-                <CardDescription>Trace logo and logomark in various formats</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <p className="text-sm text-muted-foreground">
-                  Logo files are available in the{' '}
-                  <a
-                    href="https://github.com/Trace-iOS/Trace/tree/main/Assets"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-primary hover:underline"
-                  >
-                    GitHub repository
-                  </a>
-                  . Includes SVG, PNG, and other formats for both light and dark backgrounds.
+          <div className="grid gap-8 sm:grid-cols-2 lg:gap-12">
+            {/* Logos */}
+            <div>
+              <h3 className="mb-3 font-semibold">Logos</h3>
+              <p className="mb-4 text-sm leading-relaxed text-muted-foreground">
+                SVG, PNG, and other formats for both light and dark backgrounds, available in the{' '}
+                <a
+                  href="https://github.com/Trace-iOS/Trace/tree/main/Assets"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-primary hover:underline"
+                >
+                  GitHub repository
+                </a>
+                .
+              </p>
+            </div>
+
+            {/* Screenshots */}
+            <div>
+              <h3 className="mb-3 font-semibold">Screenshots</h3>
+              <p className="mb-4 text-sm leading-relaxed text-muted-foreground">
+                High-resolution screenshots available on request. Contact for specific marketing
+                materials or press inquiries.
+              </p>
+            </div>
+
+            {/* Colors */}
+            <div className="sm:col-span-2">
+              <h3 className="mb-4 font-semibold">Brand colors</h3>
+              <div className="flex flex-wrap gap-6">
+                {[
+                  { name: 'Primary Blue', hex: '#0073FF', bg: 'bg-[#0073FF]', border: '' },
+                  {
+                    name: 'Black',
+                    hex: '#000000',
+                    bg: 'bg-[#000000]',
+                    border: 'dark:border dark:border-muted',
+                  },
+                  {
+                    name: 'White',
+                    hex: '#FFFFFF',
+                    bg: 'bg-[#FFFFFF]',
+                    border: 'border border-muted',
+                  },
+                ].map(({ name, hex, bg, border }) => (
+                  <div key={hex} className="flex items-center gap-3">
+                    <div className={`h-12 w-12 rounded-lg ${bg} ${border}`} />
+                    <div>
+                      <div className="text-sm font-medium">{name}</div>
+                      <div className="font-mono text-xs text-muted-foreground">{hex}</div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </PageSection>
+
+      {/* ── Usage guidelines ── */}
+      <div className="border-y bg-muted/30">
+        <div className="container py-section">
+          <div className="mx-auto max-w-readable">
+            <h2 className="mb-6 text-xl font-bold tracking-tight sm:text-2xl">Usage guidelines</h2>
+            <div className="grid gap-4 sm:grid-cols-2 sm:gap-6">
+              <div className="rounded-xl border bg-card p-4">
+                <p className="mb-1 text-xs font-semibold tracking-wide text-emerald-600 uppercase dark:text-emerald-400">
+                  Do
                 </p>
-              </CardContent>
-            </Card>
-
-            <Card>
-              <CardHeader>
-                <CardTitle>Colors</CardTitle>
-                <CardDescription>Primary brand colors</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-2 text-sm">
-                  <div className="flex items-center gap-3">
-                    <div className="h-10 w-10 rounded border bg-[#0073FF]" />
-                    <div>
-                      <div className="font-medium">Primary Blue</div>
-                      <div className="text-xs text-muted-foreground">#0073FF</div>
-                    </div>
-                  </div>
-                  <div className="flex items-center gap-3">
-                    <div className="h-10 w-10 rounded border bg-[#000000]" />
-                    <div>
-                      <div className="font-medium">Black</div>
-                      <div className="text-xs text-muted-foreground">#000000</div>
-                    </div>
-                  </div>
-                  <div className="flex items-center gap-3">
-                    <div className="h-10 w-10 rounded border border-muted bg-[#FFFFFF]" />
-                    <div>
-                      <div className="font-medium">White</div>
-                      <div className="text-xs text-muted-foreground">#FFFFFF</div>
-                    </div>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-
-            <Card>
-              <CardHeader>
-                <CardTitle>Screenshots</CardTitle>
-                <CardDescription>App screenshots and UI examples</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <p className="text-sm text-muted-foreground">
-                  High-resolution screenshots available on request. Contact for specific marketing
-                  materials or press inquiries.
+                <p className="text-sm leading-relaxed text-muted-foreground">
+                  Use the Trace name and logo when writing about the project, sharing tutorials, or
+                  linking to the website.
                 </p>
-              </CardContent>
-            </Card>
+              </div>
+              <div className="rounded-xl border bg-card p-4">
+                <p className="mb-1 text-xs font-semibold tracking-wide text-emerald-600 uppercase dark:text-emerald-400">
+                  Do
+                </p>
+                <p className="text-sm leading-relaxed text-muted-foreground">
+                  Modify logo colors to fit your design as long as the mark remains recognizable.
+                </p>
+              </div>
+              <div className="rounded-xl border bg-card p-4">
+                <p className="mb-1 text-xs font-semibold tracking-wide text-amber-600 uppercase dark:text-amber-400">
+                  Don&apos;t
+                </p>
+                <p className="text-sm leading-relaxed text-muted-foreground">
+                  Use the Trace name or logo in a way that implies official endorsement without
+                  permission.
+                </p>
+              </div>
+              <div className="rounded-xl border bg-card p-4">
+                <p className="mb-1 text-xs font-semibold tracking-wide text-amber-600 uppercase dark:text-amber-400">
+                  Don&apos;t
+                </p>
+                <p className="text-sm leading-relaxed text-muted-foreground">
+                  Modify the logo&apos;s proportions or add effects that distort the design.
+                </p>
+              </div>
+            </div>
           </div>
         </div>
-      </PageSection>
+      </div>
 
-      <Separator />
-
-      {/* Usage Guidelines */}
-      <PageSection>
-        <div className="mx-auto max-w-readable">
-          <h2 className="mb-6 text-2xl font-bold tracking-tight sm:mb-8 sm:text-3xl">
-            Usage guidelines
-          </h2>
-          <div className="space-y-4 text-sm leading-relaxed text-muted-foreground">
-            <p>
-              <strong className="text-foreground">Do:</strong> Use the Trace name and logo when
-              writing about the project, sharing tutorials, or linking to the website.
-            </p>
-            <p>
-              <strong className="text-foreground">Do:</strong> Modify logo colors to fit your design
-              as long as the mark remains recognizable.
-            </p>
-            <p>
-              <strong className="text-foreground">Don&apos;t:</strong> Use the Trace name or logo in
-              a way that implies official endorsement without permission.
-            </p>
-            <p>
-              <strong className="text-foreground">Don&apos;t:</strong> Modify the logo&apos;s
-              proportions or add effects that distort the design.
-            </p>
-          </div>
-        </div>
-      </PageSection>
-
-      <Separator />
-
-      {/* Media Contact */}
-      <PageSection>
-        <div className="mx-auto max-w-readable text-center">
-          <Mail className="mx-auto mb-4 h-10 w-10 text-muted-foreground sm:mb-6" />
-          <h2 className="mb-3 text-2xl font-bold tracking-tight sm:mb-4 sm:text-3xl">
-            Media contact
-          </h2>
-          <p className="mb-6 text-sm text-muted-foreground sm:text-base">
-            For press inquiries, interviews, or additional materials, reach out via email.
-          </p>
-          <div className="flex flex-col items-center gap-2">
-            <EmailLink email="epa6643@gmail.com" />
-          </div>
-        </div>
-      </PageSection>
+      {/* ── Media contact: editorial banner ── */}
+      <EditorialBanner variant="muted">
+        <Mail className="mx-auto mb-4 h-10 w-10 text-primary sm:h-12 sm:w-12" />
+        <h2 className="mb-3 text-2xl font-bold tracking-tight sm:text-3xl">Media contact</h2>
+        <p className="mb-6 text-sm text-muted-foreground sm:text-base">
+          For press inquiries, interviews, or additional materials, reach out via email.
+        </p>
+        <EmailLink email="epa6643@gmail.com" />
+      </EditorialBanner>
     </div>
   );
 }

@@ -1,9 +1,11 @@
 import type { Metadata } from 'next';
-import { Separator } from '@/components/ui/separator';
 import { Badge } from '@/components/ui/badge';
-import { PageHeader } from '@/components/shared/page-header';
+import { Separator } from '@/components/ui/separator';
 import { PageSection } from '@/components/shared/page-section';
 import { FeatureCard } from '@/components/marketing/feature-card';
+import { EditorialBanner } from '@/components/sections/editorial-banner';
+import Link from 'next/link';
+import { Button } from '@/components/ui/button';
 import {
   Smartphone,
   Server,
@@ -12,9 +14,11 @@ import {
   Radio,
   MessageSquare,
   Activity,
-  Layers,
+  BookOpen,
 } from 'lucide-react';
+import { CodeBlock } from '@/components/docs/mdx/code-block';
 import { NetworkFlowDiagram } from '@/components/marketing/network-flow-diagram';
+import { SectionNav } from '@/components/shared/section-nav';
 
 export const metadata: Metadata = {
   title: 'Architecture - How Trace Works Under the Hood',
@@ -43,54 +47,77 @@ export const metadata: Metadata = {
 export default function ArchitecturePage() {
   return (
     <div className="flex flex-col">
-      <PageHeader
-        icon={Layers}
-        title="Architecture"
-        description="A deep look at how Trace works under the hood. Understanding the technical foundation and design decisions."
+      {/* ── Minimal left-aligned hero ── */}
+      <section className="container py-section">
+        <div className="mx-auto max-w-content">
+          <h1 className="mb-4 text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl">
+            How Trace works under the hood.
+          </h1>
+          <p className="mb-6 max-w-readable text-sm leading-relaxed text-muted-foreground sm:text-base lg:text-lg">
+            A deep look at the technical foundation and design decisions that power on-device iOS
+            network debugging.
+          </p>
+          <div className="flex flex-wrap gap-2">
+            {['NEPacketTunnelProvider', 'TLS MITM', 'App Groups', 'WidgetKit', 'Swift 6'].map(
+              (tag) => (
+                <Badge key={tag} variant="secondary" className="text-xs">
+                  {tag}
+                </Badge>
+              ),
+            )}
+          </div>
+        </div>
+      </section>
+
+      <SectionNav
+        ariaLabel="Architecture sections"
+        items={[
+          { href: '#overview', label: 'Overview' },
+          { href: '#packet-tunnel', label: 'Packet Tunnel' },
+          { href: '#storage', label: 'Storage & IPC' },
+          { href: '#protocols', label: 'Protocols' },
+          { href: '#performance', label: 'Performance' },
+          { href: '#security', label: 'Security' },
+        ]}
       />
 
-      <Separator />
-
-      {/* System Overview */}
-      <PageSection>
-        <div className="mx-auto max-w-content">
-          <h2 className="mb-4 text-xl font-bold tracking-tight sm:mb-6 sm:text-2xl">
+      {/* ── System Overview ── */}
+      <PageSection spacing="lg">
+        <div id="overview" className="mx-auto max-w-content scroll-mt-32">
+          <h2 className="mb-4 text-xl font-bold tracking-tight sm:mb-6 sm:text-2xl md:text-3xl">
             System overview
           </h2>
-          <p className="mb-6 text-sm leading-relaxed text-muted-foreground sm:mb-8 sm:text-base">
-            Trace is built on iOS Network Extension framework, specifically implementing
-            NEPacketTunnelProvider. The tunnel runs in proxy-only mode and configures system proxy
-            settings to route HTTP/HTTPS through a local MITM proxy. Apps must honor the system
-            proxy for their traffic to be captured. The system consists of three primary components
-            that communicate via shared App Group container.
+          <p className="mb-8 max-w-readable text-sm leading-relaxed text-muted-foreground sm:text-base">
+            Trace implements NEPacketTunnelProvider in proxy-only mode, configuring system proxy
+            settings to route HTTP/HTTPS through a local MITM proxy. Three components communicate
+            via a shared App Group container.
           </p>
 
-          <div className="mb-8 grid gap-4 sm:mb-10 sm:grid-cols-2 sm:gap-5 md:mb-12 md:gap-6 lg:grid-cols-3">
+          <div className="mb-10 grid gap-4 sm:grid-cols-2 sm:gap-5 md:gap-6 lg:grid-cols-3">
             <FeatureCard
               icon={Smartphone}
               title="Main application"
               titleClassName="text-lg"
-              description="SwiftUI-based interface for viewing captured traffic, managing filters, and configuring settings. Reads data from shared App Group container and provides real-time updates. Handles export, search, replay, modification tools, and built-in utilities."
+              description="SwiftUI interface for viewing captured traffic, managing filters, and configuring settings. Reads from the shared App Group and provides real-time updates. Handles export, search, replay, modification tools, and utilities."
             />
             <FeatureCard
               icon={Server}
               title="Network extension (TraceVPN)"
               titleClassName="text-lg"
-              description="Separate process running NEPacketTunnelProvider in proxy-only mode. Configures system proxy settings and runs the local MITM proxy for HTTP/HTTPS. Handles TLS, HTTP/2, WebSocket, and SSE before writing captures to the App Group."
+              description="Separate process running NEPacketTunnelProvider in proxy-only mode. Configures system proxy settings and runs the local MITM proxy. Handles TLS, HTTP/2, WebSocket, and SSE before writing captures to the App Group."
             />
             <FeatureCard
               icon={LayoutGrid}
               title="Widget extension"
               titleClassName="text-lg"
-              description="WidgetKit bundle with standard widget, control widget, and Live Activity. Real-time network statistics and quick actions. Shares data through App Group container."
+              description="WidgetKit bundle with standard widget, control widget, and Live Activity. Real-time network statistics and quick actions. Shares data through the App Group container."
             />
           </div>
 
           <div>
-            <h3 className="mb-4 font-semibold">Network flow</h3>
+            <h3 className="mb-3 font-semibold">Network flow</h3>
             <p className="mb-6 text-sm leading-relaxed text-muted-foreground">
-              Trace uses a VPN-based proxy mode to capture HTTP/HTTPS traffic. All captured traffic
-              stays on-device and flows through a local MITM proxy server.
+              All captured traffic stays on-device and flows through a local MITM proxy server.
             </p>
             <NetworkFlowDiagram />
           </div>
@@ -99,73 +126,77 @@ export default function ArchitecturePage() {
 
       <Separator />
 
-      {/* Network Extension */}
+      {/* ── Network Extension / Packet Tunnel ── */}
       <PageSection>
-        <div className="mx-auto max-w-content">
-          <h2 className="mb-4 text-xl font-bold tracking-tight sm:mb-6 sm:text-2xl">
+        <div id="packet-tunnel" className="mx-auto max-w-content scroll-mt-32">
+          <h2 className="mb-6 text-xl font-bold tracking-tight sm:text-2xl md:text-3xl">
             Network extension implementation
           </h2>
 
-          <div className="space-y-8">
-            <div>
-              <h3 className="mb-3 text-lg font-semibold">NEPacketTunnelProvider</h3>
-              <p className="mb-4 leading-relaxed text-muted-foreground">
-                Core component that configures proxy-only VPN network settings via NEProxySettings.
-                Starts the local MITM proxy and applies system proxy rules without routing packets.
-                Runs in a separate process with elevated network privileges.
-              </p>
-              <div className="rounded-lg border bg-muted/30 p-4 font-mono text-sm break-words">
-                <div className="text-muted-foreground">
-                  final class PacketTunnelProvider: NEPacketTunnelProvider
-                </div>
+          <div className="grid gap-8 sm:gap-10 lg:grid-cols-2 lg:gap-16">
+            {/* Left: NEPacketTunnelProvider + cert management */}
+            <div className="space-y-8">
+              <div>
+                <h3 className="mb-3 text-lg font-semibold">NEPacketTunnelProvider</h3>
+                <p className="mb-4 leading-relaxed text-muted-foreground">
+                  Core component that configures proxy-only VPN network settings via
+                  NEProxySettings. Starts the local MITM proxy and applies system proxy rules
+                  without routing packets. Runs in a separate process with elevated network
+                  privileges.
+                </p>
+                <CodeBlock className="language-swift">
+                  {`final class PacketTunnelProvider: NEPacketTunnelProvider`}
+                </CodeBlock>
+              </div>
+
+              <div>
+                <h3 className="mb-3 text-lg font-semibold">Certificate management</h3>
+                <p className="leading-relaxed text-muted-foreground">
+                  On-device certificate authority generates a root CA on first launch. The user
+                  installs the root cert via Settings → General → VPN &amp; Device Management. The
+                  extension dynamically generates leaf certificates matching intercepted domains.
+                  Private keys never leave the device.
+                </p>
               </div>
             </div>
 
+            {/* Right: Pipeline steps */}
             <div>
-              <h3 className="mb-3 text-lg font-semibold">Proxy processing pipeline</h3>
+              <h3 className="mb-4 text-lg font-semibold">Proxy processing pipeline</h3>
               <div className="space-y-3">
-                <div className="rounded-lg border p-4">
-                  <h4 className="mb-2 text-sm font-semibold">1. Proxy configuration</h4>
-                  <p className="text-sm leading-relaxed text-muted-foreground">
-                    Apply system proxy settings to route HTTP/HTTPS to the local MITM proxy. Start
-                    the proxy server and expose it on 127.0.0.1:8888.
-                  </p>
-                </div>
-
-                <div className="rounded-lg border p-4">
-                  <h4 className="mb-2 text-sm font-semibold">2. HTTP parsing</h4>
-                  <p className="text-sm leading-relaxed text-muted-foreground">
-                    Handle HTTP/1.1 and HTTP/2 requests and CONNECT tunnels in the proxy. Track
-                    WebSocket upgrades, SSE connections, and request-response pairs.
-                  </p>
-                </div>
-
-                <div className="rounded-lg border p-4">
-                  <h4 className="mb-2 text-sm font-semibold">3. TLS interception</h4>
-                  <p className="text-sm leading-relaxed text-muted-foreground">
-                    When the local CA is trusted and MITM is enabled, dynamically generate leaf
-                    certificates. Decrypt and re-encrypt HTTPS traffic in the proxy for inspection.
-                  </p>
-                </div>
-
-                <div className="rounded-lg border p-4">
-                  <h4 className="mb-2 text-sm font-semibold">4. Storage and notifications</h4>
-                  <p className="text-sm leading-relaxed text-muted-foreground">
-                    Persist captures to the App Group container and notify the main app. Widgets and
-                    Live Activities update from the shared storage.
-                  </p>
-                </div>
+                {[
+                  {
+                    step: '1',
+                    title: 'Proxy configuration',
+                    body: 'Apply system proxy settings to route HTTP/HTTPS to the local MITM proxy. Start the proxy server and expose it on 127.0.0.1:8888.',
+                  },
+                  {
+                    step: '2',
+                    title: 'HTTP parsing',
+                    body: 'Handle HTTP/1.1 and HTTP/2 requests and CONNECT tunnels. Track WebSocket upgrades, SSE connections, and request-response pairs.',
+                  },
+                  {
+                    step: '3',
+                    title: 'TLS interception',
+                    body: 'When the local CA is trusted and MITM is enabled, dynamically generate leaf certificates. Decrypt and re-encrypt HTTPS traffic in the proxy for inspection.',
+                  },
+                  {
+                    step: '4',
+                    title: 'Storage and notifications',
+                    body: 'Persist captures to the App Group container and notify the main app. Widgets and Live Activities update from shared storage.',
+                  },
+                ].map(({ step, title, body }) => (
+                  <div key={step} className="flex gap-4 rounded-lg border p-4">
+                    <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-primary text-xs font-bold text-primary-foreground">
+                      {step}
+                    </div>
+                    <div>
+                      <h4 className="mb-1 text-sm font-semibold">{title}</h4>
+                      <p className="text-sm leading-relaxed text-muted-foreground">{body}</p>
+                    </div>
+                  </div>
+                ))}
               </div>
-            </div>
-
-            <div>
-              <h3 className="mb-3 text-lg font-semibold">Certificate management</h3>
-              <p className="mb-4 leading-relaxed text-muted-foreground">
-                On-device certificate authority generates root CA on first launch. User installs
-                root certificate via Settings → General → VPN & Device Management. Extension
-                dynamically generates leaf certificates matching intercepted domains. Private keys
-                never leave device.
-              </p>
             </div>
           </div>
         </div>
@@ -173,44 +204,41 @@ export default function ArchitecturePage() {
 
       <Separator />
 
-      {/* Data Storage */}
-      <PageSection>
-        <div className="mx-auto max-w-content">
-          <h2 className="mb-4 text-xl font-bold tracking-tight sm:mb-6 sm:text-2xl">
+      {/* ── Data Storage & IPC ── */}
+      <PageSection className="border-y bg-muted/30">
+        <div id="storage" className="mx-auto max-w-content scroll-mt-32">
+          <h2 className="mb-6 text-xl font-bold tracking-tight sm:text-2xl md:text-3xl">
             Data storage and IPC
           </h2>
 
-          <div className="space-y-8">
+          <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
             <div>
-              <h3 className="mb-3 text-lg font-semibold">App Groups</h3>
-              <p className="mb-4 leading-relaxed text-muted-foreground">
+              <h3 className="mb-3 font-semibold">App Groups</h3>
+              <p className="mb-4 text-sm leading-relaxed text-muted-foreground">
                 Shared container enables communication between main app and extension. Both
-                processes can read and write to shared directory. Used for configuration, captured
-                traffic data, and coordination.
+                processes can read and write to the shared directory. Used for configuration,
+                captured traffic data, and coordination.
               </p>
-              <div className="rounded-lg border bg-muted/30 p-4">
-                <code className="font-mono text-sm break-words text-muted-foreground">
-                  group.com.trace.network-debugger
-                </code>
-              </div>
+              <CodeBlock className="language-text">
+                {`group.com.trace.network-debugger`}
+              </CodeBlock>
             </div>
 
             <div>
-              <h3 className="mb-3 text-lg font-semibold">Persistent storage</h3>
-              <p className="mb-4 leading-relaxed text-muted-foreground">
+              <h3 className="mb-3 font-semibold">Persistent storage</h3>
+              <p className="text-sm leading-relaxed text-muted-foreground">
                 Structured storage for captured requests, responses, and configuration. Shared data
-                accessible from app, extension, and widgets through App Group. Efficient querying
-                and filtering with support for search and presets. Automatic cleanup with
-                configurable retention policy.
+                accessible from app, extension, and widgets. Efficient querying with support for
+                search and presets. Automatic cleanup with configurable retention policy.
               </p>
             </div>
 
             <div>
-              <h3 className="mb-3 text-lg font-semibold">Real-time updates</h3>
-              <p className="leading-relaxed text-muted-foreground">
+              <h3 className="mb-3 font-semibold">Real-time updates</h3>
+              <p className="text-sm leading-relaxed text-muted-foreground">
                 Extension writes new captures to shared storage. Main app observes data changes for
-                UI updates. Widgets receive notifications for Live Activity updates. Minimal latency
-                between capture and display across all components.
+                live UI updates. Widgets receive notifications for Live Activity updates. Minimal
+                latency between capture and display across all components.
               </p>
             </div>
           </div>
@@ -219,10 +247,10 @@ export default function ArchitecturePage() {
 
       <Separator />
 
-      {/* Protocol Support */}
+      {/* ── Protocol Support ── */}
       <PageSection>
-        <div className="mx-auto max-w-content">
-          <h2 className="mb-4 text-xl font-bold tracking-tight sm:mb-6 sm:text-2xl">
+        <div id="protocols" className="mx-auto max-w-content scroll-mt-32">
+          <h2 className="mb-6 text-xl font-bold tracking-tight sm:text-2xl md:text-3xl">
             Protocol support
           </h2>
 
@@ -249,7 +277,7 @@ export default function ArchitecturePage() {
               icon={Activity}
               title="Limitations"
               titleClassName="text-lg"
-              description="Proxy-only mode captures HTTP/HTTPS for apps that honor system proxy settings. QUIC/HTTP/3 traffic is not captured in this mode. Apps that bypass proxy settings will not appear in captures."
+              description="Proxy-only mode captures HTTP/HTTPS for apps that honor system proxy settings. QUIC/HTTP/3 traffic is not captured. Apps that bypass proxy settings will not appear in captures."
             />
           </div>
         </div>
@@ -257,133 +285,104 @@ export default function ArchitecturePage() {
 
       <Separator />
 
-      {/* Performance */}
+      {/* ── Performance + Security: side by side ── */}
       <PageSection>
         <div className="mx-auto max-w-content">
-          <h2 className="mb-4 text-xl font-bold tracking-tight sm:mb-6 sm:text-2xl">
-            Performance considerations
-          </h2>
-
-          <div className="space-y-6">
-            <div>
-              <h3 className="mb-3 text-lg font-semibold">Proxy processing efficiency</h3>
-              <p className="leading-relaxed text-muted-foreground">
-                Minimal per-connection overhead to maintain network performance. Efficient buffering
-                reduces memory allocations under load. Parsing work is scheduled off the critical
-                path where possible.
-              </p>
+          <div className="grid gap-12 lg:grid-cols-2 lg:gap-16">
+            <div id="performance" className="scroll-mt-32">
+              <h2 className="mb-6 text-xl font-bold tracking-tight sm:text-2xl">
+                Performance considerations
+              </h2>
+              <div className="space-y-6">
+                {[
+                  {
+                    title: 'Proxy processing efficiency',
+                    body: 'Minimal per-connection overhead to maintain network performance. Efficient buffering reduces memory allocations under load. Parsing work is scheduled off the critical path where possible.',
+                  },
+                  {
+                    title: 'Memory management',
+                    body: 'Extension memory budget is limited by iOS. Aggressive cleanup of processed proxy data. Writes captures to App Group storage as JSON files. Configurable retention policy prevents unbounded growth.',
+                  },
+                  {
+                    title: 'Battery impact',
+                    body: 'Background processing optimized for power efficiency. Proxy handling path is lightweight. Heavy parsing done asynchronously. Extension can be disabled when not actively debugging.',
+                  },
+                ].map(({ title, body }) => (
+                  <div key={title} className="flex gap-4">
+                    <div className="mt-1 h-2 w-2 shrink-0 rounded-full bg-primary" />
+                    <div>
+                      <h3 className="mb-1 text-sm font-semibold">{title}</h3>
+                      <p className="text-sm leading-relaxed text-muted-foreground">{body}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
             </div>
 
-            <div>
-              <h3 className="mb-3 text-lg font-semibold">Memory management</h3>
-              <p className="leading-relaxed text-muted-foreground">
-                Extension memory budget is limited by iOS. Aggressive cleanup of processed proxy
-                data. Writes captures to App Group storage as JSON files. Configurable retention
-                policy prevents unbounded growth.
-              </p>
-            </div>
-
-            <div>
-              <h3 className="mb-3 text-lg font-semibold">Battery impact</h3>
-              <p className="leading-relaxed text-muted-foreground">
-                Background processing optimized for power efficiency. Proxy handling path is
-                lightweight. Heavy parsing done asynchronously off the critical path. Extension can
-                be disabled when not actively debugging.
-              </p>
-            </div>
-          </div>
-        </div>
-      </PageSection>
-
-      <Separator />
-
-      {/* Security Model */}
-      <PageSection>
-        <div className="mx-auto max-w-content">
-          <h2 className="mb-4 text-xl font-bold tracking-tight sm:mb-6 sm:text-2xl">
-            Security model
-          </h2>
-
-          <div className="space-y-6">
-            <div>
-              <h3 className="mb-3 text-lg font-semibold">On-device only</h3>
-              <p className="leading-relaxed text-muted-foreground">
-                All traffic capture and analysis happens locally. No data transmission to external
-                servers. No telemetry or analytics collection.
-              </p>
-            </div>
-
-            <div>
-              <h3 className="mb-3 text-lg font-semibold">Root certificate trust</h3>
-              <p className="leading-relaxed text-muted-foreground">
-                TLS interception requires explicit user action to trust root CA. Certificate
-                installation flow clearly explains implications. Users maintain full control over
-                certificate trust.
-              </p>
-            </div>
-
-            <div>
-              <h3 className="mb-3 text-lg font-semibold">Data isolation</h3>
-              <p className="leading-relaxed text-muted-foreground">
-                Captured data stored in app sandbox. No access from other apps without explicit
-                export. Optional encryption for sensitive captured data.
-              </p>
-            </div>
-
-            <div>
-              <h3 className="mb-3 text-lg font-semibold">Code transparency</h3>
-              <p className="leading-relaxed text-muted-foreground">
-                Entire codebase is open source and auditable. No obfuscation or hidden
-                functionality. Build from source to verify binary integrity.
-              </p>
+            <div id="security" className="scroll-mt-32">
+              <h2 className="mb-6 text-xl font-bold tracking-tight sm:text-2xl">Security model</h2>
+              <div className="space-y-6">
+                {[
+                  {
+                    title: 'On-device only',
+                    body: 'All traffic capture and analysis happens locally. No data transmission to external servers. No telemetry or analytics collection.',
+                  },
+                  {
+                    title: 'Root certificate trust',
+                    body: 'TLS interception requires explicit user action to trust root CA. Certificate installation flow clearly explains implications. Users maintain full control over certificate trust.',
+                  },
+                  {
+                    title: 'Data isolation',
+                    body: 'Captured data stored in app sandbox. No access from other apps without explicit export. Optional encryption for sensitive captured data.',
+                  },
+                  {
+                    title: 'Code transparency',
+                    body: 'Entire codebase is open source and auditable. No obfuscation or hidden functionality. Build from source to verify binary integrity.',
+                  },
+                ].map(({ title, body }) => (
+                  <div key={title} className="flex gap-4">
+                    <div className="mt-1 h-2 w-2 shrink-0 rounded-full bg-primary" />
+                    <div>
+                      <h3 className="mb-1 text-sm font-semibold">{title}</h3>
+                      <p className="text-sm leading-relaxed text-muted-foreground">{body}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         </div>
       </PageSection>
 
-      <Separator />
-
-      {/* Technical Stack */}
-      <PageSection>
-        <div className="mx-auto max-w-readable text-center">
-          <h2 className="mb-3 text-xl font-bold tracking-tight sm:mb-4 sm:text-2xl">Built with</h2>
-          <p className="mb-6 text-sm text-muted-foreground sm:mb-8 sm:text-base">
-            Modern iOS frameworks and APIs.
-          </p>
-          <div className="flex flex-wrap justify-center gap-1.5 sm:gap-2">
-            <Badge variant="secondary" className="text-xs">
-              Swift 6.0
+      {/* ── Tech stack + docs CTA ── */}
+      <EditorialBanner variant="muted">
+        <h2 className="mb-2 text-xl font-bold tracking-tight sm:text-2xl">Built with</h2>
+        <p className="mb-6 text-sm text-muted-foreground">Modern iOS frameworks and APIs.</p>
+        <div className="mb-8 flex flex-wrap justify-center gap-1.5 sm:gap-2">
+          {[
+            'Swift 6.0',
+            'SwiftUI',
+            'Network Extension',
+            'NEPacketTunnelProvider',
+            'Network.framework',
+            'WidgetKit',
+            'Live Activities',
+            'App Groups',
+            'Keychain Services',
+            'Swift Package Manager',
+          ].map((tag) => (
+            <Badge key={tag} variant="secondary" className="text-xs">
+              {tag}
             </Badge>
-            <Badge variant="secondary" className="text-xs">
-              SwiftUI
-            </Badge>
-            <Badge variant="secondary" className="text-xs">
-              Network Extension
-            </Badge>
-            <Badge variant="secondary" className="text-xs">
-              NEPacketTunnelProvider
-            </Badge>
-            <Badge variant="secondary" className="text-xs">
-              Network.framework
-            </Badge>
-            <Badge variant="secondary" className="text-xs">
-              WidgetKit
-            </Badge>
-            <Badge variant="secondary" className="text-xs">
-              Live Activities
-            </Badge>
-            <Badge variant="secondary" className="text-xs">
-              App Groups
-            </Badge>
-            <Badge variant="secondary" className="text-xs">
-              Keychain Services
-            </Badge>
-            <Badge variant="secondary" className="text-xs">
-              Swift Package Manager
-            </Badge>
-          </div>
+          ))}
         </div>
-      </PageSection>
+        <Button asChild variant="secondary">
+          <Link href="/docs/architecture">
+            <BookOpen className="mr-2 h-4 w-4" />
+            Read the docs
+          </Link>
+        </Button>
+      </EditorialBanner>
     </div>
   );
 }

@@ -30,10 +30,10 @@ export function Footer() {
         </div>
 
         {/* Middle Section: Navigation Links */}
-        <div className="mx-auto grid max-w-4xl grid-cols-2 gap-8 sm:gap-10 md:grid-cols-4 md:gap-8">
-          <div className="flex flex-col items-center space-y-3 md:items-start">
+        <div className="mx-auto grid max-w-4xl grid-cols-2 gap-8 sm:grid-cols-4 sm:gap-6 md:gap-8">
+          <div className="flex flex-col items-center space-y-3 sm:items-start">
             <h3 className="text-sm font-semibold">Product</h3>
-            <ul className="space-y-2 text-center text-sm text-muted-foreground md:text-left">
+            <ul className="space-y-2 text-center text-sm text-muted-foreground sm:text-left">
               <li>
                 <Link href="/features" className="transition-colors hover:text-foreground">
                   Features
@@ -57,9 +57,9 @@ export function Footer() {
             </ul>
           </div>
 
-          <div className="flex flex-col items-center space-y-3 md:items-start">
+          <div className="flex flex-col items-center space-y-3 sm:items-start">
             <h3 className="text-sm font-semibold">Resources</h3>
-            <ul className="space-y-2 text-center text-sm text-muted-foreground md:text-left">
+            <ul className="space-y-2 text-center text-sm text-muted-foreground sm:text-left">
               <li>
                 <Link href="/docs" className="transition-colors hover:text-foreground">
                   Documentation
@@ -98,9 +98,9 @@ export function Footer() {
             </ul>
           </div>
 
-          <div className="flex flex-col items-center space-y-3 md:items-start">
+          <div className="flex flex-col items-center space-y-3 sm:items-start">
             <h3 className="text-sm font-semibold">Community</h3>
-            <ul className="space-y-2 text-center text-sm text-muted-foreground md:text-left">
+            <ul className="space-y-2 text-center text-sm text-muted-foreground sm:text-left">
               <li>
                 <Link
                   href="https://github.com/Trace-iOS/Trace"
@@ -134,9 +134,9 @@ export function Footer() {
             </ul>
           </div>
 
-          <div className="flex flex-col items-center space-y-3 md:items-start">
+          <div className="flex flex-col items-center space-y-3 sm:items-start">
             <h3 className="text-sm font-semibold">Legal</h3>
-            <ul className="space-y-2 text-center text-sm text-muted-foreground md:text-left">
+            <ul className="space-y-2 text-center text-sm text-muted-foreground sm:text-left">
               <li>
                 <Link href="/privacy" className="transition-colors hover:text-foreground">
                   Privacy Policy
