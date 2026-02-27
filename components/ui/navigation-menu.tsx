@@ -35,7 +35,7 @@ const NavigationMenuItem = NavigationMenuPrimitive.Item;
 const navigationMenuTriggerStyle = cn(
   'group inline-flex h-auto w-max items-center justify-center gap-1 rounded-full bg-transparent px-3 py-2 text-sm font-medium text-muted-foreground transition-[color,background] duration-[90ms] ease-out',
   'hover:bg-muted hover:text-foreground',
-  'focus:bg-muted focus:text-foreground focus:outline-none',
+  'focus-visible:bg-muted focus-visible:text-foreground focus-visible:outline-none',
   'disabled:pointer-events-none disabled:opacity-50',
   'data-[active]:bg-muted data-[state=open]:bg-muted data-[state=open]:text-foreground data-[state=open]:!duration-0',
 );

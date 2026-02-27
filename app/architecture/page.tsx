@@ -219,9 +219,7 @@ export default function ArchitecturePage() {
                 processes can read and write to the shared directory. Used for configuration,
                 captured traffic data, and coordination.
               </p>
-              <CodeBlock className="language-text">
-                {`group.com.trace.network-debugger`}
-              </CodeBlock>
+              <CodeBlock className="language-text">{`group.com.trace.network-debugger`}</CodeBlock>
             </div>
 
             <div>

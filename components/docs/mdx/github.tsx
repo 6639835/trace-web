@@ -51,7 +51,7 @@ function CardShell({ href, label, className, children, footer }: CardShellProps)
       {/* Header strip */}
       <div className="flex items-center gap-2 border-b border-border/60 px-4 py-2.5">
         <GitHubMark className="h-3.5 w-3.5 shrink-0 text-muted-foreground" />
-        <span className="text-2xs font-medium uppercase tracking-wide text-muted-foreground">
+        <span className="text-2xs font-medium tracking-wide text-muted-foreground uppercase">
           {label}
         </span>
         <ArrowUpRight className="ml-auto h-3.5 w-3.5 shrink-0 text-muted-foreground transition-colors group-hover:text-foreground" />
@@ -61,9 +61,7 @@ function CardShell({ href, label, className, children, footer }: CardShellProps)
       <div className="p-4">{children}</div>
 
       {/* Optional footer strip */}
-      {footer && (
-        <div className="border-t border-border/60 px-4 py-2.5">{footer}</div>
-      )}
+      {footer && <div className="border-t border-border/60 px-4 py-2.5">{footer}</div>}
     </a>
   );
 }
@@ -152,7 +150,12 @@ export function GitHubUser(props: GitHubUserProps) {
           {displayName && (
             <p className="truncate text-sm font-semibold text-foreground">{displayName}</p>
           )}
-          <p className={cn('text-xs text-muted-foreground', !displayName && 'font-semibold text-sm text-foreground')}>
+          <p
+            className={cn(
+              'text-xs text-muted-foreground',
+              !displayName && 'text-sm font-semibold text-foreground',
+            )}
+          >
             @{displayLogin}
           </p>
           {displayBio && (
@@ -258,16 +261,14 @@ export function GitHubRepo(props: GitHubRepoProps) {
 
   if (!isValid) return null;
 
-  const hasStats = displayLanguage || typeof displayStars === 'number' || typeof displayForks === 'number';
+  const hasStats =
+    displayLanguage || typeof displayStars === 'number' || typeof displayForks === 'number';
 
   const statsFooter = hasStats ? (
     <div className="flex flex-wrap items-center gap-4 text-xs text-muted-foreground">
       {displayLanguage && (
         <span className="flex items-center gap-1.5">
-          <span
-            className="h-2 w-2 rounded-full"
-            style={{ backgroundColor: languageColor }}
-          />
+          <span className="h-2 w-2 rounded-full" style={{ backgroundColor: languageColor }} />
           {displayLanguage}
         </span>
       )}
@@ -303,7 +304,7 @@ export function GitHubRepo(props: GitHubRepoProps) {
           className="h-9 w-9 shrink-0 rounded-full ring-1 ring-border"
         />
         <div className="min-w-0 flex-1">
-          <p className="text-sm font-semibold leading-snug text-foreground">
+          <p className="text-sm leading-snug font-semibold text-foreground">
             <span className="font-normal text-muted-foreground">{ownerLabel}/</span>
             {repo}
           </p>
@@ -377,7 +378,12 @@ export function GitHubOrg(props: GitHubOrgProps) {
           avatar?: string;
         };
         if (json.kind !== 'org') return;
-        setFetched({ login: json.login, name: json.name, description: json.description, avatar: json.avatar });
+        setFetched({
+          login: json.login,
+          name: json.name,
+          description: json.description,
+          avatar: json.avatar,
+        });
       } catch {
         // Ignore
       }
@@ -416,7 +422,12 @@ export function GitHubOrg(props: GitHubOrgProps) {
           {displayName && (
             <p className="truncate text-sm font-semibold text-foreground">{displayName}</p>
           )}
-          <p className={cn('text-xs text-muted-foreground', !displayName && 'font-semibold text-sm text-foreground')}>
+          <p
+            className={cn(
+              'text-xs text-muted-foreground',
+              !displayName && 'text-sm font-semibold text-foreground',
+            )}
+          >
             @{displayLogin}
           </p>
           {displayDescription && (

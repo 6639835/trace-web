@@ -94,9 +94,7 @@ export function SectionNav({ items, ariaLabel = 'Page sections', className }: Se
                   }}
                   className={cn(
                     'relative shrink-0 rounded-md px-3 py-1.5 text-sm font-medium transition-colors duration-200',
-                    active === id
-                      ? 'text-primary'
-                      : 'text-muted-foreground hover:text-foreground',
+                    active === id ? 'text-primary' : 'text-muted-foreground hover:text-foreground',
                   )}
                 >
                   {label}

@@ -62,6 +62,7 @@ const communityItems = [
 export function Navigation() {
   const pathname = usePathname();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [desktopMenuValue, setDesktopMenuValue] = useState('');
   const [isScrolled, setIsScrolled] = useState(false);
   const isHomePage = pathname === '/';
 
@@ -97,9 +98,13 @@ export function Navigation() {
           </Link>
 
           {/* Desktop Navigation */}
-          <NavigationMenu className="hidden md:flex">
+          <NavigationMenu
+            className="hidden md:flex"
+            value={desktopMenuValue}
+            onValueChange={setDesktopMenuValue}
+          >
             <NavigationMenuList>
-              <NavigationMenuItem>
+              <NavigationMenuItem value="project">
                 <NavigationMenuTrigger>Project</NavigationMenuTrigger>
                 <NavigationMenuContent>
                   <ul className="grid w-[400px] gap-3 p-3 md:w-[500px] md:grid-cols-2">
@@ -109,6 +114,7 @@ export function Navigation() {
                         title={item.title}
                         href={item.href}
                         icon={item.icon}
+                        onNavigate={() => setDesktopMenuValue('')}
                       >
                         {item.description}
                       </ListItem>
@@ -117,7 +123,7 @@ export function Navigation() {
                 </NavigationMenuContent>
               </NavigationMenuItem>
 
-              <NavigationMenuItem>
+              <NavigationMenuItem value="community">
                 <NavigationMenuTrigger>Community</NavigationMenuTrigger>
                 <NavigationMenuContent>
                   <ul className="grid w-[400px] gap-3 p-3 md:w-[500px] md:grid-cols-2">
@@ -127,6 +133,7 @@ export function Navigation() {
                         title={item.title}
                         href={item.href}
                         icon={item.icon}
+                        onNavigate={() => setDesktopMenuValue('')}
                       >
                         {item.description}
                       </ListItem>
@@ -229,6 +236,8 @@ const ListItem = ({
   children,
   href,
   icon: Icon,
+  onNavigate,
+  onClick,
   ...props
 }: {
   className?: string;
@@ -236,7 +245,8 @@ const ListItem = ({
   children: React.ReactNode;
   href: string;
   icon: React.ElementType;
-}) => {
+  onNavigate?: () => void;
+} & Omit<React.ComponentPropsWithoutRef<typeof Link>, 'href' | 'className' | 'children'>) => {
   return (
     <li>
       <NavigationMenuLink asChild>
@@ -247,6 +257,10 @@ const ListItem = ({
             'focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2',
             className,
           )}
+          onClick={(event) => {
+            onClick?.(event);
+            onNavigate?.();
+          }}
           {...props}
         >
           <div className="flex items-center gap-3">

@@ -76,174 +76,180 @@ export default function ComparisonPage() {
             Feature comparison
           </h2>
           <div className="-mx-4 overflow-x-auto px-4 sm:mx-0 sm:px-0">
-          <div className="overflow-hidden rounded-lg border">
-            <Table>
-              <TableHeader>
-                <TableRow>
-                  <TableHead className="w-[200px] sm:w-[250px]">Feature</TableHead>
-                  <TableHead className="text-center">Trace</TableHead>
-                  <TableHead className="text-center">Charles</TableHead>
-                  <TableHead className="text-center">Proxyman</TableHead>
-                </TableRow>
-              </TableHeader>
-              <TableBody>
-                <TableRow>
-                  <TableCell className="font-medium">Platform</TableCell>
-                  <TableCell className="text-center">iOS/iPadOS</TableCell>
-                  <TableCell className="text-center">macOS/Windows/Linux</TableCell>
-                  <TableCell className="text-center">macOS/iOS</TableCell>
-                </TableRow>
-                <TableRow>
-                  <TableCell className="font-medium">On-device capture</TableCell>
-                  <TableCell className="text-center">
-                    <CheckIcon />
-                  </TableCell>
-                  <TableCell className="text-center">
-                    <CrossIcon />
-                  </TableCell>
-                  <TableCell className="text-center">
-                    <CheckIcon />
-                  </TableCell>
-                </TableRow>
-                <TableRow>
-                  <TableCell className="font-medium">Requires desktop app</TableCell>
-                  <TableCell className="text-center">
-                    <CrossIcon />
-                  </TableCell>
-                  <TableCell className="text-center">
-                    <CheckIcon />
-                  </TableCell>
-                  <TableCell className="text-center text-sm text-muted-foreground">
-                    Optional
-                  </TableCell>
-                </TableRow>
-                <TableRow>
-                  <TableCell className="font-medium">TLS MITM</TableCell>
-                  <TableCell className="text-center">
-                    <CheckIcon />
-                  </TableCell>
-                  <TableCell className="text-center">
-                    <CheckIcon />
-                  </TableCell>
-                  <TableCell className="text-center">
-                    <CheckIcon />
-                  </TableCell>
-                </TableRow>
-                <TableRow>
-                  <TableCell className="font-medium">WebSocket support</TableCell>
-                  <TableCell className="text-center">
-                    <CheckIcon />
-                  </TableCell>
-                  <TableCell className="text-center">
-                    <CheckIcon />
-                  </TableCell>
-                  <TableCell className="text-center">
-                    <CheckIcon />
-                  </TableCell>
-                </TableRow>
-                <TableRow>
-                  <TableCell className="font-medium">Request modification</TableCell>
-                  <TableCell className="text-center">
-                    <CheckIcon />
-                  </TableCell>
-                  <TableCell className="text-center">
-                    <CheckIcon />
-                  </TableCell>
-                  <TableCell className="text-center">
-                    <CheckIcon />
-                  </TableCell>
-                </TableRow>
-                <TableRow>
-                  <TableCell className="font-medium">HAR export</TableCell>
-                  <TableCell className="text-center">
-                    <CheckIcon />
-                  </TableCell>
-                  <TableCell className="text-center">
-                    <CheckIcon />
-                  </TableCell>
-                  <TableCell className="text-center">
-                    <CheckIcon />
-                  </TableCell>
-                </TableRow>
-                <TableRow>
-                  <TableCell className="font-medium">PCAP export</TableCell>
-                  <TableCell className="text-center">
-                    <CheckIcon />
-                  </TableCell>
-                  <TableCell className="text-center">
-                    <CheckIcon />
-                  </TableCell>
-                  <TableCell className="text-center">
-                    <CrossIcon />
-                  </TableCell>
-                </TableRow>
-                <TableRow>
-                  <TableCell className="font-medium">Scripting</TableCell>
-                  <TableCell className="text-center text-sm text-muted-foreground">
-                    JavaScript
-                  </TableCell>
-                  <TableCell className="text-center text-sm text-muted-foreground">Java</TableCell>
-                  <TableCell className="text-center text-sm text-muted-foreground">
-                    Python/JS
-                  </TableCell>
-                </TableRow>
-                <TableRow>
-                  <TableCell className="font-medium">Privacy</TableCell>
-                  <TableCell className="text-center text-sm text-muted-foreground">
-                    On-device
-                  </TableCell>
-                  <TableCell className="text-center text-sm text-muted-foreground">Local</TableCell>
-                  <TableCell className="text-center text-sm text-muted-foreground">
-                    Local/Cloud
-                  </TableCell>
-                </TableRow>
-                <TableRow>
-                  <TableCell className="font-medium">Open source</TableCell>
-                  <TableCell className="text-center">
-                    <CheckIcon />
-                  </TableCell>
-                  <TableCell className="text-center">
-                    <CrossIcon />
-                  </TableCell>
-                  <TableCell className="text-center">
-                    <CrossIcon />
-                  </TableCell>
-                </TableRow>
-                <TableRow>
-                  <TableCell className="font-medium">Pricing</TableCell>
-                  <TableCell className="text-center text-sm text-muted-foreground">Free</TableCell>
-                  <TableCell className="text-center text-sm text-muted-foreground">$50</TableCell>
-                  <TableCell className="text-center text-sm text-muted-foreground">
-                    Free/$99
-                  </TableCell>
-                </TableRow>
-                <TableRow>
-                  <TableCell className="font-medium">macOS features</TableCell>
-                  <TableCell className="text-center">
-                    <CrossIcon />
-                  </TableCell>
-                  <TableCell className="text-center">
-                    <CheckIcon />
-                  </TableCell>
-                  <TableCell className="text-center">
-                    <CheckIcon />
-                  </TableCell>
-                </TableRow>
-                <TableRow>
-                  <TableCell className="font-medium">Works with VPNs</TableCell>
-                  <TableCell className="text-center">
-                    <CheckIcon />
-                  </TableCell>
-                  <TableCell className="text-center">
-                    <CheckIcon />
-                  </TableCell>
-                  <TableCell className="text-center text-sm text-muted-foreground">
-                    Varies
-                  </TableCell>
-                </TableRow>
-              </TableBody>
-            </Table>
-          </div>
+            <div className="overflow-hidden rounded-lg border">
+              <Table>
+                <TableHeader>
+                  <TableRow>
+                    <TableHead className="w-[200px] sm:w-[250px]">Feature</TableHead>
+                    <TableHead className="text-center">Trace</TableHead>
+                    <TableHead className="text-center">Charles</TableHead>
+                    <TableHead className="text-center">Proxyman</TableHead>
+                  </TableRow>
+                </TableHeader>
+                <TableBody>
+                  <TableRow>
+                    <TableCell className="font-medium">Platform</TableCell>
+                    <TableCell className="text-center">iOS/iPadOS</TableCell>
+                    <TableCell className="text-center">macOS/Windows/Linux</TableCell>
+                    <TableCell className="text-center">macOS/iOS</TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell className="font-medium">On-device capture</TableCell>
+                    <TableCell className="text-center">
+                      <CheckIcon />
+                    </TableCell>
+                    <TableCell className="text-center">
+                      <CrossIcon />
+                    </TableCell>
+                    <TableCell className="text-center">
+                      <CheckIcon />
+                    </TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell className="font-medium">Requires desktop app</TableCell>
+                    <TableCell className="text-center">
+                      <CrossIcon />
+                    </TableCell>
+                    <TableCell className="text-center">
+                      <CheckIcon />
+                    </TableCell>
+                    <TableCell className="text-center text-sm text-muted-foreground">
+                      Optional
+                    </TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell className="font-medium">TLS MITM</TableCell>
+                    <TableCell className="text-center">
+                      <CheckIcon />
+                    </TableCell>
+                    <TableCell className="text-center">
+                      <CheckIcon />
+                    </TableCell>
+                    <TableCell className="text-center">
+                      <CheckIcon />
+                    </TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell className="font-medium">WebSocket support</TableCell>
+                    <TableCell className="text-center">
+                      <CheckIcon />
+                    </TableCell>
+                    <TableCell className="text-center">
+                      <CheckIcon />
+                    </TableCell>
+                    <TableCell className="text-center">
+                      <CheckIcon />
+                    </TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell className="font-medium">Request modification</TableCell>
+                    <TableCell className="text-center">
+                      <CheckIcon />
+                    </TableCell>
+                    <TableCell className="text-center">
+                      <CheckIcon />
+                    </TableCell>
+                    <TableCell className="text-center">
+                      <CheckIcon />
+                    </TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell className="font-medium">HAR export</TableCell>
+                    <TableCell className="text-center">
+                      <CheckIcon />
+                    </TableCell>
+                    <TableCell className="text-center">
+                      <CheckIcon />
+                    </TableCell>
+                    <TableCell className="text-center">
+                      <CheckIcon />
+                    </TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell className="font-medium">PCAP export</TableCell>
+                    <TableCell className="text-center">
+                      <CheckIcon />
+                    </TableCell>
+                    <TableCell className="text-center">
+                      <CheckIcon />
+                    </TableCell>
+                    <TableCell className="text-center">
+                      <CrossIcon />
+                    </TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell className="font-medium">Scripting</TableCell>
+                    <TableCell className="text-center text-sm text-muted-foreground">
+                      JavaScript
+                    </TableCell>
+                    <TableCell className="text-center text-sm text-muted-foreground">
+                      Java
+                    </TableCell>
+                    <TableCell className="text-center text-sm text-muted-foreground">
+                      Python/JS
+                    </TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell className="font-medium">Privacy</TableCell>
+                    <TableCell className="text-center text-sm text-muted-foreground">
+                      On-device
+                    </TableCell>
+                    <TableCell className="text-center text-sm text-muted-foreground">
+                      Local
+                    </TableCell>
+                    <TableCell className="text-center text-sm text-muted-foreground">
+                      Local/Cloud
+                    </TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell className="font-medium">Open source</TableCell>
+                    <TableCell className="text-center">
+                      <CheckIcon />
+                    </TableCell>
+                    <TableCell className="text-center">
+                      <CrossIcon />
+                    </TableCell>
+                    <TableCell className="text-center">
+                      <CrossIcon />
+                    </TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell className="font-medium">Pricing</TableCell>
+                    <TableCell className="text-center text-sm text-muted-foreground">
+                      Free
+                    </TableCell>
+                    <TableCell className="text-center text-sm text-muted-foreground">$50</TableCell>
+                    <TableCell className="text-center text-sm text-muted-foreground">
+                      Free/$99
+                    </TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell className="font-medium">macOS features</TableCell>
+                    <TableCell className="text-center">
+                      <CrossIcon />
+                    </TableCell>
+                    <TableCell className="text-center">
+                      <CheckIcon />
+                    </TableCell>
+                    <TableCell className="text-center">
+                      <CheckIcon />
+                    </TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell className="font-medium">Works with VPNs</TableCell>
+                    <TableCell className="text-center">
+                      <CheckIcon />
+                    </TableCell>
+                    <TableCell className="text-center">
+                      <CheckIcon />
+                    </TableCell>
+                    <TableCell className="text-center text-sm text-muted-foreground">
+                      Varies
+                    </TableCell>
+                  </TableRow>
+                </TableBody>
+              </Table>
+            </div>
           </div>
           <p className="mt-4 text-xs text-muted-foreground sm:text-sm">
             * Feature details and pricing accurate as of January 2026. Check official websites for
