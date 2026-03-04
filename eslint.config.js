@@ -1,5 +1,7 @@
 /* eslint-disable @typescript-eslint/no-require-imports */
+const { fixupConfigRules } = require('@eslint/compat');
+
 module.exports = [
-  ...require('eslint-config-next/core-web-vitals'),
-  ...require('eslint-config-next/typescript'),
+  ...fixupConfigRules(require('eslint-config-next/core-web-vitals')),
+  ...fixupConfigRules(require('eslint-config-next/typescript')),
 ];
