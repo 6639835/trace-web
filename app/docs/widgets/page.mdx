@@ -1,27 +1,74 @@
 # Widgets and Live Activity
 
-Trace includes widgets and a Live Activity to keep capture status visible on your Home Screen and Lock Screen.
+Trace includes home screen widgets, a Lock Screen Live Activity, and a Control Center widget so capture status is always accessible.
 
-## Add a widget
+## Home Screen widget
+
+Add a Trace widget to see capture status and request counts at a glance without opening the app.
 
 1. Long-press the Home Screen.
 2. Tap **Edit** → **Add Widget**.
-3. Choose **Trace** and select a widget size.
+3. Search for **Trace** and select a widget size.
+4. Tap **Add Widget**.
+
+The widget updates automatically when capture state changes.
 
 ## Live Activity
 
-When capture is running, Trace can show a Live Activity with quick status updates.
+When capture is running, Trace shows a Live Activity on the Lock Screen and in the Dynamic Island (on supported devices) with real-time capture status.
+
+The Live Activity dismisses automatically when capture stops.
+
+## Control Center widget
+
+Trace adds a toggle to iOS Control Center so you can start and stop capture without leaving the current app.
+
+To add the Trace control:
+
+1. Open **Settings → Control Center**.
+2. Scroll to **More Controls** and tap **+** next to **Trace**.
+
+The control shows capture status and toggles capture with a single tap. It also provides a **Clear Requests** action to flush captured data without stopping capture.
+
+## Home screen Quick Actions
+
+Long-press the Trace app icon on the Home Screen to reveal shortcut actions:
+
+| Action | What it does |
+|---|---|
+| **Start Capture** | Starts the VPN tunnel and begins recording traffic (shown when capture is stopped) |
+| **Stop Capture** | Stops the VPN tunnel (shown when capture is running) |
+| **View Last Session** | Opens the app and selects the most recent capture session |
+| **Export Data** | Exports the last session as a HAR file in the background and shows a notification when done |
+
+Quick actions are unavailable until onboarding is complete.
+
+## Deep links
+
+Trace responds to the `trace://` URL scheme for automation and shortcuts:
+
+| URL | Destination |
+|---|---|
+| `trace://capture` | Opens the Network tab |
+| `trace://tools` | Opens the Tools tab |
+| `trace://settings` | Opens the Settings tab |
+| `trace://favorites` | Opens the Network tab and shows Favorites |
+| `trace://lastSession` | Selects the most recent capture session |
 
 ## Tips
 
-- Use widgets to confirm capture state at a glance.
-- Combine widgets with sessions for better tracking during test runs.
+- Use the widget to confirm capture is active during automated test runs.
+- Use the Control Center toggle to start and stop capture without interrupting your workflow.
+- The **Export Data** Quick Action is useful for scripted workflows — it runs in the background and sends a local notification with the exported file count.
 
 <CardGroup>
   <Card title="Quick start" icon="rocket" href="/docs/quick-start">
     Start your first capture
   </Card>
   <Card title="Sessions" icon="book-open" href="/docs/sessions">
-    Organize your runs
+    Organise your runs
+  </Card>
+  <Card title="Exporting sessions" icon="download" href="/docs/exporting">
+    Share captured data
   </Card>
 </CardGroup>

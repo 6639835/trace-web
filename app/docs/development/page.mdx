@@ -4,50 +4,84 @@ This page helps contributors understand the Trace codebase and workflow.
 
 ## Repository layout
 
-- `Trace`: iOS app target (UI + capture management)
-- `TraceVPN`: Network Extension packet tunnel
-- `TraceWidget` / `TraceWidgetExtension`: WidgetKit and Live Activity
-- SwiftPM modules:
-  - `TraceCore`
-  - `TraceNetworking`
-  - `TraceSecurity`
-  - `TraceProxy`
-  - `TraceCompression`
-  - `TracePacket`
-  - `TraceQUIC`
-  - `TraceFeatures`
-  - `TraceUI`
+- **`Trace`** – iOS app target: UI, capture management, onboarding
+- **`TraceVPN`** – Network Extension packet tunnel (runs in a separate process)
+- **`TraceWidget`** – WidgetKit, Live Activity, and Control widget extension
+- SwiftPM modules (four-layer architecture):
+  - **Foundation**: `TraceCore`, `TraceCompression`
+  - **Infrastructure**: `TraceSecurity`, `TraceNetworking`, `TracePacket`, `TraceQUIC`
+  - **Features**: `TraceProxy`, `TraceFeatures`, `TraceUI`
+
+## Module responsibilities
+
+| Module | Role |
+|---|---|
+| `TraceCore` | Data models, GRDB SQLite storage, App Group container, shared configuration |
+| `TraceCompression` | Brotli, Deflate/GZIP, and Zstandard decompression |
+| `TraceSecurity` | Root CA generation, per-domain certificate signing, TLS interception |
+| `TraceNetworking` | DNS query/response parsing, network diagnostics |
+| `TracePacket` | IP/TCP/UDP packet parsing and stream reassembly |
+| `TraceQUIC` | QUIC/HTTP3 client and MITM orchestration via quiche FFI |
+| `TraceProxy` | NIO-based MITM proxy, HTTP/HTTPS/WebSocket/SSE interception pipeline |
+| `TraceFeatures` | Feature managers: rewrite, scripts, breakpoints, request maps, hosts, favorites, throttling, export |
+| `TraceUI` | Shared SwiftUI components and design system |
 
 ## Core flows
 
-- **Capture lifecycle**: `TraceFeatures/VPN/VPNManager` controls the tunnel.
-- **Proxy server**: `TraceProxy` hosts the MITM proxy at `127.0.0.1:8888`.
-- **Storage**: `TraceCore/Storage/AppGroupStorage` owns shared data and config.
+- **Capture lifecycle**: `TraceFeatures/VPN/VPNManager` controls the NEVPNManager tunnel.
+- **Proxy server**: `TraceProxy/MITM/MITMProxyServer` hosts the MITM proxy at `127.0.0.1:8888`.
+- **Request interception**: `TraceProxy/MITM/RequestInterceptor` applies rewrite rules, runs scripts, and handles breakpoints.
+- **Storage**: `TraceCore/Storage/AppGroupStorage` owns all shared data and configuration.
+- **Stream interception**: `TraceProxy/MITM/Streams/` contains the Stream Interception V2 pipeline for WebSocket and SSE.
 
 ## App Group storage
 
-The app and extensions share data via the App Group container. If unavailable (e.g., simulator), Trace falls back to local storage and logs a warning.
+The app and VPN extension share data via an App Group container (SQLite database via GRDB). The widget also reads from the same container. If the App Group is unavailable (e.g., simulator), Trace falls back to local storage and logs a warning.
 
 ## Local development workflow
 
-- Run the app target and the VPN extension on a physical device.
+- Build and run the `Trace` app target on a **physical device** (packet tunnel does not work in the simulator).
+- The VPN extension (`TraceVPN`) launches automatically when capture starts.
 - Use a clean session when testing new capture changes.
-- Clear App Group data if you need a fresh start.
+- Clear App Group data via **Settings → Storage & Cleanup** if you need a fresh start.
+
+## Build and lint commands
+
+```bash
+# Open the project
+open Trace.xcodeproj
+
+# Run tests (requires connected device or simulator for non-tunnel tests)
+xcodebuild test -scheme Trace -destination 'platform=iOS Simulator,name=iPhone 16'
+
+# Format code
+swiftformat --lint . --config .swiftformat
+
+# Lint
+swiftlint lint --strict --config .swiftlint.yml
+```
 
 ## Logging
 
-Trace uses structured logging categories for storage, VPN, export, and networking events. Check the console during development for diagnostic events.
+Trace uses structured logging categories. Each module has its own logger (e.g., `CoreLog`, `SecurityLog`, `FeatureLog`). Check the system console via Xcode's debug console or Console.app during development.
+
+## Swift 6 and concurrency
+
+The project enforces Swift 6 strict concurrency. All types that cross actor boundaries must be `Sendable`. Use `@MainActor` for UI-bound state and `AppGroupStorage`'s GRDB queue for database work.
 
 ## Where to start contributing
 
-- **UI work**: `TraceUI` components and Network inspector screens.
+- **UI work**: `TraceUI` components and views in `Trace/Views/`.
 - **Capture pipeline**: `TraceVPN` and `TraceProxy`.
 - **Storage and models**: `TraceCore` data structures and persistence.
+- **Feature logic**: `TraceFeatures` managers (one manager per feature).
 
 ## Testing notes
 
-- Packet tunnel features require a physical device.
+- Packet tunnel features require a **physical device**.
 - Widget and Live Activity builds require entitlements and valid signing.
+- Unit tests live in `TraceTests/`; UI tests in `TraceUITests/`.
+- Non-tunnel logic (storage, rules, parsers) can be tested in the simulator.
 
 <CardGroup>
   <Card title="Architecture" icon="book-open" href="/docs/architecture">

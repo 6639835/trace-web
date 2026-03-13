@@ -21,8 +21,89 @@ Trace includes a JavaScript-based scripting engine to modify requests, responses
 
 - Scripts run inside Trace on-device using JavaScriptCore.
 - A script can inspect or modify headers, bodies, and metadata.
-- Scripts have a 2-second execution timeout per invocation.
+- Scripts have a **2-second execution timeout** per invocation.
 - If a script fails or times out, Trace logs the error and continues with the original request.
+- Full Promise and async/await support is available.
+
+## JavaScript API reference
+
+### `request` object (request and "both" scripts)
+
+| Property / Method | Type | Description |
+|---|---|---|
+| `request.url` | `string` | Full request URL |
+| `request.method` | `string` | HTTP method (`GET`, `POST`, etc.) |
+| `request.headers` | `object` | Key-value map of request headers |
+| `request.queryParams` | `object` | Parsed query string parameters |
+| `request.cookies` | `object` | Parsed cookie values |
+| `request.body` | `string` | Request body as a string |
+
+### `response` object (response and "both" scripts)
+
+| Property / Method | Type | Description |
+|---|---|---|
+| `response.statusCode` | `number` | HTTP status code |
+| `response.headers` | `object` | Key-value map of response headers |
+| `response.cookies` | `object` | Parsed response cookie values |
+| `response.body` | `string` | Response body as a string |
+| `response.json()` | `object` | Parse `body` as JSON |
+| `response.xml()` | `string` | Parse and re-format `body` as XML |
+
+### `stream` object (stream scripts)
+
+The `stream` object represents an individual WebSocket message or SSE event payload. Modify it to rewrite what the client sees.
+
+### Utility functions
+
+These global helpers are available in all script types:
+
+| Function | Description |
+|---|---|
+| `getQueryParam(url, name)` | Extract a query parameter value from a URL string |
+| `setQueryParam(url, name, value)` | Add or update a query parameter and return the new URL |
+| `getCookie(headers, name)` | Extract a named cookie value from a headers object |
+| `setCookie(headers, name, value)` | Set a named cookie value in a headers object |
+| `parseJSON(str)` | Parse a JSON string into an object |
+| `stringifyJSON(obj)` | Serialize an object to a JSON string |
+| `decodeBase64(str)` | Decode a Base64-encoded string |
+| `encodeBase64(str)` | Encode a string to Base64 |
+| `md5(str)` | Compute the MD5 hash of a string |
+| `sha256(str)` | Compute the SHA-256 hash of a string |
+| `hmacSha256(message, key)` | Compute HMAC-SHA256 |
+
+### Console API
+
+```js
+console.log("message");
+console.error("error");
+console.warn("warning");
+console.info("info");
+```
+
+Console output appears in the execution log for the request or stream that triggered the script.
+
+## Example: inject an authorization header
+
+```js
+// Request script
+request.headers["Authorization"] = "Bearer my-dev-token";
+```
+
+## Example: rewrite a response body
+
+```js
+// Response script
+const body = response.json();
+body.featureFlag = true;
+response.body = stringifyJSON(body);
+```
+
+## Example: log SSE event data
+
+```js
+// Stream script
+console.log("SSE event:", stream.data);
+```
 
 ## When to use scripts
 
@@ -44,14 +125,17 @@ Trace ships built-in templates for common tasks. Access them from **Script Templ
 ## Debugging scripts
 
 - Start with a narrow filter so you see only the requests your script touches.
-- Add temporary logging in the script to validate inputs and outputs.
+- Use `console.log()` in the script and check the execution log on the request detail view.
 - Disable scripts one by one if you see unexpected behavior.
 
 <CardGroup>
+  <Card title="Rewrite rules" icon="shuffle" href="/docs/rewrite-rules">
+    Static rules for simpler modifications
+  </Card>
   <Card title="Exporting sessions" icon="download" href="/docs/exporting">
     Export scripts and rule sets
   </Card>
-  <Card title="Proxy modes" icon="shuffle" href="/docs/proxy-modes">
+  <Card title="Proxy modes" icon="settings" href="/docs/proxy-modes">
     Understand where scripts run in the pipeline
   </Card>
 </CardGroup>

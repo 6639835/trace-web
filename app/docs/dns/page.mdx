@@ -6,6 +6,21 @@ Trace can capture and inspect DNS queries and responses when DNS traffic passes 
 
 - DNS messages appear in the DNS list when capture is active.
 - Use search and filters to isolate domains or record types.
+- Each entry shows the queried domain, record type, response data, and timing.
+
+## Supported record types
+
+Trace parses all common DNS record types, including:
+
+- **Address records**: A, AAAA
+- **Name resolution**: CNAME, NS, PTR, SOA
+- **Mail**: MX
+- **Service discovery**: SRV, SVCB, HTTPS
+- **Text**: TXT, CAA
+- **Security (DNSSEC)**: DS, DNSKEY, RRSIG, NSEC, NSEC3
+- **Certificate association**: TLSA, SSHFP
+
+Unknown record types are displayed with their raw numeric type code and raw RDATA.
 
 ## Export DNS data
 
@@ -17,12 +32,17 @@ Trace can capture and inspect DNS queries and responses when DNS traffic passes 
 
 - DNS is usually UDP-based. In proxy-only mode, DNS traffic is not captured.
 - Use full-tunnel mode when you need DNS visibility.
+- To override DNS resolution for specific domains, see [Host Overrides](/docs/hosts).
 
 <CardGroup>
   <Card title="UDP flows" icon="cloud" href="/docs/udp">
     Inspect raw UDP activity
   </Card>
+  <Card title="Host overrides" icon="server" href="/docs/hosts">
+    Override DNS at the hosts-file level
+  </Card>
   <Card title="Proxy modes" icon="settings" href="/docs/proxy-modes">
     Understand capture limitations
   </Card>
 </CardGroup>
+

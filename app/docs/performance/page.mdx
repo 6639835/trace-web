@@ -8,6 +8,21 @@ Trace is built to run on-device, but large captures can still consume CPU, memor
 - **Lower max body size** to avoid large payloads filling storage.
 - **Clear sessions** regularly if you are running long tests.
 
+## Advanced body storage settings
+
+Open **Settings → Advanced** to tune body storage thresholds:
+
+- **Inline threshold** (64 KB – 50 MB): bodies smaller than this are stored inline in the database. Bodies above this threshold are written to separate files.
+- **Truncation threshold** (256 KB – 200 MB): bodies larger than this are truncated; only the first chunk is stored.
+- **Preview size** (64 KB – 10 MB): maximum body size rendered in the inspector UI.
+
+## Request sampling
+
+Enable **Request Sampling** in **Settings → Advanced** to capture only a fraction of traffic during high-volume tests:
+
+- **Sample rate**: 5–100% of requests are captured (random, periodic, or adaptive strategy).
+- Useful for background services or APIs that fire hundreds of requests per second.
+
 ## Session management
 
 - Capture only the flows you need, then stop capture.

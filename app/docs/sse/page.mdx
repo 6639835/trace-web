@@ -1,22 +1,92 @@
 # SSE inspector
 
-Trace captures Server-Sent Events (SSE) streams alongside HTTP traffic.
+Trace captures Server-Sent Events (SSE) streams and records each event as it arrives, so you can inspect real-time push data without a desktop tool.
 
-## View SSE events
+## How SSE capture works
 
-- SSE streams appear in the Network list.
-- Open a stream to review events, payloads, and timing.
+When Trace sees a response with `Content-Type: text/event-stream`, it treats the connection as an SSE stream and begins parsing events incrementally according to the WHATWG SSE specification. Events are stored as they arrive, so you see a growing timeline even while the connection is still open.
 
-## Tips
+SSE capture works in all three capture modes. HTTPS connections require the root CA to be trusted.
 
-- Use filters to isolate SSE endpoints.
-- Save a session before clearing long-running streams.
+## Navigate to SSE connections
+
+SSE streams appear in the **Network** tab. Use the type filter bar to select **SSE** and focus the list on streaming traffic only.
+
+Each row in the list shows:
+
+- Protocol badge (**SSE**)
+- Connection status (connecting, streaming, closed, failed)
+- Total event count
+- Duration of the stream
+- Endpoint URL
+- Total bytes transferred
+- **Truncated** badge if the stream exceeded the configured body storage limit
+
+Tap a row to open the stream detail view.
+
+## Inspect a stream
+
+### Stream overview
+
+- **URL** – the SSE endpoint
+- **Status** – lifecycle state of the connection
+- **Start / end time** and total **duration**
+- **Request headers** – sent with the initial GET (including `Accept: text/event-stream` and `Last-Event-ID` if reconnecting)
+- **Response headers** – including `Cache-Control`, `Connection`, and any CORS headers
+
+### Event list
+
+Each captured SSE event contains:
+
+| Field | Description |
+|---|---|
+| **Event ID** (`id:`) | Optional identifier set by the server for reconnect support |
+| **Event type** (`event:`) | Named event type, defaults to `message` if omitted |
+| **Data** (`data:`) | One or more data lines joined as the payload |
+| **Retry** (`retry:`) | Reconnection interval in milliseconds, if the server sent one |
+| **Timestamp** | When Trace received and parsed the event |
+
+Tap an event to view its full data payload. JSON payloads render with syntax highlighting.
+
+## Filter events within a stream
+
+Use the filter bar inside a stream detail view to narrow events by:
+
+- **Event type** – show only `message`, `update`, `error`, or any custom type
+- **Event ID** – search for a specific ID value
+- **Data content** – search within event payloads
+
+## Export
+
+SSE sessions are exported as part of a HAR export. To capture a long-running SSE stream before clearing capture data, save the session first:
+
+1. End or pause the capture session.
+2. Open **Export → HAR** or use the share action from the session.
+
+<Tip>
+  Save the session before clearing the capture list if you are tracking a long-running SSE connection. Once cleared, event history is gone.
+</Tip>
+
+## Modifying SSE events
+
+You can intercept and modify SSE event payloads using [Custom scripts](/docs/scripts) with a **Stream** script type. The `stream` object in JavaScript exposes the event payload so you can rewrite or drop individual events before they reach the client.
+
+[Breakpoints](/docs/breakpoints) also support stream events — set a breakpoint that matches the SSE endpoint to pause and edit individual events in the inspector before they are forwarded.
+
+## Troubleshooting
+
+- **No SSE entries**: verify the target endpoint returns `Content-Type: text/event-stream`. Trace detects SSE by content type. Also confirm capture is active.
+- **Stream shows as truncated**: increase the **Body Storage** inline threshold in **Advanced Settings**, or export the session before it truncates.
+- **Events missing**: some clients reconnect after a timeout using `Last-Event-ID`. Trace records each reconnection as a continuation of the same stream when the ID field is present.
 
 <CardGroup>
   <Card title="WebSocket inspector" icon="book-open" href="/docs/websockets">
     Inspect WebSocket frames
   </Card>
+  <Card title="Custom scripts" icon="code" href="/docs/scripts">
+    Transform SSE event payloads with JavaScript
+  </Card>
   <Card title="Exporting sessions" icon="file-text" href="/docs/exporting">
-    Save long-running streams
+    Save long-running streams before clearing
   </Card>
 </CardGroup>

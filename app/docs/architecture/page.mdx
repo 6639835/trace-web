@@ -38,7 +38,7 @@ Communication happens through **App Group storage**, **Darwin notifications**, a
 - **PacketTunnelProvider**: configures `NEPacketTunnelNetworkSettings` and proxy settings.
 - **MITMProxyServer (TraceProxy)**: HTTP/HTTPS proxy that performs TLS MITM when allowed.
 - **TraceSecurity**: certificate generation and TLS handling.
-- **TraceNetworking**: HTTP, HTTP/2, WebSocket, and SSE parsing.
+- **TraceNetworking**: DNS query and response parsing, network diagnostics.
 - **TraceQUIC**: QUIC/HTTP3 client and MITM session orchestration via quiche FFI.
 
 ## Capture modes
@@ -64,8 +64,9 @@ Communication happens through **App Group storage**, **Darwin notifications**, a
 
 ## Storage and IPC
 
-- **App Group container**: shared storage for requests, bodies, sessions, scripts, rules, and logs.
-- **Darwin notifications**: notify the app when new data arrives.
+- **App Group container**: shared storage for requests, bodies, sessions, scripts, rules, and logs. Backed by a **GRDB SQLite** database. Request/response bodies above a small inline threshold are stored as separate files in the container.
+- **Darwin notifications**: notify the app when new data arrives from the extension.
+- **Keychain**: stores the Trace root CA and any signing credentials. Shared across app and extension via a keychain access group.
 - **Fallback storage**: used when App Group is unavailable (e.g., simulator).
 
 ## Extension boundary

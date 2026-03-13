@@ -2,6 +2,32 @@
 
 Trace includes diagnostics tools to help with low-level troubleshooting and support cases.
 
+## Full Tunnel self-check
+
+If you are using Full Tunnel or Dual MITM mode and traffic is not appearing as expected, the self-check tool audits the VPN extension's event log and reports what it finds.
+
+To run the self-check:
+
+1. Start capture in Full Tunnel or Dual MITM mode.
+2. Open **Settings → Diagnostics → Full Tunnel Self-Check**.
+3. Tap **Refresh** to analyse the current VPN event log.
+
+The self-check evaluates the following:
+
+| Check | What it verifies |
+|---|---|
+| Full Tunnel mode is active | Confirms the VPN extension started in `fullTunnel` or `fullTunnelDualMITM` mode |
+| Transparent TCP MITM ingress enabled | Verifies hybrid TCP MITM is active and routing traffic into the proxy |
+| Bypass-proxy route reached MITM | Confirms that traffic bypassing the proxy was still intercepted by MITM |
+| Tunneled requests completed | Validates the request lifecycle from pending to completed in the database |
+| Response capture recorded | Confirms that response bodies were captured for tunneled HTTPS sessions |
+
+The results page also shows raw counters (MITM route hits, parsed requests, saved requests, response captures, upstream failures) and lists any requests that stalled in a pending state without completing.
+
+<Info>
+  The self-check reads the VPN NDJSON event log. If the log file is empty or missing, start a capture session first so events accumulate.
+</Info>
+
 ## Packet captures (PCAP)
 
 1. Open **Settings → Packet Captures**.
@@ -10,15 +36,17 @@ Trace includes diagnostics tools to help with low-level troubleshooting and supp
 
 PCAP files can be opened in tools like Wireshark.
 
+Raw packet capture is only available in Full Tunnel and Dual MITM modes.
+
 ## VPN event logs (NDJSON)
 
 Trace records structured NDJSON logs from the VPN extension during capture. To export them:
 
 1. Open **Settings → Packet Captures**.
-2. Select the VPN log file.
+2. Select the VPN log file (`vpn_events.ndjson`).
 3. Share using the iOS Share Sheet.
 
-These logs are useful for diagnosing packet-tunnel behavior or low-level routing issues.
+These logs are useful for diagnosing packet-tunnel behavior or low-level routing issues, and are also what the Full Tunnel self-check reads.
 
 ## Event logs
 
@@ -31,6 +59,9 @@ Use **Settings → Storage & Cleanup** to review space usage and delete old requ
 <CardGroup>
   <Card title="Performance tuning" icon="settings" href="/docs/performance">
     Keep diagnostics lightweight
+  </Card>
+  <Card title="Proxy modes" icon="shuffle" href="/docs/proxy-modes">
+    Understand Full Tunnel mode
   </Card>
   <Card title="Exporting sessions" icon="book-open" href="/docs/exporting">
     Share data safely

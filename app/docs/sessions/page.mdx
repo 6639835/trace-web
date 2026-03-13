@@ -1,23 +1,68 @@
 # Sessions
 
-Sessions group captured traffic so you can keep test runs separate and easier to export.
+Sessions group captured traffic into named runs so you can keep test cases separate, review history, and export precise slices of data.
 
-## Use sessions in the Network list
+## How sessions work
 
-- Start a new session before a test run.
-- Switch sessions to focus on a specific capture.
-- Group the list by session for a timeline of runs.
+Trace creates a session automatically each time you start capture. The session tracks:
 
-## Tips
+- **Name** – optional label you assign (defaults to a timestamp-based display name)
+- **Start time** – when capture began
+- **End time** – when capture was stopped (active sessions have no end time)
+- **Request count** – number of captured requests in the session
+- **Total data transferred** – cumulative bytes across all requests
 
-- Name sessions by feature or test case.
-- Export a single session to keep shared files small.
+Sessions are stored in the shared App Group database and persist across app restarts.
+
+## Start a new session
+
+1. Tap the capture toggle to stop any active session.
+2. Tap the capture toggle again to start a fresh session.
+
+Each start creates a new session entry. The previous session's data remains available for review.
+
+## Name a session
+
+1. Open the session list from the Network tab toolbar.
+2. Tap a session to select it, then tap **Rename**.
+3. Enter a descriptive name (for example, `checkout-flow-v2` or `login-regression`).
+
+Named sessions are easier to identify when exporting or sharing.
+
+## Switch between sessions
+
+Open the session picker from the Network list toolbar. Tap any session to switch the list to show only that session's traffic. The active capture session is marked with a running indicator.
+
+## Group the list by session
+
+Enable **Group by Session** in the Network list settings to show requests separated by their capture run. This is useful when you have multiple sessions and want a timeline view.
+
+## Export a single session
+
+Exporting a specific session avoids including unrelated traffic from other runs.
+
+1. Open the session list.
+2. Long-press or swipe a session to reveal export options.
+3. Choose **Export as HAR** or use the share action.
+
+See [Exporting sessions](/docs/exporting) for all available export formats.
+
+## Delete a session
+
+Swipe a session entry left and tap **Delete**, or use **Settings → Storage & Cleanup** to bulk-remove old sessions.
+
+<Tip>
+  Name sessions by feature or test case before you start capturing. It is easier to do it up front than to rename after the fact when you have multiple runs.
+</Tip>
 
 <CardGroup>
   <Card title="Exporting sessions" icon="file-text" href="/docs/exporting">
-    Share a single run
+    Share a single capture run
   </Card>
-  <Card title="Filtering traffic" icon="book-open" href="/docs/filtering">
+  <Card title="Filtering traffic" icon="filter" href="/docs/filtering">
     Reduce noise before exporting
+  </Card>
+  <Card title="Performance tuning" icon="settings" href="/docs/performance">
+    Manage storage for long captures
   </Card>
 </CardGroup>

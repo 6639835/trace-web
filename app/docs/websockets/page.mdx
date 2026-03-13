@@ -1,22 +1,101 @@
 # WebSocket inspector
 
-Trace captures WebSocket connections alongside HTTP traffic.
+Trace captures WebSocket connections and their individual frames, giving you a live view of bidirectional traffic.
 
-## View WebSocket events
+## How WebSocket capture works
 
-- WebSocket connections appear in the Network list.
-- Open a WebSocket entry to view frames, metadata, and timing.
+When a client sends an HTTP Upgrade request (status 101), Trace recognises the handshake and begins recording the resulting WebSocket session. Each frame is stored with its direction, timestamp, opcode, and payload.
 
-## Tips
+WebSocket capture works in all three capture modes. HTTPS-tunnelled connections also require the root CA to be trusted so that Trace can inspect the encrypted channel.
 
-- Use filters to isolate WebSocket domains.
-- Export requests for offline analysis when needed.
+## Navigate to WebSocket connections
+
+WebSocket connections appear in the **Network** tab. Use the type filter bar to select **WebSocket** and focus the list on WS traffic only.
+
+Each row in the list shows:
+
+- Protocol badge (**WS**)
+- Connection status (connecting, open, closing, closed, failed)
+- Total message count
+- Duration of the session
+- Connection URL
+- Sent (↑) and received (↓) message counts
+
+Tap a row to open the connection detail view.
+
+## Inspect a connection
+
+The connection detail view has two levels:
+
+### Connection overview
+
+- **URL** – the full WebSocket endpoint
+- **Status** – current lifecycle state
+- **Start / end time** and total **duration**
+- **Close code** and **close reason** (if the connection ended cleanly)
+- **Request headers** – the HTTP Upgrade request headers
+- **Response headers** – the 101 Switching Protocols response headers
+
+### Message list
+
+Below the overview, every frame is listed in chronological order. Each message shows:
+
+| Field | Description |
+|---|---|
+| **Direction** | Sent (↑) or received (↓) |
+| **Timestamp** | Absolute time the frame arrived or was sent |
+| **Opcode** | Frame type (see below) |
+| **Payload size** | Byte count of the payload |
+| **Compressed** | Whether per-message compression (RFC 7692) was applied |
+
+Tap a message to inspect its full payload. Text payloads render with syntax highlighting; binary payloads show a hex dump.
+
+## Frame opcodes
+
+| Opcode | Hex | Meaning |
+|---|---|---|
+| `continuation` | 0x0 | Continuation of a fragmented message |
+| `text` | 0x1 | UTF-8 text payload |
+| `binary` | 0x2 | Binary payload |
+| `close` | 0x8 | Connection close handshake |
+| `ping` | 0x9 | Keepalive ping |
+| `pong` | 0xA | Keepalive pong reply |
+
+## Filter and search
+
+- **Search** connections by URL in the search bar.
+- **Filter by status** to focus on open, closed, or failed connections.
+- **Swipe to delete** a single connection, or use **Clear All** from the menu to remove all captured WebSocket data.
+
+## Export
+
+Captured WebSocket sessions are included in HAR exports alongside HTTP traffic. To export:
+
+1. Open the connection detail view.
+2. Tap **Share** or use the toolbar export action.
+3. Choose a format and destination.
+
+<Tip>
+  Filter the HTTP request list for status code 101 to jump directly to the Upgrade request that initiated a WebSocket session. The corresponding WebSocket detail view is linked from the request overview.
+</Tip>
+
+## Troubleshooting
+
+- **No WebSocket entries**: confirm capture is active and the app is using a mode that intercepts the target traffic (proxy-only captures apps that respect system proxy; full-tunnel captures all).
+- **Payload shows as binary**: the server may be sending compressed or binary-framed messages. Trace records the raw payload; binary data renders as a hex dump.
+- **Truncated payloads**: check **Advanced Settings → Body Storage** to confirm the inline threshold is large enough for your message sizes.
 
 <CardGroup>
   <Card title="SSE inspector" icon="book-open" href="/docs/sse">
-    Inspect server-sent events
+    Inspect server-sent event streams
+  </Card>
+  <Card title="Breakpoints" icon="pause-circle" href="/docs/breakpoints">
+    Pause and edit WebSocket frames in flight
+  </Card>
+  <Card title="Custom scripts" icon="code" href="/docs/scripts">
+    Transform WebSocket message payloads with JavaScript
   </Card>
   <Card title="Request inspection" icon="file-text" href="/docs/request-inspection">
-    Explore request details
+    Inspect the HTTP Upgrade handshake
   </Card>
 </CardGroup>
