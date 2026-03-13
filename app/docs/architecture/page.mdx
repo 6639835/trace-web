@@ -39,6 +39,7 @@ Communication happens through **App Group storage**, **Darwin notifications**, a
 - **MITMProxyServer (TraceProxy)**: HTTP/HTTPS proxy that performs TLS MITM when allowed.
 - **TraceSecurity**: certificate generation and TLS handling.
 - **TraceNetworking**: HTTP, HTTP/2, WebSocket, and SSE parsing.
+- **TraceQUIC**: QUIC/HTTP3 client and MITM session orchestration via quiche FFI.
 
 ## Capture modes
 
@@ -48,11 +49,18 @@ Communication happens through **App Group storage**, **Darwin notifications**, a
 - No packet routing; apps must honor system proxy settings.
 - QUIC/HTTP3 over UDP is not captured in this mode.
 
-### Full-tunnel (advanced)
+### Full Tunnel (advanced)
 
-- Includes packet routing and optional DNS configuration.
-- Requires a SOCKS5 forwarder host and port.
-- Uses a packet forwarding engine and optional raw PCAP capture.
+- Routes all traffic through the packet tunnel.
+- Optional SOCKS5 forwarder (uses built-in local server when empty).
+- Optional custom DNS, IPv6, and UDP forwarding mode.
+- Optional Hybrid TCP MITM for transparent decryption alongside proxy routing.
+- Supports raw PCAP capture.
+
+### Dual MITM (advanced)
+
+- Combines full packet-tunnel routing with transparent TCP MITM.
+- Always uses Trace's embedded local SOCKS5 forwarder; no external server needed.
 
 ## Storage and IPC
 

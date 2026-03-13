@@ -10,13 +10,12 @@ Use rewrite rules to:
 - Modify request headers, query params, cookies, or body.
 - Modify response headers, body, or status code.
 - Block requests entirely.
-- Map requests to local responses (mocking).
 
 ## Create a rule
 
 1. Open **Settings → Rewrite Rules**.
 2. Tap **Add Rule**.
-3. Choose a **Rule Type** (redirect, modify, block, map).
+3. Choose a **Rule Type** (redirect, modify, block).
 4. Configure the **Match** criteria (exact, contains, wildcard, or regex).
 5. Add one or more **Actions**.
 6. Save and enable the rule.
@@ -33,9 +32,18 @@ Use rewrite rules to:
 - Set or remove headers.
 - Replace or set the body.
 - Redirect to a new URL.
-- Add delays or throttling.
+- Add delays.
 - Encode/decode body content.
 - Adjust status codes and connection behavior.
+
+## Advanced tools
+
+The rewrite rules screen provides additional tooling via the toolbar menu:
+
+- **Rule Wizard**: step-by-step guided rule creation.
+- **Visual Editor**: point-and-click rule builder.
+- **Rule Testing**: test a rule against a sample URL before enabling it.
+- **Import rules**: import rule sets exported from Proxyman, Charles, Fiddler, or HAR files.
 
 <Tip>
   Start with a single rule and verify it applies to one request before broadening the match pattern.

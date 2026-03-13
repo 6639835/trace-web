@@ -7,6 +7,7 @@ import { BookOpen, Calendar, Clock, ArrowRight } from 'lucide-react';
 import type { LucideIcon } from 'lucide-react';
 import * as LucideIcons from 'lucide-react';
 import { getAllPosts, type BlogPost } from '@/lib/blog';
+import { PageSection } from '@/components/shared/page-section';
 
 /** Resolve a Lucide icon by name string. Falls back to BookOpen. */
 function resolveIcon(name?: string): LucideIcon {
@@ -173,9 +174,8 @@ export default async function BlogPage({
   return (
     <div className="flex flex-col">
       {/* Header */}
-      <section className="container py-section">
-        <div className="mx-auto max-w-content">
-          <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+      <PageSection>
+        <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
             <div>
               <p className="mb-1 text-sm font-medium tracking-widest text-primary uppercase">
                 Trace Blog
@@ -216,15 +216,13 @@ export default async function BlogPage({
               ))}
             </div>
           </div>
-        </div>
-      </section>
+      </PageSection>
 
       <Separator />
 
       {/* Posts */}
-      <section className="container py-section">
-        <div className="mx-auto max-w-content">
-          {posts.length === 0 ? (
+      <PageSection>
+        {posts.length === 0 ? (
             <div className="flex min-h-[400px] items-center justify-center">
               <div className="text-center">
                 <BookOpen className="mx-auto mb-4 h-12 w-12 text-muted-foreground" />
@@ -262,8 +260,7 @@ export default async function BlogPage({
               )}
             </div>
           )}
-        </div>
-      </section>
+      </PageSection>
     </div>
   );
 }

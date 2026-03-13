@@ -5,7 +5,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Separator } from '@/components/ui/separator';
 import { Timeline, TimelineItem } from '@/components/ui/timeline';
 import { PageHeader } from '@/components/shared/page-header';
-import { PageSection } from '@/components/shared/page-section';
+import { PageSection, SectionHeading } from '@/components/shared/page-section';
 import { BentoGrid, BentoItem } from '@/components/sections/bento-grid';
 import { EditorialBanner } from '@/components/sections/editorial-banner';
 import {
@@ -94,9 +94,7 @@ export default function AboutPage() {
       {/* ── Mission ── */}
       <PageSection>
         <div className="mx-auto max-w-readable">
-          <h2 className="mb-6 text-2xl font-bold tracking-tight sm:mb-8 sm:text-3xl">
-            Our mission
-          </h2>
+          <SectionHeading title="Our mission" />
           <p className="mb-4 text-base leading-relaxed text-muted-foreground sm:text-lg">
             iOS network debugging shouldn&apos;t require desktop tools, manual configuration, or
             compromising on privacy. Trace brings professional-grade network inspection directly to
@@ -119,9 +117,7 @@ export default function AboutPage() {
       {/* ── Story ── */}
       <PageSection>
         <div className="mx-auto max-w-readable">
-          <h2 className="mb-6 text-2xl font-bold tracking-tight sm:mb-8 sm:text-3xl">
-            The story behind Trace
-          </h2>
+          <SectionHeading title="The story behind Trace" />
           <div className="space-y-4 text-base leading-relaxed text-muted-foreground sm:text-lg">
             <p>
               Trace started as a personal project to solve a specific problem: debugging network
@@ -157,9 +153,7 @@ export default function AboutPage() {
       {/* ── Principles: bento grid ── */}
       <PageSection>
         <div className="mx-auto max-w-content">
-          <h2 className="mb-8 text-2xl font-bold tracking-tight sm:mb-10 sm:text-3xl md:mb-12">
-            Our principles
-          </h2>
+          <SectionHeading title="Our principles" />
 
           <BentoGrid>
             {/* Privacy — large card */}
@@ -212,9 +206,7 @@ export default function AboutPage() {
       {/* ── Milestones timeline ── */}
       <PageSection>
         <div className="mx-auto max-w-readable">
-          <h2 className="mb-8 text-2xl font-bold tracking-tight sm:mb-10 sm:text-3xl md:mb-12">
-            Milestones
-          </h2>
+          <SectionHeading title="Milestones" />
           <Timeline>
             <TimelineItem icon={<CheckCircle2 className="h-5 w-5 text-primary sm:h-6 sm:w-6" />}>
               <Card>
@@ -322,7 +314,7 @@ export default function AboutPage() {
       {/* ── Team ── */}
       <PageSection>
         <div className="mx-auto max-w-readable">
-          <h2 className="mb-6 text-2xl font-bold tracking-tight sm:mb-8 sm:text-3xl">Team</h2>
+          <SectionHeading title="Team" />
           <Card>
             <CardHeader>
               <CardTitle>Justin Lu</CardTitle>

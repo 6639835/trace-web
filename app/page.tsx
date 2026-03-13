@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { PageSection } from '@/components/shared/page-section';
+import { PageSection, SectionHeading } from '@/components/shared/page-section';
 import { MetricsStrip } from '@/components/sections/metrics-strip';
 import { EditorialBanner } from '@/components/sections/editorial-banner';
 import { BentoGrid, BentoItem } from '@/components/sections/bento-grid';
@@ -124,15 +124,11 @@ export default function Home() {
       {/* ── Capabilities: bento grid ── */}
       <PageSection spacing="lg">
         <div className="mx-auto max-w-content">
-          <div className="mb-10 sm:mb-12 md:mb-14">
-            <h2 className="mb-3 text-2xl font-bold tracking-tight sm:text-3xl md:text-4xl">
-              Built for production debugging
-            </h2>
-            <p className="max-w-readable text-sm text-muted-foreground sm:text-base">
-              Comprehensive network visibility with the tools you need to diagnose and resolve
-              issues fast.
-            </p>
-          </div>
+          <SectionHeading
+            title="Built for production debugging"
+            description="Comprehensive network visibility with the tools you need to diagnose and resolve issues fast."
+            className="mb-10 sm:mb-12 md:mb-14"
+          />
 
           <BentoGrid>
             {/* Large card spans 2 cols */}
@@ -203,14 +199,11 @@ export default function Home() {
       {/* ── Engineering depth: 2-col list + tech badges ── */}
       <PageSection spacing="lg" className="border-y bg-muted/30">
         <div className="mx-auto max-w-content">
-          <div className="mb-10 sm:mb-12">
-            <h2 className="mb-3 text-2xl font-bold tracking-tight sm:text-3xl md:text-4xl">
-              Engineering depth
-            </h2>
-            <p className="max-w-readable text-sm text-muted-foreground sm:text-base">
-              Built on iOS system frameworks for reliable, low-level network access.
-            </p>
-          </div>
+          <SectionHeading
+            title="Engineering depth"
+            description="Built on iOS system frameworks for reliable, low-level network access."
+            className="mb-10 sm:mb-12"
+          />
 
           <div className="grid gap-6 sm:grid-cols-2 sm:gap-7 md:gap-10">
             <div className="space-y-5">

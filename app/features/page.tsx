@@ -3,7 +3,8 @@ import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Separator } from '@/components/ui/separator';
-import { PageSection } from '@/components/shared/page-section';
+import { PageHeader } from '@/components/shared/page-header';
+import { PageSection, SectionHeading } from '@/components/shared/page-section';
 import { FeatureCard } from '@/components/marketing/feature-card';
 import { FeatureSection } from '@/components/marketing/feature-section';
 import { BulletList, BulletItem } from '@/components/shared/bullet-list';
@@ -52,32 +53,27 @@ export default function FeaturesPage() {
   return (
     <div className="flex flex-col">
       {/* ── Minimal left-aligned hero ── */}
-      <section className="container py-section">
-        <div className="mx-auto max-w-content">
-          <h1 className="mb-4 text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl">
-            Everything you need to debug iOS network traffic.
-          </h1>
-          <p className="mb-6 max-w-readable text-sm leading-relaxed text-muted-foreground sm:text-base lg:text-lg">
-            A complete toolkit for network debugging and analysis. Built for iOS developers who need
-            precise, low-level visibility—on the device, without a desktop.
-          </p>
-          <div className="flex flex-col gap-3 sm:flex-row sm:gap-4">
-            <Button asChild>
-              <Link
-                href="https://testflight.apple.com/join/fmYFd8ud"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <Smartphone className="mr-2 h-4 w-4" />
-                Try on TestFlight
-              </Link>
-            </Button>
-            <Button variant="outline" asChild>
-              <Link href="/comparison">Compare with alternatives</Link>
-            </Button>
-          </div>
+      <PageHeader
+        variant="minimal"
+        title="Everything you need to debug iOS network traffic."
+        description="A complete toolkit for network debugging and analysis. Built for iOS developers who need precise, low-level visibility—on the device, without a desktop."
+      >
+        <div className="flex flex-col gap-3 sm:flex-row sm:gap-4">
+          <Button asChild>
+            <Link
+              href="https://testflight.apple.com/join/fmYFd8ud"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <Smartphone className="mr-2 h-4 w-4" />
+              Try on TestFlight
+            </Link>
+          </Button>
+          <Button variant="outline" asChild>
+            <Link href="/comparison">Compare with alternatives</Link>
+          </Button>
         </div>
-      </section>
+      </PageHeader>
 
       {/* Sticky anchor nav */}
       <SectionNav
@@ -94,9 +90,7 @@ export default function FeaturesPage() {
       {/* ── Core capabilities ── */}
       <PageSection>
         <div id="core" className="scroll-mt-32">
-          <h2 className="mb-10 text-xl font-bold tracking-tight sm:mb-12 sm:text-2xl md:text-3xl">
-            Core capabilities
-          </h2>
+          <SectionHeading title="Core capabilities" />
 
           <div className="space-y-10 sm:space-y-12 md:space-y-16">
             <FeatureSection
@@ -156,9 +150,7 @@ export default function FeaturesPage() {
       {/* ── Advanced tools ── */}
       <PageSection>
         <div id="advanced" className="scroll-mt-32">
-          <h2 className="mb-10 text-xl font-bold tracking-tight sm:mb-12 sm:text-2xl md:text-3xl">
-            Advanced tools
-          </h2>
+          <SectionHeading title="Advanced tools" />
           <div className="grid gap-4 sm:grid-cols-2 sm:gap-5 md:gap-6">
             <FeatureCard
               icon={Repeat}
@@ -199,9 +191,7 @@ export default function FeaturesPage() {
       {/* ── Traffic modification ── */}
       <PageSection>
         <div id="modification" className="scroll-mt-32">
-          <h2 className="mb-10 text-xl font-bold tracking-tight sm:mb-12 sm:text-2xl md:text-3xl">
-            Traffic modification
-          </h2>
+          <SectionHeading title="Traffic modification" />
           <div className="grid gap-4 sm:grid-cols-2 sm:gap-5 md:gap-6">
             <FeatureCard
               title="Rewrite rules"
@@ -236,9 +226,7 @@ export default function FeaturesPage() {
       {/* ── Utilities ── */}
       <PageSection>
         <div id="utilities" className="scroll-mt-32">
-          <h2 className="mb-10 text-xl font-bold tracking-tight sm:mb-12 sm:text-2xl md:text-3xl">
-            Built-in utilities
-          </h2>
+          <SectionHeading title="Built-in utilities" />
           <div className="grid gap-4 sm:grid-cols-2 sm:gap-5 md:gap-6 lg:grid-cols-3">
             <FeatureCard
               title="Base64 encoder/decoder"
@@ -279,9 +267,7 @@ export default function FeaturesPage() {
       {/* ── Performance & Privacy: side-by-side ── */}
       <PageSection>
         <div id="performance" className="scroll-mt-32">
-          <h2 className="mb-10 text-xl font-bold tracking-tight sm:mb-12 sm:text-2xl md:text-3xl">
-            Performance and privacy
-          </h2>
+          <SectionHeading title="Performance and privacy" />
           <div className="grid gap-6 sm:grid-cols-2 sm:gap-7 md:gap-8">
             <div>
               <div className="mb-4 flex items-center gap-3">

@@ -1,31 +1,39 @@
 # Custom scripts
 
-Trace includes a JavaScript-based scripting engine to modify requests and responses on the fly.
+Trace includes a JavaScript-based scripting engine to modify requests, responses, and stream events on the fly.
 
 ## What scripts can do
 
 - Rewrite URLs or headers
 - Transform request or response bodies
+- Modify WebSocket messages or SSE event payloads
 - Mock dynamic responses
 - Apply logic that is hard to express with simple rules
 
 ## Script types
 
-- **Request scripts**: run before the request is sent
-- **Response scripts**: run after the response is received
-- **Both**: run on both phases
+- **Request scripts**: run before the request is sent, can modify method, URL, headers, and body.
+- **Response scripts**: run after the response is received, can modify status, headers, and body.
+- **Stream scripts**: run on individual WebSocket messages or SSE events, can modify or drop payloads.
+- **Both**: run on both the request and response phases.
 
 ## Execution model
 
-- Scripts run inside Trace on-device.
+- Scripts run inside Trace on-device using JavaScriptCore.
 - A script can inspect or modify headers, bodies, and metadata.
-- If a script fails, Trace logs the error and continues with the original request.
+- Scripts have a 2-second execution timeout per invocation.
+- If a script fails or times out, Trace logs the error and continues with the original request.
 
 ## When to use scripts
 
 - You need conditional logic (if/else) instead of static rules
 - You need to compute a response body dynamically
+- You want to modify stream messages or SSE events
 - You want to prototype backend changes without deploying
+
+## Script templates
+
+Trace ships built-in templates for common tasks. Access them from **Script Templates** in the script list to load a starting point.
 
 ## Tips
 

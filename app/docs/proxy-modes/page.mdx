@@ -1,6 +1,6 @@
 # Proxy modes
 
-Trace supports two capture modes. Choose the right one for your workflow.
+Trace supports three capture modes. Choose the right one for your workflow.
 
 ## Proxy-only (default)
 
@@ -24,52 +24,74 @@ Proxy-only mode configures iOS system proxy settings and routes HTTP/HTTPS to th
 - Apps that ignore proxy settings will not be captured
 - UDP/QUIC traffic is not visible
 
-## Full-tunnel (advanced)
+## Full Tunnel (advanced)
 
-Full-tunnel mode routes traffic through the tunnel and forwards it to a SOCKS5 server.
-
-**Requirements**
-
-- A reachable SOCKS5 host and port
-- Optional custom DNS servers and search domains
+Full Tunnel mode routes all traffic through the VPN tunnel. An optional SOCKS5 forwarder can be configured for outbound traffic; if left empty, Trace uses its built-in local SOCKS5 server.
 
 **Behavior**
 
 - Includes packet routing and optional raw packet capture
 - Can capture traffic from apps that ignore system proxies
+- Optional custom DNS servers and search domains
+- Optional IPv6 control
+- UDP forwarding mode: HEV Only, Direct, or Split (UDP/443 via HEV, other UDP direct)
+- Optional Hybrid TCP MITM: enables transparent TCP MITM on intercepted ports alongside proxy routing
 - Higher overhead than proxy-only mode
 
 **Best for**
 
 - Apps that bypass proxy settings
 - Low-level packet analysis and debugging
+- DNS capture and UDP flow inspection
 
 **Limitations**
 
-- Requires a reachable SOCKS5 server
 - Higher CPU/battery usage
+- QUIC decryption requires QUIC MITM mode (see Dual MITM)
+
+## Dual MITM (advanced)
+
+Dual MITM mode enables both full packet-tunnel routing and transparent TCP MITM simultaneously. It always uses Trace's embedded local SOCKS5 forwarder and does not require an external SOCKS5 server.
+
+**Behavior**
+
+- All traffic routed through the tunnel
+- Transparent TCP MITM applied automatically on intercepted ports
+- No external SOCKS5 server needed
+
+**Best for**
+
+- Capturing apps that ignore the system proxy and require full decryption
+- Cases where Proxy Only and Full Tunnel both miss traffic
+
+**Limitations**
+
+- Highest overhead of the three modes
+- Same QUIC/ECH constraints as Full Tunnel
 
 ## Switching modes
 
 1. Open **Settings → Capture Mode**.
-2. Select **Proxy Only** or **Full Tunnel**.
-3. If using full-tunnel, enter the SOCKS5 host and port.
-4. Tap **Apply Capture Mode**.
+2. Select **Proxy Only**, **Full Tunnel**, or **Dual MITM**.
+3. If using Full Tunnel with an external SOCKS5 server, enter the host and port (optional — leave empty to use the built-in server).
+4. Configure DNS servers, IPv6, and UDP forwarding mode as needed.
+5. Changes are applied automatically; stop and restart capture if traffic does not appear.
 
 <Tip>
-  If capture is active, Trace will refresh settings automatically. If you do not see traffic after
-  switching, stop and start capture once.
+  Start with proxy-only for most debugging tasks. Switch to Full Tunnel or Dual MITM only when
+  traffic is missing or bypasses proxy settings.
 </Tip>
 
 ## HTTPS inspection
 
-Both modes can perform HTTPS MITM, but only after you install and trust the Trace root CA.
+All three modes can perform HTTPS MITM, but only after you install and trust the Trace root CA.
 
 ## Which mode should I use?
 
-- **Start with proxy-only** for most debugging tasks.
-- **Switch to full-tunnel** when traffic is missing or bypasses proxy settings.
-- **Avoid full-tunnel** for long capture sessions unless you need it.
+- **Start with Proxy Only** for most debugging tasks.
+- **Switch to Full Tunnel** when traffic is missing or bypasses proxy settings.
+- **Use Dual MITM** when Full Tunnel alone is not enough and you need transparent decryption.
+- **Avoid full-tunnel modes** for long capture sessions unless you need them.
 
 <CardGroup>
   <Card title="Certificates" icon="shield" href="/docs/certificates">

@@ -1,8 +1,8 @@
 import type { Metadata } from 'next';
-import { DocsSidebar } from '@/components/docs/docs-sidebar';
 import { DocsTableOfContents } from '@/components/docs/docs-toc';
-import { DocsMobileNav } from '@/components/docs/docs-mobile-nav';
 import { Breadcrumbs } from '@/components/docs/breadcrumbs';
+import { DocsNavigationChrome } from '@/components/docs/docs-navigation-chrome';
+import { getDocsSearch } from '@/lib/server/docs-search';
 
 export const metadata: Metadata = {
   title: {
@@ -30,23 +30,14 @@ export const metadata: Metadata = {
   },
 };
 
-export default function DocsLayout({ children }: { children: React.ReactNode }) {
+export default async function DocsLayout({ children }: { children: React.ReactNode }) {
+  const docsSearch = await getDocsSearch();
+
   return (
     <div className="container py-6 lg:py-8">
-      {/* Mobile Navigation */}
-      <div className="mb-6 md:hidden">
-        <DocsMobileNav />
-      </div>
+      <div className="grid gap-6 md:grid-cols-[16rem_minmax(0,1fr)] lg:gap-10 xl:grid-cols-[16rem_minmax(0,1fr)_14rem]">
+        <DocsNavigationChrome docsSearch={docsSearch} />
 
-      <div className="flex gap-6 lg:gap-10">
-        {/* Sidebar Navigation */}
-        <aside className="hidden w-64 shrink-0 md:block">
-          <div className="sticky top-20">
-            <DocsSidebar />
-          </div>
-        </aside>
-
-        {/* Main Content */}
         <main className="min-w-0 flex-1">
           <Breadcrumbs />
           <article
@@ -57,8 +48,7 @@ export default function DocsLayout({ children }: { children: React.ReactNode }) 
           </article>
         </main>
 
-        {/* Table of Contents */}
-        <aside className="hidden w-56 shrink-0 xl:block">
+        <aside className="hidden xl:block">
           <div className="sticky top-20">
             <DocsTableOfContents />
           </div>

@@ -1,28 +1,56 @@
 # Breakpoints
 
-Breakpoints pause live requests or responses so you can inspect and edit them before continuing.
+Breakpoints pause live requests, responses, or stream events so you can inspect and edit them before continuing.
 
 ## What breakpoints can do
 
 - Pause a request before it is sent.
-- Pause a response before it is displayed.
-- Edit URL, method, headers, body, and status code.
-- Resume or drop the request.
+- Pause a response before it is returned to the app.
+- Pause a WebSocket or SSE stream event before it is processed.
+- Edit URL, method, headers, body, and status code while paused.
+- Resume, drop, or automatically apply edits to subsequent matching traffic.
 
 ## Enable breakpoints
 
 1. Open **Settings → Breakpoints**.
 2. Tap **Add Breakpoint**.
-3. Choose **Request** or **Response**.
-4. Set a match pattern and enable the breakpoint.
+3. Choose a breakpoint type: **Request**, **Response**, or **Stream**.
+4. Set a URL match pattern and enable the breakpoint.
+
+## Execution modes
+
+Breakpoints have four execution modes, controlled from the breakpoint configuration:
+
+- **Normal**: Pauses every matching request/response for manual editing.
+- **Log Only**: Logs the hit without pausing. Useful for monitoring without interrupting traffic.
+- **Edit Once**: Pauses the first hit so you can make edits. Those edits are automatically replayed on all subsequent matches.
+- **Always Apply**: Pauses once to capture your edits, then silently applies them to every subsequent match without pausing again.
+
+## Conditions
+
+Breakpoints can include conditions that must all pass before triggering:
+
+- **Header Exists**: triggers only if a specific request/response header is present.
+- **Header Equals**: triggers only if a header matches an exact value.
+- **Body Contains**: triggers only if the body contains a substring.
+- **Body Regex**: triggers only if the body matches a regular expression.
+- **Query Param Exists**: triggers only if a specific query parameter is present in the URL.
 
 ## When a breakpoint triggers
 
-- Trace presents a breakpoint editor.
-- Make edits in **Overview**, **Headers**, or **Body** tabs.
-- Tap **Send** to continue or **Drop** to cancel.
+- Trace presents a breakpoint editor with the paused request or response.
+- Make edits in the **Overview**, **Headers**, or **Body** tabs.
+- Tap **Send** to continue or **Drop** to cancel the request.
 
-<Tip>Use narrow match patterns to avoid pausing too many requests at once.</Tip>
+## Stream breakpoints
+
+Stream breakpoints intercept individual WebSocket messages or SSE events. When triggered on a stream event, you can inspect and modify the event payload before it is forwarded.
+
+## Max hits
+
+Set a **Max Hits** limit on a breakpoint to automatically disable it after it has been triggered a given number of times.
+
+<Tip>Use narrow match patterns and conditions to avoid pausing too many requests at once.</Tip>
 
 <CardGroup>
   <Card title="Rewrite rules" icon="sparkles" href="/docs/rewrite-rules">

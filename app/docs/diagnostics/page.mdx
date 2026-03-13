@@ -10,13 +10,23 @@ Trace includes diagnostics tools to help with low-level troubleshooting and supp
 
 PCAP files can be opened in tools like Wireshark.
 
+## VPN event logs (NDJSON)
+
+Trace records structured NDJSON logs from the VPN extension during capture. To export them:
+
+1. Open **Settings → Packet Captures**.
+2. Select the VPN log file.
+3. Share using the iOS Share Sheet.
+
+These logs are useful for diagnosing packet-tunnel behavior or low-level routing issues.
+
 ## Event logs
 
-Trace records structured logs for the app and network extension. These logs are stored on-device and can be reviewed when debugging issues or sharing with support.
+Trace uses structured logging categories for storage, VPN, export, and networking events. Check the system console (via Xcode or Console.app) during development for diagnostic events.
 
 ## Storage management
 
-Use **Settings → Storage** to review space usage and clean up old requests, bodies, and logs.
+Use **Settings → Storage & Cleanup** to review space usage and delete old requests, bodies, and logs.
 
 <CardGroup>
   <Card title="Performance tuning" icon="settings" href="/docs/performance">
